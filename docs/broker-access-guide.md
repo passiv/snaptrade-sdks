@@ -1,5 +1,7 @@
 # Broker Access Guide
 
+This guide covers broker approvals and credentials for **Commercial API Key** integrations. **Personal API Key** integrations use broker access available through SnapTrade Personal. **OAuth** apps access users' Personal connections and require [SnapTrade approval](https://docs.snaptrade.com/docs/oauth-apps#1-register-your-app) for production, but no separate broker approvals.
+
 Start building in minutes. The majority of SnapTrade's [brokerage integrations](https://docs.snaptrade.com/docs/integrations) are live the moment your [Production Access Application](https://dashboard.snaptrade.com/production-access) is approved. For the few brokers that work differently, this page breaks down exactly what to expect.
 
 The **free plan** includes up to 5 brokerage connections, with no additional steps required to access any integration.

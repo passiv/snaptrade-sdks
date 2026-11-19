@@ -2,6 +2,8 @@
 
 A SnapTrade connection provides direct access to a user's trading account. When an access token is no longer valid, SnapTrade considered this to be a _disabled connection_ which will no longer provide live data until it is repaired by the user.
 
+This guide applies to **Commercial API Key**, **Personal API Key**, and **OAuth** integrations. Generate reconnect links using your method's credentials; see [Connection Portal](https://docs.snaptrade.com/docs/implement-connection-portal). OAuth users can also repair their connections in the [SnapTrade Dashboard](https://dashboard.snaptrade.com).
+
 # Required Functionalities
 
 It is important that users are directed to _fix connections_ rather than they create new ones. This allows you to provide a better experience to the user, minimize the number of disabled connections you are managing, and retain historical session data. Using the Connection Portal in the normal manner will create new connections, which will have a different connection id and different account ids if successful, as well as will leave the disabled connection to remain.
@@ -14,7 +16,7 @@ SnapTrade's Connection Portal has a special mode that's designed for fixing conn
 
 When the Connection Portal is accessed with the `reconnect` parameter, it will immediately take the user into the appropriate reconnection flow for that connection. When successful, the disabled connection will be updated with a new access token and start working again.
 
-Note: It is important that the user logs into the same brokerage connection when attempting to reconnect. Changing the connection in a reconnect is not permitted and will return an error. If the user wishes to change the connection, they should delete the old connection and create a new one to the new trading account.
+Note: The user must reconnect the same brokerage connection. Changing it during reconnection is not permitted. API-key integrations can delete the old connection and create a replacement. OAuth API requests cannot delete connections; direct the user to manage them in the [SnapTrade Dashboard](https://dashboard.snaptrade.com).
 
 # Webhooks
 
@@ -27,6 +29,6 @@ SnapTrade provides webhooks to notify when new connections are:
 - Broken
 - Fixed
 
-If you have a webhook listener URL associated with your SnapTrade account, you will automatically receive webhook events to let you know when any of those events take place. This is especially useful for noticing when connections break so that you can inform the user that they need to reconnect.
+Configure a webhook listener to receive supported connection events. For OAuth apps, the user's authorization must also include the `webhook` scope. These events help you notify users when they need to reconnect.
 
 Review the documentation on [SnapTrade Webhooks](/docs/webhooks) for more detail, sample payloads, etc.

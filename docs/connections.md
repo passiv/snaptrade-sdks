@@ -1,6 +1,10 @@
 # Connections
 
-A connection is an open channel for accessing brokerage account data. In Commercial integrations, connections belong to the end users of your app; in Personal API key integrations, connections provide access to your own brokerage data. Each connection is associated one-to-one with a set of credentials to an institution. If the access token for the connection is no longer valid, the connection will become disabled and the end-user will need to go through the connection portal again to enable the connection.
+A connection links SnapTrade to a user's brokerage and provides access to their connected accounts.
+
+- **Commercial API Key:** your app manages connections for its end users.
+- **Personal API Key:** you manage connections to your own brokerages.
+- **OAuth:** your app accesses connections managed by the consenting SnapTrade Personal user.
 
 ## Connection Portal
 
