@@ -91,7 +91,7 @@ export interface Activity {
      */
     'type': string;
     /**
-     * Recorded trade date and time in UTC. Precision depends on what the brokerage supplies.
+     * Recorded date and time in UTC. Precision depends on what the brokerage supplies.
      * @type {string}
      * @memberof Activity
      */

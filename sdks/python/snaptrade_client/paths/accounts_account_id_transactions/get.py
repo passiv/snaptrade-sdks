@@ -717,7 +717,7 @@ class GetAccountTransactions(BaseApi, typing.Generic[TAuth]):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns the account's cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.  """
+        """ Returns the account's cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.  """
         args = self._get_account_transactions_mapped_args(
             query_params=query_params,
             path_params=path_params,
@@ -798,7 +798,7 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns the account's cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.  """
+        """ Returns the account's cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.  """
         args = self._get_account_transactions_mapped_args(
             query_params=query_params,
             path_params=path_params,

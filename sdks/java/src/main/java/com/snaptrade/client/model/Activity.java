@@ -167,11 +167,11 @@ public class Activity {
   }
 
    /**
-   * Recorded trade date and time in UTC. Precision depends on what the brokerage supplies.
+   * Recorded date and time in UTC. Precision depends on what the brokerage supplies.
    * @return date
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "2026-11-16T15:42:18.123456Z", required = true, value = "Recorded trade date and time in UTC. Precision depends on what the brokerage supplies.")
+  @ApiModelProperty(example = "2026-11-16T15:42:18.123456Z", required = true, value = "Recorded date and time in UTC. Precision depends on what the brokerage supplies.")
 
   public OffsetDateTime getDate() {
     return date;

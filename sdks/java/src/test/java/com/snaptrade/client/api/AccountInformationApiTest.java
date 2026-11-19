@@ -156,7 +156,7 @@ public class AccountInformationApiTest {
     /**
      * List account transactions
      *
-     * Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+     * Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
      *
      * @throws ApiException if the Api call fails
      */

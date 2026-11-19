@@ -2703,13 +2703,13 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account transactions
      *
-     * Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
+     * Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
      *
      * @param  string $account_id account_id (required)
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
-     * @param  \DateTime $start_date First trade date to include (UTC). Defaults to the earliest available transaction. (optional)
-     * @param  \DateTime $end_date Last trade date to include (UTC). Defaults to the latest available transaction. (optional)
+     * @param  \DateTime $start_date First date to include (UTC). Defaults to the earliest available transaction. (optional)
+     * @param  \DateTime $end_date Last date to include (UTC). Defaults to the latest available transaction. (optional)
      * @param  string $type Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. (optional)
      * @param  int $offset Number of matching transactions to skip. (optional, default to 0)
      * @param  int $limit Maximum number of transactions to return in this page. (optional, default to 1000)
@@ -2742,13 +2742,13 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account transactions
      *
-     * Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
+     * Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
      *
      * @param  string $account_id (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  \DateTime $start_date First trade date to include (UTC). Defaults to the earliest available transaction. (optional)
-     * @param  \DateTime $end_date Last trade date to include (UTC). Defaults to the latest available transaction. (optional)
+     * @param  \DateTime $start_date First date to include (UTC). Defaults to the earliest available transaction. (optional)
+     * @param  \DateTime $end_date Last date to include (UTC). Defaults to the latest available transaction. (optional)
      * @param  string $type Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. (optional)
      * @param  int $offset Number of matching transactions to skip. (optional, default to 0)
      * @param  int $limit Maximum number of transactions to return in this page. (optional, default to 1000)
@@ -2896,13 +2896,13 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account transactions
      *
-     * Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
+     * Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
      *
      * @param  string $account_id (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  \DateTime $start_date First trade date to include (UTC). Defaults to the earliest available transaction. (optional)
-     * @param  \DateTime $end_date Last trade date to include (UTC). Defaults to the latest available transaction. (optional)
+     * @param  \DateTime $start_date First date to include (UTC). Defaults to the earliest available transaction. (optional)
+     * @param  \DateTime $end_date Last date to include (UTC). Defaults to the latest available transaction. (optional)
      * @param  string $type Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. (optional)
      * @param  int $offset Number of matching transactions to skip. (optional, default to 0)
      * @param  int $limit Maximum number of transactions to return in this page. (optional, default to 1000)
@@ -2938,13 +2938,13 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account transactions
      *
-     * Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
+     * Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
      *
      * @param  string $account_id (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  \DateTime $start_date First trade date to include (UTC). Defaults to the earliest available transaction. (optional)
-     * @param  \DateTime $end_date Last trade date to include (UTC). Defaults to the latest available transaction. (optional)
+     * @param  \DateTime $start_date First date to include (UTC). Defaults to the earliest available transaction. (optional)
+     * @param  \DateTime $end_date Last date to include (UTC). Defaults to the latest available transaction. (optional)
      * @param  string $type Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. (optional)
      * @param  int $offset Number of matching transactions to skip. (optional, default to 0)
      * @param  int $limit Maximum number of transactions to return in this page. (optional, default to 1000)
@@ -3003,8 +3003,8 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @param  string $account_id (required)
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
-     * @param  \DateTime $start_date First trade date to include (UTC). Defaults to the earliest available transaction. (optional)
-     * @param  \DateTime $end_date Last trade date to include (UTC). Defaults to the latest available transaction. (optional)
+     * @param  \DateTime $start_date First date to include (UTC). Defaults to the earliest available transaction. (optional)
+     * @param  \DateTime $end_date Last date to include (UTC). Defaults to the latest available transaction. (optional)
      * @param  string $type Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. (optional)
      * @param  int $offset Number of matching transactions to skip. (optional, default to 0)
      * @param  int $limit Maximum number of transactions to return in this page. (optional, default to 1000)

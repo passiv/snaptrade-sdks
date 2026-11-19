@@ -1107,13 +1107,13 @@ type AccountInformationApiGetAccountTransactionsRequest struct {
 	limit *int32
 }
 
-// First trade date to include (UTC). Defaults to the earliest available transaction.
+// First date to include (UTC). Defaults to the earliest available transaction.
 func (r *AccountInformationApiGetAccountTransactionsRequest) StartDate(startDate string) *AccountInformationApiGetAccountTransactionsRequest {
 	r.startDate = &startDate
 	return r
 }
 
-// Last trade date to include (UTC). Defaults to the latest available transaction.
+// Last date to include (UTC). Defaults to the latest available transaction.
 func (r *AccountInformationApiGetAccountTransactionsRequest) EndDate(endDate string) *AccountInformationApiGetAccountTransactionsRequest {
 	r.endDate = &endDate
 	return r
@@ -1144,7 +1144,7 @@ func (r AccountInformationApiGetAccountTransactionsRequest) Execute() (*AccountT
 /*
 GetAccountTransactions List account transactions
 
-Returns the account's cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.
+Returns the account's cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.
 
 History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
 

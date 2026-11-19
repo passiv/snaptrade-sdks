@@ -529,7 +529,7 @@ AccountOrder result = client
 
 ### `snaptrade.accountInformation.getAccountTransactions`<a id="snaptradeaccountinformationgetaccounttransactions"></a>
 
-Returns the account's cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.
+Returns the account's cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.
 
 History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
 
@@ -558,11 +558,11 @@ AccountTransactionsResponse result = client
 
 ##### startDate: `LocalDate`<a id="startdate-localdate"></a>
 
-First trade date to include (UTC). Defaults to the earliest available transaction.
+First date to include (UTC). Defaults to the earliest available transaction.
 
 ##### endDate: `LocalDate`<a id="enddate-localdate"></a>
 
-Last trade date to include (UTC). Defaults to the latest available transaction.
+Last date to include (UTC). Defaults to the latest available transaction.
 
 ##### type: `String`<a id="type-string"></a>
 

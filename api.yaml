@@ -1691,7 +1691,7 @@ paths:
       summary: List account transactions
       operationId: AccountInformation_getAccountTransactions
       description: |
-        Returns the account's cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.
+        Returns the account's cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.
 
         History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
       parameters:
@@ -1712,12 +1712,12 @@ paths:
             $ref: "#/components/schemas/UserSecret"
         - in: query
           name: startDate
-          description: First trade date to include (UTC). Defaults to the earliest available transaction.
+          description: First date to include (UTC). Defaults to the earliest available transaction.
           schema:
             $ref: "#/components/schemas/ReportingDate"
         - in: query
           name: endDate
-          description: Last trade date to include (UTC). Defaults to the latest available transaction.
+          description: Last date to include (UTC). Defaults to the latest available transaction.
           schema:
             $ref: "#/components/schemas/ReportingDate"
         - in: query
@@ -9241,7 +9241,7 @@ components:
         date:
           type: string
           format: date-time
-          description: Recorded trade date and time in UTC. Precision depends on what the brokerage supplies.
+          description: Recorded date and time in UTC. Precision depends on what the brokerage supplies.
           example: "2026-11-16T15:42:18.123456Z"
         description:
           type: string

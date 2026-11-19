@@ -178,14 +178,14 @@ namespace SnapTrade.Net.Api
         /// List account transactions
         /// </summary>
         /// <remarks>
-        /// Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+        /// Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="startDate">First trade date to include (UTC). Defaults to the earliest available transaction. (optional)</param>
-        /// <param name="endDate">Last trade date to include (UTC). Defaults to the latest available transaction. (optional)</param>
+        /// <param name="startDate">First date to include (UTC). Defaults to the earliest available transaction. (optional)</param>
+        /// <param name="endDate">Last date to include (UTC). Defaults to the latest available transaction. (optional)</param>
         /// <param name="type">Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once.  (optional)</param>
         /// <param name="offset">Number of matching transactions to skip. (optional, default to 0)</param>
         /// <param name="limit">Maximum number of transactions to return in this page. (optional, default to 1000)</param>
@@ -197,14 +197,14 @@ namespace SnapTrade.Net.Api
         /// List account transactions
         /// </summary>
         /// <remarks>
-        /// Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+        /// Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="startDate">First trade date to include (UTC). Defaults to the earliest available transaction. (optional)</param>
-        /// <param name="endDate">Last trade date to include (UTC). Defaults to the latest available transaction. (optional)</param>
+        /// <param name="startDate">First date to include (UTC). Defaults to the earliest available transaction. (optional)</param>
+        /// <param name="endDate">Last date to include (UTC). Defaults to the latest available transaction. (optional)</param>
         /// <param name="type">Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once.  (optional)</param>
         /// <param name="offset">Number of matching transactions to skip. (optional, default to 0)</param>
         /// <param name="limit">Maximum number of transactions to return in this page. (optional, default to 1000)</param>
@@ -750,14 +750,14 @@ namespace SnapTrade.Net.Api
         /// List account transactions
         /// </summary>
         /// <remarks>
-        /// Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+        /// Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="startDate">First trade date to include (UTC). Defaults to the earliest available transaction. (optional)</param>
-        /// <param name="endDate">Last trade date to include (UTC). Defaults to the latest available transaction. (optional)</param>
+        /// <param name="startDate">First date to include (UTC). Defaults to the earliest available transaction. (optional)</param>
+        /// <param name="endDate">Last date to include (UTC). Defaults to the latest available transaction. (optional)</param>
         /// <param name="type">Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once.  (optional)</param>
         /// <param name="offset">Number of matching transactions to skip. (optional, default to 0)</param>
         /// <param name="limit">Maximum number of transactions to return in this page. (optional, default to 1000)</param>
@@ -770,14 +770,14 @@ namespace SnapTrade.Net.Api
         /// List account transactions
         /// </summary>
         /// <remarks>
-        /// Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+        /// Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="startDate">First trade date to include (UTC). Defaults to the earliest available transaction. (optional)</param>
-        /// <param name="endDate">Last trade date to include (UTC). Defaults to the latest available transaction. (optional)</param>
+        /// <param name="startDate">First date to include (UTC). Defaults to the earliest available transaction. (optional)</param>
+        /// <param name="endDate">Last date to include (UTC). Defaults to the latest available transaction. (optional)</param>
         /// <param name="type">Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once.  (optional)</param>
         /// <param name="offset">Number of matching transactions to skip. (optional, default to 0)</param>
         /// <param name="limit">Maximum number of transactions to return in this page. (optional, default to 1000)</param>
@@ -2429,14 +2429,14 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account transactions Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+        /// List account transactions Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="startDate">First trade date to include (UTC). Defaults to the earliest available transaction. (optional)</param>
-        /// <param name="endDate">Last trade date to include (UTC). Defaults to the latest available transaction. (optional)</param>
+        /// <param name="startDate">First date to include (UTC). Defaults to the earliest available transaction. (optional)</param>
+        /// <param name="endDate">Last date to include (UTC). Defaults to the latest available transaction. (optional)</param>
         /// <param name="type">Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once.  (optional)</param>
         /// <param name="offset">Number of matching transactions to skip. (optional, default to 0)</param>
         /// <param name="limit">Maximum number of transactions to return in this page. (optional, default to 1000)</param>
@@ -2449,14 +2449,14 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account transactions Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+        /// List account transactions Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="startDate">First trade date to include (UTC). Defaults to the earliest available transaction. (optional)</param>
-        /// <param name="endDate">Last trade date to include (UTC). Defaults to the latest available transaction. (optional)</param>
+        /// <param name="startDate">First date to include (UTC). Defaults to the earliest available transaction. (optional)</param>
+        /// <param name="endDate">Last date to include (UTC). Defaults to the latest available transaction. (optional)</param>
         /// <param name="type">Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once.  (optional)</param>
         /// <param name="offset">Number of matching transactions to skip. (optional, default to 0)</param>
         /// <param name="limit">Maximum number of transactions to return in this page. (optional, default to 1000)</param>
@@ -2562,14 +2562,14 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account transactions Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+        /// List account transactions Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="startDate">First trade date to include (UTC). Defaults to the earliest available transaction. (optional)</param>
-        /// <param name="endDate">Last trade date to include (UTC). Defaults to the latest available transaction. (optional)</param>
+        /// <param name="startDate">First date to include (UTC). Defaults to the earliest available transaction. (optional)</param>
+        /// <param name="endDate">Last date to include (UTC). Defaults to the latest available transaction. (optional)</param>
         /// <param name="type">Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once.  (optional)</param>
         /// <param name="offset">Number of matching transactions to skip. (optional, default to 0)</param>
         /// <param name="limit">Maximum number of transactions to return in this page. (optional, default to 1000)</param>
@@ -2583,14 +2583,14 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account transactions Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+        /// List account transactions Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="startDate">First trade date to include (UTC). Defaults to the earliest available transaction. (optional)</param>
-        /// <param name="endDate">Last trade date to include (UTC). Defaults to the latest available transaction. (optional)</param>
+        /// <param name="startDate">First date to include (UTC). Defaults to the earliest available transaction. (optional)</param>
+        /// <param name="endDate">Last date to include (UTC). Defaults to the latest available transaction. (optional)</param>
         /// <param name="type">Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once.  (optional)</param>
         /// <param name="offset">Number of matching transactions to skip. (optional, default to 0)</param>
         /// <param name="limit">Maximum number of transactions to return in this page. (optional, default to 1000)</param>
