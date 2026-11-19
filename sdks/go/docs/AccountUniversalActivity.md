@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **Fee** | Pointer to **float32** | Any fee associated with the transaction if provided by the brokerage. | [optional] 
 **FxRate** | Pointer to **NullableFloat32** | The forex conversion rate involved in the transaction if provided by the brokerage. Used in cases where securities of one currency are purchased in a different currency, and the forex conversion is automatic. In those cases, price, amount and fee will be in the top level currency (activity -&gt; currency) | [optional] 
 **Institution** | Pointer to **string** | The institution that the transaction is associated with. This is usually the brokerage name. | [optional] 
-**ExternalReferenceId** | Pointer to **NullableString** | Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same &#x60;external_reference_id&#x60; | [optional] 
+**ExternalReferenceId** | Pointer to **NullableString** | A stable and unique transaction id when available | [optional] 
 
 ## Methods
 

@@ -645,11 +645,11 @@ public class AccountUniversalActivity {
   }
 
    /**
-   * Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same &#x60;external_reference_id&#x60;
+   * A stable and unique transaction id when available
    * @return externalReferenceId
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2f7dc9b3-5c33-4668-3440-2b31e056ebe6", value = "Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same `external_reference_id`")
+  @ApiModelProperty(example = "2f7dc9b3-5c33-4668-3440-2b31e056ebe6", value = "A stable and unique transaction id when available")
 
   public String getExternalReferenceId() {
     return externalReferenceId;

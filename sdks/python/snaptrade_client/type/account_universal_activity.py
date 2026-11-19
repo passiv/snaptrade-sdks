@@ -67,7 +67,7 @@ class OptionalAccountUniversalActivity(TypedDict, total=False):
     # The institution that the transaction is associated with. This is usually the brokerage name.
     institution: str
 
-    # Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same `external_reference_id`
+    # A stable and unique transaction id when available
     external_reference_id: typing.Optional[str]
 
 class AccountUniversalActivity(RequiredAccountUniversalActivity, OptionalAccountUniversalActivity):

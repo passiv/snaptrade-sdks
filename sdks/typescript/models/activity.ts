@@ -79,7 +79,7 @@ export interface Activity {
     [key: string]: unknown;
 
     /**
-     * Brokerage transaction reference, when available. Related transactions such as a fill and a fee can share this value.
+     * A stable and unique transaction id when available
      * @type {string}
      * @memberof Activity
      */

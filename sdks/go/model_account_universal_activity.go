@@ -46,7 +46,7 @@ type AccountUniversalActivity struct {
 	FxRate NullableFloat32 `json:"fx_rate,omitempty"`
 	// The institution that the transaction is associated with. This is usually the brokerage name.
 	Institution *string `json:"institution,omitempty"`
-	// Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same `external_reference_id`
+	// A stable and unique transaction id when available
 	ExternalReferenceId NullableString `json:"external_reference_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

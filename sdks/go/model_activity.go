@@ -19,7 +19,7 @@ import (
 
 // Activity A recorded transaction in a brokerage account.
 type Activity struct {
-	// Brokerage transaction reference, when available. Related transactions such as a fill and a fee can share this value.
+	// A stable and unique transaction id when available
 	TransactionId NullableString `json:"transaction_id"`
 	// Best-effort activity classification. A reported option action takes precedence over its base type. Common values include BUY, SELL, BUY_TO_OPEN, BUY_TO_CLOSE, SELL_TO_OPEN, SELL_TO_CLOSE, DIVIDEND, INTEREST, CONTRIBUTION, WITHDRAWAL, TRANSFER and FEE. Clients must accept unfamiliar values. 
 	Type string `json:"type"`

@@ -109,11 +109,11 @@ public class Activity {
   }
 
    /**
-   * Brokerage transaction reference, when available. Related transactions such as a fill and a fee can share this value.
+   * A stable and unique transaction id when available
    * @return transactionId
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "TXN-20261116-003", required = true, value = "Brokerage transaction reference, when available. Related transactions such as a fill and a fee can share this value.")
+  @ApiModelProperty(example = "TXN-20261116-003", required = true, value = "A stable and unique transaction id when available")
 
   public String getTransactionId() {
     return transactionId;
