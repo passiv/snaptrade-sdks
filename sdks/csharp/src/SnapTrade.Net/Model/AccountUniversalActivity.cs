@@ -51,7 +51,7 @@ namespace SnapTrade.Net.Model
         /// <param name="fee">Any fee associated with the transaction if provided by the brokerage..</param>
         /// <param name="fxRate">The forex conversion rate involved in the transaction if provided by the brokerage. Used in cases where securities of one currency are purchased in a different currency, and the forex conversion is automatic. In those cases, price, amount and fee will be in the top level currency (activity -&gt; currency).</param>
         /// <param name="institution">The institution that the transaction is associated with. This is usually the brokerage name..</param>
-        /// <param name="externalReferenceId">Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same &#x60;external_reference_id&#x60;.</param>
+        /// <param name="externalReferenceId">A stable and unique transaction id when available.</param>
         public AccountUniversalActivity(string id = default(string), SymbolNullable symbol = default(SymbolNullable), SymbolNullable currencyUniversalSymbol = default(SymbolNullable), OptionsSymbolNullable optionSymbol = default(OptionsSymbolNullable), double price = default(double), double units = default(double), double? amount = default(double?), CurrencyNullable currency = default(CurrencyNullable), string type = default(string), string optionType = default(string), string description = default(string), DateTime? tradeDate = default(DateTime?), DateTime settlementDate = default(DateTime), double fee = default(double), double? fxRate = default(double?), string institution = default(string), string externalReferenceId = default(string)) : base()
         {
             this.Id = id;
@@ -183,9 +183,9 @@ namespace SnapTrade.Net.Model
         public string Institution { get; set; }
 
         /// <summary>
-        /// Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same &#x60;external_reference_id&#x60;
+        /// A stable and unique transaction id when available
         /// </summary>
-        /// <value>Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same &#x60;external_reference_id&#x60;</value>
+        /// <value>A stable and unique transaction id when available</value>
         [DataMember(Name = "external_reference_id", EmitDefaultValue = true)]
         public string ExternalReferenceId { get; set; }
 

@@ -399,7 +399,7 @@ class Activity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets transaction_id
      *
-     * @param string $transaction_id Brokerage transaction reference, when available. Related transactions such as a fill and a fee can share this value.
+     * @param string $transaction_id A stable and unique transaction id when available
      *
      * @return self
      */

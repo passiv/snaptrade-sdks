@@ -8,7 +8,7 @@ A recorded transaction in a brokerage account.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**transactionId** | **String** | Brokerage transaction reference, when available. Related transactions such as a fill and a fee can share this value. |  |
+|**transactionId** | **String** | A stable and unique transaction id when available |  |
 |**type** | **String** | Best-effort activity classification. A reported option action takes precedence over its base type. Common values include BUY, SELL, BUY_TO_OPEN, BUY_TO_CLOSE, SELL_TO_OPEN, SELL_TO_CLOSE, DIVIDEND, INTEREST, CONTRIBUTION, WITHDRAWAL, TRANSFER and FEE. Clients must accept unfamiliar values.  |  |
 |**date** | **OffsetDateTime** | Recorded date and time in UTC. Precision depends on what the brokerage supplies. |  |
 |**description** | **String** | Brokerage activity description, including an unresolved brokerage symbol&#39;s name when available. |  |

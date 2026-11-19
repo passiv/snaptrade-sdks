@@ -24,7 +24,7 @@ A transaction or activity from an institution
 |**fee** | **Double** | Any fee associated with the transaction if provided by the brokerage. |  [optional] |
 |**fxRate** | **Double** | The forex conversion rate involved in the transaction if provided by the brokerage. Used in cases where securities of one currency are purchased in a different currency, and the forex conversion is automatic. In those cases, price, amount and fee will be in the top level currency (activity -&gt; currency) |  [optional] |
 |**institution** | **String** | The institution that the transaction is associated with. This is usually the brokerage name. |  [optional] |
-|**externalReferenceId** | **String** | Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same &#x60;external_reference_id&#x60; |  [optional] |
+|**externalReferenceId** | **String** | A stable and unique transaction id when available |  [optional] |
 
 
 

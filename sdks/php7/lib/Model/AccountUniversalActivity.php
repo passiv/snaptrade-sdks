@@ -921,7 +921,7 @@ class AccountUniversalActivity implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets external_reference_id
      *
-     * @param string|null $external_reference_id Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same `external_reference_id`
+     * @param string|null $external_reference_id A stable and unique transaction id when available
      *
      * @return self
      */

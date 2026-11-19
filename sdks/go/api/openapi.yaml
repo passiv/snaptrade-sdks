@@ -14589,8 +14589,7 @@ components:
         fx_rate: "1.032"
       properties:
         transaction_id:
-          description: "Brokerage transaction reference, when available. Related transactions\
-            \ such as a fill and a fee can share this value."
+          description: A stable and unique transaction id when available
           example: TXN-20261116-003
           nullable: true
           type: string
@@ -15072,9 +15071,7 @@ components:
           x-konfig-original-example: Robinhood
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-institution
         external_reference_id:
-          description: "Reference ID from brokerage used to identify related transactions.\
-            \ For example if an order comprises of several transactions (buy, fee,\
-            \ fx), they can be grouped if they share the same `external_reference_id`"
+          description: A stable and unique transaction id when available
           example: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
           nullable: true
           type: string

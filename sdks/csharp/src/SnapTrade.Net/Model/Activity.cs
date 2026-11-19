@@ -43,7 +43,7 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Activity" /> class.
         /// </summary>
-        /// <param name="transactionId">Brokerage transaction reference, when available. Related transactions such as a fill and a fee can share this value. (required).</param>
+        /// <param name="transactionId">A stable and unique transaction id when available (required).</param>
         /// <param name="type">Best-effort activity classification. A reported option action takes precedence over its base type. Common values include BUY, SELL, BUY_TO_OPEN, BUY_TO_CLOSE, SELL_TO_OPEN, SELL_TO_CLOSE, DIVIDEND, INTEREST, CONTRIBUTION, WITHDRAWAL, TRANSFER and FEE. Clients must accept unfamiliar values.  (required).</param>
         /// <param name="date">Recorded date and time in UTC. Precision depends on what the brokerage supplies. (required).</param>
         /// <param name="description">Brokerage activity description, including an unresolved brokerage symbol&#39;s name when available. (required).</param>
@@ -106,9 +106,9 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Brokerage transaction reference, when available. Related transactions such as a fill and a fee can share this value.
+        /// A stable and unique transaction id when available
         /// </summary>
-        /// <value>Brokerage transaction reference, when available. Related transactions such as a fill and a fee can share this value.</value>
+        /// <value>A stable and unique transaction id when available</value>
         [DataMember(Name = "transaction_id", IsRequired = true, EmitDefaultValue = true)]
         public string TransactionId { get; set; }
 

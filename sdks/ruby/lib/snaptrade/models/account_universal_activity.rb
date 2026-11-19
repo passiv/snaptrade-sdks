@@ -57,7 +57,7 @@ module SnapTrade
     # The institution that the transaction is associated with. This is usually the brokerage name.
     attr_accessor :institution
 
-    # Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same `external_reference_id`
+    # A stable and unique transaction id when available
     attr_accessor :external_reference_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
