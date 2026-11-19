@@ -40,7 +40,7 @@ func (r ManagementApiGetStatsRequest) Execute() (*ConnectedAssetPartnerStats, *h
 }
 
 /*
-GetStats Get usage stats (beta)
+GetStats Get usage stats
 
 **Beta.** This endpoint and its response schema may change.
 

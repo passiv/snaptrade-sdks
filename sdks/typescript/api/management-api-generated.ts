@@ -101,7 +101,7 @@ export const ManagementApiAxiosParamCreator = function (configuration?: Configur
     return {
         /**
          * **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `connected_assets_calculated_at` indicates when it was last calculated. 
-         * @summary Get usage stats (beta)
+         * @summary Get usage stats
          * @param {string} [currency] ISO 4217 currency code to express connected asset values in. Defaults to &#x60;USD&#x60;.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -218,7 +218,7 @@ export const ManagementApiFp = function<TAuth extends AuthMode>(configuration?: 
     return {
         /**
          * **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `connected_assets_calculated_at` indicates when it was last calculated. 
-         * @summary Get usage stats (beta)
+         * @summary Get usage stats
          * @param {ManagementApiGetStatsRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -253,7 +253,7 @@ export const ManagementApiFactory = function<TAuth extends AuthMode>(configurati
     return {
         /**
          * **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `connected_assets_calculated_at` indicates when it was last calculated. 
-         * @summary Get usage stats (beta)
+         * @summary Get usage stats
          * @param {ManagementApiGetStatsRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -346,7 +346,7 @@ export type ManagementApiGetStatsLegacyArgs<TAuth extends AuthMode> =
 export class ManagementApiGenerated<TAuth extends AuthMode> extends BaseAPI<TAuth> {
     /**
      * **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `connected_assets_calculated_at` indicates when it was last calculated. 
-     * @summary Get usage stats (beta)
+     * @summary Get usage stats
      * @param {ManagementApiGetStatsRequest<TAuth>} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestManagementStats(ApiTestMixin, unittest.TestCase):
     """
     ManagementStats unit test stubs
-        Get usage stats (beta)
+        Get usage stats
     """
 
     def setUp(self):

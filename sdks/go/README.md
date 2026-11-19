@@ -205,7 +205,7 @@ Class | Method | HTTP request | Description
 *ExperimentalEndpointsApi* | [**GetUserAccountRecentOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountrecentordersv2) | **Get** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)
 *ExperimentalEndpointsApi* | [**ListSubscriptions**](docs/ExperimentalEndpointsApi.md#listsubscriptions) | **Get** /snapTrade/tradeDetection/subscriptions | List active Trade Detection subscriptions
 *ExperimentalEndpointsApi* | [**PlaceSimpleOrder**](docs/ExperimentalEndpointsApi.md#placesimpleorder) | **Post** /accounts/{accountId}/trading/simple | Place a simple order (beta)
-*ManagementApi* | [**GetStats**](docs/ManagementApi.md#getstats) | **Get** /management/stats | Get usage stats (beta)
+*ManagementApi* | [**GetStats**](docs/ManagementApi.md#getstats) | **Get** /management/stats | Get usage stats
 *ManagementApi* | [**GetStatsLegacy**](docs/ManagementApi.md#getstatslegacy) | **Get** /snapTrade/stats | Get usage stats (deprecated)
 *ReferenceDataApi* | [**GetPartnerInfo**](docs/ReferenceDataApi.md#getpartnerinfo) | **Get** /snapTrade/partners | Get Client Info
 *ReferenceDataApi* | [**GetStockExchanges**](docs/ReferenceDataApi.md#getstockexchanges) | **Get** /exchanges | Get exchanges

@@ -499,7 +499,7 @@ paths:
     get:
       tags:
         - Management
-      summary: Get usage stats (beta)
+      summary: Get usage stats
       description: |
         **Beta.** This endpoint and its response schema may change.
 

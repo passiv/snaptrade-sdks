@@ -4,14 +4,14 @@ All URIs are relative to *https://api.snaptrade.com*
 
 Method | Path | Description
 ------------- | ------------- | -------------
-[**GetStats**](ManagementApi.md#GetStats) | **Get** /management/stats | Get usage stats (beta)
+[**GetStats**](ManagementApi.md#GetStats) | **Get** /management/stats | Get usage stats
 [**GetStatsLegacy**](ManagementApi.md#GetStatsLegacy) | **Get** /snapTrade/stats | Get usage stats (deprecated)
 
 
 
 ## GetStats
 
-Get usage stats (beta)
+Get usage stats
 
 
 
