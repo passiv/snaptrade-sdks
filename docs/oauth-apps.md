@@ -396,7 +396,7 @@ Use the generated client’s `trading` methods with the same OAuth auth factory.
 1. Select the user's account and validate the order details for that brokerage.
 2. Show the user the order details and available impact and fee information, then obtain their confirmation. See [Order Impact and Confirmation](https://docs.snaptrade.com/docs/order-impact-and-confirmation).
 3. Submit the order with the endpoint for the asset: :api[Trading_placeForceOrder] for equities, :api[Trading_placeMlegOrder] for options, or :api[Trading_placeCryptoOrder] for crypto.
-4. Track the order's status with :api[AccountInformation_getAccountOrder], using the brokerage order ID returned by the submission. This public beta endpoint returns an order with a `legs` list and `kind`-discriminated instruments and order types. Its request and response schemas and behavior may change without advance notice. A successful submission does not mean the order has filled.
+4. Track the order's status with :api[AccountInformation_getUserAccountOrders] and match `brokerage_order_id` to the brokerage order ID returned by the submission. Results may reflect cached data depending on your app's data access, and a newly submitted order may not appear immediately. A successful submission does not mean the order has filled.
 
 See [Trading with SnapTrade](https://docs.snaptrade.com/docs/trading-with-snaptrade) for order payloads and brokerage-specific capabilities. Its Connection Portal setup instructions apply to Commercial API-key integrations; OAuth apps use connections managed by Personal users.
 
