@@ -59,16 +59,17 @@ console.log("Send this Connection Portal URL to your user:", login.data.redirect
 After the user completes the Connection Portal, run the following code. Reuse your initialized SDK client and the user's stored credentials.
 
 ```typescript
-const accounts = await snaptrade.accountInformation.listUserAccounts({
+const accounts = await snaptrade.accountInformation.listAllUserAccounts({
   // Commercial account-data calls include the user's credentials.
   userId,
   userSecret,
 });
 
-if (!accounts.data.length) throw new Error("No connected accounts yet");
+const account = accounts.data.results.find((account) => account.kind === "investment");
+if (!account) throw new Error("No connected investment accounts yet");
 
 const positions = await snaptrade.accountInformation.getAllAccountPositions({
-  accountId: accounts.data[0].id!,
+  accountId: account.id,
   userId,
   userSecret,
 });
@@ -111,17 +112,21 @@ print("Send this Connection Portal URL to your user:", login.body["redirectURI"]
 After the user completes the Connection Portal, run the following code. Reuse your initialized SDK client and the user's stored credentials.
 
 ```python
-accounts = snaptrade.account_information.list_user_accounts(
+accounts = snaptrade.account_information.list_all_user_accounts(
     # Commercial account-data calls include the user's credentials.
     user_id=user_id,
     user_secret=user_secret,
 )
 
-if not accounts.body:
-    raise RuntimeError("No connected accounts yet")
+account = next(
+    (account for account in accounts.body["results"] if account["kind"] == "investment"),
+    None,
+)
+if account is None:
+    raise RuntimeError("No connected investment accounts yet")
 
 positions = snaptrade.account_information.get_all_account_positions(
-    account_id=accounts.body[0]["id"],
+    account_id=account["id"],
     user_id=user_id,
     user_secret=user_secret,
 )
@@ -138,7 +143,7 @@ print(positions.body)
 
 ## Accounts and Trading
 
-After connection, list accounts, choose an account ID, and retrieve positions with :api[AccountInformation_getAllAccountPositions]. Balances and orders are available through :api[AccountInformation_getUserAccountBalance] and :api[AccountInformation_getUserAccountOrders].
+After connection, list accounts with :api[AccountInformation_listAllUserAccounts]. Its `results` list can contain multiple account kinds; choose an `investment` account before retrieving positions with :api[AccountInformation_getAllAccountPositions]. Balances and orders are available through :api[AccountInformation_getUserAccountBalance] and :api[AccountInformation_getUserAccountOrders].
 
 For trading, create the connection with `connectionType` / `connection_type` set to `trade-if-available`. The default `read` connection type only supports data access. Trading also depends on the key, brokerage, connection, and account capabilities. Build the order with the account ID and brokerage ticker, show the user its details and impact, obtain confirmation, then use :api[Trading_placeForceOrder]. See [Trading with SnapTrade](https://docs.snaptrade.com/docs/trading-with-snaptrade) for order types and supported assets.
 
