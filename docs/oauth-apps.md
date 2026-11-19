@@ -165,7 +165,7 @@ async function handleCallback(userId: string, query: URLSearchParams) {
   const snaptrade = new Snaptrade({
     auth: SnaptradeAuth.oauth({ accessToken: tokens.accessToken }),
   });
-  return snaptrade.accountInformation.listUserAccounts();
+  return snaptrade.accountInformation.listAllUserAccounts();
 }
 ```
 
@@ -183,7 +183,7 @@ async function refreshAccounts(userId: string) {
   const snaptrade = new Snaptrade({
     auth: SnaptradeAuth.oauth({ accessToken: refreshed.accessToken }),
   });
-  return snaptrade.accountInformation.listUserAccounts();
+  return snaptrade.accountInformation.listAllUserAccounts();
 }
 ```
 
@@ -231,7 +231,7 @@ def handle_callback(user_id: str, query: dict[str, str]):
     tokens = oauth.exchange_code(code=code, code_verifier=attempt.code_verifier)
     save_tokens(user_id, tokens)
     snaptrade = SnapTrade(auth=SnapTradeAuth.oauth(access_token=tokens.access_token))
-    return snaptrade.account_information.list_user_accounts()
+    return snaptrade.account_information.list_all_user_accounts()
 ```
 
 **Refresh explicitly.** The app's per-user helper coordinates calls and shares the result.
@@ -248,7 +248,7 @@ def refresh_accounts(user_id: str):
 
     refreshed = with_user_refresh(user_id, refresh_current)
     snaptrade = SnapTrade(auth=SnapTradeAuth.oauth(access_token=refreshed.access_token))
-    return snaptrade.account_information.list_user_accounts()
+    return snaptrade.account_information.list_all_user_accounts()
 ```
 
 Token results expose `accessToken`, `refreshToken`, `expiresIn`, `tokenType`, `scope`, and `raw` in TypeScript, and `access_token`, `refresh_token`, `expires_in`, `token_type`, `scope`, and `raw` in Python. Optional fields may be absent. Follow the shared [Refresh Tokens](#10-refresh-tokens) rules when a refresh fails.
@@ -348,7 +348,7 @@ Use the generated API client with the current token from your application's stor
 async function listAccounts(userId: string) {
   const tokens = await loadTokens(userId);
   const snaptrade = new Snaptrade({ auth: SnaptradeAuth.oauth({ accessToken: tokens.accessToken }) });
-  return snaptrade.accountInformation.listUserAccounts();
+  return snaptrade.accountInformation.listAllUserAccounts();
 }
 ```
 
@@ -356,10 +356,10 @@ async function listAccounts(userId: string) {
 def list_accounts(user_id: str):
     tokens = load_tokens(user_id)
     snaptrade = SnapTrade(auth=SnapTradeAuth.oauth(access_token=tokens.access_token))
-    return snaptrade.account_information.list_user_accounts()
+    return snaptrade.account_information.list_all_user_accounts()
 ```
 
-The client sends `Authorization: Bearer …` to the canonical `/accounts` endpoint.
+The client sends `Authorization: Bearer …` to the canonical `/accounts/all` endpoint. Accounts are returned in `response.data.results` in TypeScript and `response.body["results"]` in Python. The list can contain different account kinds; select `kind == "investment"` before requesting positions.
 
 You can then use the supported read and connection endpoints to list the user's connections, accounts, positions, balances, orders, and transactions.
 
@@ -396,7 +396,7 @@ Use the generated client’s `trading` methods with the same OAuth auth factory.
 1. Select the user's account and validate the order details for that brokerage.
 2. Show the user the order details and available impact and fee information, then obtain their confirmation. See [Order Impact and Confirmation](https://docs.snaptrade.com/docs/order-impact-and-confirmation).
 3. Submit the order with the endpoint for the asset: :api[Trading_placeForceOrder] for equities, :api[Trading_placeMlegOrder] for options, or :api[Trading_placeCryptoOrder] for crypto.
-4. Track the order's status with :api[AccountInformation_getUserAccountOrderDetailV2], using the brokerage order ID returned by the submission. A successful submission does not mean the order has filled.
+4. Track the order's status with :api[AccountInformation_getAccountOrder], using the brokerage order ID returned by the submission. This public beta endpoint returns an order with a `legs` list and `kind`-discriminated instruments and order types. Its request and response schemas and behavior may change without advance notice. A successful submission does not mean the order has filled.
 
 See [Trading with SnapTrade](https://docs.snaptrade.com/docs/trading-with-snaptrade) for order payloads and brokerage-specific capabilities. Its Connection Portal setup instructions apply to Commercial API-key integrations; OAuth apps use connections managed by Personal users.
 
