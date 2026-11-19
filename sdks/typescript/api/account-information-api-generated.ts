@@ -482,9 +482,9 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
          * @param {string} accountId 
          * @param {string | Date} [startDate] First date to include (UTC). Defaults to the earliest available transaction.
          * @param {string | Date} [endDate] Last date to include (UTC). Defaults to the latest available transaction.
-         * @param {string} [type] Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
-         * @param {number} [offset] Number of matching transactions to skip.
-         * @param {number} [limit] Maximum number of transactions to return in this page.
+         * @param {string} [type] Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;BUY_TO_OPEN&#x60; - Option bought to open a long position.   - &#x60;BUY_TO_CLOSE&#x60; - Option bought to close a short position.   - &#x60;SELL_TO_OPEN&#x60; - Option sold to open a short position.   - &#x60;SELL_TO_CLOSE&#x60; - Option sold to close a long position.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;SUBSTITUTE_DIVIDEND&#x60; - Payment in lieu of a dividend.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;STOCK_DIVIDEND&#x60; - A type of dividend where a company distributes shares instead of cash   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;TAX&#x60; - A tax related fee.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another.   - &#x60;SPLIT&#x60; - A stock share split. 
+         * @param {number} [offset] An integer that specifies the starting point of the paginated results. Default is 0.
+         * @param {number} [limit] An integer that specifies the maximum number of transactions to return. Default of 1000.
          * @param {string} [userId] 
          * @param {string} [userSecret] 
          * @param {*} [options] Override http request option.
@@ -2105,21 +2105,21 @@ export type AccountInformationApiGetAccountTransactionsBaseRequest = {
     readonly endDate?: string | Date
     
     /**
-    * Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
+    * Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `BUY_TO_OPEN` - Option bought to open a long position.   - `BUY_TO_CLOSE` - Option bought to close a short position.   - `SELL_TO_OPEN` - Option sold to open a short position.   - `SELL_TO_CLOSE` - Option sold to close a long position.   - `DIVIDEND` - Dividend payout.   - `SUBSTITUTE_DIVIDEND` - Payment in lieu of a dividend.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `TAX` - A tax related fee.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another.   - `SPLIT` - A stock share split. 
     * @type {string}
     * @memberof AccountInformationApiGetAccountTransactions
     */
     readonly type?: string
     
     /**
-    * Number of matching transactions to skip.
+    * An integer that specifies the starting point of the paginated results. Default is 0.
     * @type {number}
     * @memberof AccountInformationApiGetAccountTransactions
     */
     readonly offset?: number
     
     /**
-    * Maximum number of transactions to return in this page.
+    * An integer that specifies the maximum number of transactions to return. Default of 1000.
     * @type {number}
     * @memberof AccountInformationApiGetAccountTransactions
     */

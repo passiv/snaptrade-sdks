@@ -260,6 +260,7 @@ public class Example {
     String userId = "snaptrade-user-123";
     String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
+    UUID clientOrderId = UUID.randomUUID(); // Canonical 36-character UUID required when placing a Wealthsimple order with two or more legs. Not required for an impact preview or single-leg request. Reuse it when retrying the same attempt. SnapTrade retains the ID after success or failure; reuse by the same user across accounts or placement endpoints returns 409 without submitting again. A 409 does not establish whether the original attempt was accepted; reconcile it before using a new ID for a genuinely new order. This protection does not depend on Wealthsimple deduplicating its external order ID.
     BigDecimal limitPrice = new BigDecimal(78); // The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unless `price_effect` is `EVEN` - a net-even order is implicitly priced at 0, so the field may be omitted and must be `0` if sent.
     BigDecimal stopPrice = new BigDecimal(78); // The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
     MlegPriceEffectStrictNullable priceEffect = MlegPriceEffectStrictNullable.fromValue("CREDIT");
@@ -267,6 +268,7 @@ public class Example {
       OptionImpact result = client
               .trading
               .getOptionImpact(orderType, timeInForce, legs, userId, userSecret, accountId)
+              .clientOrderId(clientOrderId)
               .limitPrice(limitPrice)
               .stopPrice(stopPrice)
               .priceEffect(priceEffect)
@@ -288,6 +290,7 @@ public class Example {
       ApiResponse<OptionImpact> response = client
               .trading
               .getOptionImpact(orderType, timeInForce, legs, userId, userSecret, accountId)
+              .clientOrderId(clientOrderId)
               .limitPrice(limitPrice)
               .stopPrice(stopPrice)
               .priceEffect(priceEffect)
@@ -693,7 +696,7 @@ public class Example {
     UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // The ID of the account to execute the trade on.
     String userId = "snaptrade-user-123";
     String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
-    UUID clientOrderId = UUID.randomUUID(); // Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
+    UUID clientOrderId = UUID.randomUUID(); // Caller-supplied canonical 36-character UUID. Required for Wealthsimple multi-leg placement and optional for other orders. SnapTrade rejects reuse by the same user for Wealthsimple multi-leg placement and OAuth requests. Otherwise, forwarding and duplicate prevention depend on the endpoint and brokerage. Refer to the request schema and per-brokerage documentation for behavior on duplicate submission. 
     try {
       ComplexOrderResponse result = client
               .trading
@@ -924,7 +927,7 @@ public class Example {
     Double stop = 3.4D; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     Double units = 3.4D; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
     Object notionalValue = null;
-    UUID clientOrderId = UUID.randomUUID(); // Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
+    UUID clientOrderId = UUID.randomUUID(); // Caller-supplied canonical 36-character UUID. Required for Wealthsimple multi-leg placement and optional for other orders. SnapTrade rejects reuse by the same user for Wealthsimple multi-leg placement and OAuth requests. Otherwise, forwarding and duplicate prevention depend on the endpoint and brokerage. Refer to the request schema and per-brokerage documentation for behavior on duplicate submission. 
     try {
       AccountOrderRecord result = client
               .trading
@@ -1038,7 +1041,7 @@ public class Example {
 
 Place option order
 
-Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
+Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  Wealthsimple placement with two or more legs requires a canonical UUID &#x60;client_order_id&#x60;. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID. 
 
 ### Example
 ```java
@@ -1068,6 +1071,7 @@ public class Example {
     String userId = "snaptrade-user-123";
     String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
     UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631");
+    UUID clientOrderId = UUID.randomUUID(); // Canonical 36-character UUID required when placing a Wealthsimple order with two or more legs. Not required for an impact preview or single-leg request. Reuse it when retrying the same attempt. SnapTrade retains the ID after success or failure; reuse by the same user across accounts or placement endpoints returns 409 without submitting again. A 409 does not establish whether the original attempt was accepted; reconcile it before using a new ID for a genuinely new order. This protection does not depend on Wealthsimple deduplicating its external order ID.
     BigDecimal limitPrice = new BigDecimal(78); // The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unless `price_effect` is `EVEN` - a net-even order is implicitly priced at 0, so the field may be omitted and must be `0` if sent.
     BigDecimal stopPrice = new BigDecimal(78); // The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
     MlegPriceEffectStrictNullable priceEffect = MlegPriceEffectStrictNullable.fromValue("CREDIT");
@@ -1075,6 +1079,7 @@ public class Example {
       MlegOrderResponse result = client
               .trading
               .placeMlegOrder(orderType, timeInForce, legs, userId, userSecret, accountId)
+              .clientOrderId(clientOrderId)
               .limitPrice(limitPrice)
               .stopPrice(stopPrice)
               .priceEffect(priceEffect)
@@ -1095,6 +1100,7 @@ public class Example {
       ApiResponse<MlegOrderResponse> response = client
               .trading
               .placeMlegOrder(orderType, timeInForce, legs, userId, userSecret, accountId)
+              .clientOrderId(clientOrderId)
               .limitPrice(limitPrice)
               .stopPrice(stopPrice)
               .priceEffect(priceEffect)

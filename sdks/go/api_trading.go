@@ -1751,6 +1751,8 @@ PlaceMlegOrder Place option order
 
 Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support
 
+Wealthsimple placement with two or more legs requires a canonical UUID `client_order_id`. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
@@ -1887,6 +1889,17 @@ func (a *TradingApiService) PlaceMlegOrderExecute(r TradingApiPlaceMlegOrderRequ
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
 			var v Model400FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v TradingPlaceMlegOrder409Response
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

@@ -18,6 +18,8 @@ import (
 
 // MlegTradeForm Inputs for placing a multi-leg order with the brokerage.
 type MlegTradeForm struct {
+	// Canonical 36-character UUID required when placing a Wealthsimple order with two or more legs. Not required for an impact preview or single-leg request. Reuse it when retrying the same attempt. SnapTrade retains the ID after success or failure; reuse by the same user across accounts or placement endpoints returns 409 without submitting again. A 409 does not establish whether the original attempt was accepted; reconcile it before using a new ID for a genuinely new order. This protection does not depend on Wealthsimple deduplicating its external order ID.
+	ClientOrderId *string `json:"client_order_id,omitempty"`
 	OrderType MlegOrderTypeStrict `json:"order_type"`
 	TimeInForce TimeInForceStrict `json:"time_in_force"`
 	// The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unless `price_effect` is `EVEN` - a net-even order is implicitly priced at 0, so the field may be omitted and must be `0` if sent.
@@ -48,6 +50,38 @@ func NewMlegTradeForm(orderType MlegOrderTypeStrict, timeInForce TimeInForceStri
 func NewMlegTradeFormWithDefaults() *MlegTradeForm {
 	this := MlegTradeForm{}
 	return &this
+}
+
+// GetClientOrderId returns the ClientOrderId field value if set, zero value otherwise.
+func (o *MlegTradeForm) GetClientOrderId() string {
+	if o == nil || isNil(o.ClientOrderId) {
+		var ret string
+		return ret
+	}
+	return *o.ClientOrderId
+}
+
+// GetClientOrderIdOk returns a tuple with the ClientOrderId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MlegTradeForm) GetClientOrderIdOk() (*string, bool) {
+	if o == nil || isNil(o.ClientOrderId) {
+    return nil, false
+	}
+	return o.ClientOrderId, true
+}
+
+// HasClientOrderId returns a boolean if a field has been set.
+func (o *MlegTradeForm) HasClientOrderId() bool {
+	if o != nil && !isNil(o.ClientOrderId) {
+		return true
+	}
+
+	return false
+}
+
+// SetClientOrderId gets a reference to the given string and assigns it to the ClientOrderId field.
+func (o *MlegTradeForm) SetClientOrderId(v string) {
+	o.ClientOrderId = &v
 }
 
 // GetOrderType returns the OrderType field value
@@ -250,6 +284,9 @@ func (o *MlegTradeForm) SetLegs(v []MlegLeg) {
 
 func (o MlegTradeForm) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if !isNil(o.ClientOrderId) {
+		toSerialize["client_order_id"] = o.ClientOrderId
+	}
 	if true {
 		toSerialize["order_type"] = o.OrderType
 	}

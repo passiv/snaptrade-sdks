@@ -138,11 +138,11 @@ public class Activity {
   }
 
    /**
-   * Best-effort activity classification. A reported option action takes precedence over its base type. Common values include BUY, SELL, BUY_TO_OPEN, BUY_TO_CLOSE, SELL_TO_OPEN, SELL_TO_CLOSE, DIVIDEND, INTEREST, CONTRIBUTION, WITHDRAWAL, TRANSFER and FEE. Clients must accept unfamiliar values. 
+   * A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;BUY_TO_OPEN&#x60; - Option bought to open a long position.   - &#x60;BUY_TO_CLOSE&#x60; - Option bought to close a short position.   - &#x60;SELL_TO_OPEN&#x60; - Option sold to open a short position.   - &#x60;SELL_TO_CLOSE&#x60; - Option sold to close a long position.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;SUBSTITUTE_DIVIDEND&#x60; - Payment in lieu of a dividend.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;STOCK_DIVIDEND&#x60; - A type of dividend where a company distributes shares instead of cash   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;TAX&#x60; - A tax related fee.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of asset(s) from one account to another.   - &#x60;EXTERNAL_ASSET_TRANSFER_IN&#x60; - Incoming transfer of an asset from an external account to this account.   - &#x60;EXTERNAL_ASSET_TRANSFER_OUT&#x60; - Outgoing transfer of an asset from this account to an external account.   - &#x60;SPLIT&#x60; - A stock share split.   - &#x60;ADJUSTMENT&#x60; - A one time adjustment of the account&#39;s cash balance or shares of an asset 
    * @return type
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "BUY", required = true, value = "Best-effort activity classification. A reported option action takes precedence over its base type. Common values include BUY, SELL, BUY_TO_OPEN, BUY_TO_CLOSE, SELL_TO_OPEN, SELL_TO_CLOSE, DIVIDEND, INTEREST, CONTRIBUTION, WITHDRAWAL, TRANSFER and FEE. Clients must accept unfamiliar values. ")
+  @ApiModelProperty(example = "BUY", required = true, value = "A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `BUY_TO_OPEN` - Option bought to open a long position.   - `BUY_TO_CLOSE` - Option bought to close a short position.   - `SELL_TO_OPEN` - Option sold to open a short position.   - `SELL_TO_CLOSE` - Option sold to close a long position.   - `DIVIDEND` - Dividend payout.   - `SUBSTITUTE_DIVIDEND` - Payment in lieu of a dividend.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `TAX` - A tax related fee.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of asset(s) from one account to another.   - `EXTERNAL_ASSET_TRANSFER_IN` - Incoming transfer of an asset from an external account to this account.   - `EXTERNAL_ASSET_TRANSFER_OUT` - Outgoing transfer of an asset from this account to an external account.   - `SPLIT` - A stock share split.   - `ADJUSTMENT` - A one time adjustment of the account's cash balance or shares of an asset ")
 
   public String getType() {
     return type;
@@ -283,11 +283,11 @@ public class Activity {
   }
 
    /**
-   * Signed amount recorded for the transaction. Use this value directly. Price, units and fees may be insufficient to reconstruct it.
+   * The amount of the transaction denominated in &#x60;priced_in&#x60;. This can be positive or negative. In general, transactions that positively affect the account balance (like sell, deposits, dividends, etc) will have a positive amount, while transactions that negatively affect the account balance (like buy, withdrawals, fees, etc) will have a negative amount.
    * @return amount
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "-651.3", required = true, value = "Signed amount recorded for the transaction. Use this value directly. Price, units and fees may be insufficient to reconstruct it.")
+  @ApiModelProperty(example = "-651.3", required = true, value = "The amount of the transaction denominated in `priced_in`. This can be positive or negative. In general, transactions that positively affect the account balance (like sell, deposits, dividends, etc) will have a positive amount, while transactions that negatively affect the account balance (like buy, withdrawals, fees, etc) will have a negative amount.")
 
   public BigDecimal getAmount() {
     return amount;
@@ -312,11 +312,11 @@ public class Activity {
   }
 
    /**
-   * Recorded unit price. For options this is the price per underlying share. Some missing brokerage prices are stored as zero.
+   * The price of the security for the transaction. This is mostly applicable to &#x60;BUY&#x60;, &#x60;SELL&#x60;, and &#x60;DIVIDEND&#x60; transactions. For option transactions, this represents the price per share of the option contract.
    * @return price
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "325", required = true, value = "Recorded unit price. For options this is the price per underlying share. Some missing brokerage prices are stored as zero.")
+  @ApiModelProperty(example = "325", required = true, value = "The price of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions. For option transactions, this represents the price per share of the option contract.")
 
   public BigDecimal getPrice() {
     return price;
@@ -341,11 +341,11 @@ public class Activity {
   }
 
    /**
-   * Signed quantity recorded for the transaction. For options the quantity counts contracts.
+   * The number of units of the security for the transaction. This is mostly applicable to &#x60;BUY&#x60;, &#x60;SELL&#x60;, and &#x60;DIVIDEND&#x60; transactions. In general, BUYs result in positive units while SELLs result in negative due to the shares leaving the account
    * @return units
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "2", required = true, value = "Signed quantity recorded for the transaction. For options the quantity counts contracts.")
+  @ApiModelProperty(example = "2", required = true, value = "The number of units of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions. In general, BUYs result in positive units while SELLs result in negative due to the shares leaving the account")
 
   public BigDecimal getUnits() {
     return units;

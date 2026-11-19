@@ -457,6 +457,7 @@ Class | Method | HTTP request | Description
  - [TradeDetectionSubscription](docs/TradeDetectionSubscription.md)
  - [TradingGetUserAccountOptionQuotes410Response](docs/TradingGetUserAccountOptionQuotes410Response.md)
  - [TradingInstrument](docs/TradingInstrument.md)
+ - [TradingPlaceMlegOrder409Response](docs/TradingPlaceMlegOrder409Response.md)
  - [TradingPlaceSimpleOrder409Response](docs/TradingPlaceSimpleOrder409Response.md)
  - [TradingSearchCryptocurrencyPairInstruments200Response](docs/TradingSearchCryptocurrencyPairInstruments200Response.md)
  - [TradingSession](docs/TradingSession.md)

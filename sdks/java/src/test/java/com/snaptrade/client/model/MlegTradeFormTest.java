@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -44,6 +45,14 @@ public class MlegTradeFormTest {
     @Test
     public void testMlegTradeForm() {
         // TODO: test MlegTradeForm
+    }
+
+    /**
+     * Test the property 'clientOrderId'
+     */
+    @Test
+    public void clientOrderIdTest() {
+        // TODO: test clientOrderId
     }
 
     /**

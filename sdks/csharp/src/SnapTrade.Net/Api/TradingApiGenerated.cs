@@ -292,7 +292,7 @@ namespace SnapTrade.Net.Api
         /// Place option order
         /// </summary>
         /// <remarks>
-        /// Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
+        /// Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  Wealthsimple placement with two or more legs requires a canonical UUID &#x60;client_order_id&#x60;. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -307,7 +307,7 @@ namespace SnapTrade.Net.Api
         /// Place option order
         /// </summary>
         /// <remarks>
-        /// Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
+        /// Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  Wealthsimple placement with two or more legs requires a canonical UUID &#x60;client_order_id&#x60;. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -727,7 +727,7 @@ namespace SnapTrade.Net.Api
         /// Place option order
         /// </summary>
         /// <remarks>
-        /// Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
+        /// Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  Wealthsimple placement with two or more legs requires a canonical UUID &#x60;client_order_id&#x60;. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -743,7 +743,7 @@ namespace SnapTrade.Net.Api
         /// Place option order
         /// </summary>
         /// <remarks>
-        /// Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
+        /// Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  Wealthsimple placement with two or more legs requires a canonical UUID &#x60;client_order_id&#x60;. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -3045,7 +3045,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place option order Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
+        /// Place option order Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  Wealthsimple placement with two or more legs requires a canonical UUID &#x60;client_order_id&#x60;. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -3061,7 +3061,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place option order Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
+        /// Place option order Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  Wealthsimple placement with two or more legs requires a canonical UUID &#x60;client_order_id&#x60;. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -3158,7 +3158,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place option order Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
+        /// Place option order Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  Wealthsimple placement with two or more legs requires a canonical UUID &#x60;client_order_id&#x60;. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -3175,7 +3175,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place option order Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
+        /// Place option order Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  Wealthsimple placement with two or more legs requires a canonical UUID &#x60;client_order_id&#x60;. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>

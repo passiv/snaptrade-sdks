@@ -566,15 +566,15 @@ Last date to include (UTC). Defaults to the latest available transaction.
 
 ##### type: `String`<a id="type-string"></a>
 
-Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
+Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `BUY_TO_OPEN` - Option bought to open a long position.   - `BUY_TO_CLOSE` - Option bought to close a short position.   - `SELL_TO_OPEN` - Option sold to open a short position.   - `SELL_TO_CLOSE` - Option sold to close a long position.   - `DIVIDEND` - Dividend payout.   - `SUBSTITUTE_DIVIDEND` - Payment in lieu of a dividend.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `TAX` - A tax related fee.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another.   - `SPLIT` - A stock share split. 
 
 ##### offset: `Integer`<a id="offset-integer"></a>
 
-Number of matching transactions to skip.
+An integer that specifies the starting point of the paginated results. Default is 0.
 
 ##### limit: `Integer`<a id="limit-integer"></a>
 
-Maximum number of transactions to return in this page.
+An integer that specifies the maximum number of transactions to return. Default of 1000.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -2028,7 +2028,7 @@ Only applicable to multi-leg limit and stop_limit orders. Requirements and suppo
 
 ##### client_order_id: [`UUID`](./src/main/java/com/snaptrade/client/model/UUID.java)<a id="client_order_id-uuidsrcmainjavacomsnaptradeclientmodeluuidjava"></a>
 
-Optional canonical UUID, forwarded where the existing execution path supports it and for tastytrade, Webull US, and TradeStation futures-family orders. Requires the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies. SnapTrade does not enforce uniqueness, except for requests authenticated with an OAuth access token, where a client_order_id the user has already used returns 409. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions. For Webull US futures, SnapTrade converts the supplied UUID (or its generated order UUID) to lowercase 32-character hexadecimal without hyphens. The original supplied UUID remains in SnapTrade's trade audit; the converted value is returned as brokerage_order_id for subsequent order reads. For TradeStation live and SIM, SnapTrade encodes the supplied UUID (or its generated order UUID) as 22-character URL-safe base64 without padding and sends it as OrderConfirmID for brokerage duplicate prevention; the response contains TradeStation's separate order ID.
+Canonical UUID. Required for Wealthsimple multi-leg placement regardless of client-order-ID enablement; reuse it when retrying the same attempt. Wealthsimple multi-leg attempts retain the ID after success or failure, and reuse by the same user across accounts or placement endpoints returns 409 without another submission. A 409 does not establish whether the original attempt was accepted; reconcile it before creating a new order with a new ID. Optional for other orders, forwarded where the existing execution path supports it and for tastytrade, Webull US, and TradeStation futures-family orders. Other orders require the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies. OAuth requests also reject a client_order_id the user has already used with 409. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions. For Webull US futures, SnapTrade converts the supplied UUID (or its generated order UUID) to lowercase 32-character hexadecimal without hyphens. The original supplied UUID remains in SnapTrade's trade audit; the converted value is returned as brokerage_order_id for subsequent order reads. For TradeStation live and SIM, SnapTrade encodes the supplied UUID (or its generated order UUID) as 22-character URL-safe base64 without padding and sends it as OrderConfirmID for brokerage duplicate prevention; the response contains TradeStation's separate order ID.
 
 ##### expiry_date: `OffsetDateTime`<a id="expiry_date-offsetdatetime"></a>
 
@@ -2501,6 +2501,7 @@ Only supported for certain enabled brokerages. Please refer to the [brokerage tr
 OptionImpact result = client
         .trading
         .getOptionImpact(orderType, timeInForce, legs, userId, userSecret, accountId)
+        .clientOrderId(clientOrderId)
         .limitPrice(limitPrice)
         .stopPrice(stopPrice)
         .priceEffect(priceEffect)
@@ -2520,6 +2521,10 @@ OptionImpact result = client
 ##### userSecret: `String`<a id="usersecret-string"></a>
 
 ##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+##### client_order_id: `UUID`<a id="client_order_id-uuid"></a>
+
+Canonical 36-character UUID required when placing a Wealthsimple order with two or more legs. Not required for an impact preview or single-leg request. Reuse it when retrying the same attempt. SnapTrade retains the ID after success or failure; reuse by the same user across accounts or placement endpoints returns 409 without submitting again. A 409 does not establish whether the original attempt was accepted; reconcile it before using a new ID for a genuinely new order. This protection does not depend on Wealthsimple deduplicating its external order ID.
 
 ##### limit_price: `BigDecimal`<a id="limit_price-bigdecimal"></a>
 
@@ -2758,7 +2763,7 @@ The ID of the account to execute the trade on.
 
 ##### client_order_id: `UUID`<a id="client_order_id-uuid"></a>
 
-Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
+Caller-supplied canonical 36-character UUID. Required for Wealthsimple multi-leg placement and optional for other orders. SnapTrade rejects reuse by the same user for Wealthsimple multi-leg placement and OAuth requests. Otherwise, forwarding and duplicate prevention depend on the endpoint and brokerage. Refer to the request schema and per-brokerage documentation for behavior on duplicate submission. 
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -2918,7 +2923,7 @@ Number of shares for the order. This can be a decimal for fractional orders. Mus
 
 ##### client_order_id: `UUID`<a id="client_order_id-uuid"></a>
 
-Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
+Caller-supplied canonical 36-character UUID. Required for Wealthsimple multi-leg placement and optional for other orders. SnapTrade rejects reuse by the same user for Wealthsimple multi-leg placement and OAuth requests. Otherwise, forwarding and duplicate prevention depend on the endpoint and brokerage. Refer to the request schema and per-brokerage documentation for behavior on duplicate submission. 
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -2937,6 +2942,8 @@ Optional caller-supplied identifier passed through to the brokerage for idempote
 
 Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support
 
+Wealthsimple placement with two or more legs requires a canonical UUID `client_order_id`. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -2944,6 +2951,7 @@ Places a multi-leg option order. Only supported on certain option trading broker
 MlegOrderResponse result = client
         .trading
         .placeMlegOrder(orderType, timeInForce, legs, userId, userSecret, accountId)
+        .clientOrderId(clientOrderId)
         .limitPrice(limitPrice)
         .stopPrice(stopPrice)
         .priceEffect(priceEffect)
@@ -2963,6 +2971,10 @@ MlegOrderResponse result = client
 ##### userSecret: `String`<a id="usersecret-string"></a>
 
 ##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+##### client_order_id: `UUID`<a id="client_order_id-uuid"></a>
+
+Canonical 36-character UUID required when placing a Wealthsimple order with two or more legs. Not required for an impact preview or single-leg request. Reuse it when retrying the same attempt. SnapTrade retains the ID after success or failure; reuse by the same user across accounts or placement endpoints returns 409 without submitting again. A 409 does not establish whether the original attempt was accepted; reconcile it before using a new ID for a genuinely new order. This protection does not depend on Wealthsimple deduplicating its external order ID.
 
 ##### limit_price: `BigDecimal`<a id="limit_price-bigdecimal"></a>
 

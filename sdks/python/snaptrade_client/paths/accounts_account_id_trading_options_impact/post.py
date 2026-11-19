@@ -242,6 +242,7 @@ class BaseApi(api_client.Api):
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         legs: typing.Optional[typing.List[MlegLeg]] = None,
         account_id: typing.Optional[str] = None,
+        client_order_id: typing.Optional[str] = None,
         limit_price: typing.Optional[typing.Optional[str]] = None,
         stop_price: typing.Optional[typing.Optional[str]] = None,
         price_effect: typing.Optional[MlegPriceEffectStrictNullable] = None,
@@ -256,6 +257,8 @@ class BaseApi(api_client.Api):
         _header_params = {}
         _path_params = {}
         _body = {}
+        if client_order_id is not None:
+            _body["client_order_id"] = client_order_id
         if order_type is not None:
             _body["order_type"] = order_type
         if time_in_force is not None:
@@ -571,6 +574,7 @@ class GetOptionImpact(BaseApi, typing.Generic[TAuth]):
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         legs: typing.Optional[typing.List[MlegLeg]] = None,
         account_id: typing.Optional[str] = None,
+        client_order_id: typing.Optional[str] = None,
         limit_price: typing.Optional[typing.Optional[str]] = None,
         stop_price: typing.Optional[typing.Optional[str]] = None,
         price_effect: typing.Optional[MlegPriceEffectStrictNullable] = None,
@@ -592,6 +596,7 @@ class GetOptionImpact(BaseApi, typing.Generic[TAuth]):
             time_in_force=time_in_force,
             legs=legs,
             account_id=account_id,
+            client_order_id=client_order_id,
             limit_price=limit_price,
             stop_price=stop_price,
             price_effect=price_effect,
@@ -613,6 +618,7 @@ class GetOptionImpact(BaseApi, typing.Generic[TAuth]):
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         legs: typing.Optional[typing.List[MlegLeg]] = None,
         account_id: typing.Optional[str] = None,
+        client_order_id: typing.Optional[str] = None,
         limit_price: typing.Optional[typing.Optional[str]] = None,
         stop_price: typing.Optional[typing.Optional[str]] = None,
         price_effect: typing.Optional[MlegPriceEffectStrictNullable] = None,
@@ -634,6 +640,7 @@ class GetOptionImpact(BaseApi, typing.Generic[TAuth]):
             time_in_force=time_in_force,
             legs=legs,
             account_id=account_id,
+            client_order_id=client_order_id,
             limit_price=limit_price,
             stop_price=stop_price,
             price_effect=price_effect,
@@ -658,6 +665,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         legs: typing.Optional[typing.List[MlegLeg]] = None,
         account_id: typing.Optional[str] = None,
+        client_order_id: typing.Optional[str] = None,
         limit_price: typing.Optional[typing.Optional[str]] = None,
         stop_price: typing.Optional[typing.Optional[str]] = None,
         price_effect: typing.Optional[MlegPriceEffectStrictNullable] = None,
@@ -679,6 +687,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
             time_in_force=time_in_force,
             legs=legs,
             account_id=account_id,
+            client_order_id=client_order_id,
             limit_price=limit_price,
             stop_price=stop_price,
             price_effect=price_effect,
@@ -700,6 +709,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         legs: typing.Optional[typing.List[MlegLeg]] = None,
         account_id: typing.Optional[str] = None,
+        client_order_id: typing.Optional[str] = None,
         limit_price: typing.Optional[typing.Optional[str]] = None,
         stop_price: typing.Optional[typing.Optional[str]] = None,
         price_effect: typing.Optional[MlegPriceEffectStrictNullable] = None,
@@ -721,6 +731,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
             time_in_force=time_in_force,
             legs=legs,
             account_id=account_id,
+            client_order_id=client_order_id,
             limit_price=limit_price,
             stop_price=stop_price,
             price_effect=price_effect,

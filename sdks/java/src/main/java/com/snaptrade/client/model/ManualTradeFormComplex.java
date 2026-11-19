@@ -192,11 +192,11 @@ public class ManualTradeFormComplex {
   }
 
    /**
-   * Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
+   * Caller-supplied canonical 36-character UUID. Required for Wealthsimple multi-leg placement and optional for other orders. SnapTrade rejects reuse by the same user for Wealthsimple multi-leg placement and OAuth requests. Otherwise, forwarding and duplicate prevention depend on the endpoint and brokerage. Refer to the request schema and per-brokerage documentation for behavior on duplicate submission. 
    * @return clientOrderId
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "550e8400-e29b-41d4-a716-446655440000", value = "Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. ")
+  @ApiModelProperty(example = "550e8400-e29b-41d4-a716-446655440000", value = "Caller-supplied canonical 36-character UUID. Required for Wealthsimple multi-leg placement and optional for other orders. SnapTrade rejects reuse by the same user for Wealthsimple multi-leg placement and OAuth requests. Otherwise, forwarding and duplicate prevention depend on the endpoint and brokerage. Refer to the request schema and per-brokerage documentation for behavior on duplicate submission. ")
 
   public UUID getClientOrderId() {
     return clientOrderId;

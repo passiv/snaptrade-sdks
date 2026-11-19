@@ -73,6 +73,7 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
             null,
             null,
         )
+        mlegTradeForm.SetClientOrderId("3e8b682d-c901-4b2d-a67f-70f73b04a29e")
         mlegTradeForm.SetLimitPrice("")
         mlegTradeForm.SetStopPrice("")
         mlegTradeForm.SetPriceEffect(DEBIT)
@@ -254,6 +255,7 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
             null,
             null,
         )
+        mlegTradeForm.SetClientOrderId("3e8b682d-c901-4b2d-a67f-70f73b04a29e")
         mlegTradeForm.SetLimitPrice("")
         mlegTradeForm.SetStopPrice("")
         mlegTradeForm.SetPriceEffect(DEBIT)

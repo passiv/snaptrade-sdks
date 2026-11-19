@@ -20,7 +20,7 @@ Inputs for placing an order with the brokerage.
 |**stop** | **Double** | The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. |  [optional] |
 |**units** | **Double** | Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. |  [optional] |
 |**notionalValue** | **Object** |  |  [optional] |
-|**clientOrderId** | **UUID** | Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission.  |  [optional] |
+|**clientOrderId** | **UUID** | Caller-supplied canonical 36-character UUID. Required for Wealthsimple multi-leg placement and optional for other orders. SnapTrade rejects reuse by the same user for Wealthsimple multi-leg placement and OAuth requests. Otherwise, forwarding and duplicate prevention depend on the endpoint and brokerage. Refer to the request schema and per-brokerage documentation for behavior on duplicate submission.  |  [optional] |
 
 
 

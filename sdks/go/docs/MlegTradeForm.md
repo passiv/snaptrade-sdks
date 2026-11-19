@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClientOrderId** | Pointer to **string** | Canonical 36-character UUID required when placing a Wealthsimple order with two or more legs. Not required for an impact preview or single-leg request. Reuse it when retrying the same attempt. SnapTrade retains the ID after success or failure; reuse by the same user across accounts or placement endpoints returns 409 without submitting again. A 409 does not establish whether the original attempt was accepted; reconcile it before using a new ID for a genuinely new order. This protection does not depend on Wealthsimple deduplicating its external order ID. | [optional] 
 **OrderType** | [**MlegOrderTypeStrict**](MlegOrderTypeStrict.md) |  | 
 **TimeInForce** | [**TimeInForceStrict**](TimeInForceStrict.md) |  | 
 **LimitPrice** | Pointer to **NullableFloat64** | The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;, unless &#x60;price_effect&#x60; is &#x60;EVEN&#x60; - a net-even order is implicitly priced at 0, so the field may be omitted and must be &#x60;0&#x60; if sent. | [optional] 
@@ -29,6 +30,31 @@ will change when the set of required properties is changed
 NewMlegTradeFormWithDefaults instantiates a new MlegTradeForm object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClientOrderId
+
+`func (o *MlegTradeForm) GetClientOrderId() string`
+
+GetClientOrderId returns the ClientOrderId field if non-nil, zero value otherwise.
+
+### GetClientOrderIdOk
+
+`func (o *MlegTradeForm) GetClientOrderIdOk() (*string, bool)`
+
+GetClientOrderIdOk returns a tuple with the ClientOrderId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClientOrderId
+
+`func (o *MlegTradeForm) SetClientOrderId(v string)`
+
+SetClientOrderId sets ClientOrderId field to given value.
+
+### HasClientOrderId
+
+`func (o *MlegTradeForm) HasClientOrderId() bool`
+
+HasClientOrderId returns a boolean if a field has been set.
 
 ### GetOrderType
 

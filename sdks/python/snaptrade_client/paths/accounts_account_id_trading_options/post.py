@@ -185,6 +185,95 @@ _response_for_400 = api_client.OpenApiResponse(
 )
 
 
+class SchemaFor409ResponseBodyApplicationJson(
+    schemas.DictSchema
+):
+
+
+    class MetaOapg:
+        
+        class properties:
+            detail = schemas.StrSchema
+            status_code = schemas.IntSchema
+            code = schemas.StrSchema
+            __annotations__ = {
+                "detail": detail,
+                "status_code": status_code,
+                "code": code,
+            }
+        additional_properties = schemas.AnyTypeSchema
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["detail"]) -> MetaOapg.properties.detail: ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["status_code"]) -> MetaOapg.properties.status_code: ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["code"]) -> MetaOapg.properties.code: ...
+    
+    @typing.overload
+    def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
+    
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["detail"], typing_extensions.Literal["status_code"], typing_extensions.Literal["code"], str, ]):
+        # dict_instance[name] accessor
+        return super().__getitem__(name)
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["detail"]) -> typing.Union[MetaOapg.properties.detail, schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["status_code"]) -> typing.Union[MetaOapg.properties.status_code, schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["code"]) -> typing.Union[MetaOapg.properties.code, schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
+    
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["detail"], typing_extensions.Literal["status_code"], typing_extensions.Literal["code"], str, ]):
+        return super().get_item_oapg(name)
+
+    def __new__(
+        cls,
+        *args: typing.Union[dict, frozendict.frozendict, ],
+        detail: typing.Union[MetaOapg.properties.detail, str, schemas.Unset] = schemas.unset,
+        status_code: typing.Union[MetaOapg.properties.status_code, decimal.Decimal, int, schemas.Unset] = schemas.unset,
+        code: typing.Union[MetaOapg.properties.code, str, schemas.Unset] = schemas.unset,
+        _configuration: typing.Optional[schemas.Configuration] = None,
+        **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
+    ) -> 'SchemaFor409ResponseBodyApplicationJson':
+        return super().__new__(
+            cls,
+            *args,
+            detail=detail,
+            status_code=status_code,
+            code=code,
+            _configuration=_configuration,
+            **kwargs,
+        )
+
+
+@dataclass
+class ApiResponseFor409(api_client.ApiResponse):
+    body: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
+
+
+@dataclass
+class ApiResponseFor409Async(api_client.AsyncApiResponse):
+    body: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
+
+
+_response_for_409 = api_client.OpenApiResponse(
+    response_cls=ApiResponseFor409,
+    response_cls_async=ApiResponseFor409Async,
+    content={
+        'application/json': api_client.MediaType(
+            schema=SchemaFor409ResponseBodyApplicationJson),
+    },
+)
+
+
 @dataclass
 class ApiResponseFor500(api_client.ApiResponse):
     body: schemas.Unset = schemas.unset
@@ -202,6 +291,7 @@ _response_for_500 = api_client.OpenApiResponse(
 _status_code_to_response = {
     '200': _response_for_200,
     '400': _response_for_400,
+    '409': _response_for_409,
     '500': _response_for_500,
 }
 _all_accept_content_types = (
@@ -218,6 +308,7 @@ class BaseApi(api_client.Api):
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         legs: typing.Optional[typing.List[MlegLeg]] = None,
         account_id: typing.Optional[str] = None,
+        client_order_id: typing.Optional[str] = None,
         limit_price: typing.Optional[typing.Optional[str]] = None,
         stop_price: typing.Optional[typing.Optional[str]] = None,
         price_effect: typing.Optional[MlegPriceEffectStrictNullable] = None,
@@ -232,6 +323,8 @@ class BaseApi(api_client.Api):
         _header_params = {}
         _path_params = {}
         _body = {}
+        if client_order_id is not None:
+            _body["client_order_id"] = client_order_id
         if order_type is not None:
             _body["order_type"] = order_type
         if time_in_force is not None:
@@ -547,6 +640,7 @@ class PlaceMlegOrder(BaseApi, typing.Generic[TAuth]):
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         legs: typing.Optional[typing.List[MlegLeg]] = None,
         account_id: typing.Optional[str] = None,
+        client_order_id: typing.Optional[str] = None,
         limit_price: typing.Optional[typing.Optional[str]] = None,
         stop_price: typing.Optional[typing.Optional[str]] = None,
         price_effect: typing.Optional[MlegPriceEffectStrictNullable] = None,
@@ -568,6 +662,7 @@ class PlaceMlegOrder(BaseApi, typing.Generic[TAuth]):
             time_in_force=time_in_force,
             legs=legs,
             account_id=account_id,
+            client_order_id=client_order_id,
             limit_price=limit_price,
             stop_price=stop_price,
             price_effect=price_effect,
@@ -589,6 +684,7 @@ class PlaceMlegOrder(BaseApi, typing.Generic[TAuth]):
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         legs: typing.Optional[typing.List[MlegLeg]] = None,
         account_id: typing.Optional[str] = None,
+        client_order_id: typing.Optional[str] = None,
         limit_price: typing.Optional[typing.Optional[str]] = None,
         stop_price: typing.Optional[typing.Optional[str]] = None,
         price_effect: typing.Optional[MlegPriceEffectStrictNullable] = None,
@@ -602,7 +698,7 @@ class PlaceMlegOrder(BaseApi, typing.Generic[TAuth]):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  """
+        """ Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  Wealthsimple placement with two or more legs requires a canonical UUID `client_order_id`. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID.  """
         args = self._place_mleg_order_mapped_args(
             body=body,
             path_params=path_params,
@@ -610,6 +706,7 @@ class PlaceMlegOrder(BaseApi, typing.Generic[TAuth]):
             time_in_force=time_in_force,
             legs=legs,
             account_id=account_id,
+            client_order_id=client_order_id,
             limit_price=limit_price,
             stop_price=stop_price,
             price_effect=price_effect,
@@ -634,6 +731,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         legs: typing.Optional[typing.List[MlegLeg]] = None,
         account_id: typing.Optional[str] = None,
+        client_order_id: typing.Optional[str] = None,
         limit_price: typing.Optional[typing.Optional[str]] = None,
         stop_price: typing.Optional[typing.Optional[str]] = None,
         price_effect: typing.Optional[MlegPriceEffectStrictNullable] = None,
@@ -655,6 +753,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
             time_in_force=time_in_force,
             legs=legs,
             account_id=account_id,
+            client_order_id=client_order_id,
             limit_price=limit_price,
             stop_price=stop_price,
             price_effect=price_effect,
@@ -676,6 +775,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         legs: typing.Optional[typing.List[MlegLeg]] = None,
         account_id: typing.Optional[str] = None,
+        client_order_id: typing.Optional[str] = None,
         limit_price: typing.Optional[typing.Optional[str]] = None,
         stop_price: typing.Optional[typing.Optional[str]] = None,
         price_effect: typing.Optional[MlegPriceEffectStrictNullable] = None,
@@ -689,7 +789,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  """
+        """ Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  Wealthsimple placement with two or more legs requires a canonical UUID `client_order_id`. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID.  """
         args = self._place_mleg_order_mapped_args(
             body=body,
             path_params=path_params,
@@ -697,6 +797,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
             time_in_force=time_in_force,
             legs=legs,
             account_id=account_id,
+            client_order_id=client_order_id,
             limit_price=limit_price,
             stop_price=stop_price,
             price_effect=price_effect,

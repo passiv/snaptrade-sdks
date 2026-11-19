@@ -500,6 +500,9 @@ operation_parameter_map = {
                 'name': 'accountId'
             },
             {
+                'name': 'client_order_id'
+            },
+            {
                 'name': 'limit_price'
             },
             {
@@ -670,6 +673,9 @@ operation_parameter_map = {
             },
             {
                 'name': 'accountId'
+            },
+            {
+                'name': 'client_order_id'
             },
             {
                 'name': 'limit_price'

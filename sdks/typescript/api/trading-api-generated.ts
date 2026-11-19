@@ -147,6 +147,8 @@ import { TimeInForceStrict } from '../models';
 // @ts-ignore
 import { TradingGetUserAccountOptionQuotes410Response } from '../models';
 // @ts-ignore
+import { TradingPlaceMlegOrder409Response } from '../models';
+// @ts-ignore
 import { TradingSearchCryptocurrencyPairInstruments200Response } from '../models';
 // @ts-ignore
 import { TradingSession } from '../models';
@@ -780,7 +782,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
+         * Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  Wealthsimple placement with two or more legs requires a canonical UUID `client_order_id`. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID. 
          * @summary Place option order
          * @param {string} accountId 
          * @param {MlegTradeForm} mlegTradeForm 
@@ -1176,6 +1178,7 @@ export const TradingApiFp = function<TAuth extends AuthMode>(configuration?: Con
         async getOptionImpact(...args: TradingApiGetOptionImpactArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<OptionImpact, unknown>>> {
             const [requestParameters = {} as TradingApiGetOptionImpactRequest<TAuth>, options] = args;
             const mlegTradeForm: MlegTradeForm = {
+                client_order_id: requestParameters.client_order_id,
                 order_type: requestParameters.order_type,
                 time_in_force: requestParameters.time_in_force,
                 limit_price: requestParameters.limit_price,
@@ -1302,7 +1305,7 @@ export const TradingApiFp = function<TAuth extends AuthMode>(configuration?: Con
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
-         * Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
+         * Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  Wealthsimple placement with two or more legs requires a canonical UUID `client_order_id`. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID. 
          * @summary Place option order
          * @param {TradingApiPlaceMlegOrderRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1311,6 +1314,7 @@ export const TradingApiFp = function<TAuth extends AuthMode>(configuration?: Con
         async placeMlegOrder(...args: TradingApiPlaceMlegOrderArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<MlegOrderResponse, unknown>>> {
             const [requestParameters = {} as TradingApiPlaceMlegOrderRequest<TAuth>, options] = args;
             const mlegTradeForm: MlegTradeForm = {
+                client_order_id: requestParameters.client_order_id,
                 order_type: requestParameters.order_type,
                 time_in_force: requestParameters.time_in_force,
                 limit_price: requestParameters.limit_price,
@@ -1495,7 +1499,7 @@ export const TradingApiFactory = function<TAuth extends AuthMode>(configuration?
             return localVarFp.placeForceOrder(...args).then((request) => request(axios, basePath));
         },
         /**
-         * Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
+         * Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  Wealthsimple placement with two or more legs requires a canonical UUID `client_order_id`. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID. 
          * @summary Place option order
          * @param {TradingApiPlaceMlegOrderRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -2256,7 +2260,7 @@ export class TradingApiGenerated<TAuth extends AuthMode> extends BaseAPI<TAuth> 
     }
 
     /**
-     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
+     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  Wealthsimple placement with two or more legs requires a canonical UUID `client_order_id`. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID. 
      * @summary Place option order
      * @param {TradingApiPlaceMlegOrderRequest<TAuth>} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

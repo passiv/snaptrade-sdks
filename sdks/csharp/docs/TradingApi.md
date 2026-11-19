@@ -249,6 +249,7 @@ namespace Example
             var userId = "snaptrade-user-123";
             var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
+            var clientOrderId = "3e8b682d-c901-4b2d-a67f-70f73b04a29e"; // Canonical 36-character UUID required when placing a Wealthsimple order with two or more legs. Not required for an impact preview or single-leg request. Reuse it when retrying the same attempt. SnapTrade retains the ID after success or failure; reuse by the same user across accounts or placement endpoints returns 409 without submitting again. A 409 does not establish whether the original attempt was accepted; reconcile it before using a new ID for a genuinely new order. This protection does not depend on Wealthsimple deduplicating its external order ID.
             var orderType = MlegOrderTypeStrict.MARKET;
             var timeInForce = TimeInForceStrict.FOK;
             var limitPrice = 8.9M; // The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unless `price_effect` is `EVEN` - a net-even order is implicitly priced at 0, so the field may be omitted and must be `0` if sent.
@@ -257,6 +258,7 @@ namespace Example
             var legs = new List<MlegLeg>();
             
             var mlegTradeForm = new MlegTradeForm(
+                clientOrderId,
                 orderType,
                 timeInForce,
                 limitPrice,
@@ -680,7 +682,7 @@ namespace Example
             var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             var type = ManualTradeFormComplex.TypeEnum.OTO; // The complex order type. - `OCO`: One Cancels the Other — two peer orders. - `OTO`: One Triggers the Other — a trigger order and a conditional order. - `OTOCO`: One Triggers a One Cancels the Other — a trigger order and two peer orders. 
             var orders = new List<ComplexOrderLeg>(); // The orders that make up the complex order. Required counts and roles per type: - `OCO`: exactly 2 orders, both `PEER` - `OTO`: exactly 2 orders, one `TRIGGER` and one `CONDITIONAL` - `OTOCO`: exactly 3 orders, one `TRIGGER` and two `PEER` 
-            var clientOrderId = "550e8400-e29b-41d4-a716-446655440000"; // Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
+            var clientOrderId = "550e8400-e29b-41d4-a716-446655440000"; // Caller-supplied canonical 36-character UUID. Required for Wealthsimple multi-leg placement and optional for other orders. SnapTrade rejects reuse by the same user for Wealthsimple multi-leg placement and OAuth requests. Otherwise, forwarding and duplicate prevention depend on the endpoint and brokerage. Refer to the request schema and per-brokerage documentation for behavior on duplicate submission. 
             
             var manualTradeFormComplex = new ManualTradeFormComplex(
                 type,
@@ -914,7 +916,7 @@ namespace Example
             var stop = 31.33; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
             var units = 10.5; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
             var notionalValue = new NotionalValueNullable(100); // Total notional amount for the order. Must be `null` if `units` is provided. Can only work with `Market` for `order_type` and `Day` for `time_in_force`. This is only available for certain brokerages. Please check the [integrations doc](https://support.snaptrade.com/brokerages-table?v=e7bbcbf9f272441593f93decde660687) for more information.
-            var clientOrderId = "550e8400-e29b-41d4-a716-446655440000"; // Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
+            var clientOrderId = "550e8400-e29b-41d4-a716-446655440000"; // Caller-supplied canonical 36-character UUID. Required for Wealthsimple multi-leg placement and optional for other orders. SnapTrade rejects reuse by the same user for Wealthsimple multi-leg placement and OAuth requests. Otherwise, forwarding and duplicate prevention depend on the endpoint and brokerage. Refer to the request schema and per-brokerage documentation for behavior on duplicate submission. 
             
             var manualTradeFormWithOptions = new ManualTradeFormWithOptions(
                 accountId,
@@ -1003,7 +1005,7 @@ catch (ApiException e)
 
 
 
-Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
+Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  Wealthsimple placement with two or more legs requires a canonical UUID `client_order_id`. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID. 
 
 ### Example
 ```csharp
@@ -1028,6 +1030,7 @@ namespace Example
             var userId = "snaptrade-user-123";
             var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631";
+            var clientOrderId = "3e8b682d-c901-4b2d-a67f-70f73b04a29e"; // Canonical 36-character UUID required when placing a Wealthsimple order with two or more legs. Not required for an impact preview or single-leg request. Reuse it when retrying the same attempt. SnapTrade retains the ID after success or failure; reuse by the same user across accounts or placement endpoints returns 409 without submitting again. A 409 does not establish whether the original attempt was accepted; reconcile it before using a new ID for a genuinely new order. This protection does not depend on Wealthsimple deduplicating its external order ID.
             var orderType = MlegOrderTypeStrict.MARKET;
             var timeInForce = TimeInForceStrict.FOK;
             var limitPrice = 8.9M; // The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unless `price_effect` is `EVEN` - a net-even order is implicitly priced at 0, so the field may be omitted and must be `0` if sent.
@@ -1036,6 +1039,7 @@ namespace Example
             var legs = new List<MlegLeg>();
             
             var mlegTradeForm = new MlegTradeForm(
+                clientOrderId,
                 orderType,
                 timeInForce,
                 limitPrice,
@@ -1106,6 +1110,7 @@ catch (ApiException e)
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
 | **400** | Invalid request |  -  |
+| **409** | The Wealthsimple client_order_id was already submitted by this user. No second order is submitted; this does not establish whether the original attempt was accepted. |  -  |
 | **500** | Unexpected Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

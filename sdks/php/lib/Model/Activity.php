@@ -435,7 +435,7 @@ class Activity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets type
      *
-     * @param string $type Best-effort activity classification. A reported option action takes precedence over its base type. Common values include BUY, SELL, BUY_TO_OPEN, BUY_TO_CLOSE, SELL_TO_OPEN, SELL_TO_CLOSE, DIVIDEND, INTEREST, CONTRIBUTION, WITHDRAWAL, TRANSFER and FEE. Clients must accept unfamiliar values.
+     * @param string $type A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `BUY_TO_OPEN` - Option bought to open a long position.   - `BUY_TO_CLOSE` - Option bought to close a short position.   - `SELL_TO_OPEN` - Option sold to open a short position.   - `SELL_TO_CLOSE` - Option sold to close a long position.   - `DIVIDEND` - Dividend payout.   - `SUBSTITUTE_DIVIDEND` - Payment in lieu of a dividend.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `TAX` - A tax related fee.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of asset(s) from one account to another.   - `EXTERNAL_ASSET_TRANSFER_IN` - Incoming transfer of an asset from an external account to this account.   - `EXTERNAL_ASSET_TRANSFER_OUT` - Outgoing transfer of an asset from this account to an external account.   - `SPLIT` - A stock share split.   - `ADJUSTMENT` - A one time adjustment of the account's cash balance or shares of an asset
      *
      * @return self
      */
@@ -594,7 +594,7 @@ class Activity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets amount
      *
-     * @param float $amount Signed amount recorded for the transaction. Use this value directly. Price, units and fees may be insufficient to reconstruct it.
+     * @param float $amount The amount of the transaction denominated in `priced_in`. This can be positive or negative. In general, transactions that positively affect the account balance (like sell, deposits, dividends, etc) will have a positive amount, while transactions that negatively affect the account balance (like buy, withdrawals, fees, etc) will have a negative amount.
      *
      * @return self
      */
@@ -623,7 +623,7 @@ class Activity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets price
      *
-     * @param float $price Recorded unit price. For options this is the price per underlying share. Some missing brokerage prices are stored as zero.
+     * @param float $price The price of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions. For option transactions, this represents the price per share of the option contract.
      *
      * @return self
      */
@@ -659,7 +659,7 @@ class Activity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets units
      *
-     * @param float $units Signed quantity recorded for the transaction. For options the quantity counts contracts.
+     * @param float $units The number of units of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions. In general, BUYs result in positive units while SELLs result in negative due to the shares leaving the account
      *
      * @return self
      */
