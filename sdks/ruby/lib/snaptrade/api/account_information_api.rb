@@ -670,9 +670,9 @@ module SnapTrade
     # @param user_secret [String] 
     # @param start_date [Date] First date to include (UTC). Defaults to the earliest available transaction.
     # @param end_date [Date] Last date to include (UTC). Defaults to the latest available transaction.
-    # @param type [String] Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
-    # @param offset [Integer] Number of matching transactions to skip.
-    # @param limit [Integer] Maximum number of transactions to return in this page.
+    # @param type [String] Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values: - `BUY` - Asset bought. - `SELL` - Asset sold. - `BUY_TO_OPEN` - Option bought to open a long position. - `BUY_TO_CLOSE` - Option bought to close a short position. - `SELL_TO_OPEN` - Option sold to open a short position. - `SELL_TO_CLOSE` - Option sold to close a long position. - `DIVIDEND` - Dividend payout. - `SUBSTITUTE_DIVIDEND` - Payment in lieu of a dividend. - `CONTRIBUTION` - Cash contribution. - `WITHDRAWAL` - Cash withdrawal. - `REI` - Dividend reinvestment. - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash - `INTEREST` - Interest deposited into the account. - `FEE` - Fee withdrawn from the account. - `TAX` - A tax related fee. - `OPTIONEXPIRATION` - Option expiration event. - `OPTIONASSIGNMENT` - Option assignment event. - `OPTIONEXERCISE` - Option exercise event. - `TRANSFER` - Transfer of assets from one account to another. - `SPLIT` - A stock share split. 
+    # @param offset [Integer] An integer that specifies the starting point of the paginated results. Default is 0.
+    # @param limit [Integer] An integer that specifies the maximum number of transactions to return. Default of 1000.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_account_transactions(account_id:, user_id:, user_secret:, start_date: SENTINEL, end_date: SENTINEL, type: SENTINEL, offset: 0, limit: 1000, extra: {})
       extra[:start_date] = start_date if start_date != SENTINEL
@@ -695,9 +695,9 @@ module SnapTrade
     # @param user_secret [String] 
     # @param start_date [Date] First date to include (UTC). Defaults to the earliest available transaction.
     # @param end_date [Date] Last date to include (UTC). Defaults to the latest available transaction.
-    # @param type [String] Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
-    # @param offset [Integer] Number of matching transactions to skip.
-    # @param limit [Integer] Maximum number of transactions to return in this page.
+    # @param type [String] Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values: - `BUY` - Asset bought. - `SELL` - Asset sold. - `BUY_TO_OPEN` - Option bought to open a long position. - `BUY_TO_CLOSE` - Option bought to close a short position. - `SELL_TO_OPEN` - Option sold to open a short position. - `SELL_TO_CLOSE` - Option sold to close a long position. - `DIVIDEND` - Dividend payout. - `SUBSTITUTE_DIVIDEND` - Payment in lieu of a dividend. - `CONTRIBUTION` - Cash contribution. - `WITHDRAWAL` - Cash withdrawal. - `REI` - Dividend reinvestment. - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash - `INTEREST` - Interest deposited into the account. - `FEE` - Fee withdrawn from the account. - `TAX` - A tax related fee. - `OPTIONEXPIRATION` - Option expiration event. - `OPTIONASSIGNMENT` - Option assignment event. - `OPTIONEXERCISE` - Option exercise event. - `TRANSFER` - Transfer of assets from one account to another. - `SPLIT` - A stock share split. 
+    # @param offset [Integer] An integer that specifies the starting point of the paginated results. Default is 0.
+    # @param limit [Integer] An integer that specifies the maximum number of transactions to return. Default of 1000.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_account_transactions_with_http_info(account_id:, user_id:, user_secret:, start_date: SENTINEL, end_date: SENTINEL, type: SENTINEL, offset: 0, limit: 1000, extra: {})
       extra[:start_date] = start_date if start_date != SENTINEL
@@ -716,9 +716,9 @@ module SnapTrade
     # @param [Hash] opts the optional parameters
     # @option opts [Date] :start_date First date to include (UTC). Defaults to the earliest available transaction.
     # @option opts [Date] :end_date Last date to include (UTC). Defaults to the latest available transaction.
-    # @option opts [String] :type Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
-    # @option opts [Integer] :offset Number of matching transactions to skip. (default to 0)
-    # @option opts [Integer] :limit Maximum number of transactions to return in this page. (default to 1000)
+    # @option opts [String] :type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `BUY_TO_OPEN` - Option bought to open a long position.   - `BUY_TO_CLOSE` - Option bought to close a short position.   - `SELL_TO_OPEN` - Option sold to open a short position.   - `SELL_TO_CLOSE` - Option sold to close a long position.   - `DIVIDEND` - Dividend payout.   - `SUBSTITUTE_DIVIDEND` - Payment in lieu of a dividend.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `TAX` - A tax related fee.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another.   - `SPLIT` - A stock share split. 
+    # @option opts [Integer] :offset An integer that specifies the starting point of the paginated results. Default is 0. (default to 0)
+    # @option opts [Integer] :limit An integer that specifies the maximum number of transactions to return. Default of 1000. (default to 1000)
     # @return [AccountTransactionsResponse]
     private def get_account_transactions_impl(account_id, user_id, user_secret, opts = {})
       data, _status_code, _headers = get_account_transactions_with_http_info(account_id, user_id, user_secret, opts)
@@ -733,9 +733,9 @@ module SnapTrade
     # @param [Hash] opts the optional parameters
     # @option opts [Date] :start_date First date to include (UTC). Defaults to the earliest available transaction.
     # @option opts [Date] :end_date Last date to include (UTC). Defaults to the latest available transaction.
-    # @option opts [String] :type Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
-    # @option opts [Integer] :offset Number of matching transactions to skip. (default to 0)
-    # @option opts [Integer] :limit Maximum number of transactions to return in this page. (default to 1000)
+    # @option opts [String] :type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `BUY_TO_OPEN` - Option bought to open a long position.   - `BUY_TO_CLOSE` - Option bought to close a short position.   - `SELL_TO_OPEN` - Option sold to open a short position.   - `SELL_TO_CLOSE` - Option sold to close a long position.   - `DIVIDEND` - Dividend payout.   - `SUBSTITUTE_DIVIDEND` - Payment in lieu of a dividend.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `TAX` - A tax related fee.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another.   - `SPLIT` - A stock share split. 
+    # @option opts [Integer] :offset An integer that specifies the starting point of the paginated results. Default is 0. (default to 0)
+    # @option opts [Integer] :limit An integer that specifies the maximum number of transactions to return. Default of 1000. (default to 1000)
     # @return [Array<(AccountTransactionsResponse, Integer, Hash)>] AccountTransactionsResponse data, response status code and response headers
     private def get_account_transactions_with_http_info_impl(account_id, user_id, user_secret, opts = {})
       if @api_client.config.debugging

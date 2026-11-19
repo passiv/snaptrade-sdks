@@ -73,6 +73,15 @@ class MlegTradeFormTest extends TestCase
     }
 
     /**
+     * Test attribute "client_order_id"
+     */
+    public function testPropertyClientOrderId()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "order_type"
      */
     public function testPropertyOrderType()

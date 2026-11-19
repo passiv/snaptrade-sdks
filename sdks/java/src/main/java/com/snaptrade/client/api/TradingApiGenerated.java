@@ -622,6 +622,7 @@ public class TradingApiGenerated {
         final String userId;
         final String userSecret;
         final UUID accountId;
+        UUID clientOrderId;
         BigDecimal limitPrice;
         BigDecimal stopPrice;
         MlegPriceEffectStrictNullable priceEffect;
@@ -635,6 +636,16 @@ public class TradingApiGenerated {
             this.accountId = accountId;
         }
 
+        /**
+         * Set clientOrderId
+         * @param clientOrderId Canonical 36-character UUID required when placing a Wealthsimple order with two or more legs. Not required for an impact preview or single-leg request. Reuse it when retrying the same attempt. SnapTrade retains the ID after success or failure; reuse by the same user across accounts or placement endpoints returns 409 without submitting again. A 409 does not establish whether the original attempt was accepted; reconcile it before using a new ID for a genuinely new order. This protection does not depend on Wealthsimple deduplicating its external order ID. (optional)
+         * @return TradingApi.GetOptionImpactRequestBuilder
+         */
+        public TradingApi.GetOptionImpactRequestBuilder clientOrderId(UUID clientOrderId) {
+            this.clientOrderId = clientOrderId;
+            return (TradingApi.GetOptionImpactRequestBuilder) this;
+        }
+        
         /**
          * Set limitPrice
          * @param limitPrice The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;, unless &#x60;price_effect&#x60; is &#x60;EVEN&#x60; - a net-even order is implicitly priced at 0, so the field may be omitted and must be &#x60;0&#x60; if sent. (optional)
@@ -684,6 +695,7 @@ public class TradingApiGenerated {
 
         private MlegTradeForm buildBodyParams() {
             MlegTradeForm mlegTradeForm = new MlegTradeForm();
+            mlegTradeForm.clientOrderId(this.clientOrderId);
             mlegTradeForm.orderType(this.orderType);
             mlegTradeForm.timeInForce(this.timeInForce);
             mlegTradeForm.limitPrice(this.limitPrice);
@@ -1614,7 +1626,7 @@ public class TradingApiGenerated {
 
         /**
          * Set clientOrderId
-         * @param clientOrderId Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission.  (optional)
+         * @param clientOrderId Caller-supplied canonical 36-character UUID. Required for Wealthsimple multi-leg placement and optional for other orders. SnapTrade rejects reuse by the same user for Wealthsimple multi-leg placement and OAuth requests. Otherwise, forwarding and duplicate prevention depend on the endpoint and brokerage. Refer to the request schema and per-brokerage documentation for behavior on duplicate submission.  (optional)
          * @return TradingApi.PlaceComplexOrderRequestBuilder
          */
         public TradingApi.PlaceComplexOrderRequestBuilder clientOrderId(UUID clientOrderId) {
@@ -2242,7 +2254,7 @@ public class TradingApiGenerated {
         
         /**
          * Set clientOrderId
-         * @param clientOrderId Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission.  (optional)
+         * @param clientOrderId Caller-supplied canonical 36-character UUID. Required for Wealthsimple multi-leg placement and optional for other orders. SnapTrade rejects reuse by the same user for Wealthsimple multi-leg placement and OAuth requests. Otherwise, forwarding and duplicate prevention depend on the endpoint and brokerage. Refer to the request schema and per-brokerage documentation for behavior on duplicate submission.  (optional)
          * @return TradingApi.PlaceForceOrderRequestBuilder
          */
         public TradingApi.PlaceForceOrderRequestBuilder clientOrderId(UUID clientOrderId) {
@@ -2467,6 +2479,7 @@ public class TradingApiGenerated {
         final String userId;
         final String userSecret;
         final UUID accountId;
+        UUID clientOrderId;
         BigDecimal limitPrice;
         BigDecimal stopPrice;
         MlegPriceEffectStrictNullable priceEffect;
@@ -2480,6 +2493,16 @@ public class TradingApiGenerated {
             this.accountId = accountId;
         }
 
+        /**
+         * Set clientOrderId
+         * @param clientOrderId Canonical 36-character UUID required when placing a Wealthsimple order with two or more legs. Not required for an impact preview or single-leg request. Reuse it when retrying the same attempt. SnapTrade retains the ID after success or failure; reuse by the same user across accounts or placement endpoints returns 409 without submitting again. A 409 does not establish whether the original attempt was accepted; reconcile it before using a new ID for a genuinely new order. This protection does not depend on Wealthsimple deduplicating its external order ID. (optional)
+         * @return TradingApi.PlaceMlegOrderRequestBuilder
+         */
+        public TradingApi.PlaceMlegOrderRequestBuilder clientOrderId(UUID clientOrderId) {
+            this.clientOrderId = clientOrderId;
+            return (TradingApi.PlaceMlegOrderRequestBuilder) this;
+        }
+        
         /**
          * Set limitPrice
          * @param limitPrice The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;, unless &#x60;price_effect&#x60; is &#x60;EVEN&#x60; - a net-even order is implicitly priced at 0, so the field may be omitted and must be &#x60;0&#x60; if sent. (optional)
@@ -2529,6 +2552,7 @@ public class TradingApiGenerated {
 
         private MlegTradeForm buildBodyParams() {
             MlegTradeForm mlegTradeForm = new MlegTradeForm();
+            mlegTradeForm.clientOrderId(this.clientOrderId);
             mlegTradeForm.orderType(this.orderType);
             mlegTradeForm.timeInForce(this.timeInForce);
             mlegTradeForm.limitPrice(this.limitPrice);
@@ -2591,7 +2615,7 @@ public class TradingApiGenerated {
 
     /**
      * Place option order
-     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
+     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  Wealthsimple placement with two or more legs requires a canonical UUID &#x60;client_order_id&#x60;. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId  (required)

@@ -79,6 +79,12 @@ import { TimeInForceStrict } from './time-in-force-strict';
  */
 export interface MlegTradeForm {
     /**
+     * Canonical 36-character UUID required when placing a Wealthsimple order with two or more legs. Not required for an impact preview or single-leg request. Reuse it when retrying the same attempt. SnapTrade retains the ID after success or failure; reuse by the same user across accounts or placement endpoints returns 409 without submitting again. A 409 does not establish whether the original attempt was accepted; reconcile it before using a new ID for a genuinely new order. This protection does not depend on Wealthsimple deduplicating its external order ID.
+     * @type {string}
+     * @memberof MlegTradeForm
+     */
+    'client_order_id'?: string;
+    /**
      * The type of order to place.
      * @type {MlegOrderTypeStrict}
      * @memberof MlegTradeForm

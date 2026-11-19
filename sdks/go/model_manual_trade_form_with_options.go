@@ -37,7 +37,7 @@ type ManualTradeFormWithOptions struct {
 	// Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
 	Units NullableFloat32 `json:"units,omitempty"`
 	NotionalValue NullableNotionalValueNullable `json:"notional_value,omitempty"`
-	// Optional caller-supplied identifier passed through to the brokerage for idempotent order placement. Must be a canonical 36-character UUID. Idempotency enforcement is brokerage-specific - SnapTrade forwards this value to the broker but does not enforce uniqueness server-side. Refer to per-brokerage documentation for behavior on duplicate submission. 
+	// Caller-supplied canonical 36-character UUID. Required for Wealthsimple multi-leg placement and optional for other orders. SnapTrade rejects reuse by the same user for Wealthsimple multi-leg placement and OAuth requests. Otherwise, forwarding and duplicate prevention depend on the endpoint and brokerage. Refer to the request schema and per-brokerage documentation for behavior on duplicate submission. 
 	ClientOrderId NullableString `json:"client_order_id,omitempty"`
 }
 

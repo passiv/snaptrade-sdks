@@ -1110,6 +1110,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
         $account_id,
+        $client_order_id = SENTINEL_VALUE,
         $limit_price = SENTINEL_VALUE,
         $stop_price = SENTINEL_VALUE,
         $price_effect = SENTINEL_VALUE,
@@ -1117,6 +1118,7 @@ class TradingApi extends \SnapTrade\CustomApi
     )
     {
         $_body = [];
+        $this->setRequestBodyProperty($_body, "client_order_id", $client_order_id);
         $this->setRequestBodyProperty($_body, "order_type", $order_type);
         $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
         $this->setRequestBodyProperty($_body, "limit_price", $limit_price);
@@ -1322,6 +1324,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
         $account_id,
+        $client_order_id = SENTINEL_VALUE,
         $limit_price = SENTINEL_VALUE,
         $stop_price = SENTINEL_VALUE,
         $price_effect = SENTINEL_VALUE,
@@ -1329,6 +1332,7 @@ class TradingApi extends \SnapTrade\CustomApi
     )
     {
         $_body = [];
+        $this->setRequestBodyProperty($_body, "client_order_id", $client_order_id);
         $this->setRequestBodyProperty($_body, "order_type", $order_type);
         $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
         $this->setRequestBodyProperty($_body, "limit_price", $limit_price);
@@ -4571,7 +4575,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Place option order
      *
-     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support
+     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  Wealthsimple placement with two or more legs requires a canonical UUID &#x60;client_order_id&#x60;. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID.
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -4581,7 +4585,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SnapTrade\Model\MlegOrderResponse|\SnapTrade\Model\Model400FailedRequestResponse
+     * @return \SnapTrade\Model\MlegOrderResponse|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\TradingPlaceMlegOrder409Response
      */
     public function placeMlegOrder(
 
@@ -4591,6 +4595,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
         $account_id,
+        $client_order_id = SENTINEL_VALUE,
         $limit_price = SENTINEL_VALUE,
         $stop_price = SENTINEL_VALUE,
         $price_effect = SENTINEL_VALUE,
@@ -4598,6 +4603,7 @@ class TradingApi extends \SnapTrade\CustomApi
     )
     {
         $_body = [];
+        $this->setRequestBodyProperty($_body, "client_order_id", $client_order_id);
         $this->setRequestBodyProperty($_body, "order_type", $order_type);
         $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
         $this->setRequestBodyProperty($_body, "limit_price", $limit_price);
@@ -4615,7 +4621,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Place option order
      *
-     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support
+     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  Wealthsimple placement with two or more legs requires a canonical UUID &#x60;client_order_id&#x60;. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -4625,7 +4631,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SnapTrade\Model\MlegOrderResponse|\SnapTrade\Model\Model400FailedRequestResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SnapTrade\Model\MlegOrderResponse|\SnapTrade\Model\Model400FailedRequestResponse|\SnapTrade\Model\TradingPlaceMlegOrder409Response, HTTP status code, HTTP response headers (array of strings)
      */
     public function placeMlegOrderWithHttpInfo($user_id, $user_secret, $account_id, $mleg_trade_form, string $contentType = self::contentTypes['placeMlegOrder'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -4715,6 +4721,21 @@ class TradingApi extends \SnapTrade\CustomApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 409:
+                    if ('\SnapTrade\Model\TradingPlaceMlegOrder409Response' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\SnapTrade\Model\TradingPlaceMlegOrder409Response' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SnapTrade\Model\TradingPlaceMlegOrder409Response', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
             }
 
             $returnType = '\SnapTrade\Model\MlegOrderResponse';
@@ -4751,6 +4772,14 @@ class TradingApi extends \SnapTrade\CustomApi
                     );
                     $e->setResponseObject($data);
                     break;
+                case 409:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SnapTrade\Model\TradingPlaceMlegOrder409Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
@@ -4761,7 +4790,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Place option order
      *
-     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support
+     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  Wealthsimple placement with two or more legs requires a canonical UUID &#x60;client_order_id&#x60;. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -4780,6 +4809,7 @@ class TradingApi extends \SnapTrade\CustomApi
         $user_id,
         $user_secret,
         $account_id,
+        $client_order_id = SENTINEL_VALUE,
         $limit_price = SENTINEL_VALUE,
         $stop_price = SENTINEL_VALUE,
         $price_effect = SENTINEL_VALUE,
@@ -4787,6 +4817,7 @@ class TradingApi extends \SnapTrade\CustomApi
     )
     {
         $_body = [];
+        $this->setRequestBodyProperty($_body, "client_order_id", $client_order_id);
         $this->setRequestBodyProperty($_body, "order_type", $order_type);
         $this->setRequestBodyProperty($_body, "time_in_force", $time_in_force);
         $this->setRequestBodyProperty($_body, "limit_price", $limit_price);
@@ -4808,7 +4839,7 @@ class TradingApi extends \SnapTrade\CustomApi
      *
      * Place option order
      *
-     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support
+     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  Wealthsimple placement with two or more legs requires a canonical UUID &#x60;client_order_id&#x60;. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)

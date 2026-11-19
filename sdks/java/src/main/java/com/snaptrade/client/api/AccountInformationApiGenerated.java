@@ -1257,7 +1257,7 @@ public class AccountInformationApiGenerated {
         
         /**
          * Set type
-         * @param type Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once.  (optional)
+         * @param type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;BUY_TO_OPEN&#x60; - Option bought to open a long position.   - &#x60;BUY_TO_CLOSE&#x60; - Option bought to close a short position.   - &#x60;SELL_TO_OPEN&#x60; - Option sold to open a short position.   - &#x60;SELL_TO_CLOSE&#x60; - Option sold to close a long position.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;SUBSTITUTE_DIVIDEND&#x60; - Payment in lieu of a dividend.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;STOCK_DIVIDEND&#x60; - A type of dividend where a company distributes shares instead of cash   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;TAX&#x60; - A tax related fee.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another.   - &#x60;SPLIT&#x60; - A stock share split.  (optional)
          * @return AccountInformationApi.GetAccountTransactionsRequestBuilder
          */
         public AccountInformationApi.GetAccountTransactionsRequestBuilder type(String type) {
@@ -1267,7 +1267,7 @@ public class AccountInformationApiGenerated {
         
         /**
          * Set offset
-         * @param offset Number of matching transactions to skip. (optional, default to 0)
+         * @param offset An integer that specifies the starting point of the paginated results. Default is 0. (optional, default to 0)
          * @return AccountInformationApi.GetAccountTransactionsRequestBuilder
          */
         public AccountInformationApi.GetAccountTransactionsRequestBuilder offset(Integer offset) {
@@ -1277,7 +1277,7 @@ public class AccountInformationApiGenerated {
         
         /**
          * Set limit
-         * @param limit Maximum number of transactions to return in this page. (optional, default to 1000)
+         * @param limit An integer that specifies the maximum number of transactions to return. Default of 1000. (optional, default to 1000)
          * @return AccountInformationApi.GetAccountTransactionsRequestBuilder
          */
         public AccountInformationApi.GetAccountTransactionsRequestBuilder limit(Integer limit) {

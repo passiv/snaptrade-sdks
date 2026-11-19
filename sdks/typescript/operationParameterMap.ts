@@ -506,6 +506,9 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'accountId'
             },
             {
+                name: 'client_order_id'
+            },
+            {
                 name: 'limit_price'
             },
             {
@@ -676,6 +679,9 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'accountId'
+            },
+            {
+                name: 'client_order_id'
             },
             {
                 name: 'limit_price'

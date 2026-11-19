@@ -555,9 +555,9 @@ namespace Example
             var userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
             var startDate = DateTime.Parse("2022-01-24"); // First date to include (UTC). Defaults to the earliest available transaction. (optional) 
             var endDate = DateTime.Parse("2022-01-24"); // Last date to include (UTC). Defaults to the latest available transaction. (optional) 
-            var type = "BUY,DIVIDEND"; // Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once.  (optional) 
-            var offset = 0; // Number of matching transactions to skip. (optional)  (default to 0)
-            var limit = 1000; // Maximum number of transactions to return in this page. (optional)  (default to 1000)
+            var type = "BUY,DIVIDEND"; // Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `BUY_TO_OPEN` - Option bought to open a long position.   - `BUY_TO_CLOSE` - Option bought to close a short position.   - `SELL_TO_OPEN` - Option sold to open a short position.   - `SELL_TO_CLOSE` - Option sold to close a long position.   - `DIVIDEND` - Dividend payout.   - `SUBSTITUTE_DIVIDEND` - Payment in lieu of a dividend.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `TAX` - A tax related fee.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another.   - `SPLIT` - A stock share split.  (optional) 
+            var offset = 0; // An integer that specifies the starting point of the paginated results. Default is 0. (optional)  (default to 0)
+            var limit = 1000; // An integer that specifies the maximum number of transactions to return. Default of 1000. (optional)  (default to 1000)
             
             try
             {
@@ -611,9 +611,9 @@ catch (ApiException e)
 | **userSecret** | **string** |  |  |
 | **startDate** | **DateTime?** | First date to include (UTC). Defaults to the earliest available transaction. | [optional]  |
 | **endDate** | **DateTime?** | Last date to include (UTC). Defaults to the latest available transaction. | [optional]  |
-| **type** | **string** | Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once.  | [optional]  |
-| **offset** | **int?** | Number of matching transactions to skip. | [optional] [default to 0] |
-| **limit** | **int?** | Maximum number of transactions to return in this page. | [optional] [default to 1000] |
+| **type** | **string** | Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;BUY_TO_OPEN&#x60; - Option bought to open a long position.   - &#x60;BUY_TO_CLOSE&#x60; - Option bought to close a short position.   - &#x60;SELL_TO_OPEN&#x60; - Option sold to open a short position.   - &#x60;SELL_TO_CLOSE&#x60; - Option sold to close a long position.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;SUBSTITUTE_DIVIDEND&#x60; - Payment in lieu of a dividend.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;STOCK_DIVIDEND&#x60; - A type of dividend where a company distributes shares instead of cash   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;TAX&#x60; - A tax related fee.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another.   - &#x60;SPLIT&#x60; - A stock share split.  | [optional]  |
+| **offset** | **int?** | An integer that specifies the starting point of the paginated results. Default is 0. | [optional] [default to 0] |
+| **limit** | **int?** | An integer that specifies the maximum number of transactions to return. Default of 1000. | [optional] [default to 1000] |
 
 ### Return type
 

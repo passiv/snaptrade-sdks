@@ -263,13 +263,15 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
+    # @param client_order_id [String] Canonical 36-character UUID required when placing a Wealthsimple order with two or more legs. Not required for an impact preview or single-leg request. Reuse it when retrying the same attempt. SnapTrade retains the ID after success or failure; reuse by the same user across accounts or placement endpoints returns 409 without submitting again. A 409 does not establish whether the original attempt was accepted; reconcile it before using a new ID for a genuinely new order. This protection does not depend on Wealthsimple deduplicating its external order ID.
     # @param limit_price [Float] The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unless `price_effect` is `EVEN` - a net-even order is implicitly priced at 0, so the field may be omitted and must be `0` if sent.
     # @param stop_price [Float] The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
     # @param price_effect [MlegPriceEffectStrict] 
     # @param body [MlegTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_option_impact(order_type:, time_in_force:, legs:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, price_effect: SENTINEL, extra: {})
+    def get_option_impact(order_type:, time_in_force:, legs:, user_id:, user_secret:, account_id:, client_order_id: SENTINEL, limit_price: SENTINEL, stop_price: SENTINEL, price_effect: SENTINEL, extra: {})
       _body = {}
+      _body[:client_order_id] = client_order_id if client_order_id != SENTINEL
       _body[:order_type] = order_type if order_type != SENTINEL
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:limit_price] = limit_price if limit_price != SENTINEL
@@ -292,13 +294,15 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
+    # @param client_order_id [String] Canonical 36-character UUID required when placing a Wealthsimple order with two or more legs. Not required for an impact preview or single-leg request. Reuse it when retrying the same attempt. SnapTrade retains the ID after success or failure; reuse by the same user across accounts or placement endpoints returns 409 without submitting again. A 409 does not establish whether the original attempt was accepted; reconcile it before using a new ID for a genuinely new order. This protection does not depend on Wealthsimple deduplicating its external order ID.
     # @param limit_price [Float] The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unless `price_effect` is `EVEN` - a net-even order is implicitly priced at 0, so the field may be omitted and must be `0` if sent.
     # @param stop_price [Float] The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
     # @param price_effect [MlegPriceEffectStrict] 
     # @param body [MlegTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_option_impact_with_http_info(order_type:, time_in_force:, legs:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, price_effect: SENTINEL, extra: {})
+    def get_option_impact_with_http_info(order_type:, time_in_force:, legs:, user_id:, user_secret:, account_id:, client_order_id: SENTINEL, limit_price: SENTINEL, stop_price: SENTINEL, price_effect: SENTINEL, extra: {})
       _body = {}
+      _body[:client_order_id] = client_order_id if client_order_id != SENTINEL
       _body[:order_type] = order_type if order_type != SENTINEL
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:limit_price] = limit_price if limit_price != SENTINEL
@@ -1304,6 +1308,8 @@ module SnapTrade
     # Place option order
     #
     # Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support
+    # 
+    # Wealthsimple placement with two or more legs requires a canonical UUID `client_order_id`. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID.
     #
     # @param order_type [MlegOrderTypeStrict] The type of order to place.
     # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
@@ -1311,13 +1317,15 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
+    # @param client_order_id [String] Canonical 36-character UUID required when placing a Wealthsimple order with two or more legs. Not required for an impact preview or single-leg request. Reuse it when retrying the same attempt. SnapTrade retains the ID after success or failure; reuse by the same user across accounts or placement endpoints returns 409 without submitting again. A 409 does not establish whether the original attempt was accepted; reconcile it before using a new ID for a genuinely new order. This protection does not depend on Wealthsimple deduplicating its external order ID.
     # @param limit_price [Float] The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unless `price_effect` is `EVEN` - a net-even order is implicitly priced at 0, so the field may be omitted and must be `0` if sent.
     # @param stop_price [Float] The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
     # @param price_effect [MlegPriceEffectStrict] 
     # @param body [MlegTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_mleg_order(order_type:, time_in_force:, legs:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, price_effect: SENTINEL, extra: {})
+    def place_mleg_order(order_type:, time_in_force:, legs:, user_id:, user_secret:, account_id:, client_order_id: SENTINEL, limit_price: SENTINEL, stop_price: SENTINEL, price_effect: SENTINEL, extra: {})
       _body = {}
+      _body[:client_order_id] = client_order_id if client_order_id != SENTINEL
       _body[:order_type] = order_type if order_type != SENTINEL
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:limit_price] = limit_price if limit_price != SENTINEL
@@ -1332,6 +1340,8 @@ module SnapTrade
     # Place option order
     #
     # Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support
+    # 
+    # Wealthsimple placement with two or more legs requires a canonical UUID `client_order_id`. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID.
     #
     # @param order_type [MlegOrderTypeStrict] The type of order to place.
     # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
@@ -1339,13 +1349,15 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
+    # @param client_order_id [String] Canonical 36-character UUID required when placing a Wealthsimple order with two or more legs. Not required for an impact preview or single-leg request. Reuse it when retrying the same attempt. SnapTrade retains the ID after success or failure; reuse by the same user across accounts or placement endpoints returns 409 without submitting again. A 409 does not establish whether the original attempt was accepted; reconcile it before using a new ID for a genuinely new order. This protection does not depend on Wealthsimple deduplicating its external order ID.
     # @param limit_price [Float] The limit price. Required if the order type is `LIMIT`, `STOP_LOSS_LIMIT`, unless `price_effect` is `EVEN` - a net-even order is implicitly priced at 0, so the field may be omitted and must be `0` if sent.
     # @param stop_price [Float] The stop price. Required if the order type is `STOP_LOSS_MARKET`, `STOP_LOSS_LIMIT`.
     # @param price_effect [MlegPriceEffectStrict] 
     # @param body [MlegTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_mleg_order_with_http_info(order_type:, time_in_force:, legs:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, price_effect: SENTINEL, extra: {})
+    def place_mleg_order_with_http_info(order_type:, time_in_force:, legs:, user_id:, user_secret:, account_id:, client_order_id: SENTINEL, limit_price: SENTINEL, stop_price: SENTINEL, price_effect: SENTINEL, extra: {})
       _body = {}
+      _body[:client_order_id] = client_order_id if client_order_id != SENTINEL
       _body[:order_type] = order_type if order_type != SENTINEL
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:limit_price] = limit_price if limit_price != SENTINEL
@@ -1357,7 +1369,7 @@ module SnapTrade
     end
 
     # Place option order
-    # Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
+    # Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  Wealthsimple placement with two or more legs requires a canonical UUID `client_order_id`. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -1370,7 +1382,7 @@ module SnapTrade
     end
 
     # Place option order
-    # Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
+    # Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  Wealthsimple placement with two or more legs requires a canonical UUID &#x60;client_order_id&#x60;. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 

@@ -76,6 +76,7 @@ class MlegTradeForm(
             
                 def __getitem__(self, i: int) -> 'MlegLeg':
                     return super().__getitem__(i)
+            client_order_id = schemas.UUIDSchema
             
             
             class limit_price(
@@ -132,6 +133,7 @@ class MlegTradeForm(
                 "order_type": order_type,
                 "time_in_force": time_in_force,
                 "legs": legs,
+                "client_order_id": client_order_id,
                 "limit_price": limit_price,
                 "stop_price": stop_price,
                 "price_effect": price_effect,
@@ -151,6 +153,9 @@ class MlegTradeForm(
     def __getitem__(self, name: typing_extensions.Literal["legs"]) -> MetaOapg.properties.legs: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["client_order_id"]) -> MetaOapg.properties.client_order_id: ...
+    
+    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["limit_price"]) -> MetaOapg.properties.limit_price: ...
     
     @typing.overload
@@ -162,7 +167,7 @@ class MlegTradeForm(
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["order_type", "time_in_force", "legs", "limit_price", "stop_price", "price_effect", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["order_type", "time_in_force", "legs", "client_order_id", "limit_price", "stop_price", "price_effect", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -177,6 +182,9 @@ class MlegTradeForm(
     def get_item_oapg(self, name: typing_extensions.Literal["legs"]) -> MetaOapg.properties.legs: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["client_order_id"]) -> typing.Union[MetaOapg.properties.client_order_id, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["limit_price"]) -> typing.Union[MetaOapg.properties.limit_price, schemas.Unset]: ...
     
     @typing.overload
@@ -188,7 +196,7 @@ class MlegTradeForm(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["order_type", "time_in_force", "legs", "limit_price", "stop_price", "price_effect", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["order_type", "time_in_force", "legs", "client_order_id", "limit_price", "stop_price", "price_effect", ], str]):
         return super().get_item_oapg(name)
     
 
@@ -198,6 +206,7 @@ class MlegTradeForm(
         time_in_force: 'TimeInForceStrict',
         legs: typing.Union[MetaOapg.properties.legs, list, tuple, ],
         order_type: 'MlegOrderTypeStrict',
+        client_order_id: typing.Union[MetaOapg.properties.client_order_id, str, uuid.UUID, schemas.Unset] = schemas.unset,
         limit_price: typing.Union[MetaOapg.properties.limit_price, None, str, schemas.Unset] = schemas.unset,
         stop_price: typing.Union[MetaOapg.properties.stop_price, None, str, schemas.Unset] = schemas.unset,
         price_effect: typing.Union['MlegPriceEffectStrictNullable', schemas.Unset] = schemas.unset,
@@ -210,6 +219,7 @@ class MlegTradeForm(
             time_in_force=time_in_force,
             legs=legs,
             order_type=order_type,
+            client_order_id=client_order_id,
             limit_price=limit_price,
             stop_price=stop_price,
             price_effect=price_effect,

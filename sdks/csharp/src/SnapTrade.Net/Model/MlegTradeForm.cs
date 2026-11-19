@@ -58,13 +58,14 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="MlegTradeForm" /> class.
         /// </summary>
+        /// <param name="clientOrderId">Canonical 36-character UUID required when placing a Wealthsimple order with two or more legs. Not required for an impact preview or single-leg request. Reuse it when retrying the same attempt. SnapTrade retains the ID after success or failure; reuse by the same user across accounts or placement endpoints returns 409 without submitting again. A 409 does not establish whether the original attempt was accepted; reconcile it before using a new ID for a genuinely new order. This protection does not depend on Wealthsimple deduplicating its external order ID..</param>
         /// <param name="orderType">orderType (required).</param>
         /// <param name="timeInForce">timeInForce (required).</param>
         /// <param name="limitPrice">The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;, unless &#x60;price_effect&#x60; is &#x60;EVEN&#x60; - a net-even order is implicitly priced at 0, so the field may be omitted and must be &#x60;0&#x60; if sent..</param>
         /// <param name="stopPrice">The stop price. Required if the order type is &#x60;STOP_LOSS_MARKET&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;..</param>
         /// <param name="priceEffect">priceEffect.</param>
         /// <param name="legs">legs (required).</param>
-        public MlegTradeForm(MlegOrderTypeStrict orderType = default(MlegOrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), decimal? limitPrice = default(decimal?), decimal? stopPrice = default(decimal?), MlegPriceEffectStrictNullable? priceEffect = default(MlegPriceEffectStrictNullable?), List<MlegLeg> legs = default(List<MlegLeg>))
+        public MlegTradeForm(string clientOrderId = default(string), MlegOrderTypeStrict orderType = default(MlegOrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), decimal? limitPrice = default(decimal?), decimal? stopPrice = default(decimal?), MlegPriceEffectStrictNullable? priceEffect = default(MlegPriceEffectStrictNullable?), List<MlegLeg> legs = default(List<MlegLeg>))
         {
             this.OrderType = orderType;
             this.TimeInForce = timeInForce;
@@ -74,10 +75,18 @@ namespace SnapTrade.Net.Model
                 throw new ArgumentNullException("legs is a required property for MlegTradeForm and cannot be null");
             }
             this.Legs = legs;
+            this.ClientOrderId = clientOrderId;
             this.LimitPrice = limitPrice;
             this.StopPrice = stopPrice;
             this.PriceEffect = priceEffect;
         }
+
+        /// <summary>
+        /// Canonical 36-character UUID required when placing a Wealthsimple order with two or more legs. Not required for an impact preview or single-leg request. Reuse it when retrying the same attempt. SnapTrade retains the ID after success or failure; reuse by the same user across accounts or placement endpoints returns 409 without submitting again. A 409 does not establish whether the original attempt was accepted; reconcile it before using a new ID for a genuinely new order. This protection does not depend on Wealthsimple deduplicating its external order ID.
+        /// </summary>
+        /// <value>Canonical 36-character UUID required when placing a Wealthsimple order with two or more legs. Not required for an impact preview or single-leg request. Reuse it when retrying the same attempt. SnapTrade retains the ID after success or failure; reuse by the same user across accounts or placement endpoints returns 409 without submitting again. A 409 does not establish whether the original attempt was accepted; reconcile it before using a new ID for a genuinely new order. This protection does not depend on Wealthsimple deduplicating its external order ID.</value>
+        [DataMember(Name = "client_order_id", EmitDefaultValue = false)]
+        public string ClientOrderId { get; set; }
 
         /// <summary>
         /// The limit price. Required if the order type is &#x60;LIMIT&#x60;, &#x60;STOP_LOSS_LIMIT&#x60;, unless &#x60;price_effect&#x60; is &#x60;EVEN&#x60; - a net-even order is implicitly priced at 0, so the field may be omitted and must be &#x60;0&#x60; if sent.
@@ -109,6 +118,7 @@ namespace SnapTrade.Net.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class MlegTradeForm {\n");
+            sb.Append("  ClientOrderId: ").Append(ClientOrderId).Append("\n");
             sb.Append("  OrderType: ").Append(OrderType).Append("\n");
             sb.Append("  TimeInForce: ").Append(TimeInForce).Append("\n");
             sb.Append("  LimitPrice: ").Append(LimitPrice).Append("\n");
@@ -151,6 +161,11 @@ namespace SnapTrade.Net.Model
             }
             return 
                 (
+                    this.ClientOrderId == input.ClientOrderId ||
+                    (this.ClientOrderId != null &&
+                    this.ClientOrderId.Equals(input.ClientOrderId))
+                ) && 
+                (
                     this.OrderType == input.OrderType ||
                     this.OrderType.Equals(input.OrderType)
                 ) && 
@@ -189,6 +204,10 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                if (this.ClientOrderId != null)
+                {
+                    hashCode = (hashCode * 59) + this.ClientOrderId.GetHashCode();
+                }
                 hashCode = (hashCode * 59) + this.OrderType.GetHashCode();
                 hashCode = (hashCode * 59) + this.TimeInForce.GetHashCode();
                 if (this.LimitPrice != null)

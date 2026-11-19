@@ -13,6 +13,9 @@ require 'time'
 module SnapTrade
   # Inputs for placing a multi-leg order with the brokerage.
   class MlegTradeForm
+    # Canonical 36-character UUID required when placing a Wealthsimple order with two or more legs. Not required for an impact preview or single-leg request. Reuse it when retrying the same attempt. SnapTrade retains the ID after success or failure; reuse by the same user across accounts or placement endpoints returns 409 without submitting again. A 409 does not establish whether the original attempt was accepted; reconcile it before using a new ID for a genuinely new order. This protection does not depend on Wealthsimple deduplicating its external order ID.
+    attr_accessor :client_order_id
+
     # The type of order to place.
     attr_accessor :order_type
 
@@ -32,6 +35,7 @@ module SnapTrade
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'client_order_id' => :'client_order_id',
         :'order_type' => :'order_type',
         :'time_in_force' => :'time_in_force',
         :'limit_price' => :'limit_price',
@@ -49,6 +53,7 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'client_order_id' => :'String',
         :'order_type' => :'MlegOrderTypeStrict',
         :'time_in_force' => :'TimeInForceStrict',
         :'limit_price' => :'Float',
@@ -81,6 +86,10 @@ module SnapTrade
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'client_order_id')
+        self.client_order_id = attributes[:'client_order_id']
+      end
 
       if attributes.key?(:'order_type')
         self.order_type = attributes[:'order_type']
@@ -142,6 +151,7 @@ module SnapTrade
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          client_order_id == o.client_order_id &&
           order_type == o.order_type &&
           time_in_force == o.time_in_force &&
           limit_price == o.limit_price &&
@@ -159,7 +169,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [order_type, time_in_force, limit_price, stop_price, price_effect, legs].hash
+      [client_order_id, order_type, time_in_force, limit_price, stop_price, price_effect, legs].hash
     end
 
     # Builds the object from hash

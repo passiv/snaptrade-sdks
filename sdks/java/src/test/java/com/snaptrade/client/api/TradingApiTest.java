@@ -125,10 +125,12 @@ public class TradingApiTest {
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
+        UUID clientOrderId = null;
         BigDecimal limitPrice = null;
         BigDecimal stopPrice = null;
         MlegPriceEffectStrictNullable priceEffect = null;
         OptionImpact response = api.getOptionImpact(orderType, timeInForce, legs, userId, userSecret, accountId)
+                .clientOrderId(clientOrderId)
                 .limitPrice(limitPrice)
                 .stopPrice(stopPrice)
                 .priceEffect(priceEffect)
@@ -295,7 +297,7 @@ public class TradingApiTest {
     /**
      * Place option order
      *
-     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
+     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support  Wealthsimple placement with two or more legs requires a canonical UUID &#x60;client_order_id&#x60;. Reuse it for retries of the same attempt. SnapTrade returns 409 for an ID already used by that user, including across accounts and after a lost placement response. Reconcile the original attempt before submitting a genuinely new order with a new ID. 
      *
      * @throws ApiException if the Api call fails
      */
@@ -307,10 +309,12 @@ public class TradingApiTest {
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
+        UUID clientOrderId = null;
         BigDecimal limitPrice = null;
         BigDecimal stopPrice = null;
         MlegPriceEffectStrictNullable priceEffect = null;
         MlegOrderResponse response = api.placeMlegOrder(orderType, timeInForce, legs, userId, userSecret, accountId)
+                .clientOrderId(clientOrderId)
                 .limitPrice(limitPrice)
                 .stopPrice(stopPrice)
                 .priceEffect(priceEffect)

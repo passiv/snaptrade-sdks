@@ -51,6 +51,7 @@ class MlegTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
+        'client_order_id' => 'string',
         'order_type' => '\SnapTrade\Model\MlegOrderTypeStrict',
         'time_in_force' => '\SnapTrade\Model\TimeInForceStrict',
         'limit_price' => 'float',
@@ -67,6 +68,7 @@ class MlegTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'client_order_id' => 'uuid',
         'order_type' => null,
         'time_in_force' => null,
         'limit_price' => 'decimal',
@@ -81,7 +83,8 @@ class MlegTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'order_type' => false,
+        'client_order_id' => false,
+		'order_type' => false,
 		'time_in_force' => false,
 		'limit_price' => true,
 		'stop_price' => true,
@@ -175,6 +178,7 @@ class MlegTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
+        'client_order_id' => 'client_order_id',
         'order_type' => 'order_type',
         'time_in_force' => 'time_in_force',
         'limit_price' => 'limit_price',
@@ -189,6 +193,7 @@ class MlegTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
+        'client_order_id' => 'setClientOrderId',
         'order_type' => 'setOrderType',
         'time_in_force' => 'setTimeInForce',
         'limit_price' => 'setLimitPrice',
@@ -203,6 +208,7 @@ class MlegTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
+        'client_order_id' => 'getClientOrderId',
         'order_type' => 'getOrderType',
         'time_in_force' => 'getTimeInForce',
         'limit_price' => 'getLimitPrice',
@@ -268,6 +274,7 @@ class MlegTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('client_order_id', $data ?? [], null);
         $this->setIfExists('order_type', $data ?? [], null);
         $this->setIfExists('time_in_force', $data ?? [], null);
         $this->setIfExists('limit_price', $data ?? [], null);
@@ -326,6 +333,35 @@ class MlegTradeForm implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets client_order_id
+     *
+     * @return string|null
+     */
+    public function getClientOrderId()
+    {
+        return $this->container['client_order_id'];
+    }
+
+    /**
+     * Sets client_order_id
+     *
+     * @param string|null $client_order_id Canonical 36-character UUID required when placing a Wealthsimple order with two or more legs. Not required for an impact preview or single-leg request. Reuse it when retrying the same attempt. SnapTrade retains the ID after success or failure; reuse by the same user across accounts or placement endpoints returns 409 without submitting again. A 409 does not establish whether the original attempt was accepted; reconcile it before using a new ID for a genuinely new order. This protection does not depend on Wealthsimple deduplicating its external order ID.
+     *
+     * @return self
+     */
+    public function setClientOrderId($client_order_id)
+    {
+
+        if (is_null($client_order_id)) {
+            throw new \InvalidArgumentException('non-nullable client_order_id cannot be null');
+        }
+
+        $this->container['client_order_id'] = $client_order_id;
+
+        return $this;
+    }
 
     /**
      * Gets order_type
