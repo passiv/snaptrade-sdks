@@ -448,7 +448,7 @@ p result
 
 ### `snaptrade.account_information.get_account_transactions`<a id="snaptradeaccount_informationget_account_transactions"></a>
 
-Returns the account's cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.
+Returns the account's cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.
 
 History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
 
@@ -475,11 +475,10 @@ p result
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### start_date: `Date`<a id="start_date-date"></a>
-First trade date to include (UTC). Defaults to the earliest available
-transaction.
+First date to include (UTC). Defaults to the earliest available transaction.
 
 ##### end_date: `Date`<a id="end_date-date"></a>
-Last trade date to include (UTC). Defaults to the latest available transaction.
+Last date to include (UTC). Defaults to the latest available transaction.
 
 ##### type: `String`<a id="type-string"></a>
 Comma-separated activity types. A transaction matches its base type or its

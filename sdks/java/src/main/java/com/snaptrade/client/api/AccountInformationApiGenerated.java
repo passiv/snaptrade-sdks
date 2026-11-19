@@ -1237,7 +1237,7 @@ public class AccountInformationApiGenerated {
 
         /**
          * Set startDate
-         * @param startDate First trade date to include (UTC). Defaults to the earliest available transaction. (optional)
+         * @param startDate First date to include (UTC). Defaults to the earliest available transaction. (optional)
          * @return AccountInformationApi.GetAccountTransactionsRequestBuilder
          */
         public AccountInformationApi.GetAccountTransactionsRequestBuilder startDate(LocalDate startDate) {
@@ -1247,7 +1247,7 @@ public class AccountInformationApiGenerated {
         
         /**
          * Set endDate
-         * @param endDate Last trade date to include (UTC). Defaults to the latest available transaction. (optional)
+         * @param endDate Last date to include (UTC). Defaults to the latest available transaction. (optional)
          * @return AccountInformationApi.GetAccountTransactionsRequestBuilder
          */
         public AccountInformationApi.GetAccountTransactionsRequestBuilder endDate(LocalDate endDate) {
@@ -1352,7 +1352,7 @@ public class AccountInformationApiGenerated {
 
     /**
      * List account transactions
-     * Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+     * Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
      * @param accountId  (required)
      * @param userId  (required)
      * @param userSecret  (required)

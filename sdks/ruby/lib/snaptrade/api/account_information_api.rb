@@ -661,15 +661,15 @@ module SnapTrade
 
     # List account transactions
     #
-    # Returns the account's cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.
+    # Returns the account's cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.
     # 
     # History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
     #
     # @param account_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param start_date [Date] First trade date to include (UTC). Defaults to the earliest available transaction.
-    # @param end_date [Date] Last trade date to include (UTC). Defaults to the latest available transaction.
+    # @param start_date [Date] First date to include (UTC). Defaults to the earliest available transaction.
+    # @param end_date [Date] Last date to include (UTC). Defaults to the latest available transaction.
     # @param type [String] Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
     # @param offset [Integer] Number of matching transactions to skip.
     # @param limit [Integer] Maximum number of transactions to return in this page.
@@ -686,15 +686,15 @@ module SnapTrade
 
     # List account transactions
     #
-    # Returns the account's cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.
+    # Returns the account's cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.
     # 
     # History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
     #
     # @param account_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param start_date [Date] First trade date to include (UTC). Defaults to the earliest available transaction.
-    # @param end_date [Date] Last trade date to include (UTC). Defaults to the latest available transaction.
+    # @param start_date [Date] First date to include (UTC). Defaults to the earliest available transaction.
+    # @param end_date [Date] Last date to include (UTC). Defaults to the latest available transaction.
     # @param type [String] Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
     # @param offset [Integer] Number of matching transactions to skip.
     # @param limit [Integer] Maximum number of transactions to return in this page.
@@ -709,13 +709,13 @@ module SnapTrade
     end
 
     # List account transactions
-    # Returns the account's cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+    # Returns the account's cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
     # @param account_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [Date] :start_date First trade date to include (UTC). Defaults to the earliest available transaction.
-    # @option opts [Date] :end_date Last trade date to include (UTC). Defaults to the latest available transaction.
+    # @option opts [Date] :start_date First date to include (UTC). Defaults to the earliest available transaction.
+    # @option opts [Date] :end_date Last date to include (UTC). Defaults to the latest available transaction.
     # @option opts [String] :type Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
     # @option opts [Integer] :offset Number of matching transactions to skip. (default to 0)
     # @option opts [Integer] :limit Maximum number of transactions to return in this page. (default to 1000)
@@ -726,13 +726,13 @@ module SnapTrade
     end
 
     # List account transactions
-    # Returns the account&#39;s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+    # Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
     # @param account_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [Date] :start_date First trade date to include (UTC). Defaults to the earliest available transaction.
-    # @option opts [Date] :end_date Last trade date to include (UTC). Defaults to the latest available transaction.
+    # @option opts [Date] :start_date First date to include (UTC). Defaults to the earliest available transaction.
+    # @option opts [Date] :end_date Last date to include (UTC). Defaults to the latest available transaction.
     # @option opts [String] :type Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
     # @option opts [Integer] :offset Number of matching transactions to skip. (default to 0)
     # @option opts [Integer] :limit Maximum number of transactions to return in this page. (default to 1000)

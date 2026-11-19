@@ -2617,7 +2617,7 @@ paths:
   /accounts/{accountId}/transactions:
     get:
       description: |
-        Returns the account's cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.
+        Returns the account's cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.
 
         History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
       operationId: AccountInformation_getAccountTransactions
@@ -2643,7 +2643,7 @@ paths:
         schema:
           $ref: '#/components/schemas/UserSecret'
         style: form
-      - description: First trade date to include (UTC). Defaults to the earliest available
+      - description: First date to include (UTC). Defaults to the earliest available
           transaction.
         explode: true
         in: query
@@ -2652,7 +2652,7 @@ paths:
         schema:
           $ref: '#/components/schemas/ReportingDate'
         style: form
-      - description: Last trade date to include (UTC). Defaults to the latest available
+      - description: Last date to include (UTC). Defaults to the latest available
           transaction.
         explode: true
         in: query
@@ -14770,8 +14770,8 @@ components:
           x-konfig-original-example: BUY
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Activity-properties-type
         date:
-          description: Recorded trade date and time in UTC. Precision depends on what
-            the brokerage supplies.
+          description: Recorded date and time in UTC. Precision depends on what the
+            brokerage supplies.
           example: 2026-11-16T15:42:18.123456Z
           format: date-time
           type: string

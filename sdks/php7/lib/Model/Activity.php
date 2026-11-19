@@ -464,7 +464,7 @@ class Activity implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets date
      *
-     * @param \DateTime $date Recorded trade date and time in UTC. Precision depends on what the brokerage supplies.
+     * @param \DateTime $date Recorded date and time in UTC. Precision depends on what the brokerage supplies.
      *
      * @return self
      */

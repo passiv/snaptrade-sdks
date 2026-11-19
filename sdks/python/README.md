@@ -772,7 +772,7 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 
 ### `snaptrade.account_information.get_account_transactions`<a id="snaptradeaccount_informationget_account_transactions"></a>
 
-Returns the account's cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.
+Returns the account's cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.
 
 History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
 
@@ -826,11 +826,11 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 
 ##### start_date: `date`<a id="start_date-date"></a>
 
-First trade date to include (UTC). Defaults to the earliest available transaction.
+First date to include (UTC). Defaults to the earliest available transaction.
 
 ##### end_date: `date`<a id="end_date-date"></a>
 
-Last trade date to include (UTC). Defaults to the latest available transaction.
+Last date to include (UTC). Defaults to the latest available transaction.
 
 ##### type: `str`<a id="type-str"></a>
 

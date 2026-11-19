@@ -477,11 +477,11 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             };
         },
         /**
-         * Returns the account\'s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+         * Returns the account\'s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
          * @summary List account transactions
          * @param {string} accountId 
-         * @param {string | Date} [startDate] First trade date to include (UTC). Defaults to the earliest available transaction.
-         * @param {string | Date} [endDate] Last trade date to include (UTC). Defaults to the latest available transaction.
+         * @param {string | Date} [startDate] First date to include (UTC). Defaults to the earliest available transaction.
+         * @param {string | Date} [endDate] Last date to include (UTC). Defaults to the latest available transaction.
          * @param {string} [type] Comma-separated activity types. A transaction matches its base type or its option action, case-insensitively. For example, BUY includes opening and closing option purchases, while BUY_TO_OPEN selects only opening purchases. A transaction matching multiple values appears once. 
          * @param {number} [offset] Number of matching transactions to skip.
          * @param {number} [limit] Maximum number of transactions to return in this page.
@@ -1466,7 +1466,7 @@ export const AccountInformationApiFp = function<TAuth extends AuthMode>(configur
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
-         * Returns the account\'s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+         * Returns the account\'s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
          * @summary List account transactions
          * @param {AccountInformationApiGetAccountTransactionsRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1700,7 +1700,7 @@ export const AccountInformationApiFactory = function<TAuth extends AuthMode>(con
             return localVarFp.getAccountOrder(...args).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the account\'s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+         * Returns the account\'s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
          * @summary List account transactions
          * @param {AccountInformationApiGetAccountTransactionsRequest<TAuth>} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -2091,14 +2091,14 @@ export type AccountInformationApiGetAccountTransactionsBaseRequest = {
     readonly accountId: string
     
     /**
-    * First trade date to include (UTC). Defaults to the earliest available transaction.
+    * First date to include (UTC). Defaults to the earliest available transaction.
     * @type {string | Date}
     * @memberof AccountInformationApiGetAccountTransactions
     */
     readonly startDate?: string | Date
     
     /**
-    * Last trade date to include (UTC). Defaults to the latest available transaction.
+    * Last date to include (UTC). Defaults to the latest available transaction.
     * @type {string | Date}
     * @memberof AccountInformationApiGetAccountTransactions
     */
@@ -2760,7 +2760,7 @@ export class AccountInformationApiGenerated<TAuth extends AuthMode> extends Base
     }
 
     /**
-     * Returns the account\'s cached transaction history, most recent trade date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+     * Returns the account\'s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
      * @summary List account transactions
      * @param {AccountInformationApiGetAccountTransactionsRequest<TAuth>} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
