@@ -265,7 +265,7 @@ readmeHeader:
 useSecurityKeyName: true
 additionalGenerators:
   php7:
-    version: 3.0.61
+    version: 3.0.62
     outputDirectory: sdks/php7
     packageName: snaptrade-php-7-sdk
     invokerPackage: SnapTrade
@@ -279,7 +279,7 @@ additionalGenerators:
       repoId: snaptrade-php-7-sdk
 generators:
   go:
-    version: 2.0.62
+    version: 2.0.63
     packageName: snaptrade
     outputDirectory: sdks/go
     readmeSnippet: snippets/go.go
@@ -291,7 +291,7 @@ generators:
       - ConsumerKey
   ruby:
     moduleName: SnapTrade
-    version: 3.0.61
+    version: 3.0.62
     outputDirectory: sdks/ruby
     apiDocumentationAuthenticationPartial: snippets/ruby_doc_auth_partial.rb
     gemName: snaptrade
@@ -302,7 +302,7 @@ generators:
       - name: consumer_key
         required: true
   php:
-    version: 3.0.61
+    version: 3.0.62
     outputDirectory: sdks/php
     packageName: snaptrade-php-sdk
     invokerPackage: SnapTrade
@@ -314,7 +314,7 @@ generators:
       repoId: snaptrade-php-sdk
   csharp:
     clientName: Snaptrade
-    version: 6.0.61
+    version: 6.0.62
     packageName: SnapTrade.Net
     logoPath: logo.png
     outputDirectory: sdks/csharp
@@ -325,7 +325,7 @@ generators:
       userId: passiv
       repoId: snaptrade-sdks/tree/master/sdks/csharp
   java:
-    version: 6.0.61
+    version: 6.0.62
     outputDirectory: sdks/java
     readmeSnippet: snippets/java.java
     clientName: Snaptrade
@@ -339,7 +339,7 @@ generators:
     groupId: com.snaptrade
     artifactId: snaptrade-java-sdk
   python:
-    version: 13.4.3
+    version: 13.4.4
     responseTypeVersion: '1'
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
@@ -363,7 +363,7 @@ generators:
         - pnpm typecheck
         - pnpm test
         - pnpm build
-    version: 13.4.3
+    version: 13.4.4
     outputDirectory: sdks/typescript
     clientState:
       - consumerKey
