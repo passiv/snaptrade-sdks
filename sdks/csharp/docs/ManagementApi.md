@@ -4,7 +4,7 @@ All URIs are relative to *https://api.snaptrade.com*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**GetStats**](ManagementApi.md#getstats) | **GET** /management/stats | Get usage stats (beta) |
+| [**GetStats**](ManagementApi.md#getstats) | **GET** /management/stats | Get usage stats |
 | [**GetStatsLegacy**](ManagementApi.md#getstatslegacy) | **GET** /snapTrade/stats | Get usage stats (deprecated) |
 
 
@@ -38,7 +38,7 @@ namespace Example
             
             try
             {
-                // Get usage stats (beta)
+                // Get usage stats
                 ConnectedAssetPartnerStats result = client.Management.GetStats(currency);
                 Console.WriteLine(result);
             }
@@ -65,7 +65,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get usage stats (beta)
+    // Get usage stats
     ApiResponse<ConnectedAssetPartnerStats> response = apiInstance.GetStatsWithHttpInfo(currency);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

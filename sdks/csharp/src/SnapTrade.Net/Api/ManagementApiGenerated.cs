@@ -28,7 +28,7 @@ namespace SnapTrade.Net.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Get usage stats (beta)
+        /// Get usage stats
         /// </summary>
         /// <remarks>
         /// **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;connected_assets_calculated_at&#x60; indicates when it was last calculated. 
@@ -40,7 +40,7 @@ namespace SnapTrade.Net.Api
         ConnectedAssetPartnerStats GetStats(string currency = default(string), int operationIndex = 0);
 
         /// <summary>
-        /// Get usage stats (beta)
+        /// Get usage stats
         /// </summary>
         /// <remarks>
         /// **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;connected_assets_calculated_at&#x60; indicates when it was last calculated. 
@@ -85,7 +85,7 @@ namespace SnapTrade.Net.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// Get usage stats (beta)
+        /// Get usage stats
         /// </summary>
         /// <remarks>
         /// **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;connected_assets_calculated_at&#x60; indicates when it was last calculated. 
@@ -98,7 +98,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<ConnectedAssetPartnerStats> GetStatsAsync(string currency = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Get usage stats (beta)
+        /// Get usage stats
         /// </summary>
         /// <remarks>
         /// **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;connected_assets_calculated_at&#x60; indicates when it was last calculated. 
@@ -257,7 +257,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get usage stats (beta) **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;connected_assets_calculated_at&#x60; indicates when it was last calculated. 
+        /// Get usage stats **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;connected_assets_calculated_at&#x60; indicates when it was last calculated. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currency">ISO 4217 currency code to express connected asset values in. Defaults to &#x60;USD&#x60;. (optional)</param>
@@ -270,7 +270,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get usage stats (beta) **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;connected_assets_calculated_at&#x60; indicates when it was last calculated. 
+        /// Get usage stats **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;connected_assets_calculated_at&#x60; indicates when it was last calculated. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currency">ISO 4217 currency code to express connected asset values in. Defaults to &#x60;USD&#x60;. (optional)</param>
@@ -339,7 +339,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get usage stats (beta) **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;connected_assets_calculated_at&#x60; indicates when it was last calculated. 
+        /// Get usage stats **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;connected_assets_calculated_at&#x60; indicates when it was last calculated. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currency">ISO 4217 currency code to express connected asset values in. Defaults to &#x60;USD&#x60;. (optional)</param>
@@ -353,7 +353,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get usage stats (beta) **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;connected_assets_calculated_at&#x60; indicates when it was last calculated. 
+        /// Get usage stats **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;connected_assets_calculated_at&#x60; indicates when it was last calculated. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currency">ISO 4217 currency code to express connected asset values in. Defaults to &#x60;USD&#x60;. (optional)</param>

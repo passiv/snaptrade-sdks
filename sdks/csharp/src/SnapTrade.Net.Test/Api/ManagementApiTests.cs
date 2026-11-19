@@ -56,7 +56,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // Get usage stats (beta)
+                // Get usage stats
                 ConnectedAssetPartnerStats result = client.Management.GetStats(currency);
                 Console.WriteLine(result);
             }

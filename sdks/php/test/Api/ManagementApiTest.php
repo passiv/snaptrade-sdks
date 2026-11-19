@@ -61,7 +61,7 @@ class ManagementApiTest extends TestCase
     /**
      * Test case for getStats
      *
-     * Get usage stats (beta).
+     * Get usage stats.
      *
      */
     public function testGetStats()

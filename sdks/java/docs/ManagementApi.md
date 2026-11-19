@@ -4,7 +4,7 @@ All URIs are relative to *https://api.snaptrade.com*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**getStats**](ManagementApi.md#getStats) | **GET** /management/stats | Get usage stats (beta) |
+| [**getStats**](ManagementApi.md#getStats) | **GET** /management/stats | Get usage stats |
 | [**getStatsLegacy**](ManagementApi.md#getStatsLegacy) | **GET** /snapTrade/stats | Get usage stats (deprecated) |
 
 
@@ -12,7 +12,7 @@ All URIs are relative to *https://api.snaptrade.com*
 # **getStats**
 > ConnectedAssetPartnerStats getStats().currency(currency).execute();
 
-Get usage stats (beta)
+Get usage stats
 
 **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;connected_assets_calculated_at&#x60; indicates when it was last calculated. 
 

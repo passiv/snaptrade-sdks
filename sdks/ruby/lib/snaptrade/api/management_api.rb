@@ -17,7 +17,7 @@ module SnapTrade
       @api_client = api_client
     end
 
-    # Get usage stats (beta)
+    # Get usage stats
     #
     # **Beta.** This endpoint and its response schema may change.
     # 
@@ -33,7 +33,7 @@ module SnapTrade
       data
     end
 
-    # Get usage stats (beta)
+    # Get usage stats
     #
     # **Beta.** This endpoint and its response schema may change.
     # 
@@ -48,7 +48,7 @@ module SnapTrade
       get_stats_with_http_info_impl(extra)
     end
 
-    # Get usage stats (beta)
+    # Get usage stats
     # **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users & Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; `connected_assets_calculated_at` indicates when it was last calculated. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :currency ISO 4217 currency code to express connected asset values in. Defaults to `USD`.
@@ -58,7 +58,7 @@ module SnapTrade
       data
     end
 
-    # Get usage stats (beta)
+    # Get usage stats
     # **Beta.** This endpoint and its response schema may change.  Returns user, connection, and connected asset totals for your SnapTrade Client ID. These are the same numbers shown on the Users &amp; Connections page of the SnapTrade Dashboard.  User and connection counts are cached for up to 5 minutes. Connected asset values come from a snapshot calculated once a day; &#x60;connected_assets_calculated_at&#x60; indicates when it was last calculated. 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :currency ISO 4217 currency code to express connected asset values in. Defaults to `USD`.

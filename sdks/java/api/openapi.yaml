@@ -4203,7 +4203,7 @@ paths:
                 $ref: '#/components/schemas/503CurrencyConversionUnavailableResponse'
           description: Exchange rates for the requested currency are temporarily unavailable
           x-do-not-generate: true
-      summary: Get usage stats (beta)
+      summary: Get usage stats
       tags:
       - Management
       x-konfig-operation-can-have-single-parameter: true
