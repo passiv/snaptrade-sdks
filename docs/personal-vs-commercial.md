@@ -2,7 +2,7 @@
 
 SnapTrade supports two primary customer experiences: **Personal** and **Commercial**. Both can use SnapTrade to connect brokerage accounts, retrieve account data, and, where enabled, place trades. The important difference is who owns the SnapTrade account and how users are represented.
 
-Use this guide to choose the right integration model before building authentication, user registration, connection management, billing, and support flows.
+This page explains customer accounts and billing context. To choose an authentication and connection flow, start with [Choose Your Integration](https://docs.snaptrade.com/docs/authentication-methods). Commercial apps can use either OAuth or a Commercial API key.
 
 :::info
 Personal and Commercial are customer experiences, not billing plan names. Billing plans such as Build, Launch, and Custom control limits, pricing, and feature availability. A customer's Personal or Commercial experience controls how SnapTrade users, credentials, and Connection Portal flows behave.
@@ -14,15 +14,15 @@ Personal and Commercial are customer experiences, not billing plan names. Billin
 | --- | --- | --- |
 | Intended user | An individual using SnapTrade for their own brokerage accounts | A company building an app for its own end users |
 | SnapTrade account owner | The individual investor | The developer, company, or partner |
-| End-user model | The signed-in Personal user is the SnapTrade user | Your app creates one SnapTrade `userId` and `userSecret` per end user |
-| Authentication options | OAuth for sharing connected account data, or a Personal client ID and consumer key for direct access | Commercial client ID and consumer key |
-| API authorization | OAuth bearer tokens for apps, or signed requests with a Personal consumer key | Signed requests using the Commercial consumer key |
-| User registration | Do not call :api[Authentication_registerSnapTradeUser] for Personal API key authentication | Call :api[Authentication_registerSnapTradeUser] before creating connections |
-| Connection Portal | Opens for the Personal user's own brokerage connections | Opens for a specific SnapTrade user managed by your app |
+| End-user model | The signed-in Personal user is the SnapTrade user | API key: your app creates a SnapTrade user per end user. OAuth: users authorize their existing Personal identity |
+| Authentication options | OAuth for sharing connected account data, or a Personal client ID and consumer key for direct access | Commercial API key or registered OAuth app |
+| API authorization | OAuth bearer tokens for apps, or signed requests with a Personal consumer key | API key: signed requests. OAuth: Bearer access tokens |
+| User registration | Do not call :api[Authentication_registerSnapTradeUser] for Personal API key authentication | Required for Commercial API keys; not used for OAuth |
+| Connection Portal | Opens for the Personal user's own brokerage connections | API key: opens for an app-managed user. OAuth: users manage connections in their Personal Dashboard |
 | Trading | Supported for the Personal user's own accounts where enabled | Supported for app users where enabled |
 | Webhooks | Available | Available |
 | MCP server | Supported; the MCP server is designed for SnapTrade Personal users | Not used with Commercial developer API keys |
-| Key lifecycle | Personal customers can create one Personal client ID and consumer key in the dashboard | Commercial customers start with a test key and can create production keys after KYC approval |
+| Key lifecycle | Personal customers can create one Personal client ID and consumer key in the dashboard | Commercial customers create test API keys or OAuth apps; production requires approval |
 | Billing | Free | Connected users and usage under the Commercial customer agreement |
 
 ## Choose Personal When
@@ -36,16 +36,9 @@ Common Personal use cases include:
 - Portfolio analysis and trading for the user's own accounts.
 - Connection management for the user's own brokerages.
 
-Most Personal users connect their brokerage accounts in the SnapTrade Dashboard and authorize OAuth-enabled apps or AI assistants to read their data. OAuth apps receive scoped tokens rather than the user's API credentials.
+Most Personal users connect their brokerage accounts in the SnapTrade Dashboard and authorize OAuth-enabled apps or AI assistants to read their data.
 
-Personal client ID and consumer key authentication is available for Personal users who need direct signed-request workflows, including trading with their own accounts where enabled. The Personal user represents themselves. Unlike a Commercial integration, your app should not create a separate SnapTrade user for them.
-
-For Personal API key authentication:
-
-- Sign requests with the Personal `consumerKey`.
-- Do not create a SnapTrade user with :api[Authentication_registerSnapTradeUser].
-- Do not store or send a `userSecret`.
-- Omit `userId` and `userSecret` when making API requests; SnapTrade resolves the user from the Personal API key.
+Personal users can also access their own accounts with a Personal API key. The Personal user represents themselves.
 
 ## Choose Commercial When
 
@@ -58,74 +51,7 @@ Common Commercial use cases include:
 - A backend service that needs to create, track, and support many SnapTrade users.
 - Production integrations that need billing, compliance review, and higher limits.
 
-Commercial integrations use a SnapTrade client ID and consumer key. Your backend signs requests with the consumer key and keeps that key secret.
-
-For each end user in your application:
-
-1. Create a stable SnapTrade `userId` with :api[Authentication_registerSnapTradeUser].
-2. Store the returned `userSecret` securely.
-3. Generate a Connection Portal link with :api[Authentication_loginSnapTradeUser].
-4. Send your end user through the Connection Portal.
-5. Use the `userId`, `userSecret`, and account IDs to retrieve data or perform enabled trading workflows.
-
-Commercial `userId` values should be immutable identifiers from your system. Avoid email addresses because users can change emails and because user IDs may appear in logs, support workflows, or billing reconciliation.
-
-## Credentials And Keys
-
-Both experiences can involve a SnapTrade client ID and consumer key, but they are used differently.
-
-**Personal client ID and consumer key**
-
-- Belong to an individual Personal customer.
-- Represent that individual's SnapTrade access.
-- Do not imply that your app should create subordinate SnapTrade users.
-- Are useful for local tools or advanced Personal workflows where signed-request authentication is available.
-
-**Commercial client ID and consumer key**
-
-- Belong to a company or developer customer.
-- Represent an integration that manages many SnapTrade users.
-- Must be stored only on a backend or other secure server-side environment.
-- Are used to generate request signatures and validate webhook signatures.
-
-In the SnapTrade Dashboard, Commercial customers typically create a test key first. Production key creation requires KYC approval and a payment method. Personal customers are limited to one free Personal client ID and consumer key for their own brokerage accounts.
-
-## Users And Connections
-
-The biggest implementation difference is whether your app creates SnapTrade users.
-
-### Personal
-
-With Personal API key authentication, the Personal API key identifies the SnapTrade user. Your app can call normal SnapTrade APIs, but user identity is inferred from the key. Do not call user-registration endpoints or store a `userSecret`.
-
-When opening the Connection Portal for a Personal API key user, generate the portal link without `userId` or `userSecret`. SnapTrade resolves the Personal user's context from the API key.
-
-### Commercial
-
-With Commercial client ID and consumer key authentication, your app owns user mapping. Each end user of your app should have a corresponding SnapTrade user.
-
-A typical mapping is:
-
-```
-Your app user  ->  SnapTrade userId + userSecret  ->  connections  ->  accounts
-```
-
-Create one SnapTrade user per end user, then create one or more brokerage connections under that user. When a brokerage login contains multiple brokerage accounts, those accounts appear under the same connection.
-
-## Trading And Write Access
-
-Feature availability depends on the customer, key, brokerage, account, and plan.
-
-Personal users can trade with their own accounts using SnapTrade client ID and consumer key authentication where trading is enabled for the account and brokerage.
-
-For Commercial integrations, trading requires:
-
-- A Commercial key with trading features enabled.
-- A brokerage and account that support trading.
-- A connection created with the appropriate connection type.
-- Your application's own user confirmation and compliance flow before submitting orders.
-
-Both Personal and Commercial API keys can receive webhooks after a webhook listener URL is configured in the SnapTrade Dashboard.
+Commercial API Key integrations manage their own end-user identities and connection experience. OAuth integrations access connections managed by SnapTrade Personal users.
 
 ## Billing And Limits
 
@@ -143,23 +69,27 @@ Plan-level settings can affect:
 
 For Commercial integrations, design your onboarding, usage tracking, and support workflows around the connected-user model described in [Billing](https://docs.snaptrade.com/docs/billing). Personal users do not need to design around Commercial connected-user billing.
 
-## Implementation Checklist
+## Implementation Guides
 
-Before building, decide:
+<a id="credentials-and-keys"></a>
+<a id="users-and-connections"></a>
+<a id="trading-and-write-access"></a>
+<a id="implementation-checklist"></a>
 
-- Is the person connecting accounts the SnapTrade customer, or is your company the SnapTrade customer?
-- Will your backend sign API requests with a consumer key?
-- Should your app call :api[Authentication_registerSnapTradeUser]?
-- Where will credentials and user secrets be stored?
-- Who owns support for reconnecting brokerages and removing connections?
-- If you are building a Commercial integration, which billing plan controls limits, data freshness, and feature access?
+- [Build an OAuth App](https://docs.snaptrade.com/docs/oauth-apps)
 
-If the user owns the SnapTrade account, use the Personal model. If your app owns the integration and manages many end users, use the Commercial model.
+<a id="commercial"></a>
+
+- [Build With a Commercial API Key](https://docs.snaptrade.com/docs/commercial-api-key)
+
+<a id="personal"></a>
+
+- [Use a Personal API Key](https://docs.snaptrade.com/docs/personal-api-key)
 
 ## Related
 
 - [Getting Started with SnapTrade](https://docs.snaptrade.com/docs/getting-started)
-- [Authentication Methods](https://docs.snaptrade.com/docs/authentication-methods)
+- [Choose Your Integration](https://docs.snaptrade.com/docs/authentication-methods)
 - [Terminology](https://docs.snaptrade.com/docs/terminology)
 - [Billing](https://docs.snaptrade.com/docs/billing)
 - [Request Signatures](https://docs.snaptrade.com/docs/request-signatures)

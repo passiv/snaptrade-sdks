@@ -53,10 +53,15 @@ portal:
               path: docs/getting-started.md
             - id: authentication-methods
               path: docs/authentication-methods.md
+              label: Choose Your Integration
             - id: personal-vs-commercial
               path: docs/personal-vs-commercial.md
+            - id: commercial-api-key
+              path: docs/commercial-api-key.md
             - id: oauth-apps
               path: docs/oauth-apps.md
+            - id: personal-api-key
+              path: docs/personal-api-key.md
             - id: implement-connection-portal
               path: docs/implement-connection-portal.md
             - id: connection-sharing
