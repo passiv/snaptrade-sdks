@@ -73,6 +73,16 @@ Custom plans may include a **monthly minimum fee**. If your usage-based charges 
 
 ---
 
+## Optional add-ons
+
+Commercial production customers may have additional charges for optional features.
+
+Tax Lots costs $0.50 USD per eligible connected user per month on Commercial production keys. It is free on Personal and Commercial Build keys.
+
+Tax Lots charges are separate from standard plan charges. See the [Tax Lots guide](https://docs.snaptrade.com/docs/tax-lots) for eligibility, proration and cancellation details.
+
+---
+
 ## Invoice Total
 
 A Commercial invoice total is calculated as:
