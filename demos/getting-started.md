@@ -122,13 +122,13 @@ Once the end user makes a successful connection, SnapTrade will retrieve all the
 :::form
 
 ```python
-accounts = snaptrade.account_information.list_user_accounts(
+accounts = snaptrade.account_information.list_all_user_accounts(
     user_id=user_id,
     user_secret=user_secret
 )
 print(json.dumps(accounts.body, indent=2))
 
-for account in accounts.body:
+for account in accounts.body["results"]:
     print("::SAVE[ACCOUNTS]/{}".format(account["id"]))
 ```
 
@@ -148,7 +148,7 @@ Select a connected account below to retrieve the account detail.
 
 ```python
 account_id = ACCOUNT_ID
-account_detail = snaptrade.account_information.get_user_account_details(
+account_detail = snaptrade.account_information.get_account_details(
     account_id=account_id, user_id=user_id, user_secret=user_secret
 )
 print(json.dumps(account_detail.body, indent=2))

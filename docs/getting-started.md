@@ -5,6 +5,8 @@ Start with [Choose Your Integration](https://docs.snaptrade.com/docs/authenticat
 <a id="getting-started-api-keys"></a>
 <a id="choose-a-customer-model"></a>
 
+The [interactive Getting Started Demo](https://docs.snaptrade.com/demo/getting-started) offers Commercial API key, Personal API key, and OAuth walkthroughs. Select an authentication method for its setup and request behavior, then retrieve account data. Personal API keys identify your own user; OAuth apps use the user’s existing Personal connections. User registration and deletion apply only to Commercial API keys.
+
 ## Choose a Guide
 
 <a id="commercial-quickstart"></a>
