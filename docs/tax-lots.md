@@ -16,9 +16,11 @@ Brokerage capabilities may change, so check this page before relying on tax lot 
 
 Tax Lots is an optional feature that must be enabled through [Dashboard Add-ons](https://dashboard.snaptrade.com/add-ons).
 
-- Personal: Free.
-- Commercial Build: Free for development and testing, within the existing five-connection Build plan limit.
-- Commercial production: $0.50 USD per eligible connected user per month, in addition to standard plan charges.
+Personal: Free.
+
+Commercial Build: Free for development and testing, within the existing five-connection Build plan limit.
+
+Commercial production: $0.50 USD per eligible connected user per month, in addition to standard plan charges.
 
 Tax Lots is free to test on Commercial Build keys, but is a paid add-on in production. Enabling it for testing does not make it free in production.
 
@@ -28,14 +30,18 @@ After enabling Tax Lots, request account positions using the [List all account p
 
 ## Billing behavior
 
-On Commercial production keys, Tax Lots costs $0.50 USD per eligible connected user per month. Only distinct users who had at least one qualifying connection through a tax-lot-supported brokerage during the invoice period are included in the add-on charge.
+On Commercial production keys, Tax Lots costs $0.50 USD per eligible connected user per month.
 
-If the feature is enabled mid-month, Tax Lot charges are prorated by the number of calendar days the feature is active in the billing period:
+Charges apply according to the eligible-user and qualifying-connection rules described in this guide. A user with multiple qualifying connections is counted once.
+
+Only distinct users who had at least one qualifying connection through a tax-lot-supported brokerage during the invoice period are included in the add-on charge.
+
+If Tax Lots is enabled partway through a month, charges are prorated based on the number of days the feature is active during that month.
 
 `unit price × eligible users × (active days ÷ days in billing period)`
 
 Eligible users are distinct users who had at least one qualifying event through a supported brokerage at any point in the invoice period. This count is prorated from the activation date.
 
-A normal customer cancellation is scheduled for the first day of the following month. Tax Lots remains active through the end of the current month, so the cancellation does not reduce that month's charge.
+A normal cancellation takes effect on the first day of the following month. Tax Lots remains active through the end of the current month, so cancellation does not reduce that month's charge.
 
-Your invoice will have an item detailing the tax-lot charge and the number of eligible users based on if they had at least one connection that supports the tax lot feature during the month.
+Tax Lots appears as a separate invoice item.
