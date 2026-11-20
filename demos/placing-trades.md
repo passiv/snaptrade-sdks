@@ -77,13 +77,13 @@ Once the end user makes a successful connection, SnapTrade will retrieve all the
 :::form
 
 ```python
-accounts = snaptrade.account_information.list_user_accounts(
+accounts = snaptrade.account_information.list_all_user_accounts(
     user_id=user_id,
     user_secret=user_secret
 )
 print(json.dumps(accounts.body, indent=2))
 
-for account in accounts.body:
+for account in accounts.body["results"]:
     print("::SAVE[ACCOUNTS]/{}".format(account["id"]))
 ```
 
@@ -129,10 +129,10 @@ If you connected a live brokerage account, please be cautious when submitting or
 
 ::enum{name=ACCOUNT_ID label="Account ID" placeholder="ACCOUNT_ID" savedData=ACCOUNTS description="The ID of the account to submit the order to."}
 ::enum{name=ACTION label="Action" data="BUY,SELL" defaultValue=BUY}
-::enum{name=ORDER_TYPE label="Order Type" data="Market,Limit,StopLimit,StopLoss" defaultValue="Market"}
+::enum{name=ORDER_TYPE label="Order Type" data="Market,Limit,StopLimit,Stop" defaultValue="Market"}
 ::enum{name=TIME_IN_FORCE label="Time in Force" data="Day,FOK,GTC" defaultValue="Day"}
 ::number{name=LIMIT_PRICE label="Limit Price" step=0.01 precision=2 optional description="The limit price for Limit and StopLimit orders."}
-::number{name=STOP_PRICE label="Stop Price" step=0.01 precision=2 optional description="The stop price for StopLimit and StopLoss orders."}
+::number{name=STOP_PRICE label="Stop Price" step=0.01 precision=2 optional description="The stop price for StopLimit and Stop orders."}
 ::number{name=UNITS label="Units" defaultValue=1 step=0.05 precision=2 description="The number of shares to buy or sell. Can be decimal for fractional shares."}
 
 ```python
