@@ -57,6 +57,8 @@ For options, `symbol` is always the [OCC option symbol](https://en.wikipedia.org
 
 For futures, `symbol` usually includes the root symbol, month code, and year. For example, `ESZ22` represents the E-mini S&P 500 future expiring in December 2022.
 
+Futures symbols are not normalized between brokerages when placing orders. See [Futures Symbols](https://docs.snaptrade.com/docs/trading-with-snaptrade#futures-symbols) for the format each brokerage expects.
+
 #### Crypto
 
 For cryptocurrencies, `symbol` is not normalized between brokerages. While most brokerages supported on SnapTrade will return widely-accepted symbols for the various cryptocurrencies, such as `BTC` for Bitcoin, Kraken and other exchanges may instead return `XBT` or `XXBT`. These are not normalized in order to make it easier to execute crypto trading. For more details, see :api[Trading_searchCryptocurrencyPairInstruments] and :api[Trading_placeCryptoOrder].
