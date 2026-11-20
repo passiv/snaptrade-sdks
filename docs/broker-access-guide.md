@@ -64,7 +64,7 @@ Some brokers require a production approval step before connections go live. Once
 
 ## Bring your own API keys
 
-A small number of brokers require you to apply for API credentials directly with the broker. These are the only integrations where you'll need to take action beyond completing the Production Access Application. Once you have your keys, add them to your SnapTrade dashboard and you're good to go.
+A small number of brokers require you to apply for API credentials directly with the broker. These are the only integrations where you'll need to take action beyond completing the Production Access Application. Once you have your keys, send them securely to SnapTrade (for example, via Bitwarden) at [support@snaptrade.com](mailto:support@snaptrade.com) and we'll configure them for you.
 
 Every broker in this section requires your own API keys. Use the table below to understand the steps needed for each.
 
