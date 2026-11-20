@@ -48,7 +48,7 @@ To share accounts with an OAuth-enabled app, connect your brokerage in the Dashb
 
 Production access requires the approval steps described in the selected guide.
 
-For definitions, see [Terminology](https://docs.snaptrade.com/docs/terminology). For customer-account context, see [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial). The [interactive demo](https://docs.snaptrade.com/demo/getting-started) demonstrates the Commercial API-key flow.
+For definitions, see [Terminology](https://docs.snaptrade.com/docs/terminology). For customer-account context, see [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial). The [interactive demo](https://docs.snaptrade.com/demo/getting-started) supports all three authentication methods.
 
 ## SnapTrade SDKs
 
