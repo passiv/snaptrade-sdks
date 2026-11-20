@@ -29,6 +29,9 @@ import com.snaptrade.client.model.OptionImpact;
 import com.snaptrade.client.model.OptionQuote;
 import com.snaptrade.client.model.OrderTypeStrict;
 import com.snaptrade.client.model.OrderUpdatedResponse;
+import com.snaptrade.client.model.SimpleTradeForm;
+import com.snaptrade.client.model.SimpleTradeLeg;
+import com.snaptrade.client.model.SimpleTradeResponse;
 import com.snaptrade.client.model.SymbolsQuotesInner;
 import com.snaptrade.client.model.TimeInForceStrict;
 import com.snaptrade.client.model.TradingSearchCryptocurrencyPairInstruments200Response;
@@ -98,6 +101,11 @@ public class TradingApi extends TradingApiGenerated {
     public class PlaceOrderRequestBuilder extends PlaceOrderRequestBuilderGenerated {
         public PlaceOrderRequestBuilder(UUID tradeId, String userId, String userSecret) {
             super(tradeId, userId, userSecret);
+        }
+    }
+    public class PlaceSimpleOrderRequestBuilder extends PlaceSimpleOrderRequestBuilderGenerated {
+        public PlaceSimpleOrderRequestBuilder(String orderType, String timeInForce, List<SimpleTradeLeg> legs, UUID accountId, String userId, String userSecret) {
+            super(orderType, timeInForce, legs, accountId, userId, userSecret);
         }
     }
     public class PreviewCryptoOrderRequestBuilder extends PreviewCryptoOrderRequestBuilderGenerated {

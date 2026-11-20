@@ -20,6 +20,7 @@ from snaptrade_client.paths.accounts_account_id_trading_crypto.post import Place
 from snaptrade_client.paths.trade_place.post import PlaceForceOrder
 from snaptrade_client.paths.accounts_account_id_trading_options.post import PlaceMlegOrder
 from snaptrade_client.paths.trade_trade_id.post import PlaceOrder
+from snaptrade_client.paths.accounts_account_id_trading_simple.post import PlaceSimpleOrder
 from snaptrade_client.paths.accounts_account_id_trading_crypto_preview.post import PreviewCryptoOrder
 from snaptrade_client.paths.accounts_account_id_trading_replace.post import ReplaceOrder
 from snaptrade_client.paths.accounts_account_id_trading_instruments_cryptocurrency_pairs.get import SearchCryptocurrencyPairInstruments
@@ -41,6 +42,7 @@ class TradingApiGenerated(
     PlaceForceOrder[TAuth],
     PlaceMlegOrder[TAuth],
     PlaceOrder[TAuth],
+    PlaceSimpleOrder[TAuth],
     PreviewCryptoOrder[TAuth],
     ReplaceOrder[TAuth],
     SearchCryptocurrencyPairInstruments[TAuth],

@@ -2107,6 +2107,229 @@ func (a *TradingApiService) PlaceOrderExecute(r TradingApiPlaceOrderRequest) (*A
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type TradingApiPlaceSimpleOrderRequest struct {
+	ctx context.Context
+	ApiService *TradingApiService
+	accountId string
+	userId string
+	userSecret string
+	simpleTradeForm SimpleTradeForm
+}
+
+func (r TradingApiPlaceSimpleOrderRequest) Execute() (*SimpleTradeResponse, *http.Response, error) {
+	return r.ApiService.PlaceSimpleOrderExecute(r)
+}
+
+/*
+PlaceSimpleOrder Place a simple order (beta)
+
+**Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. Breaking changes are possible while this endpoint is in beta.
+
+Equity and equity-option orders use the existing brokerage trading capabilities. Futures are supported on tastytrade, Webull US, and TradeStation (live and SIM); future options are supported on tastytrade and TradeStation (live and SIM). Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).
+
+An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.
+
+Webull US supports single-leg futures orders with buy or sell actions and positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day or gtc duration. Futures options, multi-leg futures, trailing stops, and Webull Canada futures trading are not supported. Webull determines contract availability, margin requirements, and valid price increments.
+
+TradeStation and TradeStation SIM support single-leg futures and futures-option orders in Futures accounts, with positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day, gtc, ioc, or fok duration, subject to the contract and route's supported combinations. Futures use buy/sell; futures options use the open/close option actions. Multi-leg futures-family strategies are not supported. Prices are forwarded without rounding; TradeStation determines contract availability, permissions, margin requirements, and valid price increments.
+
+All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or brokerage-native futures symbols. For tastytrade, use the exact BrokerageInstrument ticker, including any spaces. For Webull US, use a specific unprefixed futures contract symbol such as ESZ6; slash-prefixed aliases, continuous/root-only symbols, and whitespace are not accepted. For TradeStation, use a specific two-digit-year contract such as ESZ26 or @ESZ26, or a futures-option symbol such as `ESZ26 C6000`, preserving the space and any session alias. The optional @ prefix is supported for dated futures contracts and is forwarded unchanged. Slash-prefixed aliases and root-only continuous symbols such as @ES are not accepted. A futures symbol does not need to be present in SnapTrade's local instrument catalog to submit an order.
+
+A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param accountId The ID of the account to execute the trade on.
+ @param userId
+ @param userSecret
+ @param simpleTradeForm
+ @return TradingApiPlaceSimpleOrderRequest
+*/
+func (a *TradingApiService) PlaceSimpleOrder(accountId string, userId string, userSecret string, simpleTradeForm SimpleTradeForm) TradingApiPlaceSimpleOrderRequest {
+	return TradingApiPlaceSimpleOrderRequest{
+		ApiService: a,
+		ctx: a.client.cfg.Context,
+		accountId: accountId,
+		userId: userId,
+		userSecret: userSecret,
+		simpleTradeForm: simpleTradeForm,
+	}
+}
+
+// Execute executes the request
+//  @return SimpleTradeResponse
+func (a *TradingApiService) PlaceSimpleOrderExecute(r TradingApiPlaceSimpleOrderRequest) (*SimpleTradeResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *SimpleTradeResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TradingApiService.PlaceSimpleOrder")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+    subpath := "/accounts/{accountId}/trading/simple"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	localVarQueryParams.Add("userId", parameterToString(r.userId, ""))
+	localVarQueryParams.Add("userSecret", parameterToString(r.userSecret, ""))
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+    if !checkNilInterface(r.simpleTradeForm) {
+        localVarPostBody = r.simpleTradeForm
+    }
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerClientId"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("clientId", key)
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerSignature"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Signature"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerTimestamp"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("timestamp", key)
+			}
+		}
+	}
+
+    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Model400FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Model403FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Model404FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v TradingPlaceSimpleOrder409Response
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type TradingApiPreviewCryptoOrderRequest struct {
 	ctx context.Context
 	ApiService *TradingApiService

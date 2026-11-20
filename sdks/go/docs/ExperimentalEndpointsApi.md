@@ -10,7 +10,6 @@ Method | Path | Description
 [**GetUserAccountOrdersV2**](ExperimentalEndpointsApi.md#GetUserAccountOrdersV2) | **Get** /accounts/{accountId}/orders/v2 | List account orders v2
 [**GetUserAccountRecentOrdersV2**](ExperimentalEndpointsApi.md#GetUserAccountRecentOrdersV2) | **Get** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)
 [**ListSubscriptions**](ExperimentalEndpointsApi.md#ListSubscriptions) | **Get** /snapTrade/tradeDetection/subscriptions | List active Trade Detection subscriptions
-[**PlaceSimpleOrder**](ExperimentalEndpointsApi.md#PlaceSimpleOrder) | **Post** /accounts/{accountId}/trading/simple | Place a simple order (beta)
 
 
 
@@ -310,71 +309,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `TradeDetectionSubscription.ListSubscriptions.AccountId`: %v\n", resp.AccountId)
     fmt.Fprintf(os.Stdout, "Response from `TradeDetectionSubscription.ListSubscriptions.Cost`: %v\n", resp.Cost)
     fmt.Fprintf(os.Stdout, "Response from `TradeDetectionSubscription.ListSubscriptions.CheckIntervalSeconds`: %v\n", resp.CheckIntervalSeconds)
-}
-```
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PlaceSimpleOrder
-
-Place a simple order (beta)
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "fmt"
-    "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
-)
-
-func main() {
-    configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
-    client := snaptrade.NewAPIClient(configuration)
-
-    limitPrice := *snaptrade.Newfloat64()
-    stopPrice := *snaptrade.Newfloat64()
-    clientOrderId := *snaptrade.Newstring()
-    notionalValue := *snaptrade.Newfloat64()
-    
-    simpleTradeForm := *snaptrade.NewSimpleTradeForm(
-        "STOP_LIMIT",
-        "DAY",
-        null,
-    )
-    simpleTradeForm.SetLimitPrice(limitPrice)
-    simpleTradeForm.SetStopPrice(stopPrice)
-    simpleTradeForm.SetPriceEffect("DEBIT")
-    simpleTradeForm.SetClientOrderId(clientOrderId)
-    simpleTradeForm.SetExpiryDate(2026-12-18T20:00Z)
-    simpleTradeForm.SetNotionalValue(notionalValue)
-    simpleTradeForm.SetTradingSession("REGULAR")
-    
-    request := client.ExperimentalEndpointsApi.PlaceSimpleOrder(
-        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        ""snaptrade-user-123"",
-        ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
-        simpleTradeForm,
-    )
-    
-    resp, httpRes, err := request.Execute()
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ExperimentalEndpointsApi.PlaceSimpleOrder``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
-    }
-    // response from `PlaceSimpleOrder`: SimpleTradeResponse
-    fmt.Fprintf(os.Stdout, "Response from `ExperimentalEndpointsApi.PlaceSimpleOrder`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `SimpleTradeResponse.PlaceSimpleOrder.BrokerageOrderId`: %v\n", resp.BrokerageOrderId)
 }
 ```
 

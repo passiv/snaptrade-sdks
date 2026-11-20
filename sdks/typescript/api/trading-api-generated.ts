@@ -141,6 +141,12 @@ import { OrderTypeStrict } from '../models';
 // @ts-ignore
 import { OrderUpdatedResponse } from '../models';
 // @ts-ignore
+import { SimpleTradeForm } from '../models';
+// @ts-ignore
+import { SimpleTradeLeg } from '../models';
+// @ts-ignore
+import { SimpleTradeResponse } from '../models';
+// @ts-ignore
 import { SymbolsQuotesInner } from '../models';
 // @ts-ignore
 import { TimeInForceStrict } from '../models';
@@ -148,6 +154,8 @@ import { TimeInForceStrict } from '../models';
 import { TradingGetUserAccountOptionQuotes410Response } from '../models';
 // @ts-ignore
 import { TradingPlaceMlegOrder409Response } from '../models';
+// @ts-ignore
+import { TradingPlaceSimpleOrder409Response } from '../models';
 // @ts-ignore
 import { TradingSearchCryptocurrencyPairInstruments200Response } from '../models';
 // @ts-ignore
@@ -920,6 +928,76 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. Breaking changes are possible while this endpoint is in beta.  Equity and equity-option orders use the existing brokerage trading capabilities. Futures are supported on tastytrade, Webull US, and TradeStation (live and SIM); future options are supported on tastytrade and TradeStation (live and SIM). Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).  An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.  Webull US supports single-leg futures orders with buy or sell actions and positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day or gtc duration. Futures options, multi-leg futures, trailing stops, and Webull Canada futures trading are not supported. Webull determines contract availability, margin requirements, and valid price increments.  TradeStation and TradeStation SIM support single-leg futures and futures-option orders in Futures accounts, with positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day, gtc, ioc, or fok duration, subject to the contract and route\'s supported combinations. Futures use buy/sell; futures options use the open/close option actions. Multi-leg futures-family strategies are not supported. Prices are forwarded without rounding; TradeStation determines contract availability, permissions, margin requirements, and valid price increments.  All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or brokerage-native futures symbols. For tastytrade, use the exact BrokerageInstrument ticker, including any spaces. For Webull US, use a specific unprefixed futures contract symbol such as ESZ6; slash-prefixed aliases, continuous/root-only symbols, and whitespace are not accepted. For TradeStation, use a specific two-digit-year contract such as ESZ26 or @ESZ26, or a futures-option symbol such as `ESZ26 C6000`, preserving the space and any session alias. The optional @ prefix is supported for dated futures contracts and is forwarded unchanged. Slash-prefixed aliases and root-only continuous symbols such as @ES are not accepted. A futures symbol does not need to be present in SnapTrade\'s local instrument catalog to submit an order.  A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details. 
+         * @summary Place a simple order (beta)
+         * @param {string} accountId The ID of the account to execute the trade on.
+         * @param {SimpleTradeForm} simpleTradeForm 
+         * @param {string} [userId] 
+         * @param {string} [userSecret] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        placeSimpleOrder: async (accountId: string, simpleTradeForm: SimpleTradeForm, userId?: string, userSecret?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('placeSimpleOrder', 'accountId', accountId)
+            // verify required parameter 'simpleTradeForm' is not null or undefined
+            assertParamExists('placeSimpleOrder', 'simpleTradeForm', simpleTradeForm)
+            const localVarPath = `/accounts/{accountId}/trading/simple`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (configuration?.authMode === "commercialApiKey") {
+                // authentication PartnerClientId required
+                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+                // authentication userId required
+                if (userId !== undefined) localVarQueryParameter["userId"] = userId;
+                // authentication userSecret required
+                if (userSecret !== undefined) localVarQueryParameter["userSecret"] = userSecret;
+            }
+            if (configuration?.authMode === "personalApiKey") {
+                // authentication PersonalClientId required
+                await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            }
+            if (configuration?.authMode === "oauth") {
+                // authentication OAuthBearer required
+                await setBearerAuthToObject(localVarHeaderParameter, configuration)
+            }
+
+    
+            const localVarOperationAuth = { ...{ authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } }, selectedAuthMode: configuration?.authMode };
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                requestBody: simpleTradeForm,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/accounts/{accountId}/trading/simple',
+                httpMethod: 'POST',
+                operationAuth: localVarOperationAuth
+            });
+            localVarRequestOptions.data = serializeDataIfNeeded(simpleTradeForm, localVarRequestOptions, configuration)
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Previews an order using the specified account. 
          * @summary Preview crypto order
          * @param {string} accountId 
@@ -1341,6 +1419,30 @@ export const TradingApiFp = function<TAuth extends AuthMode>(configuration?: Con
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
         },
         /**
+         * **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. Breaking changes are possible while this endpoint is in beta.  Equity and equity-option orders use the existing brokerage trading capabilities. Futures are supported on tastytrade, Webull US, and TradeStation (live and SIM); future options are supported on tastytrade and TradeStation (live and SIM). Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).  An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.  Webull US supports single-leg futures orders with buy or sell actions and positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day or gtc duration. Futures options, multi-leg futures, trailing stops, and Webull Canada futures trading are not supported. Webull determines contract availability, margin requirements, and valid price increments.  TradeStation and TradeStation SIM support single-leg futures and futures-option orders in Futures accounts, with positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day, gtc, ioc, or fok duration, subject to the contract and route\'s supported combinations. Futures use buy/sell; futures options use the open/close option actions. Multi-leg futures-family strategies are not supported. Prices are forwarded without rounding; TradeStation determines contract availability, permissions, margin requirements, and valid price increments.  All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or brokerage-native futures symbols. For tastytrade, use the exact BrokerageInstrument ticker, including any spaces. For Webull US, use a specific unprefixed futures contract symbol such as ESZ6; slash-prefixed aliases, continuous/root-only symbols, and whitespace are not accepted. For TradeStation, use a specific two-digit-year contract such as ESZ26 or @ESZ26, or a futures-option symbol such as `ESZ26 C6000`, preserving the space and any session alias. The optional @ prefix is supported for dated futures contracts and is forwarded unchanged. Slash-prefixed aliases and root-only continuous symbols such as @ES are not accepted. A futures symbol does not need to be present in SnapTrade\'s local instrument catalog to submit an order.  A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details. 
+         * @summary Place a simple order (beta)
+         * @param {TradingApiPlaceSimpleOrderRequest<TAuth>} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async placeSimpleOrder(...args: TradingApiPlaceSimpleOrderArgs<TAuth>): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<SimpleTradeResponse, unknown>>> {
+            const [requestParameters = {} as TradingApiPlaceSimpleOrderRequest<TAuth>, options] = args;
+            const simpleTradeForm: SimpleTradeForm = {
+                order_type: requestParameters.order_type,
+                time_in_force: requestParameters.time_in_force,
+                legs: requestParameters.legs,
+                limit_price: requestParameters.limit_price,
+                stop_price: requestParameters.stop_price,
+                price_effect: requestParameters.price_effect,
+                client_order_id: requestParameters.client_order_id,
+                expiry_date: requestParameters.expiry_date,
+                notional_value: requestParameters.notional_value,
+                trading_session: requestParameters.trading_session
+            };
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placeSimpleOrder(requestParameters.accountId, simpleTradeForm, requestParameters.userId, requestParameters.userSecret, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration, { authModes: ["commercialApiKey", "personalApiKey", "oauth"], requestSigningByAuthMode: { "commercialApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PartnerSignature", "PartnerTimestamp"] }, "personalApiKey": { secretParameter: "consumerKey", signedSecuritySchemes: ["PersonalSignature", "PersonalTimestamp"] } } });
+        },
+        /**
          * Previews an order using the specified account. 
          * @summary Preview crypto order
          * @param {TradingApiPreviewCryptoOrderRequest<TAuth>} requestParameters Request parameters.
@@ -1517,6 +1619,16 @@ export const TradingApiFactory = function<TAuth extends AuthMode>(configuration?
          */
         placeOrder(...args: TradingApiPlaceOrderArgs<TAuth>): Promise<AxiosResponse<AccountOrderRecord, unknown>> {
             return localVarFp.placeOrder(...args).then((request) => request(axios, basePath));
+        },
+        /**
+         * **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. Breaking changes are possible while this endpoint is in beta.  Equity and equity-option orders use the existing brokerage trading capabilities. Futures are supported on tastytrade, Webull US, and TradeStation (live and SIM); future options are supported on tastytrade and TradeStation (live and SIM). Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).  An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.  Webull US supports single-leg futures orders with buy or sell actions and positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day or gtc duration. Futures options, multi-leg futures, trailing stops, and Webull Canada futures trading are not supported. Webull determines contract availability, margin requirements, and valid price increments.  TradeStation and TradeStation SIM support single-leg futures and futures-option orders in Futures accounts, with positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day, gtc, ioc, or fok duration, subject to the contract and route\'s supported combinations. Futures use buy/sell; futures options use the open/close option actions. Multi-leg futures-family strategies are not supported. Prices are forwarded without rounding; TradeStation determines contract availability, permissions, margin requirements, and valid price increments.  All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or brokerage-native futures symbols. For tastytrade, use the exact BrokerageInstrument ticker, including any spaces. For Webull US, use a specific unprefixed futures contract symbol such as ESZ6; slash-prefixed aliases, continuous/root-only symbols, and whitespace are not accepted. For TradeStation, use a specific two-digit-year contract such as ESZ26 or @ESZ26, or a futures-option symbol such as `ESZ26 C6000`, preserving the space and any session alias. The optional @ prefix is supported for dated futures contracts and is forwarded unchanged. Slash-prefixed aliases and root-only continuous symbols such as @ES are not accepted. A futures symbol does not need to be present in SnapTrade\'s local instrument catalog to submit an order.  A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details. 
+         * @summary Place a simple order (beta)
+         * @param {TradingApiPlaceSimpleOrderRequest<TAuth>} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        placeSimpleOrder(...args: TradingApiPlaceSimpleOrderArgs<TAuth>): Promise<AxiosResponse<SimpleTradeResponse, unknown>> {
+            return localVarFp.placeSimpleOrder(...args).then((request) => request(axios, basePath));
         },
         /**
          * Previews an order using the specified account. 
@@ -2001,6 +2113,46 @@ export type TradingApiPlaceOrderArgs<TAuth extends AuthMode> =
         : [requestParameters: TradingApiPlaceOrderRequest<TAuth>, options?: AxiosRequestConfig];
 
 /**
+ * Request parameters for placeSimpleOrder operation in TradingApi.
+ * @export
+ */
+export type TradingApiPlaceSimpleOrderBaseRequest = {
+    
+    /**
+    * The ID of the account to execute the trade on.
+    * @type {string}
+    * @memberof TradingApiPlaceSimpleOrder
+    */
+    readonly accountId: string
+    
+} & SimpleTradeForm
+export type TradingApiPlaceSimpleOrdercommercialApiKeyRequest = TradingApiPlaceSimpleOrderBaseRequest & {
+    readonly userId: string
+    readonly userSecret: string
+}
+export type TradingApiPlaceSimpleOrderpersonalApiKeyRequest = TradingApiPlaceSimpleOrderBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
+export type TradingApiPlaceSimpleOrderoauthRequest = TradingApiPlaceSimpleOrderBaseRequest & {
+    readonly userId?: never
+    readonly userSecret?: never
+}
+export type TradingApiPlaceSimpleOrderRequestByAuthMode = {
+    "commercialApiKey": TradingApiPlaceSimpleOrdercommercialApiKeyRequest;
+    "personalApiKey": TradingApiPlaceSimpleOrderpersonalApiKeyRequest;
+    "oauth": TradingApiPlaceSimpleOrderoauthRequest;
+}
+export type TradingApiPlaceSimpleOrderRequest<TAuth extends AuthMode> =
+    TradingApiPlaceSimpleOrderRequestByAuthMode[TAuth["mode"] & keyof TradingApiPlaceSimpleOrderRequestByAuthMode]
+
+/** Request argument optionality depends on the selected authentication mode. */
+export type TradingApiPlaceSimpleOrderArgs<TAuth extends AuthMode> =
+    TAuth["mode"] extends never
+        ? [requestParameters?: TradingApiPlaceSimpleOrderRequest<TAuth>, options?: AxiosRequestConfig]
+        : [requestParameters: TradingApiPlaceSimpleOrderRequest<TAuth>, options?: AxiosRequestConfig];
+
+/**
  * Request parameters for previewCryptoOrder operation in TradingApi.
  * @export
  */
@@ -2282,6 +2434,19 @@ export class TradingApiGenerated<TAuth extends AuthMode> extends BaseAPI<TAuth> 
      */
     public placeOrder(...args: TradingApiPlaceOrderArgs<TAuth>) {
         return TradingApiFp(this.configuration).placeOrder(...args).then((request) => request(this.axios, this.basePath));
+
+    }
+
+    /**
+     * **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. Breaking changes are possible while this endpoint is in beta.  Equity and equity-option orders use the existing brokerage trading capabilities. Futures are supported on tastytrade, Webull US, and TradeStation (live and SIM); future options are supported on tastytrade and TradeStation (live and SIM). Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).  An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.  Webull US supports single-leg futures orders with buy or sell actions and positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day or gtc duration. Futures options, multi-leg futures, trailing stops, and Webull Canada futures trading are not supported. Webull determines contract availability, margin requirements, and valid price increments.  TradeStation and TradeStation SIM support single-leg futures and futures-option orders in Futures accounts, with positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day, gtc, ioc, or fok duration, subject to the contract and route\'s supported combinations. Futures use buy/sell; futures options use the open/close option actions. Multi-leg futures-family strategies are not supported. Prices are forwarded without rounding; TradeStation determines contract availability, permissions, margin requirements, and valid price increments.  All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or brokerage-native futures symbols. For tastytrade, use the exact BrokerageInstrument ticker, including any spaces. For Webull US, use a specific unprefixed futures contract symbol such as ESZ6; slash-prefixed aliases, continuous/root-only symbols, and whitespace are not accepted. For TradeStation, use a specific two-digit-year contract such as ESZ26 or @ESZ26, or a futures-option symbol such as `ESZ26 C6000`, preserving the space and any session alias. The optional @ prefix is supported for dated futures contracts and is forwarded unchanged. Slash-prefixed aliases and root-only continuous symbols such as @ES are not accepted. A futures symbol does not need to be present in SnapTrade\'s local instrument catalog to submit an order.  A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details. 
+     * @summary Place a simple order (beta)
+     * @param {TradingApiPlaceSimpleOrderRequest<TAuth>} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TradingApiGenerated
+     */
+    public placeSimpleOrder(...args: TradingApiPlaceSimpleOrderArgs<TAuth>) {
+        return TradingApiFp(this.configuration).placeSimpleOrder(...args).then((request) => request(this.axios, this.basePath));
 
     }
 

@@ -438,16 +438,6 @@ export type {
     ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Args,
 } from './api/experimental-endpoints-api';
 
-export type {
-    ExperimentalEndpointsApiPlaceSimpleOrderBaseRequest,
-    ExperimentalEndpointsApiPlaceSimpleOrdercommercialApiKeyRequest,
-    ExperimentalEndpointsApiPlaceSimpleOrderpersonalApiKeyRequest,
-    ExperimentalEndpointsApiPlaceSimpleOrderoauthRequest,
-    ExperimentalEndpointsApiPlaceSimpleOrderRequestByAuthMode,
-    ExperimentalEndpointsApiPlaceSimpleOrderRequest,
-    ExperimentalEndpointsApiPlaceSimpleOrderArgs,
-} from './api/experimental-endpoints-api';
-
 
 export { ManagementApi, ManagementApiAxiosParamCreator, ManagementApiFp, ManagementApiFactory, ManagementApiGenerated } from './api/management-api';
 
@@ -631,6 +621,16 @@ export type {
     TradingApiPlaceOrderRequestByAuthMode,
     TradingApiPlaceOrderRequest,
     TradingApiPlaceOrderArgs,
+} from './api/trading-api';
+
+export type {
+    TradingApiPlaceSimpleOrderBaseRequest,
+    TradingApiPlaceSimpleOrdercommercialApiKeyRequest,
+    TradingApiPlaceSimpleOrderpersonalApiKeyRequest,
+    TradingApiPlaceSimpleOrderoauthRequest,
+    TradingApiPlaceSimpleOrderRequestByAuthMode,
+    TradingApiPlaceSimpleOrderRequest,
+    TradingApiPlaceSimpleOrderArgs,
 } from './api/trading-api';
 
 export type {

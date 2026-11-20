@@ -204,7 +204,6 @@ Class | Method | HTTP request | Description
 *ExperimentalEndpointsApi* | [**GetUserAccountOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountordersv2) | **Get** /accounts/{accountId}/orders/v2 | List account orders v2
 *ExperimentalEndpointsApi* | [**GetUserAccountRecentOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountrecentordersv2) | **Get** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)
 *ExperimentalEndpointsApi* | [**ListSubscriptions**](docs/ExperimentalEndpointsApi.md#listsubscriptions) | **Get** /snapTrade/tradeDetection/subscriptions | List active Trade Detection subscriptions
-*ExperimentalEndpointsApi* | [**PlaceSimpleOrder**](docs/ExperimentalEndpointsApi.md#placesimpleorder) | **Post** /accounts/{accountId}/trading/simple | Place a simple order (beta)
 *ManagementApi* | [**GetStats**](docs/ManagementApi.md#getstats) | **Get** /management/stats | Get usage stats
 *ManagementApi* | [**GetStatsLegacy**](docs/ManagementApi.md#getstatslegacy) | **Get** /snapTrade/stats | Get usage stats (deprecated)
 *ReferenceDataApi* | [**GetPartnerInfo**](docs/ReferenceDataApi.md#getpartnerinfo) | **Get** /snapTrade/partners | Get Client Info
@@ -227,6 +226,7 @@ Class | Method | HTTP request | Description
 *TradingApi* | [**PlaceForceOrder**](docs/TradingApi.md#placeforceorder) | **Post** /trade/place | Place equity order
 *TradingApi* | [**PlaceMlegOrder**](docs/TradingApi.md#placemlegorder) | **Post** /accounts/{accountId}/trading/options | Place option order
 *TradingApi* | [**PlaceOrder**](docs/TradingApi.md#placeorder) | **Post** /trade/{tradeId} | Place checked equity order
+*TradingApi* | [**PlaceSimpleOrder**](docs/TradingApi.md#placesimpleorder) | **Post** /accounts/{accountId}/trading/simple | Place a simple order (beta)
 *TradingApi* | [**PreviewCryptoOrder**](docs/TradingApi.md#previewcryptoorder) | **Post** /accounts/{accountId}/trading/crypto/preview | Preview crypto order
 *TradingApi* | [**ReplaceOrder**](docs/TradingApi.md#replaceorder) | **Post** /accounts/{accountId}/trading/replace | Replace order
 *TradingApi* | [**SearchCryptocurrencyPairInstruments**](docs/TradingApi.md#searchcryptocurrencypairinstruments) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Get crypto pairs
