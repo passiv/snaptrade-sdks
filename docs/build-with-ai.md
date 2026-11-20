@@ -113,7 +113,7 @@ Implementation requirements:
 - First inspect the installed SDK's TypeScript types and method signatures. Do
   not guess response shapes.
 - Use listUserAccounts, getUserAccountBalance, getAllAccountPositions, and
-  getAccountActivities where appropriate. Use getUserAccountRecentOrders for
+  getAccountActivities where appropriate. Use getAllAccountRecentOrders for
   recent orders and listBrokerageAuthorizations for connection status.
 - Keep data fetching on the server.
 - Ensure the portfolio page is rendered dynamically instead of being included

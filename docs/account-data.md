@@ -22,8 +22,9 @@ Balances are the current cash holdings and buying power of the account. In some 
 
 ## Orders
 
-:api[AccountInformation_getUserAccountOrders]
-:api[AccountInformation_getUserAccountRecentOrders]
+:api[AccountInformation_getAllAccountOrders]
+:api[AccountInformation_getAllAccountRecentOrders]
+:api[AccountInformation_getAccountOrder]
 
 Orders are how a broker keeps track of trading activity in an account. This differs from account activities in the following ways:
 

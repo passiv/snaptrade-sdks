@@ -143,7 +143,7 @@ print(positions.body)
 
 ## Accounts and Trading
 
-After connection, list accounts with :api[AccountInformation_listAllUserAccounts]. Its `results` list can contain multiple account kinds; choose an `investment` account before retrieving positions with :api[AccountInformation_getAllAccountPositions]. Balances and orders are available through :api[AccountInformation_getUserAccountBalance] and :api[AccountInformation_getUserAccountOrders].
+After connection, list accounts with :api[AccountInformation_listAllUserAccounts]. Its `results` list can contain multiple account kinds; choose an `investment` account before retrieving positions with :api[AccountInformation_getAllAccountPositions]. Balances and orders are available through :api[AccountInformation_getUserAccountBalance] and :api[AccountInformation_getAllAccountOrders].
 
 For trading, create the connection with `connectionType` / `connection_type` set to `trade-if-available`. The default `read` connection type only supports data access. Trading also depends on the key, brokerage, connection, and account capabilities. Build the order with the account ID and brokerage ticker, show the user its details and impact, obtain confirmation, then use :api[Trading_placeForceOrder]. See [Trading with SnapTrade](https://docs.snaptrade.com/docs/trading-with-snaptrade) for order types and supported assets.
 

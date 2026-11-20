@@ -32,7 +32,7 @@ Transactions are cached, updated once per day, and delayed by one day on both Re
 
 - [List all account positions](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getAllAccountPositions)
 - [List account balances](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountBalance)
-- [List account orders](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountOrders)
-- [List recent account orders](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountRecentOrders)
+- [List all account orders](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getAllAccountOrders)
+- [List all account recent orders](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders)
 - [Get account details](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getAccountDetails)
 - [Refresh a connection](https://docs.snaptrade.com/reference/Connections/Connections_refreshBrokerageAuthorization)
