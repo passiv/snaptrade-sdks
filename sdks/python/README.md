@@ -126,7 +126,6 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.experimental_endpoints.get_user_account_orders_v2`](#snaptradeexperimental_endpointsget_user_account_orders_v2)
   * [`snaptrade.experimental_endpoints.get_user_account_recent_orders_v2`](#snaptradeexperimental_endpointsget_user_account_recent_orders_v2)
   * [`snaptrade.experimental_endpoints.list_subscriptions`](#snaptradeexperimental_endpointslist_subscriptions)
-  * [`snaptrade.experimental_endpoints.place_simple_order`](#snaptradeexperimental_endpointsplace_simple_order)
   * [`snaptrade.management.get_stats`](#snaptrademanagementget_stats)
   * [`snaptrade.management.get_stats_legacy`](#snaptrademanagementget_stats_legacy)
   * [`snaptrade.reference_data.get_partner_info`](#snaptradereference_dataget_partner_info)
@@ -149,6 +148,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
   * [`snaptrade.trading.place_force_order`](#snaptradetradingplace_force_order)
   * [`snaptrade.trading.place_mleg_order`](#snaptradetradingplace_mleg_order)
   * [`snaptrade.trading.place_order`](#snaptradetradingplace_order)
+  * [`snaptrade.trading.place_simple_order`](#snaptradetradingplace_simple_order)
   * [`snaptrade.trading.preview_crypto_order`](#snaptradetradingpreview_crypto_order)
   * [`snaptrade.trading.replace_order`](#snaptradetradingreplace_order)
   * [`snaptrade.trading.search_cryptocurrency_pair_instruments`](#snaptradetradingsearch_cryptocurrency_pair_instruments)
@@ -170,7 +170,7 @@ pip install snaptrade-python-sdk==13.4.7
 Choose the authentication mode that matches your credentials, then use its client in the reference examples.
 
 ### Commercial API Key Auth authentication<a id="commercial-api-key-auth-authentication"></a>
-Use commercial authentication when acting on behalf of your application and passing end-user credentials with requests that require them.
+Use a Commercial API Key when your app manages users and their connection experience.
 
 ```python
 from snaptrade_client import SnapTrade, SnapTradeAuth
@@ -486,7 +486,7 @@ An integer that specifies the maximum number of transactions to return. Default 
 
 ##### type: `str`<a id="type-str"></a>
 
-Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `SUBSTITUTE_DIVIDEND` - Payment in lieu of a dividend.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `TAX` - A tax related fee.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another.   - `SPLIT` - A stock share split. 
+Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `SUBSTITUTE_DIVIDEND` - Payment in lieu of a dividend.   - `CAPITAL_GAINS_LONG` - Long-term capital-gain distribution.   - `CAPITAL_GAINS_SHORT` - Short-term capital-gain distribution.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `TAX` - A tax related fee.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another.   - `SPLIT` - A stock share split. 
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -834,7 +834,7 @@ Last date to include (UTC). Defaults to the latest available transaction.
 
 ##### type: `str`<a id="type-str"></a>
 
-Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `BUY_TO_OPEN` - Option bought to open a long position.   - `BUY_TO_CLOSE` - Option bought to close a short position.   - `SELL_TO_OPEN` - Option sold to open a short position.   - `SELL_TO_CLOSE` - Option sold to close a long position.   - `DIVIDEND` - Dividend payout.   - `SUBSTITUTE_DIVIDEND` - Payment in lieu of a dividend.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `TAX` - A tax related fee.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another.   - `SPLIT` - A stock share split. 
+Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `BUY_TO_OPEN` - Option bought to open a long position.   - `BUY_TO_CLOSE` - Option bought to close a short position.   - `SELL_TO_OPEN` - Option sold to open a short position.   - `SELL_TO_CLOSE` - Option sold to close a long position.   - `DIVIDEND` - Dividend payout.   - `SUBSTITUTE_DIVIDEND` - Payment in lieu of a dividend.   - `CAPITAL_GAINS_LONG` - Long-term capital-gain distribution.   - `CAPITAL_GAINS_SHORT` - Short-term capital-gain distribution.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `TAX` - A tax related fee.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another.   - `SPLIT` - A stock share split. 
 
 ##### offset: `int`<a id="offset-int"></a>
 
@@ -3047,182 +3047,6 @@ list_subscriptions_response = (
 
 ---
 
-### `snaptrade.experimental_endpoints.place_simple_order`<a id="snaptradeexperimental_endpointsplace_simple_order"></a>
-
-**Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.
-
-Equity and equity-option orders use the existing brokerage trading capabilities. Futures are supported on tastytrade, Webull US, and TradeStation (live and SIM); future options are supported on tastytrade and TradeStation (live and SIM). Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).
-
-An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.
-
-Webull US supports single-leg futures orders with buy or sell actions and positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day or gtc duration. Futures options, multi-leg futures, trailing stops, and Webull Canada futures trading are not supported. Webull determines contract availability, margin requirements, and valid price increments.
-
-TradeStation and TradeStation SIM support single-leg futures and futures-option orders in Futures accounts, with positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day, gtc, ioc, or fok duration, subject to the contract and route's supported combinations. Futures use buy/sell; futures options use the open/close option actions. Multi-leg futures-family strategies are not supported. Prices are forwarded without rounding; TradeStation determines contract availability, permissions, margin requirements, and valid price increments.
-
-All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or brokerage-native futures symbols. For tastytrade, use the exact BrokerageInstrument ticker, including any spaces. For Webull US, use a specific unprefixed futures contract symbol such as ESZ6; slash-prefixed aliases, continuous/root-only symbols, and whitespace are not accepted. For TradeStation, use a specific two-digit-year contract such as ESZ26 or @ESZ26, or a futures-option symbol such as `ESZ26 C6000`, preserving the space and any session alias. The optional @ prefix is supported for dated futures contracts and is forwarded unchanged. Slash-prefixed aliases and root-only continuous symbols such as @ES are not accepted. A futures symbol does not need to be present in SnapTrade's local instrument catalog to submit an order.
-
-A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
-
-```python
-place_simple_order_response = (
-    commercial_api_key_client.experimental_endpoints.place_simple_order(
-        order_type="stop_limit",
-        time_in_force="day",
-        legs=[
-            {
-                "instrument": {
-                    "kind": "future",
-                    "symbol": "/ESZ6",
-                },
-                "action": "buy",
-                "units": "1.25",
-            }
-        ],
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        limit_price="1.25",
-        stop_price="1.25",
-        price_effect="debit",
-        client_order_id="550e8400-e29b-41d4-a716-446655440000",
-        expiry_date="2026-12-18T20:00:00Z",
-        notional_value="1.25",
-        trading_session="regular",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
-)
-```
-
-Required credentials for this mode:
-
-- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-
-- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
-
-##### Personal API Key Auth<a id="personal-api-key-auth"></a>
-
-```python
-place_simple_order_response = (
-    personal_api_key_client.experimental_endpoints.place_simple_order(
-        order_type="stop_limit",
-        time_in_force="day",
-        legs=[
-            {
-                "instrument": {
-                    "kind": "future",
-                    "symbol": "/ESZ6",
-                },
-                "action": "buy",
-                "units": "1.25",
-            }
-        ],
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        limit_price="1.25",
-        stop_price="1.25",
-        price_effect="debit",
-        client_order_id="550e8400-e29b-41d4-a716-446655440000",
-        expiry_date="2026-12-18T20:00:00Z",
-        notional_value="1.25",
-        trading_session="regular",
-    )
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-##### OAuth Auth<a id="oauth-auth"></a>
-
-```python
-place_simple_order_response = oauth_client.experimental_endpoints.place_simple_order(
-    order_type="stop_limit",
-    time_in_force="day",
-    legs=[
-        {
-            "instrument": {
-                "kind": "future",
-                "symbol": "/ESZ6",
-            },
-            "action": "buy",
-            "units": "1.25",
-        }
-    ],
-    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    limit_price="1.25",
-    stop_price="1.25",
-    price_effect="debit",
-    client_order_id="550e8400-e29b-41d4-a716-446655440000",
-    expiry_date="2026-12-18T20:00:00Z",
-    notional_value="1.25",
-    trading_session="regular",
-)
-```
-
-The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
-
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### order_type: `str`<a id="order_type-str"></a>
-
-##### time_in_force: `str`<a id="time_in_force-str"></a>
-
-Order duration, subject to brokerage and execution-path support. gtd requires expiry_date and a non-market single-leg equity/option order. Existing single-leg option routing does not support ioc. Futures and multi-leg orders do not support gtd through this endpoint. Webull US futures only support day and gtc. TradeStation futures and futures options accept day, gtc, ioc, and fok, subject to the contract and route's supported combinations.
-
-##### legs: List[`SimpleTradeLeg`]<a id="legs-listsimpletradeleg"></a>
-
-Legs of one brokerage order. Use equity/option legs or future/future_option legs, without mixing the two families. Brokerage strategy and leg-count limits apply.
-
-##### account_id: `str`<a id="account_id-str"></a>
-
-The ID of the account to execute the trade on.
-
-##### limit_price: `SimpleTradeDecimal`<a id="limit_price-simpletradedecimal"></a>
-
-Required for limit and stop_limit orders, except that multi-leg price_effect even implies zero. Must be omitted or null for market and stop orders. For multi-leg orders this is the net strategy price. Negative prices are accepted only for futures-family orders, subject to brokerage support.
-
-##### stop_price: `SimpleTradeDecimal`<a id="stop_price-simpletradedecimal"></a>
-
-Required for stop and stop_limit orders. Must be omitted or null for market and limit orders. Must be positive for equity/option orders; futures-family trigger prices are subject to brokerage support.
-
-##### price_effect: `Optional[str]`<a id="price_effect-optionalstr"></a>
-
-Only applicable to multi-leg limit and stop_limit orders. Requirements and supported values depend on the brokerage; tastytrade requires credit or debit. even implies a zero limit_price, which may be omitted and must be zero if supplied. Single-leg price effects are derived from the action.
-
-##### client_order_id: `ClientOrderID`<a id="client_order_id-clientorderid"></a>
-
-Canonical UUID. Required for Wealthsimple multi-leg placement regardless of client-order-ID enablement; reuse it when retrying the same attempt. Wealthsimple multi-leg attempts retain the ID after success or failure, and reuse by the same user across accounts or placement endpoints returns 409 without another submission. A 409 does not establish whether the original attempt was accepted; reconcile it before creating a new order with a new ID. Optional for other orders, forwarded where the existing execution path supports it and for tastytrade, Webull US, and TradeStation futures-family orders. Other orders require the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies. OAuth requests also reject a client_order_id the user has already used with 409. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions. For Webull US futures, SnapTrade converts the supplied UUID (or its generated order UUID) to lowercase 32-character hexadecimal without hyphens. The original supplied UUID remains in SnapTrade's trade audit; the converted value is returned as brokerage_order_id for subsequent order reads. For TradeStation live and SIM, SnapTrade encodes the supplied UUID (or its generated order UUID) as 22-character URL-safe base64 without padding and sends it as OrderConfirmID for brokerage duplicate prevention; the response contains TradeStation's separate order ID.
-
-##### expiry_date: `Optional[datetime]`<a id="expiry_date-optionaldatetime"></a>
-
-ISO 8601 expiry timestamp, required for gtd and invalid with other durations. A missing timezone is treated as UTC. Supported only through existing single-leg Public and Sandbox execution paths.
-
-##### notional_value: `SimpleTradeDecimal`<a id="notional_value-simpletradedecimal"></a>
-
-Positive order value, supported only for a single-equity market order on eligible brokerages and partners. Mutually exclusive with leg units. Omit or set units to null when supplied.
-
-##### trading_session: `str`<a id="trading_session-str"></a>
-
-extended uses existing single-leg equity/option brokerage support and requires extended-hours enablement. Futures and multi-leg orders only accept regular.
-
-#### ⚙️ Request Body<a id="⚙️-request-body"></a>
-
-[`SimpleTradeForm`](./snaptrade_client/type/simple_trade_form.py)
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`SimpleTradeResponse`](./snaptrade_client/type/simple_trade_response.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/trading/simple` `post`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
 ### `snaptrade.management.get_stats`<a id="snaptrademanagementget_stats"></a>
 
 **Beta.** This endpoint and its response schema may change.
@@ -4900,6 +4724,178 @@ Optional, defaults to true. Determines if a wait is performed to check on order 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/{tradeId}` `post`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.trading.place_simple_order`<a id="snaptradetradingplace_simple_order"></a>
+
+**Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. Breaking changes are possible while this endpoint is in beta.
+
+Equity and equity-option orders use the existing brokerage trading capabilities. Futures are supported on tastytrade, Webull US, and TradeStation (live and SIM); future options are supported on tastytrade and TradeStation (live and SIM). Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).
+
+An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.
+
+Webull US supports single-leg futures orders with buy or sell actions and positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day or gtc duration. Futures options, multi-leg futures, trailing stops, and Webull Canada futures trading are not supported. Webull determines contract availability, margin requirements, and valid price increments.
+
+TradeStation and TradeStation SIM support single-leg futures and futures-option orders in Futures accounts, with positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day, gtc, ioc, or fok duration, subject to the contract and route's supported combinations. Futures use buy/sell; futures options use the open/close option actions. Multi-leg futures-family strategies are not supported. Prices are forwarded without rounding; TradeStation determines contract availability, permissions, margin requirements, and valid price increments.
+
+All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or brokerage-native futures symbols. For tastytrade, use the exact BrokerageInstrument ticker, including any spaces. For Webull US, use a specific unprefixed futures contract symbol such as ESZ6; slash-prefixed aliases, continuous/root-only symbols, and whitespace are not accepted. For TradeStation, use a specific two-digit-year contract such as ESZ26 or @ESZ26, or a futures-option symbol such as `ESZ26 C6000`, preserving the space and any session alias. The optional @ prefix is supported for dated futures contracts and is forwarded unchanged. Slash-prefixed aliases and root-only continuous symbols such as @ES are not accepted. A futures symbol does not need to be present in SnapTrade's local instrument catalog to submit an order.
+
+A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
+
+```python
+place_simple_order_response = commercial_api_key_client.trading.place_simple_order(
+    order_type="stop_limit",
+    time_in_force="day",
+    legs=[
+        {
+            "instrument": {
+                "kind": "future",
+                "symbol": "/ESZ6",
+            },
+            "action": "buy",
+            "units": "1.25",
+        }
+    ],
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    limit_price="1.25",
+    stop_price="1.25",
+    price_effect="debit",
+    client_order_id="550e8400-e29b-41d4-a716-446655440000",
+    expiry_date="2026-12-18T20:00:00Z",
+    notional_value="1.25",
+    trading_session="regular",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+)
+```
+
+Required credentials for this mode:
+
+- `user_id` (str, required): SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
+
+- `user_secret` (str, required): SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+
+##### Personal API Key Auth<a id="personal-api-key-auth"></a>
+
+```python
+place_simple_order_response = personal_api_key_client.trading.place_simple_order(
+    order_type="stop_limit",
+    time_in_force="day",
+    legs=[
+        {
+            "instrument": {
+                "kind": "future",
+                "symbol": "/ESZ6",
+            },
+            "action": "buy",
+            "units": "1.25",
+        }
+    ],
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    limit_price="1.25",
+    stop_price="1.25",
+    price_effect="debit",
+    client_order_id="550e8400-e29b-41d4-a716-446655440000",
+    expiry_date="2026-12-18T20:00:00Z",
+    notional_value="1.25",
+    trading_session="regular",
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```python
+place_simple_order_response = oauth_client.trading.place_simple_order(
+    order_type="stop_limit",
+    time_in_force="day",
+    legs=[
+        {
+            "instrument": {
+                "kind": "future",
+                "symbol": "/ESZ6",
+            },
+            "action": "buy",
+            "units": "1.25",
+        }
+    ],
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    limit_price="1.25",
+    stop_price="1.25",
+    price_effect="debit",
+    client_order_id="550e8400-e29b-41d4-a716-446655440000",
+    expiry_date="2026-12-18T20:00:00Z",
+    notional_value="1.25",
+    trading_session="regular",
+)
+```
+
+The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
+
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### order_type: `str`<a id="order_type-str"></a>
+
+##### time_in_force: `str`<a id="time_in_force-str"></a>
+
+Order duration, subject to brokerage and execution-path support. gtd requires expiry_date and a non-market single-leg equity/option order. Existing single-leg option routing does not support ioc. Futures and multi-leg orders do not support gtd through this endpoint. Webull US futures only support day and gtc. TradeStation futures and futures options accept day, gtc, ioc, and fok, subject to the contract and route's supported combinations.
+
+##### legs: List[`SimpleTradeLeg`]<a id="legs-listsimpletradeleg"></a>
+
+Legs of one brokerage order. Use equity/option legs or future/future_option legs, without mixing the two families. Brokerage strategy and leg-count limits apply.
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+The ID of the account to execute the trade on.
+
+##### limit_price: `SimpleTradeDecimal`<a id="limit_price-simpletradedecimal"></a>
+
+Required for limit and stop_limit orders, except that multi-leg price_effect even implies zero. Must be omitted or null for market and stop orders. For multi-leg orders this is the net strategy price. Negative prices are accepted only for futures-family orders, subject to brokerage support.
+
+##### stop_price: `SimpleTradeDecimal`<a id="stop_price-simpletradedecimal"></a>
+
+Required for stop and stop_limit orders. Must be omitted or null for market and limit orders. Must be positive for equity/option orders; futures-family trigger prices are subject to brokerage support.
+
+##### price_effect: `Optional[str]`<a id="price_effect-optionalstr"></a>
+
+Only applicable to multi-leg limit and stop_limit orders. Requirements and supported values depend on the brokerage; tastytrade requires credit or debit. even implies a zero limit_price, which may be omitted and must be zero if supplied. Single-leg price effects are derived from the action.
+
+##### client_order_id: `ClientOrderID`<a id="client_order_id-clientorderid"></a>
+
+Canonical UUID. Required for Wealthsimple multi-leg placement regardless of client-order-ID enablement; reuse it when retrying the same attempt. Wealthsimple multi-leg attempts retain the ID after success or failure, and reuse by the same user across accounts or placement endpoints returns 409 without another submission. A 409 does not establish whether the original attempt was accepted; reconcile it before creating a new order with a new ID. Optional for other orders, forwarded where the existing execution path supports it and for tastytrade, Webull US, and TradeStation futures-family orders. Other orders require the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies. OAuth requests also reject a client_order_id the user has already used with 409. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions. For Webull US futures, SnapTrade converts the supplied UUID (or its generated order UUID) to lowercase 32-character hexadecimal without hyphens. The original supplied UUID remains in SnapTrade's trade audit; the converted value is returned as brokerage_order_id for subsequent order reads. For TradeStation live and SIM, SnapTrade encodes the supplied UUID (or its generated order UUID) as 22-character URL-safe base64 without padding and sends it as OrderConfirmID for brokerage duplicate prevention; the response contains TradeStation's separate order ID.
+
+##### expiry_date: `Optional[datetime]`<a id="expiry_date-optionaldatetime"></a>
+
+ISO 8601 expiry timestamp, required for gtd and invalid with other durations. A missing timezone is treated as UTC. Supported only through existing single-leg Public and Sandbox execution paths.
+
+##### notional_value: `SimpleTradeDecimal`<a id="notional_value-simpletradedecimal"></a>
+
+Positive order value, supported only for a single-equity market order on eligible brokerages and partners. Mutually exclusive with leg units. Omit or set units to null when supplied.
+
+##### trading_session: `str`<a id="trading_session-str"></a>
+
+extended uses existing single-leg equity/option brokerage support and requires extended-hours enablement. Futures and multi-leg orders only accept regular.
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`SimpleTradeForm`](./snaptrade_client/type/simple_trade_form.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`SimpleTradeResponse`](./snaptrade_client/type/simple_trade_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/simple` `post`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

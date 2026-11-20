@@ -47,6 +47,7 @@ from snaptrade_client.apis.paths.accounts_account_id_trading_crypto_preview impo
 from snaptrade_client.apis.paths.accounts_account_id_trading_crypto import AccountsAccountIdTradingCrypto
 from snaptrade_client.apis.paths.accounts_account_id_trading_cancel import AccountsAccountIdTradingCancel
 from snaptrade_client.apis.paths.accounts_account_id_trading_replace import AccountsAccountIdTradingReplace
+from snaptrade_client.apis.paths.accounts_account_id_trading_simple import AccountsAccountIdTradingSimple
 from snaptrade_client.apis.paths.accounts_account_id_trading_complex import AccountsAccountIdTradingComplex
 from snaptrade_client.apis.paths.snap_trade_partners import SnapTradePartners
 from snaptrade_client.apis.paths.snap_trade_trade_detection_subscriptions import SnapTradeTradeDetectionSubscriptions
@@ -63,7 +64,6 @@ from snaptrade_client.apis.paths.brokerage_authorization_types import BrokerageA
 from snaptrade_client.apis.paths.exchanges import Exchanges
 from snaptrade_client.apis.paths.symbols import Symbols
 from snaptrade_client.apis.paths.symbols_query import SymbolsQuery
-from snaptrade_client.apis.paths.accounts_account_id_trading_simple import AccountsAccountIdTradingSimple
 from snaptrade_client.apis.paths.accounts_account_id_orders_details_v2_brokerage_order_id import AccountsAccountIdOrdersDetailsV2BrokerageOrderId
 
 PathToApi = typing_extensions.TypedDict(
@@ -115,6 +115,7 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO: AccountsAccountIdTradingCrypto,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CANCEL: AccountsAccountIdTradingCancel,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_REPLACE: AccountsAccountIdTradingReplace,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE: AccountsAccountIdTradingSimple,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_COMPLEX: AccountsAccountIdTradingComplex,
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
         PathValues.SNAP_TRADE_TRADE_DETECTION_SUBSCRIPTIONS: SnapTradeTradeDetectionSubscriptions,
@@ -131,7 +132,6 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.EXCHANGES: Exchanges,
         PathValues.SYMBOLS: Symbols,
         PathValues.SYMBOLS_QUERY: SymbolsQuery,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE: AccountsAccountIdTradingSimple,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_DETAILS_V2_BROKERAGE_ORDER_ID: AccountsAccountIdOrdersDetailsV2BrokerageOrderId,
     }
 )
@@ -184,6 +184,7 @@ path_to_api = PathToApi(
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO: AccountsAccountIdTradingCrypto,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CANCEL: AccountsAccountIdTradingCancel,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_REPLACE: AccountsAccountIdTradingReplace,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE: AccountsAccountIdTradingSimple,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_COMPLEX: AccountsAccountIdTradingComplex,
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
         PathValues.SNAP_TRADE_TRADE_DETECTION_SUBSCRIPTIONS: SnapTradeTradeDetectionSubscriptions,
@@ -200,7 +201,6 @@ path_to_api = PathToApi(
         PathValues.EXCHANGES: Exchanges,
         PathValues.SYMBOLS: Symbols,
         PathValues.SYMBOLS_QUERY: SymbolsQuery,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE: AccountsAccountIdTradingSimple,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_DETAILS_V2_BROKERAGE_ORDER_ID: AccountsAccountIdOrdersDetailsV2BrokerageOrderId,
     }
 )

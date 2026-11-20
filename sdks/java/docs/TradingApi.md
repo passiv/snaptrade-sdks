@@ -15,6 +15,7 @@ All URIs are relative to *https://api.snaptrade.com*
 | [**placeForceOrder**](TradingApi.md#placeForceOrder) | **POST** /trade/place | Place equity order |
 | [**placeMlegOrder**](TradingApi.md#placeMlegOrder) | **POST** /accounts/{accountId}/trading/options | Place option order |
 | [**placeOrder**](TradingApi.md#placeOrder) | **POST** /trade/{tradeId} | Place checked equity order |
+| [**placeSimpleOrder**](TradingApi.md#placeSimpleOrder) | **POST** /accounts/{accountId}/trading/simple | Place a simple order (beta) |
 | [**previewCryptoOrder**](TradingApi.md#previewCryptoOrder) | **POST** /accounts/{accountId}/trading/crypto/preview | Preview crypto order |
 | [**replaceOrder**](TradingApi.md#replaceOrder) | **POST** /accounts/{accountId}/trading/replace | Replace order |
 | [**searchCryptocurrencyPairInstruments**](TradingApi.md#searchCryptocurrencyPairInstruments) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Get crypto pairs |
@@ -1275,6 +1276,129 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** | Status of order placed |  -  |
 | **500** | Unexpected Error |  -  |
+
+<a name="placeSimpleOrder"></a>
+# **placeSimpleOrder**
+> SimpleTradeResponse placeSimpleOrder(accountId, userId, userSecret, simpleTradeForm).execute();
+
+Place a simple order (beta)
+
+**Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. Breaking changes are possible while this endpoint is in beta.  Equity and equity-option orders use the existing brokerage trading capabilities. Futures are supported on tastytrade, Webull US, and TradeStation (live and SIM); future options are supported on tastytrade and TradeStation (live and SIM). Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).  An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.  Webull US supports single-leg futures orders with buy or sell actions and positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day or gtc duration. Futures options, multi-leg futures, trailing stops, and Webull Canada futures trading are not supported. Webull determines contract availability, margin requirements, and valid price increments.  TradeStation and TradeStation SIM support single-leg futures and futures-option orders in Futures accounts, with positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day, gtc, ioc, or fok duration, subject to the contract and route&#39;s supported combinations. Futures use buy/sell; futures options use the open/close option actions. Multi-leg futures-family strategies are not supported. Prices are forwarded without rounding; TradeStation determines contract availability, permissions, margin requirements, and valid price increments.  All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or brokerage-native futures symbols. For tastytrade, use the exact BrokerageInstrument ticker, including any spaces. For Webull US, use a specific unprefixed futures contract symbol such as ESZ6; slash-prefixed aliases, continuous/root-only symbols, and whitespace are not accepted. For TradeStation, use a specific two-digit-year contract such as ESZ26 or @ESZ26, or a futures-option symbol such as &#x60;ESZ26 C6000&#x60;, preserving the space and any session alias. The optional @ prefix is supported for dated futures contracts and is forwarded unchanged. Slash-prefixed aliases and root-only continuous symbols such as @ES are not accepted. A futures symbol does not need to be present in SnapTrade&#39;s local instrument catalog to submit an order.  A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details. 
+
+### Example
+```java
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.TradingApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    String orderType = "limit";
+    String timeInForce = "day"; // Order duration, subject to brokerage and execution-path support. gtd requires expiry_date and a non-market single-leg equity/option order. Existing single-leg option routing does not support ioc. Futures and multi-leg orders do not support gtd through this endpoint. Webull US futures only support day and gtc. TradeStation futures and futures options accept day, gtc, ioc, and fok, subject to the contract and route's supported combinations.
+    List<SimpleTradeLeg> legs = Arrays.asList(); // Legs of one brokerage order. Use equity/option legs or future/future_option legs, without mixing the two families. Brokerage strategy and leg-count limits apply.
+    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // The ID of the account to execute the trade on.
+    String userId = "snaptrade-user-123";
+    String userSecret = "adf2aa34-8219-40f7-a6b3-60156985cc61";
+    BigDecimal limitPrice = new BigDecimal(78); // Required for limit and stop_limit orders, except that multi-leg price_effect even implies zero. Must be omitted or null for market and stop orders. For multi-leg orders this is the net strategy price. Negative prices are accepted only for futures-family orders, subject to brokerage support.
+    BigDecimal stopPrice = new BigDecimal(78); // Required for stop and stop_limit orders. Must be omitted or null for market and limit orders. Must be positive for equity/option orders; futures-family trigger prices are subject to brokerage support.
+    String priceEffect = "credit"; // Only applicable to multi-leg limit and stop_limit orders. Requirements and supported values depend on the brokerage; tastytrade requires credit or debit. even implies a zero limit_price, which may be omitted and must be zero if supplied. Single-leg price effects are derived from the action.
+    UUID clientOrderId = UUID.randomUUID(); // Canonical UUID. Required for Wealthsimple multi-leg placement regardless of client-order-ID enablement; reuse it when retrying the same attempt. Wealthsimple multi-leg attempts retain the ID after success or failure, and reuse by the same user across accounts or placement endpoints returns 409 without another submission. A 409 does not establish whether the original attempt was accepted; reconcile it before creating a new order with a new ID. Optional for other orders, forwarded where the existing execution path supports it and for tastytrade, Webull US, and TradeStation futures-family orders. Other orders require the existing client-order-ID enablement; when disabled the value is ignored. Brokerage behavior on duplicates varies. OAuth requests also reject a client_order_id the user has already used with 409. Tastytrade uses this as external-identifier for correlation and does not deduplicate submissions. For Webull US futures, SnapTrade converts the supplied UUID (or its generated order UUID) to lowercase 32-character hexadecimal without hyphens. The original supplied UUID remains in SnapTrade's trade audit; the converted value is returned as brokerage_order_id for subsequent order reads. For TradeStation live and SIM, SnapTrade encodes the supplied UUID (or its generated order UUID) as 22-character URL-safe base64 without padding and sends it as OrderConfirmID for brokerage duplicate prevention; the response contains TradeStation's separate order ID.
+    OffsetDateTime expiryDate = OffsetDateTime.now(); // ISO 8601 expiry timestamp, required for gtd and invalid with other durations. A missing timezone is treated as UTC. Supported only through existing single-leg Public and Sandbox execution paths.
+    BigDecimal notionalValue = new BigDecimal(78); // Positive order value, supported only for a single-equity market order on eligible brokerages and partners. Mutually exclusive with leg units. Omit or set units to null when supplied.
+    String tradingSession = "regular"; // extended uses existing single-leg equity/option brokerage support and requires extended-hours enablement. Futures and multi-leg orders only accept regular.
+    try {
+      SimpleTradeResponse result = client
+              .trading
+              .placeSimpleOrder(orderType, timeInForce, legs, accountId, userId, userSecret)
+              .limitPrice(limitPrice)
+              .stopPrice(stopPrice)
+              .priceEffect(priceEffect)
+              .clientOrderId(clientOrderId)
+              .expiryDate(expiryDate)
+              .notionalValue(notionalValue)
+              .tradingSession(tradingSession)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getBrokerageOrderId());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#placeSimpleOrder");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<SimpleTradeResponse> response = client
+              .trading
+              .placeSimpleOrder(orderType, timeInForce, legs, accountId, userId, userSecret)
+              .limitPrice(limitPrice)
+              .stopPrice(stopPrice)
+              .priceEffect(priceEffect)
+              .clientOrderId(clientOrderId)
+              .expiryDate(expiryDate)
+              .notionalValue(notionalValue)
+              .tradingSession(tradingSession)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#placeSimpleOrder");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **accountId** | **UUID**| The ID of the account to execute the trade on. | |
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+| **simpleTradeForm** | [**SimpleTradeForm**](SimpleTradeForm.md)|  | |
+
+### Return type
+
+[**SimpleTradeResponse**](SimpleTradeResponse.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Order placed |  -  |
+| **500** | Unexpected error |  -  |
 
 <a name="previewCryptoOrder"></a>
 # **previewCryptoOrder**

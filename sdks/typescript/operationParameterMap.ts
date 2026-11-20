@@ -366,43 +366,6 @@ export const operationParameterMap: Record<string, Entry> = {
         parameters: [
         ]
     },
-    '/accounts/{accountId}/trading/simple-POST': {
-        parameters: [
-            {
-                name: 'order_type'
-            },
-            {
-                name: 'time_in_force'
-            },
-            {
-                name: 'legs'
-            },
-            {
-                name: 'accountId'
-            },
-            {
-                name: 'limit_price'
-            },
-            {
-                name: 'stop_price'
-            },
-            {
-                name: 'price_effect'
-            },
-            {
-                name: 'client_order_id'
-            },
-            {
-                name: 'expiry_date'
-            },
-            {
-                name: 'notional_value'
-            },
-            {
-                name: 'trading_session'
-            },
-        ]
-    },
     '/management/stats-GET': {
         parameters: [
             {
@@ -701,6 +664,43 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'wait_to_confirm'
+            },
+        ]
+    },
+    '/accounts/{accountId}/trading/simple-POST': {
+        parameters: [
+            {
+                name: 'order_type'
+            },
+            {
+                name: 'time_in_force'
+            },
+            {
+                name: 'legs'
+            },
+            {
+                name: 'accountId'
+            },
+            {
+                name: 'limit_price'
+            },
+            {
+                name: 'stop_price'
+            },
+            {
+                name: 'price_effect'
+            },
+            {
+                name: 'client_order_id'
+            },
+            {
+                name: 'expiry_date'
+            },
+            {
+                name: 'notional_value'
+            },
+            {
+                name: 'trading_session'
             },
         ]
     },

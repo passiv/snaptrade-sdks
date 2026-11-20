@@ -2518,6 +2518,8 @@ paths:
             - `SELL` - Asset sold.
             - `DIVIDEND` - Dividend payout.
             - `SUBSTITUTE_DIVIDEND` - Payment in lieu of a dividend.
+            - `CAPITAL_GAINS_LONG` - Long-term capital-gain distribution.
+            - `CAPITAL_GAINS_SHORT` - Short-term capital-gain distribution.
             - `CONTRIBUTION` - Cash contribution.
             - `WITHDRAWAL` - Cash withdrawal.
             - `REI` - Dividend reinvestment.
@@ -2671,6 +2673,8 @@ paths:
             - `SELL_TO_CLOSE` - Option sold to close a long position.
             - `DIVIDEND` - Dividend payout.
             - `SUBSTITUTE_DIVIDEND` - Payment in lieu of a dividend.
+            - `CAPITAL_GAINS_LONG` - Long-term capital-gain distribution.
+            - `CAPITAL_GAINS_SHORT` - Short-term capital-gain distribution.
             - `CONTRIBUTION` - Cash contribution.
             - `WITHDRAWAL` - Cash withdrawal.
             - `REI` - Dividend reinvestment.
@@ -3870,6 +3874,185 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-replace
       x-content-type: application/json
       x-accepts: application/json
+  /accounts/{accountId}/trading/simple:
+    post:
+      description: |
+        **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. Breaking changes are possible while this endpoint is in beta.
+
+        Equity and equity-option orders use the existing brokerage trading capabilities. Futures are supported on tastytrade, Webull US, and TradeStation (live and SIM); future options are supported on tastytrade and TradeStation (live and SIM). Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).
+
+        An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.
+
+        Webull US supports single-leg futures orders with buy or sell actions and positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day or gtc duration. Futures options, multi-leg futures, trailing stops, and Webull Canada futures trading are not supported. Webull determines contract availability, margin requirements, and valid price increments.
+
+        TradeStation and TradeStation SIM support single-leg futures and futures-option orders in Futures accounts, with positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day, gtc, ioc, or fok duration, subject to the contract and route's supported combinations. Futures use buy/sell; futures options use the open/close option actions. Multi-leg futures-family strategies are not supported. Prices are forwarded without rounding; TradeStation determines contract availability, permissions, margin requirements, and valid price increments.
+
+        All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or brokerage-native futures symbols. For tastytrade, use the exact BrokerageInstrument ticker, including any spaces. For Webull US, use a specific unprefixed futures contract symbol such as ESZ6; slash-prefixed aliases, continuous/root-only symbols, and whitespace are not accepted. For TradeStation, use a specific two-digit-year contract such as ESZ26 or @ESZ26, or a futures-option symbol such as `ESZ26 C6000`, preserving the space and any session alias. The optional @ prefix is supported for dated futures contracts and is forwarded unchanged. Slash-prefixed aliases and root-only continuous symbols such as @ES are not accepted. A futures symbol does not need to be present in SnapTrade's local instrument catalog to submit an order.
+
+        A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details.
+      operationId: Trading_placeSimpleOrder
+      parameters:
+      - description: The ID of the account to execute the trade on.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      requestBody:
+        content:
+          application/json:
+            examples:
+              futureStopLimit:
+                summary: Tastytrade single-leg future stop-limit order
+                value:
+                  order_type: stop_limit
+                  time_in_force: day
+                  client_order_id: 3e8b682d-c901-4b2d-a67f-70f73b04a29e
+                  stop_price: "6000.00"
+                  limit_price: "6000.25"
+                  legs:
+                  - instrument:
+                      kind: future
+                      symbol: /ESZ6
+                    action: buy
+                    units: "1"
+              webullFutureStopLimit:
+                summary: Webull US single-leg future stop-limit order
+                value:
+                  order_type: stop_limit
+                  time_in_force: gtc
+                  client_order_id: 3e8b682d-c901-4b2d-a67f-70f73b04a29e
+                  stop_price: "6000.00"
+                  limit_price: "6000.25"
+                  legs:
+                  - instrument:
+                      kind: future
+                      symbol: ESZ6
+                    action: buy
+                    units: "1"
+              tradestationFutureStopLimit:
+                summary: TradeStation live or SIM single-leg future stop-limit order
+                value:
+                  order_type: stop_limit
+                  time_in_force: gtc
+                  stop_price: "6000.00"
+                  limit_price: "6000.25"
+                  legs:
+                  - instrument:
+                      kind: future
+                      symbol: '@ESZ26'
+                    action: buy
+                    units: "1"
+              tradestationFutureOptionLimit:
+                summary: TradeStation live or SIM single-leg futures-option limit
+                  order
+                value:
+                  order_type: limit
+                  time_in_force: day
+                  limit_price: "10.25"
+                  legs:
+                  - instrument:
+                      kind: future_option
+                      symbol: ESZ26 C6000
+                    action: buy_to_open
+                    units: "1"
+              optionSpread:
+                summary: Equity-option debit spread
+                value:
+                  order_type: limit
+                  time_in_force: day
+                  limit_price: "1.25"
+                  price_effect: debit
+                  legs:
+                  - instrument:
+                      kind: option
+                      symbol: AAPL  261218C00200000
+                    action: buy_to_open
+                    units: "1"
+                  - instrument:
+                      kind: option
+                      symbol: AAPL  261218C00210000
+                    action: sell_to_open
+                    units: "1"
+              notionalEquity:
+                summary: Equity market order by dollar value
+                value:
+                  order_type: market
+                  time_in_force: day
+                  notional_value: "100.00"
+                  legs:
+                  - instrument:
+                      kind: equity
+                      symbol: AAPL
+                    action: buy
+            schema:
+              $ref: '#/components/schemas/SimpleTradeForm'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimpleTradeResponse'
+          description: Order placed
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: "Invalid request, unsupported trading feature, or brokerage\
+            \ rejection"
+          x-do-not-generate: true
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FailedRequestResponse'
+          description: User does not have permissions to place trades
+          x-do-not-generate: true
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404FailedRequestResponse'
+          description: Account not found
+          x-do-not-generate: true
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trading_placeSimpleOrder_409_response'
+          description: "For OAuth requests and Wealthsimple multi-leg placement, the\
+            \ client_order_id was already used by this user, or a request with it\
+            \ is in progress. Check the original attempt before submitting another\
+            \ order; this response does not establish whether the brokerage accepted\
+            \ it."
+          x-do-not-generate: true
+        "500":
+          description: Unexpected error
+      summary: Place a simple order (beta)
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple
+      x-content-type: application/json
+      x-accepts: application/json
   /accounts/{accountId}/trading/complex:
     post:
       description: |
@@ -4826,185 +5009,6 @@ paths:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--symbols-query
-      x-accepts: application/json
-  /accounts/{accountId}/trading/simple:
-    post:
-      description: |
-        **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. This endpoint is experimental; breaking changes are possible during the experimental phase.
-
-        Equity and equity-option orders use the existing brokerage trading capabilities. Futures are supported on tastytrade, Webull US, and TradeStation (live and SIM); future options are supported on tastytrade and TradeStation (live and SIM). Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).
-
-        An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.
-
-        Webull US supports single-leg futures orders with buy or sell actions and positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day or gtc duration. Futures options, multi-leg futures, trailing stops, and Webull Canada futures trading are not supported. Webull determines contract availability, margin requirements, and valid price increments.
-
-        TradeStation and TradeStation SIM support single-leg futures and futures-option orders in Futures accounts, with positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day, gtc, ioc, or fok duration, subject to the contract and route's supported combinations. Futures use buy/sell; futures options use the open/close option actions. Multi-leg futures-family strategies are not supported. Prices are forwarded without rounding; TradeStation determines contract availability, permissions, margin requirements, and valid price increments.
-
-        All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or brokerage-native futures symbols. For tastytrade, use the exact BrokerageInstrument ticker, including any spaces. For Webull US, use a specific unprefixed futures contract symbol such as ESZ6; slash-prefixed aliases, continuous/root-only symbols, and whitespace are not accepted. For TradeStation, use a specific two-digit-year contract such as ESZ26 or @ESZ26, or a futures-option symbol such as `ESZ26 C6000`, preserving the space and any session alias. The optional @ prefix is supported for dated futures contracts and is forwarded unchanged. Slash-prefixed aliases and root-only continuous symbols such as @ES are not accepted. A futures symbol does not need to be present in SnapTrade's local instrument catalog to submit an order.
-
-        A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details.
-      operationId: Trading_placeSimpleOrder
-      parameters:
-      - description: The ID of the account to execute the trade on.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      requestBody:
-        content:
-          application/json:
-            examples:
-              futureStopLimit:
-                summary: Tastytrade single-leg future stop-limit order
-                value:
-                  order_type: stop_limit
-                  time_in_force: day
-                  client_order_id: 3e8b682d-c901-4b2d-a67f-70f73b04a29e
-                  stop_price: "6000.00"
-                  limit_price: "6000.25"
-                  legs:
-                  - instrument:
-                      kind: future
-                      symbol: /ESZ6
-                    action: buy
-                    units: "1"
-              webullFutureStopLimit:
-                summary: Webull US single-leg future stop-limit order
-                value:
-                  order_type: stop_limit
-                  time_in_force: gtc
-                  client_order_id: 3e8b682d-c901-4b2d-a67f-70f73b04a29e
-                  stop_price: "6000.00"
-                  limit_price: "6000.25"
-                  legs:
-                  - instrument:
-                      kind: future
-                      symbol: ESZ6
-                    action: buy
-                    units: "1"
-              tradestationFutureStopLimit:
-                summary: TradeStation live or SIM single-leg future stop-limit order
-                value:
-                  order_type: stop_limit
-                  time_in_force: gtc
-                  stop_price: "6000.00"
-                  limit_price: "6000.25"
-                  legs:
-                  - instrument:
-                      kind: future
-                      symbol: '@ESZ26'
-                    action: buy
-                    units: "1"
-              tradestationFutureOptionLimit:
-                summary: TradeStation live or SIM single-leg futures-option limit
-                  order
-                value:
-                  order_type: limit
-                  time_in_force: day
-                  limit_price: "10.25"
-                  legs:
-                  - instrument:
-                      kind: future_option
-                      symbol: ESZ26 C6000
-                    action: buy_to_open
-                    units: "1"
-              optionSpread:
-                summary: Equity-option debit spread
-                value:
-                  order_type: limit
-                  time_in_force: day
-                  limit_price: "1.25"
-                  price_effect: debit
-                  legs:
-                  - instrument:
-                      kind: option
-                      symbol: AAPL  261218C00200000
-                    action: buy_to_open
-                    units: "1"
-                  - instrument:
-                      kind: option
-                      symbol: AAPL  261218C00210000
-                    action: sell_to_open
-                    units: "1"
-              notionalEquity:
-                summary: Equity market order by dollar value
-                value:
-                  order_type: market
-                  time_in_force: day
-                  notional_value: "100.00"
-                  legs:
-                  - instrument:
-                      kind: equity
-                      symbol: AAPL
-                    action: buy
-            schema:
-              $ref: '#/components/schemas/SimpleTradeForm'
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SimpleTradeResponse'
-          description: Order placed
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: "Invalid request, unsupported trading feature, or brokerage\
-            \ rejection"
-          x-do-not-generate: true
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/403FailedRequestResponse'
-          description: User does not have permissions to place trades
-          x-do-not-generate: true
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/404FailedRequestResponse'
-          description: Account not found
-          x-do-not-generate: true
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Trading_placeSimpleOrder_409_response'
-          description: "For OAuth requests and Wealthsimple multi-leg placement, the\
-            \ client_order_id was already used by this user, or a request with it\
-            \ is in progress. Check the original attempt before submitting another\
-            \ order; this response does not establish whether the brokerage accepted\
-            \ it."
-          x-do-not-generate: true
-        "500":
-          description: Unexpected error
-      summary: Place a simple order (beta)
-      tags:
-      - Experimental endpoints
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple
-      x-content-type: application/json
       x-accepts: application/json
   /accounts/{accountId}/orders/details/v2/{brokerageOrderId}:
     get:
@@ -14824,6 +14828,8 @@ components:
               - `SELL_TO_CLOSE` - Option sold to close a long position.
               - `DIVIDEND` - Dividend payout.
               - `SUBSTITUTE_DIVIDEND` - Payment in lieu of a dividend.
+              - `CAPITAL_GAINS_LONG` - Long-term capital-gain distribution.
+              - `CAPITAL_GAINS_SHORT` - Short-term capital-gain distribution.
               - `CONTRIBUTION` - Cash contribution.
               - `WITHDRAWAL` - Cash withdrawal.
               - `REI` - Dividend reinvestment.
@@ -15229,6 +15235,8 @@ components:
               - `SELL` - Asset sold.
               - `DIVIDEND` - Dividend payout.
               - `SUBSTITUTE_DIVIDEND` - Payment in lieu of a dividend.
+              - `CAPITAL_GAINS_LONG` - Long-term capital-gain distribution.
+              - `CAPITAL_GAINS_SHORT` - Short-term capital-gain distribution.
               - `CONTRIBUTION` - Cash contribution.
               - `WITHDRAWAL` - Cash withdrawal.
               - `REI` - Dividend reinvestment.
@@ -15405,6 +15413,8 @@ components:
               - `SELL` - Asset sold.
               - `DIVIDEND` - Dividend payout.
               - `SUBSTITUTE_DIVIDEND` - Payment in lieu of a dividend.
+              - `CAPITAL_GAINS_LONG` - Long-term capital-gain distribution.
+              - `CAPITAL_GAINS_SHORT` - Short-term capital-gain distribution.
               - `CONTRIBUTION` - Cash contribution.
               - `WITHDRAWAL` - Cash withdrawal.
               - `REI` - Dividend reinvestment.
@@ -16300,6 +16310,19 @@ components:
     : example: "1170"
       type: string
       x-do-not-generate: true
+    ? konfig-generated-schema-paths--accounts-accountId-trading-simple-post-responses-409-content-application-json-schema-properties-detail
+    : example: An order with this client_order_id was already submitted. Use a new
+        client_order_id for a new order.
+      type: string
+      x-do-not-generate: true
+    ? konfig-generated-schema-paths--accounts-accountId-trading-simple-post-responses-409-content-application-json-schema-properties-status_code
+    : example: 409
+      type: number
+      x-do-not-generate: true
+    ? konfig-generated-schema-paths--accounts-accountId-trading-simple-post-responses-409-content-application-json-schema-properties-code
+    : example: "1170"
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-paths--management-stats-get-parameters-0-schema:
       example: USD
       type: string
@@ -16318,19 +16341,6 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-paths--brokerageAuthorizationTypes-get-parameters-0-schema:
       example: "QUESTRADE,ALPACA"
-      type: string
-      x-do-not-generate: true
-    ? konfig-generated-schema-paths--accounts-accountId-trading-simple-post-responses-409-content-application-json-schema-properties-detail
-    : example: An order with this client_order_id was already submitted. Use a new
-        client_order_id for a new order.
-      type: string
-      x-do-not-generate: true
-    ? konfig-generated-schema-paths--accounts-accountId-trading-simple-post-responses-409-content-application-json-schema-properties-status_code
-    : example: 409
-      type: number
-      x-do-not-generate: true
-    ? konfig-generated-schema-paths--accounts-accountId-trading-simple-post-responses-409-content-application-json-schema-properties-code
-    : example: "1170"
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-headers-X-RateLimit-Limit-schema:
@@ -20694,6 +20704,145 @@ components:
       - accountId
       - userId
       - userSecret
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple:
+      additionalProperties: true
+      properties:
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        order_type:
+          enum:
+          - limit
+          - market
+          - stop
+          - stop_limit
+          example: stop_limit
+          type: string
+          x-konfig-original-example: stop_limit
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-order_type
+        time_in_force:
+          description: "Order duration, subject to brokerage and execution-path support.\
+            \ gtd requires expiry_date and a non-market single-leg equity/option order.\
+            \ Existing single-leg option routing does not support ioc. Futures and\
+            \ multi-leg orders do not support gtd through this endpoint. Webull US\
+            \ futures only support day and gtc. TradeStation futures and futures options\
+            \ accept day, gtc, ioc, and fok, subject to the contract and route's supported\
+            \ combinations."
+          enum:
+          - day
+          - gtc
+          - gtd
+          - fok
+          - ioc
+          example: day
+          type: string
+          x-konfig-original-example: day
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-time_in_force
+        legs:
+          description: "Legs of one brokerage order. Use equity/option legs or future/future_option\
+            \ legs, without mixing the two families. Brokerage strategy and leg-count\
+            \ limits apply."
+          items:
+            $ref: '#/components/schemas/SimpleTradeLeg'
+          minItems: 1
+          type: array
+        limit_price:
+          allOf:
+          - $ref: '#/components/schemas/SimpleTradeDecimal'
+          description: "Required for limit and stop_limit orders, except that multi-leg\
+            \ price_effect even implies zero. Must be omitted or null for market and\
+            \ stop orders. For multi-leg orders this is the net strategy price. Negative\
+            \ prices are accepted only for futures-family orders, subject to brokerage\
+            \ support."
+        stop_price:
+          allOf:
+          - $ref: '#/components/schemas/SimpleTradeDecimal'
+          description: Required for stop and stop_limit orders. Must be omitted or
+            null for market and limit orders. Must be positive for equity/option orders;
+            futures-family trigger prices are subject to brokerage support.
+        price_effect:
+          description: "Only applicable to multi-leg limit and stop_limit orders.\
+            \ Requirements and supported values depend on the brokerage; tastytrade\
+            \ requires credit or debit. even implies a zero limit_price, which may\
+            \ be omitted and must be zero if supplied. Single-leg price effects are\
+            \ derived from the action."
+          enum:
+          - credit
+          - debit
+          - even
+          example: debit
+          nullable: true
+          type: string
+          x-konfig-original-example: debit
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-price_effect
+        client_order_id:
+          allOf:
+          - $ref: '#/components/schemas/ClientOrderID'
+          description: "Canonical UUID. Required for Wealthsimple multi-leg placement\
+            \ regardless of client-order-ID enablement; reuse it when retrying the\
+            \ same attempt. Wealthsimple multi-leg attempts retain the ID after success\
+            \ or failure, and reuse by the same user across accounts or placement\
+            \ endpoints returns 409 without another submission. A 409 does not establish\
+            \ whether the original attempt was accepted; reconcile it before creating\
+            \ a new order with a new ID. Optional for other orders, forwarded where\
+            \ the existing execution path supports it and for tastytrade, Webull US,\
+            \ and TradeStation futures-family orders. Other orders require the existing\
+            \ client-order-ID enablement; when disabled the value is ignored. Brokerage\
+            \ behavior on duplicates varies. OAuth requests also reject a client_order_id\
+            \ the user has already used with 409. Tastytrade uses this as external-identifier\
+            \ for correlation and does not deduplicate submissions. For Webull US\
+            \ futures, SnapTrade converts the supplied UUID (or its generated order\
+            \ UUID) to lowercase 32-character hexadecimal without hyphens. The original\
+            \ supplied UUID remains in SnapTrade's trade audit; the converted value\
+            \ is returned as brokerage_order_id for subsequent order reads. For TradeStation\
+            \ live and SIM, SnapTrade encodes the supplied UUID (or its generated\
+            \ order UUID) as 22-character URL-safe base64 without padding and sends\
+            \ it as OrderConfirmID for brokerage duplicate prevention; the response\
+            \ contains TradeStation's separate order ID."
+        expiry_date:
+          description: "ISO 8601 expiry timestamp, required for gtd and invalid with\
+            \ other durations. A missing timezone is treated as UTC. Supported only\
+            \ through existing single-leg Public and Sandbox execution paths."
+          example: 2026-12-18T20:00:00Z
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 2026-12-18T20:00:00Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-expiry_date
+        notional_value:
+          allOf:
+          - $ref: '#/components/schemas/SimpleTradeDecimal'
+          description: "Positive order value, supported only for a single-equity market\
+            \ order on eligible brokerages and partners. Mutually exclusive with leg\
+            \ units. Omit or set units to null when supplied."
+        trading_session:
+          default: regular
+          description: extended uses existing single-leg equity/option brokerage support
+            and requires extended-hours enablement. Futures and multi-leg orders only
+            accept regular.
+          enum:
+          - regular
+          - extended
+          example: regular
+          type: string
+          x-konfig-original-example: regular
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-trading_session
+      required:
+      - accountId
+      - legs
+      - order_type
+      - time_in_force
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - accountId
+      - userId
+      - userSecret
     konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-complex:
       additionalProperties: true
       properties:
@@ -20962,145 +21111,6 @@ components:
       x-do-not-generate: true
       x-konfig-is-parameter:
       - query
-    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple:
-      additionalProperties: true
-      properties:
-        accountId:
-          $ref: '#/components/schemas/AccountID'
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        order_type:
-          enum:
-          - limit
-          - market
-          - stop
-          - stop_limit
-          example: stop_limit
-          type: string
-          x-konfig-original-example: stop_limit
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-order_type
-        time_in_force:
-          description: "Order duration, subject to brokerage and execution-path support.\
-            \ gtd requires expiry_date and a non-market single-leg equity/option order.\
-            \ Existing single-leg option routing does not support ioc. Futures and\
-            \ multi-leg orders do not support gtd through this endpoint. Webull US\
-            \ futures only support day and gtc. TradeStation futures and futures options\
-            \ accept day, gtc, ioc, and fok, subject to the contract and route's supported\
-            \ combinations."
-          enum:
-          - day
-          - gtc
-          - gtd
-          - fok
-          - ioc
-          example: day
-          type: string
-          x-konfig-original-example: day
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-time_in_force
-        legs:
-          description: "Legs of one brokerage order. Use equity/option legs or future/future_option\
-            \ legs, without mixing the two families. Brokerage strategy and leg-count\
-            \ limits apply."
-          items:
-            $ref: '#/components/schemas/SimpleTradeLeg'
-          minItems: 1
-          type: array
-        limit_price:
-          allOf:
-          - $ref: '#/components/schemas/SimpleTradeDecimal'
-          description: "Required for limit and stop_limit orders, except that multi-leg\
-            \ price_effect even implies zero. Must be omitted or null for market and\
-            \ stop orders. For multi-leg orders this is the net strategy price. Negative\
-            \ prices are accepted only for futures-family orders, subject to brokerage\
-            \ support."
-        stop_price:
-          allOf:
-          - $ref: '#/components/schemas/SimpleTradeDecimal'
-          description: Required for stop and stop_limit orders. Must be omitted or
-            null for market and limit orders. Must be positive for equity/option orders;
-            futures-family trigger prices are subject to brokerage support.
-        price_effect:
-          description: "Only applicable to multi-leg limit and stop_limit orders.\
-            \ Requirements and supported values depend on the brokerage; tastytrade\
-            \ requires credit or debit. even implies a zero limit_price, which may\
-            \ be omitted and must be zero if supplied. Single-leg price effects are\
-            \ derived from the action."
-          enum:
-          - credit
-          - debit
-          - even
-          example: debit
-          nullable: true
-          type: string
-          x-konfig-original-example: debit
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-price_effect
-        client_order_id:
-          allOf:
-          - $ref: '#/components/schemas/ClientOrderID'
-          description: "Canonical UUID. Required for Wealthsimple multi-leg placement\
-            \ regardless of client-order-ID enablement; reuse it when retrying the\
-            \ same attempt. Wealthsimple multi-leg attempts retain the ID after success\
-            \ or failure, and reuse by the same user across accounts or placement\
-            \ endpoints returns 409 without another submission. A 409 does not establish\
-            \ whether the original attempt was accepted; reconcile it before creating\
-            \ a new order with a new ID. Optional for other orders, forwarded where\
-            \ the existing execution path supports it and for tastytrade, Webull US,\
-            \ and TradeStation futures-family orders. Other orders require the existing\
-            \ client-order-ID enablement; when disabled the value is ignored. Brokerage\
-            \ behavior on duplicates varies. OAuth requests also reject a client_order_id\
-            \ the user has already used with 409. Tastytrade uses this as external-identifier\
-            \ for correlation and does not deduplicate submissions. For Webull US\
-            \ futures, SnapTrade converts the supplied UUID (or its generated order\
-            \ UUID) to lowercase 32-character hexadecimal without hyphens. The original\
-            \ supplied UUID remains in SnapTrade's trade audit; the converted value\
-            \ is returned as brokerage_order_id for subsequent order reads. For TradeStation\
-            \ live and SIM, SnapTrade encodes the supplied UUID (or its generated\
-            \ order UUID) as 22-character URL-safe base64 without padding and sends\
-            \ it as OrderConfirmID for brokerage duplicate prevention; the response\
-            \ contains TradeStation's separate order ID."
-        expiry_date:
-          description: "ISO 8601 expiry timestamp, required for gtd and invalid with\
-            \ other durations. A missing timezone is treated as UTC. Supported only\
-            \ through existing single-leg Public and Sandbox execution paths."
-          example: 2026-12-18T20:00:00Z
-          format: date-time
-          nullable: true
-          type: string
-          x-konfig-original-example: 2026-12-18T20:00:00Z
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-expiry_date
-        notional_value:
-          allOf:
-          - $ref: '#/components/schemas/SimpleTradeDecimal'
-          description: "Positive order value, supported only for a single-equity market\
-            \ order on eligible brokerages and partners. Mutually exclusive with leg\
-            \ units. Omit or set units to null when supplied."
-        trading_session:
-          default: regular
-          description: extended uses existing single-leg equity/option brokerage support
-            and requires extended-hours enablement. Futures and multi-leg orders only
-            accept regular.
-          enum:
-          - regular
-          - extended
-          example: regular
-          type: string
-          x-konfig-original-example: regular
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-trading_session
-      required:
-      - accountId
-      - legs
-      - order_type
-      - time_in_force
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - accountId
-      - userId
-      - userSecret
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-details-v2-brokerageOrderId:
       additionalProperties: true
       properties:
@@ -22293,6 +22303,29 @@ components:
       - items
       type: object
       x-konfig-is-used-in-successful-response: true
+    Trading_placeSimpleOrder_409_response:
+      additionalProperties: true
+      properties:
+        detail:
+          example: An order with this client_order_id was already submitted. Use a
+            new client_order_id for a new order.
+          type: string
+          x-konfig-original-example: An order with this client_order_id was already
+            submitted. Use a new client_order_id for a new order.
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-trading-simple-post-responses-409-content-application-json-schema-properties-detail
+        status_code:
+          example: 409
+          type: integer
+          x-konfig-original-example: 409
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-trading-simple-post-responses-409-content-application-json-schema-properties-status_code
+        code:
+          example: "1170"
+          type: string
+          x-konfig-original-example: "1170"
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-trading-simple-post-responses-409-content-application-json-schema-properties-code
+      type: object
+      x-konfig-is-used-in-non-successful-response: true
+      x-do-not-generate: true
     TradeDetection_addSubscription_request:
       properties:
         account_id:
@@ -22328,29 +22361,6 @@ components:
       required:
       - account_id
       type: object
-    Trading_placeSimpleOrder_409_response:
-      additionalProperties: true
-      properties:
-        detail:
-          example: An order with this client_order_id was already submitted. Use a
-            new client_order_id for a new order.
-          type: string
-          x-konfig-original-example: An order with this client_order_id was already
-            submitted. Use a new client_order_id for a new order.
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-trading-simple-post-responses-409-content-application-json-schema-properties-detail
-        status_code:
-          example: 409
-          type: integer
-          x-konfig-original-example: 409
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-trading-simple-post-responses-409-content-application-json-schema-properties-status_code
-        code:
-          example: "1170"
-          type: string
-          x-konfig-original-example: "1170"
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-trading-simple-post-responses-409-content-application-json-schema-properties-code
-      type: object
-      x-konfig-is-used-in-non-successful-response: true
-      x-do-not-generate: true
     AccountBalance_total:
       description: "Total market value of this account (includes cash, equity, fixed\
         \ income, etc). This value is directly obtained from the brokerage and should\

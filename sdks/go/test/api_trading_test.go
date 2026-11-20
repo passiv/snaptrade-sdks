@@ -296,6 +296,41 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         */
     })
 
+    t.Run("Test TradingApiService PlaceSimpleOrder", func(t *testing.T) {
+        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        limitPrice := *snaptrade.Newfloat64()
+        stopPrice := *snaptrade.Newfloat64()
+        clientOrderId := *snaptrade.Newstring()
+        notionalValue := *snaptrade.Newfloat64()
+        
+        simpleTradeForm := *snaptrade.NewSimpleTradeForm(
+            "STOP_LIMIT",
+            "DAY",
+            null,
+        )
+        simpleTradeForm.SetLimitPrice(limitPrice)
+        simpleTradeForm.SetStopPrice(stopPrice)
+        simpleTradeForm.SetPriceEffect("DEBIT")
+        simpleTradeForm.SetClientOrderId(clientOrderId)
+        simpleTradeForm.SetExpiryDate(2026-12-18T20:00Z)
+        simpleTradeForm.SetNotionalValue(notionalValue)
+        simpleTradeForm.SetTradingSession("REGULAR")
+        
+        request := client.TradingApi.PlaceSimpleOrder(
+            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+            ""snaptrade-user-123"",
+            ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+            simpleTradeForm,
+        )
+        
+        resp, httpRes, err := request.Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+        */
+    })
+
     t.Run("Test TradingApiService PreviewCryptoOrder", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         instrument := *snaptrade.NewCryptoTradingInstrument()

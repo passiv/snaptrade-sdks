@@ -15,6 +15,7 @@ Method | Path | Description
 [**PlaceForceOrder**](TradingApi.md#PlaceForceOrder) | **Post** /trade/place | Place equity order
 [**PlaceMlegOrder**](TradingApi.md#PlaceMlegOrder) | **Post** /accounts/{accountId}/trading/options | Place option order
 [**PlaceOrder**](TradingApi.md#PlaceOrder) | **Post** /trade/{tradeId} | Place checked equity order
+[**PlaceSimpleOrder**](TradingApi.md#PlaceSimpleOrder) | **Post** /accounts/{accountId}/trading/simple | Place a simple order (beta)
 [**PreviewCryptoOrder**](TradingApi.md#PreviewCryptoOrder) | **Post** /accounts/{accountId}/trading/crypto/preview | Preview crypto order
 [**ReplaceOrder**](TradingApi.md#ReplaceOrder) | **Post** /accounts/{accountId}/trading/replace | Replace order
 [**SearchCryptocurrencyPairInstruments**](TradingApi.md#SearchCryptocurrencyPairInstruments) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Get crypto pairs
@@ -682,6 +683,71 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.ExpiryDate`: %v\n", *resp.ExpiryDate)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.Symbol`: %v\n", *resp.Symbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.ChildBrokerageOrderIds`: %v\n", *resp.ChildBrokerageOrderIds)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PlaceSimpleOrder
+
+Place a simple order (beta)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    limitPrice := *snaptrade.Newfloat64()
+    stopPrice := *snaptrade.Newfloat64()
+    clientOrderId := *snaptrade.Newstring()
+    notionalValue := *snaptrade.Newfloat64()
+    
+    simpleTradeForm := *snaptrade.NewSimpleTradeForm(
+        "STOP_LIMIT",
+        "DAY",
+        null,
+    )
+    simpleTradeForm.SetLimitPrice(limitPrice)
+    simpleTradeForm.SetStopPrice(stopPrice)
+    simpleTradeForm.SetPriceEffect("DEBIT")
+    simpleTradeForm.SetClientOrderId(clientOrderId)
+    simpleTradeForm.SetExpiryDate(2026-12-18T20:00Z)
+    simpleTradeForm.SetNotionalValue(notionalValue)
+    simpleTradeForm.SetTradingSession("REGULAR")
+    
+    request := client.TradingApi.PlaceSimpleOrder(
+        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        ""snaptrade-user-123"",
+        ""adf2aa34-8219-40f7-a6b3-60156985cc61"",
+        simpleTradeForm,
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TradingApi.PlaceSimpleOrder``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `PlaceSimpleOrder`: SimpleTradeResponse
+    fmt.Fprintf(os.Stdout, "Response from `TradingApi.PlaceSimpleOrder`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `SimpleTradeResponse.PlaceSimpleOrder.BrokerageOrderId`: %v\n", resp.BrokerageOrderId)
 }
 ```
 
