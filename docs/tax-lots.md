@@ -14,7 +14,7 @@ Brokerage capabilities may change, so check this page before relying on tax lot 
 
 ## Enabling tax lots
 
-Tax lots are an optional paid feature and are disabled by default. You can enable them for an additional cost from the [SnapTrade Dashboard add-ons page](https://dashboard.snaptrade.com/add-ons).
+Tax Lots is an optional feature that must be enabled through [Dashboard Add-ons](https://dashboard.snaptrade.com/add-ons).
 
 After enabling the feature, request the account's positions as usual and read the `tax_lots` array when it is present. Your integration should handle positions without tax lots, since the underlying brokerage may not support the feature or may not return lot-level data for a particular position.
 
