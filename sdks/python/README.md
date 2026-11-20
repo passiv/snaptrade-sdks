@@ -170,7 +170,7 @@ pip install snaptrade-python-sdk==13.4.7
 Choose the authentication mode that matches your credentials, then use its client in the reference examples.
 
 ### Commercial API Key Auth authentication<a id="commercial-api-key-auth-authentication"></a>
-Use commercial authentication when acting on behalf of your application and passing end-user credentials with requests that require them.
+Use a Commercial API Key when your app manages users and their connection experience.
 
 ```python
 from snaptrade_client import SnapTrade, SnapTradeAuth
