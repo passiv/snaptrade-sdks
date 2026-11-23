@@ -1,0 +1,7 @@
+{
+  "name": "snaptrade-release-checks",
+  "private": true,
+  "dependencies": {
+    "js-yaml": "4.1.1"
+  }
+}

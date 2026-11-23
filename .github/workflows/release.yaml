@@ -157,7 +157,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          ref: ${{ github.ref }}
+          ref: ${{ github.sha }}
 
       - name: Install CLI
         uses: ./.github/actions/shared/install-cli
@@ -220,6 +220,15 @@ jobs:
           max_attempts: 3
           retry_on: error
           command: konfig publish --generator ${{ matrix.language }} --skipTests --tolerateRepublish --skipRemoteCheck --ci
+
+      - name: Install portal revalidation dependencies
+        if: matrix.language == 'typescript'
+        run: npm ci --prefix .github/scripts --ignore-scripts --no-audit --no-fund
+
+      - name: Revalidate portal after TypeScript CDN readiness
+        if: matrix.language == 'typescript'
+        timeout-minutes: 25
+        run: node .github/scripts/revalidate-typescript-portal.cjs
 
   sync-php-mirrors:
     name: Sync PHP mirrors

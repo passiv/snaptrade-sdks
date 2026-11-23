@@ -13,9 +13,15 @@ jobs:
     runs-on: blacksmith-2vcpu-ubuntu-2404
     steps:
       - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
 
       - name: Install CLI
         uses: ./.github/actions/shared/install-cli
 
-      - name: Revalidate portal
-        run: konfig revalidate-portal -o passiv -r snaptrade-sdks
+      - name: Install portal revalidation dependencies
+        run: npm ci --prefix .github/scripts --ignore-scripts --no-audit --no-fund
+
+      - name: Revalidate portal after configured browser SDK readiness
+        timeout-minutes: 25
+        run: node .github/scripts/revalidate-typescript-portal.cjs
