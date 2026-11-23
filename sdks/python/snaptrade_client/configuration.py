@@ -517,10 +517,12 @@ conf = snaptrade_client.Configuration(
             }
         return auth
 
-    def auth_settings_for_auth_modes(self, auth_modes, fallback_auth_settings=None):
+    def auth_settings_for_auth_modes(self, auth_modes, fallback_auth_settings=None, allows_anonymous=False):
         if not auth_modes:
             return fallback_auth_settings
         if self.auth_mode is None:
+            if allows_anonymous:
+                return []
             raise ClientConfigurationError("This operation requires authentication; auth=None only supports public operations")
         if self.auth_mode not in auth_modes:
             raise ClientConfigurationError(
