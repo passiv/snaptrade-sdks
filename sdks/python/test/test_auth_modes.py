@@ -239,3 +239,22 @@ def test_none_auth_protected_operation_fails_before_http(monkeypatch, operation)
         else:
             client.authentication.list_snap_trade_users()
     assert calls == []
+
+
+@pytest.mark.parametrize("credentials", [
+        {"api_key": {"PartnerClientId": "legacy-client"}},
+        {"client_id": "legacy-client", "consumer_key": "legacy-secret"},
+        {"access_token": "legacy-token"},
+])
+def test_prebuilt_credentialed_configuration_preserves_legacy_auth(monkeypatch, credentials):
+    from snaptrade_client.configuration import Configuration
+
+    calls = _install_request_spy(monkeypatch, response_payload=b"[]")
+    configuration = Configuration(host="https://api.snaptrade.com/api/v1", **credentials)
+    SnapTrade(configuration, auth=None).reference_data.list_all_brokerages()
+
+    assert len(calls) == 1
+    if "access_token" in credentials:
+        assert calls[0]["headers"]["Authorization"] == "Bearer legacy-token"
+    else:
+        assert "clientId=legacy-client" in calls[0]["url"]
