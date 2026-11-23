@@ -77,10 +77,10 @@ import {
   ReferenceDataApi,
   TradingApi,
 } from "./api";
-import { AuthMode, Configuration, ConfigurationParameters } from "./configuration";
+import { ClientAuth, Configuration, ConfigurationParameters } from "./configuration";
 import { SnaptradeCustom } from "./client-custom";
 
-export class Snaptrade<TAuth extends AuthMode> extends SnaptradeCustom<TAuth> {
+export class Snaptrade<TAuth extends ClientAuth> extends SnaptradeCustom<TAuth> {
   readonly accountInformation: AccountInformationApi<TAuth>;
   readonly apiStatus: ApiStatusApi<TAuth>;
   readonly authentication: AuthenticationApi<TAuth>;

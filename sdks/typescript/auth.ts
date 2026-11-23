@@ -117,11 +117,12 @@ export class OAuthAuth {
 }
 
 export type AuthMode =
-    | null
     | CommercialApiKeyAuth
     | PersonalApiKeyAuth
     | OAuthAuth
 ;
+
+export type ClientAuth = AuthMode | null;
 
 export class SnaptradeAuth {
     private constructor() {}
