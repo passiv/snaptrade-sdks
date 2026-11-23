@@ -1,4 +1,4 @@
-import { AuthMode, Configuration } from "./configuration";
+import { ClientAuth, Configuration } from "./configuration";
 import { AxiosRequestConfig } from "axios";
 
 export function requestBeforeHook(request: {
@@ -6,7 +6,7 @@ export function requestBeforeHook(request: {
   queryParameters: Record<string, any>;
   path: string;
   requestConfig: AxiosRequestConfig;
-  configuration?: Configuration<AuthMode>;
+  configuration?: Configuration<ClientAuth>;
   pathTemplate: string;
   httpMethod: string;
   operationAuth?: {

@@ -186,6 +186,14 @@ yarn add snaptrade-typescript-sdk
 ## Authentication<a id="authentication"></a>
 
 Choose the authentication mode that matches your credentials, then use its client in the reference examples.
+
+The `auth` option is required. Pass `auth: null` explicitly to call public endpoints without credentials. TypeScript rejects protected endpoint calls from a client initialized with `auth: null`. The API server enforces authentication at runtime.
+
+```typescript
+import { Snaptrade } from "snaptrade-typescript-sdk";
+
+const unauthenticatedClient = new Snaptrade({ auth: null });
+```
 ### Commercial API Key Auth authentication<a id="commercial-api-key-auth-authentication"></a>
 Use a Commercial API Key when your app manages users and their connection experience.
 

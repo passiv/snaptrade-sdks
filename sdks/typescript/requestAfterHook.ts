@@ -1,5 +1,5 @@
 import { RequestArgs } from "./base";
-import { AuthMode, Configuration } from "./configuration";
+import { ClientAuth, Configuration } from "./configuration";
 
 function bytesToBase64(bytes: Uint8Array): string {
   let binary = "";
@@ -63,7 +63,7 @@ export async function requestAfterHook(request: {
   axiosArgs: RequestArgs;
   basePath: string;
   url: string;
-  configuration?: Configuration<AuthMode>;
+  configuration?: Configuration<ClientAuth>;
   operationAuth?: {
     selectedAuthMode?: string;
     authModes?: string[];
@@ -83,7 +83,7 @@ export async function requestAfterHook(request: {
     (scheme) => scheme.toLowerCase().endsWith("signature")
   );
   if (signatureScheme === undefined) return;
-  const signingSecret = configuration?.[requestSigning.secretParameter as keyof Configuration<AuthMode>];
+  const signingSecret = configuration?.[requestSigning.secretParameter as keyof Configuration<ClientAuth>];
   if (typeof signingSecret !== "string")
     throw Error(`${requestSigning.secretParameter} is required`);
   const encodedSigningSecret = encodeURI(signingSecret);

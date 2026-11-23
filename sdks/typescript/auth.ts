@@ -122,6 +122,8 @@ export type AuthMode =
     | OAuthAuth
 ;
 
+export type ClientAuth = AuthMode | null;
+
 export class SnaptradeAuth {
     private constructor() {}
 
