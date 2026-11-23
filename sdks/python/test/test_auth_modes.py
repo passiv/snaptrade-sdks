@@ -258,3 +258,36 @@ def test_prebuilt_credentialed_configuration_preserves_legacy_auth(monkeypatch, 
         assert calls[0]["headers"]["Authorization"] == "Bearer legacy-token"
     else:
         assert "clientId=legacy-client" in calls[0]["url"]
+
+
+def test_legacy_guard_does_not_refresh_credentials(monkeypatch):
+    from snaptrade_client.configuration import Configuration
+
+    calls = _install_request_spy(monkeypatch, response_payload=b"[]")
+    configuration = Configuration(
+        host="https://api.snaptrade.com/api/v1",
+        api_key={"PersonalClientId": "legacy-client"},
+    )
+    refreshes = []
+    configuration.refresh_api_key_hook = lambda config: refreshes.append(config)
+    assert configuration.auth_settings_for_auth_modes(
+        {"personalApiKey": ["PersonalClientId"]}, ["PersonalClientId"],
+    ) == ["PersonalClientId"]
+    assert refreshes == []
+    SnapTrade(configuration, auth=None).reference_data.list_all_brokerages()
+
+    from snaptrade_client.paths.brokerages.get import _legacy_auth
+    assert len(calls) == 1
+    assert len(refreshes) == len(_legacy_auth)
+
+
+def test_legacy_guard_preserves_configured_refresh_hook_without_calling_it():
+    from snaptrade_client.configuration import Configuration
+
+    configuration = Configuration()
+    refreshes = []
+    configuration.refresh_api_key_hook = lambda config: refreshes.append(config)
+    assert configuration.auth_settings_for_auth_modes(
+        {"personalApiKey": ["PersonalClientId"]}, ["PersonalClientId"],
+    ) == ["PersonalClientId"]
+    assert refreshes == []

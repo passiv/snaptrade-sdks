@@ -517,12 +517,33 @@ conf = snaptrade_client.Configuration(
             }
         return auth
 
+    def _has_legacy_auth_settings(self, fallback_auth_settings):
+        fallback_names = set(fallback_auth_settings or [])
+        if 'OAuthBearer' in fallback_names and self.access_token is not None:
+            return True
+        if 'PartnerClientId' in fallback_names and (self.refresh_api_key_hook is not None or 'PartnerClientId' in self.api_key):
+            return True
+        if 'PartnerSignature' in fallback_names and (self.refresh_api_key_hook is not None or 'PartnerSignature' in self.api_key):
+            return True
+        if 'PartnerTimestamp' in fallback_names and (self.refresh_api_key_hook is not None or 'PartnerTimestamp' in self.api_key):
+            return True
+        if 'PersonalClientId' in fallback_names and (self.refresh_api_key_hook is not None or 'PersonalClientId' in self.api_key or 'PartnerClientId' in self.api_key):
+            return True
+        if 'PersonalSignature' in fallback_names and (self.refresh_api_key_hook is not None or 'PersonalSignature' in self.api_key or 'PartnerSignature' in self.api_key):
+            return True
+        if 'PersonalTimestamp' in fallback_names and (self.refresh_api_key_hook is not None or 'PersonalTimestamp' in self.api_key or 'PartnerTimestamp' in self.api_key):
+            return True
+        if 'userId' in fallback_names and (self.refresh_api_key_hook is not None or 'userId' in self.api_key):
+            return True
+        if 'userSecret' in fallback_names and (self.refresh_api_key_hook is not None or 'userSecret' in self.api_key):
+            return True
+        return False
+
     def auth_settings_for_auth_modes(self, auth_modes, fallback_auth_settings=None, allows_anonymous=False):
         if not auth_modes:
             return fallback_auth_settings
         if self.auth_mode is None:
-            legacy_auth = self.auth_settings()
-            if any(name in legacy_auth for name in fallback_auth_settings or []):
+            if self._has_legacy_auth_settings(fallback_auth_settings):
                 return fallback_auth_settings
             if allows_anonymous:
                 return []
