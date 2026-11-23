@@ -372,7 +372,7 @@ generators:
         - pnpm typecheck
         - pnpm test
         - pnpm build
-    version: 13.4.8
+    version: 13.4.9
     outputDirectory: sdks/typescript
     clientState:
       - consumerKey
