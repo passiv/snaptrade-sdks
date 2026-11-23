@@ -117,6 +117,7 @@ export class OAuthAuth {
 }
 
 export type AuthMode =
+    | null
     | CommercialApiKeyAuth
     | PersonalApiKeyAuth
     | OAuthAuth

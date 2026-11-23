@@ -432,3 +432,15 @@ async function requestArgumentTypeCoverage() {
 }
 
 void requestArgumentTypeCoverage;
+
+// Public access must be explicit and cannot authenticate protected requests.
+const unauthenticatedClient = new Snaptrade({ auth: null });
+unauthenticatedClient.apiStatus.check();
+// @ts-expect-error The auth option is required.
+new Snaptrade({});
+// @ts-expect-error Undefined does not request public access.
+new Snaptrade({ auth: undefined });
+// @ts-expect-error Protected operations require an authentication mode.
+unauthenticatedClient.authentication.listSnapTradeUsers();
+// @ts-expect-error Request credentials do not authenticate the SDK client.
+unauthenticatedClient.accountInformation.listUserAccounts({ userId: "user", userSecret: "secret" });

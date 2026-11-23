@@ -97,12 +97,15 @@ export interface ConfigurationParametersShared {
     formDataCtor?: new () => FormDataLike;
 }
 
+export type AuthModeName<TAuth extends AuthMode> =
+    TAuth extends null ? undefined : NonNullable<TAuth>["mode"];
+
 export interface ConfigurationParameters<TAuth extends AuthMode> extends ConfigurationParametersShared {
     auth: TAuth;
 }
 
 export class Configuration<TAuth extends AuthMode> {
-    authMode: TAuth["mode"];
+    authMode: AuthModeName<TAuth>;
     /**
     * Client state
     */
@@ -162,17 +165,20 @@ export class Configuration<TAuth extends AuthMode> {
     userAgent: string;
 
     constructor(param: ConfigurationParameters<TAuth>) {
-        this.authMode = param.auth.mode;
+        if (param.auth === undefined) {
+            throw new TypeError("auth is required; use auth: null for unauthenticated requests");
+        }
+        this.authMode = param.auth?.mode as AuthModeName<TAuth>;
         this.apiKey = {};
-        if (param.auth.mode === "commercialApiKey") {
+        if (param.auth?.mode === "commercialApiKey") {
             this.consumerKey = param.auth.consumerKey;
             if (param.auth.clientId !== undefined) this.apiKey["clientId"] = param.auth.clientId;
         }
-        if (param.auth.mode === "personalApiKey") {
+        if (param.auth?.mode === "personalApiKey") {
             this.consumerKey = param.auth.consumerKey;
             if (param.auth.clientId !== undefined) this.apiKey["clientId"] = param.auth.clientId;
         }
-        if (param.auth.mode === "oauth") {
+        if (param.auth?.mode === "oauth") {
             this.accessToken = param.auth.accessToken;
         }
         this.basePath = param.basePath;
