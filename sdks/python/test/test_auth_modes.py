@@ -210,3 +210,32 @@ def test_public_operation_does_not_use_selected_auth_mode(monkeypatch):
     assert len(calls) == 1
     assert calls[0]["url"] == "https://api.snaptrade.com/api/v1/"
     assert "Signature" not in calls[0]["headers"]
+
+
+def test_none_auth_public_operation_does_not_sign(monkeypatch):
+    calls = _install_request_spy(monkeypatch)
+    client = SnapTrade(auth=None, host="https://api.snaptrade.com/api/v1")
+    client.api_status.check()
+    assert len(calls) == 1
+    assert calls[0]["url"] == "https://api.snaptrade.com/api/v1/"
+    assert "Signature" not in calls[0]["headers"]
+    assert "Authorization" not in calls[0]["headers"]
+
+
+def test_omitted_auth_is_rejected():
+    with pytest.raises(TypeError, match="auth"):
+        SnapTrade()
+
+
+@pytest.mark.parametrize("operation", ["accounts", "users"])
+def test_none_auth_protected_operation_fails_before_http(monkeypatch, operation):
+    from snaptrade_client.exceptions import ClientConfigurationError
+
+    calls = _install_request_spy(monkeypatch)
+    client = SnapTrade(auth=None)
+    with pytest.raises(ClientConfigurationError, match="requires authentication"):
+        if operation == "accounts":
+            client.account_information.list_user_accounts()
+        else:
+            client.authentication.list_snap_trade_users()
+    assert calls == []

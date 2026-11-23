@@ -21,7 +21,7 @@ from snaptrade_client.paths.authorizations_authorization_id_transactions_sync.po
 import typing
 from snaptrade_client.auth import AuthMode
 
-TAuth = typing.TypeVar("TAuth", bound=AuthMode)
+TAuth = typing.TypeVar("TAuth", bound=typing.Optional[AuthMode])
 
 
 class ConnectionsApiGenerated(

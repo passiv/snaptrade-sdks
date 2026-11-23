@@ -31,7 +31,7 @@ from snaptrade_client.paths.accounts_account_id.put import UpdateUserAccount
 import typing
 from snaptrade_client.auth import AuthMode
 
-TAuth = typing.TypeVar("TAuth", bound=AuthMode)
+TAuth = typing.TypeVar("TAuth", bound=typing.Optional[AuthMode])
 
 
 class AccountInformationApiGenerated(

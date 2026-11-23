@@ -77,6 +77,7 @@ See https://docs.snaptrade.com/docs/ratelimiting.
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Authentication](#authentication)
+  * [Public operations](#public-operations)
   * [Commercial API Key Auth authentication](#commercial-api-key-auth-authentication)
   * [Personal API Key Auth authentication](#personal-api-key-auth-authentication)
   * [OAuth Auth authentication](#oauth-auth-authentication)
@@ -168,6 +169,16 @@ pip install snaptrade-python-sdk==13.4.8
 ## Authentication<a id="authentication"></a>
 
 Choose the authentication mode that matches your credentials, then use its client in the reference examples.
+
+### Public operations<a id="public-operations"></a>
+
+Pass `auth=None` explicitly to call public operations without credentials. The `auth` argument is required so unauthenticated access is intentional; omitting it is an error. Protected operations require an authenticated client.
+
+```python
+from snaptrade_client import SnapTrade
+
+public_client = SnapTrade(auth=None)
+```
 
 ### Commercial API Key Auth authentication<a id="commercial-api-key-auth-authentication"></a>
 Use a Commercial API Key when your app manages users and their connection experience.

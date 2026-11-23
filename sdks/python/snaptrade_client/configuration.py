@@ -29,7 +29,7 @@ from snaptrade_client.exceptions import ClientConfigurationError
 from snaptrade_client.exceptions import InvalidHostConfigurationError
 from snaptrade_client.auth import AuthMode
 
-TAuth = typing.TypeVar("TAuth", bound=AuthMode)
+TAuth = typing.TypeVar("TAuth", bound=typing.Optional[AuthMode])
 
 
 JSON_SCHEMA_VALIDATION_KEYWORDS = {
@@ -521,7 +521,7 @@ conf = snaptrade_client.Configuration(
         if not auth_modes:
             return fallback_auth_settings
         if self.auth_mode is None:
-            return fallback_auth_settings
+            raise ClientConfigurationError("This operation requires authentication; auth=None only supports public operations")
         if self.auth_mode not in auth_modes:
             raise ClientConfigurationError(
                 "This operation does not support the selected auth mode: %s" % self.auth_mode

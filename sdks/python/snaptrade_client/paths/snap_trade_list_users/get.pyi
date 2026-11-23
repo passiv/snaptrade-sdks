@@ -16,7 +16,7 @@ from snaptrade_client import api_client
 from snaptrade_client.auth import AuthMode
 from snaptrade_client.auth import CommercialApiKeyAuth
 
-TAuth = typing.TypeVar("TAuth", bound=AuthMode)
+TAuth = typing.TypeVar("TAuth", bound=typing.Optional[AuthMode])
 
 
 class BaseApi(api_client.Api):

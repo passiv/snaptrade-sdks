@@ -71,7 +71,7 @@ class RequestField(RequestFieldBase):
         return self.__dict__ == other.__dict__
 
 
-TAuth = typing.TypeVar("TAuth", bound=AuthMode)
+TAuth = typing.TypeVar("TAuth", bound=typing.Optional[AuthMode])
 
 
 def DeprecationWarningOnce(func=None, *, prefix=None):

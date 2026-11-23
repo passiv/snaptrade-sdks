@@ -25,7 +25,7 @@ from snaptrade_client.apis.tags.reference_data_api import ReferenceDataApi
 from snaptrade_client.apis.tags.trading_api import TradingApi
 from snaptrade_client.client_custom import ClientCustom
 
-TAuth = typing.TypeVar("TAuth", bound=AuthMode)
+TAuth = typing.TypeVar("TAuth", bound=typing.Optional[AuthMode])
 
 
 class SnapTrade(ClientCustom, typing.Generic[TAuth]):
@@ -64,8 +64,19 @@ class SnapTrade(ClientCustom, typing.Generic[TAuth]):
     ) -> None: ...
     @typing.overload
     def __init__(
+        self: "SnapTrade[None]",
+        configuration: None = None,
+        *,
+        auth: None,
+        consumer_key: None = None,
+        client_id: None = None,
+        access_token: None = None,
+        **kwargs: typing.Any,
+    ) -> None: ...
+    @typing.overload
+    def __init__(
         self: "SnapTrade[TAuth]",
-        configuration: typing.Optional[Configuration[TAuth]] = None,
+        configuration: Configuration[TAuth],
         *,
         auth: None,
         consumer_key: None = None,

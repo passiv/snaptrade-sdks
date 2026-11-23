@@ -27,7 +27,7 @@ from snaptrade_client.paths.accounts_account_id_trading_instruments_cryptocurren
 import typing
 from snaptrade_client.auth import AuthMode
 
-TAuth = typing.TypeVar("TAuth", bound=AuthMode)
+TAuth = typing.TypeVar("TAuth", bound=typing.Optional[AuthMode])
 
 
 class TradingApiGenerated(
