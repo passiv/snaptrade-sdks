@@ -281,13 +281,15 @@ def test_legacy_guard_does_not_refresh_credentials(monkeypatch):
     assert len(refreshes) == len(_legacy_auth)
 
 
-def test_legacy_guard_preserves_configured_refresh_hook_without_calling_it():
+def test_unseeded_refresh_hook_does_not_authenticate_protected_request(monkeypatch):
     from snaptrade_client.configuration import Configuration
+    from snaptrade_client.exceptions import ClientConfigurationError
 
+    calls = _install_request_spy(monkeypatch, response_payload=b"[]")
     configuration = Configuration()
     refreshes = []
     configuration.refresh_api_key_hook = lambda config: refreshes.append(config)
-    assert configuration.auth_settings_for_auth_modes(
-        {"personalApiKey": ["PersonalClientId"]}, ["PersonalClientId"],
-    ) == ["PersonalClientId"]
+    with pytest.raises(ClientConfigurationError, match="requires authentication"):
+        SnapTrade(configuration, auth=None).reference_data.list_all_brokerages()
+    assert calls == []
     assert refreshes == []

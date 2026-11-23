@@ -521,21 +521,21 @@ conf = snaptrade_client.Configuration(
         fallback_names = set(fallback_auth_settings or [])
         if 'OAuthBearer' in fallback_names and self.access_token is not None:
             return True
-        if 'PartnerClientId' in fallback_names and (self.refresh_api_key_hook is not None or 'PartnerClientId' in self.api_key):
+        if 'PartnerClientId' in fallback_names and ('PartnerClientId' in self.api_key):
             return True
-        if 'PartnerSignature' in fallback_names and (self.refresh_api_key_hook is not None or 'PartnerSignature' in self.api_key):
+        if 'PartnerSignature' in fallback_names and ('PartnerSignature' in self.api_key):
             return True
-        if 'PartnerTimestamp' in fallback_names and (self.refresh_api_key_hook is not None or 'PartnerTimestamp' in self.api_key):
+        if 'PartnerTimestamp' in fallback_names and ('PartnerTimestamp' in self.api_key):
             return True
-        if 'PersonalClientId' in fallback_names and (self.refresh_api_key_hook is not None or 'PersonalClientId' in self.api_key or 'PartnerClientId' in self.api_key):
+        if 'PersonalClientId' in fallback_names and ('PersonalClientId' in self.api_key or 'PartnerClientId' in self.api_key):
             return True
-        if 'PersonalSignature' in fallback_names and (self.refresh_api_key_hook is not None or 'PersonalSignature' in self.api_key or 'PartnerSignature' in self.api_key):
+        if 'PersonalSignature' in fallback_names and ('PersonalSignature' in self.api_key or 'PartnerSignature' in self.api_key):
             return True
-        if 'PersonalTimestamp' in fallback_names and (self.refresh_api_key_hook is not None or 'PersonalTimestamp' in self.api_key or 'PartnerTimestamp' in self.api_key):
+        if 'PersonalTimestamp' in fallback_names and ('PersonalTimestamp' in self.api_key or 'PartnerTimestamp' in self.api_key):
             return True
-        if 'userId' in fallback_names and (self.refresh_api_key_hook is not None or 'userId' in self.api_key):
+        if 'userId' in fallback_names and ('userId' in self.api_key):
             return True
-        if 'userSecret' in fallback_names and (self.refresh_api_key_hook is not None or 'userSecret' in self.api_key):
+        if 'userSecret' in fallback_names and ('userSecret' in self.api_key):
             return True
         return False
 
