@@ -183,7 +183,7 @@ export class Configuration<TAuth extends ClientAuth> {
         }
         this.basePath = param.basePath;
         this.baseOptions = param.baseOptions ?? {};
-        this.userAgent = param.userAgent === undefined ? "Konfig/13.4.10/typescript" : param.userAgent;
+        this.userAgent = param.userAgent === undefined ? "Konfig/13.4.11/typescript" : param.userAgent;
         this.formDataCtor = param.formDataCtor;
     }
 
