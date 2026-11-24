@@ -614,6 +614,7 @@ func main() {
 
 
 ## GetUserAccountOrderDetail
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Get account order detail
 
@@ -690,6 +691,7 @@ func main() {
 
 
 ## GetUserAccountOrders
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 List account orders
 
@@ -762,6 +764,7 @@ func main() {
 
 
 ## GetUserAccountRecentOrders
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 List account recent orders (last 24 hours only)
 

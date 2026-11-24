@@ -243,9 +243,7 @@ Configure confidential-client credentials on your backend. The synchronous helpe
 ```python
 from snaptrade_client import SnapTrade, SnapTradeAuth, SnapTradeOAuth
 
-oauth = SnapTradeOAuth(
-    client_id=client_id, client_secret=client_secret, redirect_uri=redirect_uri
-)
+oauth = SnapTradeOAuth(client_id=client_id, client_secret=client_secret, redirect_uri=redirect_uri)
 flow = oauth.create_authorization_url(scope="read")
 # Save flow in the user's login session, then redirect to flow.url.
 # In the callback, handle OAuth errors, validate state, and consume that saved flow.
@@ -255,9 +253,7 @@ client = SnapTrade(auth=SnapTradeAuth.oauth(access_token=tokens.access_token))
 # Refresh explicitly and atomically replace the stored response, including the rotated refresh token.
 assert tokens.refresh_token is not None
 refreshed = oauth.refresh_token(refresh_token=tokens.refresh_token)
-refreshed_client = SnapTrade(
-    auth=SnapTradeAuth.oauth(access_token=refreshed.access_token)
-)
+refreshed_client = SnapTrade(auth=SnapTradeAuth.oauth(access_token=refreshed.access_token))
 ```
 
 Token responses include `access_token`, `refresh_token`, `expires_in`, `token_type`, `scope`, and `raw`. Applications own token storage, callback validation, refresh scheduling and concurrency. A configured secret defaults to `client_secret_basic`; public clients omit the secret. Browser code must never receive a confidential-client secret.
@@ -289,7 +285,9 @@ pprint(api_response.body)
 
 # 3) Create a new user on SnapTrade
 user_id = str(uuid.uuid4())
-register_response = snaptrade.authentication.register_snap_trade_user(user_id=user_id)
+register_response = snaptrade.authentication.register_snap_trade_user(
+    user_id=user_id
+)
 pprint(register_response.body)
 
 # Note: A user secret is only generated once. It's required to access
@@ -325,8 +323,11 @@ else:
     pprint(accounts.body)
 
 # 6) Deleting a user
-deleted_response = snaptrade.authentication.delete_snap_trade_user(user_id=user_id)
+deleted_response = snaptrade.authentication.delete_snap_trade_user(
+    user_id=user_id
+)
 pprint(deleted_response.body)
+
 ```
 
 ## Request timeouts<a id="request-timeouts"></a>
@@ -341,6 +342,7 @@ Timeouts apply to individual HTTP attempts; retries can increase the overall dur
 `async` support is available by prepending `a` to any method.
 
 ```python
+
 import asyncio
 from pprint import pprint
 from snaptrade_client import SnapTrade, ApiException, SnapTradeAuth
@@ -350,21 +352,19 @@ snaptrade = SnapTrade(
         consumer_key="YOUR_CONSUMER_KEY",
         client_id="YOUR_CLIENT_ID",
     ),
-)
 
+)
 
 async def main():
     try:
         # List account activities
-        get_account_activities_response = (
-            await snaptrade.account_information.aget_account_activities(
-                account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-                start_date="2022-01-24",
-                end_date="2022-01-24",
-                offset=0,
-                limit=1,
-                type="BUY,SELL,DIVIDEND",
-            )
+        get_account_activities_response = await snaptrade.account_information.aget_account_activities(
+            account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+            start_date="2022-01-24",
+            end_date="2022-01-24",
+            offset=0,
+            limit=1,
+            type="BUY,SELL,DIVIDEND",
         )
         pprint(get_account_activities_response.body)
         pprint(get_account_activities_response.body["data"])
@@ -373,16 +373,12 @@ async def main():
         pprint(get_account_activities_response.status)
         pprint(get_account_activities_response.round_trip_time)
     except ApiException as e:
-        print(
-            "Exception when calling AccountInformationApi.get_account_activities: %s\n"
-            % e
-        )
+        print("Exception when calling AccountInformationApi.get_account_activities: %s\n" % e)
         pprint(e.body)
         pprint(e.headers)
         pprint(e.status)
         pprint(e.reason)
         pprint(e.round_trip_time)
-
 
 asyncio.run(main())
 ```
@@ -409,17 +405,15 @@ If the connection has become disabled, it can no longer access the latest data f
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-get_account_activities_response = (
-    commercial_api_key_client.account_information.get_account_activities(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        start_date="2022-01-24",
-        end_date="2022-01-24",
-        offset=0,
-        limit=1,
-        type="BUY,SELL,DIVIDEND",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_account_activities_response = commercial_api_key_client.account_information.get_account_activities(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    start_date="2022-01-24",
+    end_date="2022-01-24",
+    offset=0,
+    limit=1,
+    type="BUY,SELL,DIVIDEND",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -432,15 +426,13 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-get_account_activities_response = (
-    personal_api_key_client.account_information.get_account_activities(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        start_date="2022-01-24",
-        end_date="2022-01-24",
-        offset=0,
-        limit=1,
-        type="BUY,SELL,DIVIDEND",
-    )
+get_account_activities_response = personal_api_key_client.account_information.get_account_activities(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    start_date="2022-01-24",
+    end_date="2022-01-24",
+    offset=0,
+    limit=1,
+    type="BUY,SELL,DIVIDEND",
 )
 ```
 
@@ -449,15 +441,13 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ##### OAuth Auth<a id="oauth-auth"></a>
 
 ```python
-get_account_activities_response = (
-    oauth_client.account_information.get_account_activities(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        start_date="2022-01-24",
-        end_date="2022-01-24",
-        offset=0,
-        limit=1,
-        type="BUY,SELL,DIVIDEND",
-    )
+get_account_activities_response = oauth_client.account_information.get_account_activities(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    start_date="2022-01-24",
+    end_date="2022-01-24",
+    offset=0,
+    limit=1,
+    type="BUY,SELL,DIVIDEND",
 )
 ```
 
@@ -512,12 +502,10 @@ The data may contain gaps and is best used for charting account value trends. It
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-get_account_balance_history_response = (
-    commercial_api_key_client.account_information.get_account_balance_history(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_account_balance_history_response = commercial_api_key_client.account_information.get_account_balance_history(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -530,10 +518,8 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-get_account_balance_history_response = (
-    personal_api_key_client.account_information.get_account_balance_history(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
+get_account_balance_history_response = personal_api_key_client.account_information.get_account_balance_history(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 ```
 
@@ -542,10 +528,8 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ##### OAuth Auth<a id="oauth-auth"></a>
 
 ```python
-get_account_balance_history_response = (
-    oauth_client.account_information.get_account_balance_history(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
+get_account_balance_history_response = oauth_client.account_information.get_account_balance_history(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 ```
 
@@ -588,12 +572,10 @@ If the connection has become disabled, it can no longer access the latest data f
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-get_account_balances_v2_response = (
-    commercial_api_key_client.account_information.get_account_balances_v2(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_account_balances_v2_response = commercial_api_key_client.account_information.get_account_balances_v2(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -606,10 +588,8 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-get_account_balances_v2_response = (
-    personal_api_key_client.account_information.get_account_balances_v2(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
+get_account_balances_v2_response = personal_api_key_client.account_information.get_account_balances_v2(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 ```
 
@@ -650,12 +630,10 @@ If the connection has become disabled, it can no longer access the latest data f
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-get_account_details_response = (
-    commercial_api_key_client.account_information.get_account_details(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_account_details_response = commercial_api_key_client.account_information.get_account_details(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -668,10 +646,8 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-get_account_details_response = (
-    personal_api_key_client.account_information.get_account_details(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
+get_account_details_response = personal_api_key_client.account_information.get_account_details(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 ```
 
@@ -714,21 +690,17 @@ This endpoint is always realtime and does not rely on cached data, except that a
 
 This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
 
-**Beta:** this endpoint and its response schema may change.
-
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-get_account_order_response = (
-    commercial_api_key_client.account_information.get_account_order(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_account_order_response = commercial_api_key_client.account_information.get_account_order(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -741,11 +713,9 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-get_account_order_response = (
-    personal_api_key_client.account_information.get_account_order(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
-    )
+get_account_order_response = personal_api_key_client.account_information.get_account_order(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
 )
 ```
 
@@ -782,17 +752,15 @@ History refreshes daily. Timing and available history depend on the brokerage. A
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-get_account_transactions_response = (
-    commercial_api_key_client.account_information.get_account_transactions(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        start_date="2022-01-24",
-        end_date="2022-01-24",
-        type="BUY,DIVIDEND",
-        offset=0,
-        limit=1000,
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_account_transactions_response = commercial_api_key_client.account_information.get_account_transactions(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    start_date="2022-01-24",
+    end_date="2022-01-24",
+    type="BUY,DIVIDEND",
+    offset=0,
+    limit=1000,
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -805,15 +773,13 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-get_account_transactions_response = (
-    personal_api_key_client.account_information.get_account_transactions(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        start_date="2022-01-24",
-        end_date="2022-01-24",
-        type="BUY,DIVIDEND",
-        offset=0,
-        limit=1000,
-    )
+get_account_transactions_response = personal_api_key_client.account_information.get_account_transactions(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    start_date="2022-01-24",
+    end_date="2022-01-24",
+    type="BUY,DIVIDEND",
+    offset=0,
+    limit=1000,
 )
 ```
 
@@ -864,8 +830,6 @@ Every order carries a `legs` list with at least one leg. Each leg's `instrument`
 
 `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage's own label is in `raw_type`.
 
-**Beta:** this endpoint and its response schema may change.
-
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
 
@@ -874,14 +838,12 @@ If the connection has become disabled, it can no longer access the latest data f
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-get_all_account_orders_response = (
-    commercial_api_key_client.account_information.get_all_account_orders(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        state="all",
-        days=30,
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_all_account_orders_response = commercial_api_key_client.account_information.get_all_account_orders(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    state="all",
+    days=30,
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -894,12 +856,10 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-get_all_account_orders_response = (
-    personal_api_key_client.account_information.get_all_account_orders(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        state="all",
-        days=30,
-    )
+get_all_account_orders_response = personal_api_key_client.account_information.get_all_account_orders(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    state="all",
+    days=30,
 )
 ```
 
@@ -948,12 +908,10 @@ If the connection has become disabled, it can no longer access the latest data f
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-get_all_account_positions_response = (
-    commercial_api_key_client.account_information.get_all_account_positions(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_all_account_positions_response = commercial_api_key_client.account_information.get_all_account_positions(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -966,10 +924,8 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-get_all_account_positions_response = (
-    personal_api_key_client.account_information.get_all_account_positions(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
+get_all_account_positions_response = personal_api_key_client.account_information.get_all_account_positions(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 ```
 
@@ -978,10 +934,8 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ##### OAuth Auth<a id="oauth-auth"></a>
 
 ```python
-get_all_account_positions_response = (
-    oauth_client.account_information.get_all_account_positions(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
+get_all_account_positions_response = oauth_client.account_information.get_all_account_positions(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 ```
 
@@ -1013,21 +967,17 @@ By default only returns executed orders, but that can be changed by setting *onl
 
 Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.
 
-**Beta:** this endpoint and its response schema may change.
-
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-get_all_account_recent_orders_response = (
-    commercial_api_key_client.account_information.get_all_account_recent_orders(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        only_executed=True,
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_all_account_recent_orders_response = commercial_api_key_client.account_information.get_all_account_recent_orders(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    only_executed=True,
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -1040,11 +990,9 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-get_all_account_recent_orders_response = (
-    personal_api_key_client.account_information.get_all_account_recent_orders(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        only_executed=True,
-    )
+get_all_account_recent_orders_response = personal_api_key_client.account_information.get_all_account_recent_orders(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    only_executed=True,
 )
 ```
 
@@ -1087,12 +1035,10 @@ If the connection has become disabled, it can no longer access the latest data f
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-get_user_account_balance_response = (
-    commercial_api_key_client.account_information.get_user_account_balance(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_user_account_balance_response = commercial_api_key_client.account_information.get_user_account_balance(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -1105,10 +1051,8 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-get_user_account_balance_response = (
-    personal_api_key_client.account_information.get_user_account_balance(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
+get_user_account_balance_response = personal_api_key_client.account_information.get_user_account_balance(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 ```
 
@@ -1117,10 +1061,8 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ##### OAuth Auth<a id="oauth-auth"></a>
 
 ```python
-get_user_account_balance_response = (
-    oauth_client.account_information.get_user_account_balance(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
+get_user_account_balance_response = oauth_client.account_information.get_user_account_balance(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 ```
 
@@ -1164,12 +1106,10 @@ If the connection has become disabled, it can no longer access the latest data f
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-get_user_account_details_response = (
-    commercial_api_key_client.account_information.get_user_account_details(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_user_account_details_response = commercial_api_key_client.account_information.get_user_account_details(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -1182,10 +1122,8 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-get_user_account_details_response = (
-    personal_api_key_client.account_information.get_user_account_details(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
+get_user_account_details_response = personal_api_key_client.account_information.get_user_account_details(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 ```
 
@@ -1194,10 +1132,8 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ##### OAuth Auth<a id="oauth-auth"></a>
 
 ```python
-get_user_account_details_response = (
-    oauth_client.account_information.get_user_account_details(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
+get_user_account_details_response = oauth_client.account_information.get_user_account_details(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 ```
 
@@ -1221,6 +1157,9 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ---
 
 ### `snaptrade.account_information.get_user_account_order_detail`<a id="snaptradeaccount_informationget_user_account_order_detail"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+**Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.
 
 Returns the detail of a single order using the external order ID provided in the request body.
 
@@ -1236,13 +1175,11 @@ This endpoint only returns orders placed through SnapTrade. In other words, orde
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-get_user_account_order_detail_response = (
-    commercial_api_key_client.account_information.get_user_account_order_detail(
-        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_user_account_order_detail_response = commercial_api_key_client.account_information.get_user_account_order_detail(
+    brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -1255,11 +1192,9 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-get_user_account_order_detail_response = (
-    personal_api_key_client.account_information.get_user_account_order_detail(
-        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
+get_user_account_order_detail_response = personal_api_key_client.account_information.get_user_account_order_detail(
+    brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 ```
 
@@ -1268,11 +1203,9 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ##### OAuth Auth<a id="oauth-auth"></a>
 
 ```python
-get_user_account_order_detail_response = (
-    oauth_client.account_information.get_user_account_order_detail(
-        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
+get_user_account_order_detail_response = oauth_client.account_information.get_user_account_order_detail(
+    brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 ```
 
@@ -1303,6 +1236,9 @@ Order ID returned by brokerage. This is the unique identifier for the order in t
 ---
 
 ### `snaptrade.account_information.get_user_account_orders`<a id="snaptradeaccount_informationget_user_account_orders"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+**Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.
 
 Returns a list of recent orders in the specified account.
 
@@ -1318,14 +1254,12 @@ If the connection has become disabled, it can no longer access the latest data f
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-get_user_account_orders_response = (
-    commercial_api_key_client.account_information.get_user_account_orders(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        state="all",
-        days=30,
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_user_account_orders_response = commercial_api_key_client.account_information.get_user_account_orders(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    state="all",
+    days=30,
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -1338,12 +1272,10 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-get_user_account_orders_response = (
-    personal_api_key_client.account_information.get_user_account_orders(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        state="all",
-        days=30,
-    )
+get_user_account_orders_response = personal_api_key_client.account_information.get_user_account_orders(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    state="all",
+    days=30,
 )
 ```
 
@@ -1352,12 +1284,10 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ##### OAuth Auth<a id="oauth-auth"></a>
 
 ```python
-get_user_account_orders_response = (
-    oauth_client.account_information.get_user_account_orders(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        state="all",
-        days=30,
-    )
+get_user_account_orders_response = oauth_client.account_information.get_user_account_orders(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    state="all",
+    days=30,
 )
 ```
 
@@ -1389,6 +1319,9 @@ Number of days in the past to fetch the most recent orders. Defaults to the last
 ---
 
 ### `snaptrade.account_information.get_user_account_recent_orders`<a id="snaptradeaccount_informationget_user_account_recent_orders"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+**Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.
 
 A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders.
 This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders
@@ -1401,13 +1334,11 @@ By default only returns executed orders, but that can be changed by setting *onl
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-get_user_account_recent_orders_response = (
-    commercial_api_key_client.account_information.get_user_account_recent_orders(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        only_executed=True,
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_user_account_recent_orders_response = commercial_api_key_client.account_information.get_user_account_recent_orders(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    only_executed=True,
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -1420,11 +1351,9 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-get_user_account_recent_orders_response = (
-    personal_api_key_client.account_information.get_user_account_recent_orders(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        only_executed=True,
-    )
+get_user_account_recent_orders_response = personal_api_key_client.account_information.get_user_account_recent_orders(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    only_executed=True,
 )
 ```
 
@@ -1433,11 +1362,9 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ##### OAuth Auth<a id="oauth-auth"></a>
 
 ```python
-get_user_account_recent_orders_response = (
-    oauth_client.account_information.get_user_account_recent_orders(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        only_executed=True,
-    )
+get_user_account_recent_orders_response = oauth_client.account_information.get_user_account_recent_orders(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    only_executed=True,
 )
 ```
 
@@ -1474,13 +1401,11 @@ DEPRECATED. Returns a list of rate of return percents for a given account.
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-get_user_account_return_rates_response = (
-    commercial_api_key_client.account_information.get_user_account_return_rates(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        timeframes="ALL,1Y",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_user_account_return_rates_response = commercial_api_key_client.account_information.get_user_account_return_rates(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    timeframes="ALL,1Y",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -1493,11 +1418,9 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-get_user_account_return_rates_response = (
-    personal_api_key_client.account_information.get_user_account_return_rates(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        timeframes="ALL,1Y",
-    )
+get_user_account_return_rates_response = personal_api_key_client.account_information.get_user_account_return_rates(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    timeframes="ALL,1Y",
 )
 ```
 
@@ -1527,7 +1450,7 @@ Optional comma separated list of rate-of-return timeframes to return. Supported 
 ### `snaptrade.account_information.get_user_holdings`<a id="snaptradeaccount_informationget_user_holdings"></a>
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
-**Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders).
+**Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders).
 
 This endpoint will return HTTP 410 Gone for all customers that sign up after May 11, 2026.
 
@@ -1547,12 +1470,10 @@ Concurrent live holdings requests for the same account fail immediately with HTT
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-get_user_holdings_response = (
-    commercial_api_key_client.account_information.get_user_holdings(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_user_holdings_response = commercial_api_key_client.account_information.get_user_holdings(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -1565,10 +1486,8 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-get_user_holdings_response = (
-    personal_api_key_client.account_information.get_user_holdings(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
+get_user_holdings_response = personal_api_key_client.account_information.get_user_holdings(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 ```
 
@@ -1615,11 +1534,9 @@ This endpoint returns Daily data regardless of the customer's plan. Daily data i
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-list_all_user_accounts_response = (
-    commercial_api_key_client.account_information.list_all_user_accounts(
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+list_all_user_accounts_response = commercial_api_key_client.account_information.list_all_user_accounts(
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -1632,9 +1549,7 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-list_all_user_accounts_response = (
-    personal_api_key_client.account_information.list_all_user_accounts()
-)
+list_all_user_accounts_response = personal_api_key_client.account_information.list_all_user_accounts()
 ```
 
 The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
@@ -1642,9 +1557,7 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ##### OAuth Auth<a id="oauth-auth"></a>
 
 ```python
-list_all_user_accounts_response = (
-    oauth_client.account_information.list_all_user_accounts()
-)
+list_all_user_accounts_response = oauth_client.account_information.list_all_user_accounts()
 ```
 
 The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
@@ -1679,11 +1592,9 @@ This endpoint returns Daily data regardless of the customer's plan. Daily data i
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-list_user_accounts_response = (
-    commercial_api_key_client.account_information.list_user_accounts(
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+list_user_accounts_response = commercial_api_key_client.account_information.list_user_accounts(
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -1696,9 +1607,7 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-list_user_accounts_response = (
-    personal_api_key_client.account_information.list_user_accounts()
-)
+list_user_accounts_response = personal_api_key_client.account_information.list_user_accounts()
 ```
 
 The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
@@ -1733,12 +1642,10 @@ Updates various properties of a specified account.
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-update_user_account_response = (
-    commercial_api_key_client.account_information.update_user_account(
-        account_id="accountId_example",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+update_user_account_response = commercial_api_key_client.account_information.update_user_account(
+    account_id="accountId_example",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -1751,10 +1658,8 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-update_user_account_response = (
-    personal_api_key_client.account_information.update_user_account(
-        account_id="accountId_example",
-    )
+update_user_account_response = personal_api_key_client.account_information.update_user_account(
+    account_id="accountId_example",
 )
 ```
 
@@ -1821,10 +1726,8 @@ Deletes a registered user and all associated data. This action is irreversible. 
 This endpoint supports Commercial API Key Auth authentication only.
 
 ```python
-delete_snap_trade_user_response = (
-    commercial_api_key_client.authentication.delete_snap_trade_user(
-        user_id="snaptrade-user-123",
-    )
+delete_snap_trade_user_response = commercial_api_key_client.authentication.delete_snap_trade_user(
+    user_id="snaptrade-user-123",
 )
 ```
 
@@ -1855,9 +1758,7 @@ Returns a list of all registered user IDs. Please note that the response is not 
 This endpoint supports Commercial API Key Auth authentication only.
 
 ```python
-list_snap_trade_users_response = (
-    commercial_api_key_client.authentication.list_snap_trade_users()
-)
+list_snap_trade_users_response = commercial_api_key_client.authentication.list_snap_trade_users()
 ```
 
 
@@ -1885,20 +1786,18 @@ Please note that the returned URL expires in 5 minutes.
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-login_snap_trade_user_response = (
-    commercial_api_key_client.authentication.login_snap_trade_user(
-        broker="ALPACA",
-        immediate_redirect=True,
-        custom_redirect="https://snaptrade.com",
-        reconnect="8b5f262d-4bb9-365d-888a-202bd3b15fa1",
-        connection_type="read",
-        show_close_button=True,
-        dark_mode=True,
-        locale="pt-BR",
-        connection_portal_version="v4",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+login_snap_trade_user_response = commercial_api_key_client.authentication.login_snap_trade_user(
+    broker="ALPACA",
+    immediate_redirect=True,
+    custom_redirect="https://snaptrade.com",
+    reconnect="8b5f262d-4bb9-365d-888a-202bd3b15fa1",
+    connection_type="read",
+    show_close_button=True,
+    dark_mode=True,
+    locale="pt-BR",
+    connection_portal_version="v4",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -1911,18 +1810,16 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-login_snap_trade_user_response = (
-    personal_api_key_client.authentication.login_snap_trade_user(
-        broker="ALPACA",
-        immediate_redirect=True,
-        custom_redirect="https://snaptrade.com",
-        reconnect="8b5f262d-4bb9-365d-888a-202bd3b15fa1",
-        connection_type="read",
-        show_close_button=True,
-        dark_mode=True,
-        locale="pt-BR",
-        connection_portal_version="v4",
-    )
+login_snap_trade_user_response = personal_api_key_client.authentication.login_snap_trade_user(
+    broker="ALPACA",
+    immediate_redirect=True,
+    custom_redirect="https://snaptrade.com",
+    reconnect="8b5f262d-4bb9-365d-888a-202bd3b15fa1",
+    connection_type="read",
+    show_close_button=True,
+    dark_mode=True,
+    locale="pt-BR",
+    connection_portal_version="v4",
 )
 ```
 
@@ -2008,10 +1905,8 @@ Most SnapTrade operations require a user ID and user secret to be passed in as p
 This endpoint supports Commercial API Key Auth authentication only.
 
 ```python
-register_snap_trade_user_response = (
-    commercial_api_key_client.authentication.register_snap_trade_user(
-        user_id="snaptrade-user-123",
-    )
+register_snap_trade_user_response = commercial_api_key_client.authentication.register_snap_trade_user(
+    user_id="snaptrade-user-123",
 )
 ```
 
@@ -2048,11 +1943,9 @@ Rotates the secret for a SnapTrade user. You might use this if `userSecret` is c
 This endpoint supports Commercial API Key Auth authentication only.
 
 ```python
-reset_snap_trade_user_secret_response = (
-    commercial_api_key_client.authentication.reset_snap_trade_user_secret(
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+reset_snap_trade_user_secret_response = commercial_api_key_client.authentication.reset_snap_trade_user_secret(
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -2140,12 +2033,10 @@ Returns a single connection for the specified ID.
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-detail_brokerage_authorization_response = (
-    commercial_api_key_client.connections.detail_brokerage_authorization(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+detail_brokerage_authorization_response = commercial_api_key_client.connections.detail_brokerage_authorization(
+    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -2158,10 +2049,8 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-detail_brokerage_authorization_response = (
-    personal_api_key_client.connections.detail_brokerage_authorization(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    )
+detail_brokerage_authorization_response = personal_api_key_client.connections.detail_brokerage_authorization(
+    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
 )
 ```
 
@@ -2170,10 +2059,8 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ##### OAuth Auth<a id="oauth-auth"></a>
 
 ```python
-detail_brokerage_authorization_response = (
-    oauth_client.connections.detail_brokerage_authorization(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    )
+detail_brokerage_authorization_response = oauth_client.connections.detail_brokerage_authorization(
+    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
 )
 ```
 
@@ -2209,12 +2096,10 @@ This endpoint is available on test keys. If you would like it enabled on product
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-disable_brokerage_authorization_response = (
-    commercial_api_key_client.connections.disable_brokerage_authorization(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+disable_brokerage_authorization_response = commercial_api_key_client.connections.disable_brokerage_authorization(
+    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -2227,10 +2112,8 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-disable_brokerage_authorization_response = (
-    personal_api_key_client.connections.disable_brokerage_authorization(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    )
+disable_brokerage_authorization_response = personal_api_key_client.connections.disable_brokerage_authorization(
+    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
 )
 ```
 
@@ -2239,10 +2122,8 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ##### OAuth Auth<a id="oauth-auth"></a>
 
 ```python
-disable_brokerage_authorization_response = (
-    oauth_client.connections.disable_brokerage_authorization(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    )
+disable_brokerage_authorization_response = oauth_client.connections.disable_brokerage_authorization(
+    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
 )
 ```
 
@@ -2286,12 +2167,10 @@ Check your API key on the [Customer Dashboard billing page](https://dashboard.sn
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-list_brokerage_authorization_accounts_response = (
-    commercial_api_key_client.connections.list_brokerage_authorization_accounts(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+list_brokerage_authorization_accounts_response = commercial_api_key_client.connections.list_brokerage_authorization_accounts(
+    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -2304,10 +2183,8 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-list_brokerage_authorization_accounts_response = (
-    personal_api_key_client.connections.list_brokerage_authorization_accounts(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    )
+list_brokerage_authorization_accounts_response = personal_api_key_client.connections.list_brokerage_authorization_accounts(
+    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
 )
 ```
 
@@ -2316,10 +2193,8 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ##### OAuth Auth<a id="oauth-auth"></a>
 
 ```python
-list_brokerage_authorization_accounts_response = (
-    oauth_client.connections.list_brokerage_authorization_accounts(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    )
+list_brokerage_authorization_accounts_response = oauth_client.connections.list_brokerage_authorization_accounts(
+    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
 )
 ```
 
@@ -2356,11 +2231,9 @@ SnapTrade performs de-duping on connections for a given user. If the user has an
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-list_brokerage_authorizations_response = (
-    commercial_api_key_client.connections.list_brokerage_authorizations(
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+list_brokerage_authorizations_response = commercial_api_key_client.connections.list_brokerage_authorizations(
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -2373,9 +2246,7 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-list_brokerage_authorizations_response = (
-    personal_api_key_client.connections.list_brokerage_authorizations()
-)
+list_brokerage_authorizations_response = personal_api_key_client.connections.list_brokerage_authorizations()
 ```
 
 The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
@@ -2383,9 +2254,7 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ##### OAuth Auth<a id="oauth-auth"></a>
 
 ```python
-list_brokerage_authorizations_response = (
-    oauth_client.connections.list_brokerage_authorizations()
-)
+list_brokerage_authorizations_response = oauth_client.connections.list_brokerage_authorizations()
 ```
 
 The client identifies the user in this mode. Do not pass `user_id` `user_secret` to this method.
@@ -2421,12 +2290,10 @@ Check your API key on the [Customer Dashboard billing page](https://dashboard.sn
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-list_connection_accounts_response = (
-    commercial_api_key_client.connections.list_connection_accounts(
-        connection_id="87b24961-b51e-4db8-9226-f198f6518a89",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+list_connection_accounts_response = commercial_api_key_client.connections.list_connection_accounts(
+    connection_id="87b24961-b51e-4db8-9226-f198f6518a89",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -2439,10 +2306,8 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-list_connection_accounts_response = (
-    personal_api_key_client.connections.list_connection_accounts(
-        connection_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    )
+list_connection_accounts_response = personal_api_key_client.connections.list_connection_accounts(
+    connection_id="87b24961-b51e-4db8-9226-f198f6518a89",
 )
 ```
 
@@ -2489,12 +2354,10 @@ This endpoint will also trigger a transaction sync for the past day if one has n
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-refresh_brokerage_authorization_response = (
-    commercial_api_key_client.connections.refresh_brokerage_authorization(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+refresh_brokerage_authorization_response = commercial_api_key_client.connections.refresh_brokerage_authorization(
+    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -2507,10 +2370,8 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-refresh_brokerage_authorization_response = (
-    personal_api_key_client.connections.refresh_brokerage_authorization(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    )
+refresh_brokerage_authorization_response = personal_api_key_client.connections.refresh_brokerage_authorization(
+    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
 )
 ```
 
@@ -2519,10 +2380,8 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ##### OAuth Auth<a id="oauth-auth"></a>
 
 ```python
-refresh_brokerage_authorization_response = (
-    oauth_client.connections.refresh_brokerage_authorization(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    )
+refresh_brokerage_authorization_response = oauth_client.connections.refresh_brokerage_authorization(
+    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
 )
 ```
 
@@ -2611,12 +2470,10 @@ Trigger a transactions sync for all accounts under this connection. Updates will
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-sync_brokerage_authorization_transactions_response = (
-    commercial_api_key_client.connections.sync_brokerage_authorization_transactions(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+sync_brokerage_authorization_transactions_response = commercial_api_key_client.connections.sync_brokerage_authorization_transactions(
+    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -2629,10 +2486,8 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-sync_brokerage_authorization_transactions_response = (
-    personal_api_key_client.connections.sync_brokerage_authorization_transactions(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    )
+sync_brokerage_authorization_transactions_response = personal_api_key_client.connections.sync_brokerage_authorization_transactions(
+    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
 )
 ```
 
@@ -2641,10 +2496,8 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ##### OAuth Auth<a id="oauth-auth"></a>
 
 ```python
-sync_brokerage_authorization_transactions_response = (
-    oauth_client.connections.sync_brokerage_authorization_transactions(
-        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    )
+sync_brokerage_authorization_transactions_response = oauth_client.connections.sync_brokerage_authorization_transactions(
+    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
 )
 ```
 
@@ -2678,13 +2531,11 @@ This endpoint requires `userId` and `userSecret` in addition to the partner sign
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-add_subscription_response = (
-    commercial_api_key_client.experimental_endpoints.add_subscription(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        check_interval_seconds=300,
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+add_subscription_response = commercial_api_key_client.experimental_endpoints.add_subscription(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    check_interval_seconds=300,
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -2697,11 +2548,9 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-add_subscription_response = (
-    personal_api_key_client.experimental_endpoints.add_subscription(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        check_interval_seconds=300,
-    )
+add_subscription_response = personal_api_key_client.experimental_endpoints.add_subscription(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    check_interval_seconds=300,
 )
 ```
 
@@ -2744,20 +2593,16 @@ This endpoint requires partner signature authentication only and does not requir
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-cancel_subscription_response = (
-    commercial_api_key_client.experimental_endpoints.cancel_subscription(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
+cancel_subscription_response = commercial_api_key_client.experimental_endpoints.cancel_subscription(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 ```
 
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-cancel_subscription_response = (
-    personal_api_key_client.experimental_endpoints.cancel_subscription(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    )
+cancel_subscription_response = personal_api_key_client.experimental_endpoints.cancel_subscription(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 ```
 
@@ -2784,6 +2629,9 @@ Unique identifier for the connected brokerage account. This is the UUID used to 
 ---
 
 ### `snaptrade.experimental_endpoints.get_user_account_order_detail_v2`<a id="snaptradeexperimental_endpointsget_user_account_order_detail_v2"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+**Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.
 
 Returns the detail of a single order using the brokerage order ID provided as a path parameter.
 
@@ -2800,13 +2648,11 @@ This endpoint only returns orders placed through SnapTrade. In other words, orde
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-get_user_account_order_detail_v2_response = (
-    commercial_api_key_client.experimental_endpoints.get_user_account_order_detail_v2(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_user_account_order_detail_v2_response = commercial_api_key_client.experimental_endpoints.get_user_account_order_detail_v2(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -2819,11 +2665,9 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-get_user_account_order_detail_v2_response = (
-    personal_api_key_client.experimental_endpoints.get_user_account_order_detail_v2(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
-    )
+get_user_account_order_detail_v2_response = personal_api_key_client.experimental_endpoints.get_user_account_order_detail_v2(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
 )
 ```
 
@@ -2832,11 +2676,9 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ##### OAuth Auth<a id="oauth-auth"></a>
 
 ```python
-get_user_account_order_detail_v2_response = (
-    oauth_client.experimental_endpoints.get_user_account_order_detail_v2(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
-    )
+get_user_account_order_detail_v2_response = oauth_client.experimental_endpoints.get_user_account_order_detail_v2(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
 )
 ```
 
@@ -2862,6 +2704,9 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ---
 
 ### `snaptrade.experimental_endpoints.get_user_account_orders_v2`<a id="snaptradeexperimental_endpointsget_user_account_orders_v2"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+**Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.
 
 Returns a list of recent orders in the specified account.
 
@@ -2875,14 +2720,12 @@ If the connection has become disabled, it can no longer access the latest data f
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-get_user_account_orders_v2_response = (
-    commercial_api_key_client.experimental_endpoints.get_user_account_orders_v2(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        state="all",
-        days=30,
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_user_account_orders_v2_response = commercial_api_key_client.experimental_endpoints.get_user_account_orders_v2(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    state="all",
+    days=30,
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -2895,12 +2738,10 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-get_user_account_orders_v2_response = (
-    personal_api_key_client.experimental_endpoints.get_user_account_orders_v2(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        state="all",
-        days=30,
-    )
+get_user_account_orders_v2_response = personal_api_key_client.experimental_endpoints.get_user_account_orders_v2(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    state="all",
+    days=30,
 )
 ```
 
@@ -2909,12 +2750,10 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ##### OAuth Auth<a id="oauth-auth"></a>
 
 ```python
-get_user_account_orders_v2_response = (
-    oauth_client.experimental_endpoints.get_user_account_orders_v2(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        state="all",
-        days=30,
-    )
+get_user_account_orders_v2_response = oauth_client.experimental_endpoints.get_user_account_orders_v2(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    state="all",
+    days=30,
 )
 ```
 
@@ -2946,6 +2785,9 @@ Number of days in the past to fetch the most recent orders. Defaults to the last
 ---
 
 ### `snaptrade.experimental_endpoints.get_user_account_recent_orders_v2`<a id="snaptradeexperimental_endpointsget_user_account_recent_orders_v2"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+**Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.
 
 A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format.
 This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.
@@ -2958,13 +2800,11 @@ By default only returns executed orders, but that can be changed by setting *onl
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-get_user_account_recent_orders_v2_response = (
-    commercial_api_key_client.experimental_endpoints.get_user_account_recent_orders_v2(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        only_executed=True,
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_user_account_recent_orders_v2_response = commercial_api_key_client.experimental_endpoints.get_user_account_recent_orders_v2(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    only_executed=True,
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -2977,11 +2817,9 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-get_user_account_recent_orders_v2_response = (
-    personal_api_key_client.experimental_endpoints.get_user_account_recent_orders_v2(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        only_executed=True,
-    )
+get_user_account_recent_orders_v2_response = personal_api_key_client.experimental_endpoints.get_user_account_recent_orders_v2(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    only_executed=True,
 )
 ```
 
@@ -2990,11 +2828,9 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ##### OAuth Auth<a id="oauth-auth"></a>
 
 ```python
-get_user_account_recent_orders_v2_response = (
-    oauth_client.experimental_endpoints.get_user_account_recent_orders_v2(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        only_executed=True,
-    )
+get_user_account_recent_orders_v2_response = oauth_client.experimental_endpoints.get_user_account_recent_orders_v2(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    only_executed=True,
 )
 ```
 
@@ -3030,17 +2866,13 @@ Returns active Trade Detection subscriptions for your Client ID. Cancelled subsc
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-list_subscriptions_response = (
-    commercial_api_key_client.experimental_endpoints.list_subscriptions()
-)
+list_subscriptions_response = commercial_api_key_client.experimental_endpoints.list_subscriptions()
 ```
 
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-list_subscriptions_response = (
-    personal_api_key_client.experimental_endpoints.list_subscriptions()
-)
+list_subscriptions_response = personal_api_key_client.experimental_endpoints.list_subscriptions()
 ```
 
 
@@ -3195,17 +3027,13 @@ Returns a list of all supported Exchanges.
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-get_stock_exchanges_response = (
-    commercial_api_key_client.reference_data.get_stock_exchanges()
-)
+get_stock_exchanges_response = commercial_api_key_client.reference_data.get_stock_exchanges()
 ```
 
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-get_stock_exchanges_response = (
-    personal_api_key_client.reference_data.get_stock_exchanges()
-)
+get_stock_exchanges_response = personal_api_key_client.reference_data.get_stock_exchanges()
 ```
 
 ##### OAuth Auth<a id="oauth-auth"></a>
@@ -3290,20 +3118,16 @@ Returns the Universal Symbol object specified by the ticker or the Universal Sym
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-get_symbols_by_ticker_response = (
-    commercial_api_key_client.reference_data.get_symbols_by_ticker(
-        query="query_example",
-    )
+get_symbols_by_ticker_response = commercial_api_key_client.reference_data.get_symbols_by_ticker(
+    query="query_example",
 )
 ```
 
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-get_symbols_by_ticker_response = (
-    personal_api_key_client.reference_data.get_symbols_by_ticker(
-        query="query_example",
-    )
+get_symbols_by_ticker_response = personal_api_key_client.reference_data.get_symbols_by_ticker(
+    query="query_example",
 )
 ```
 
@@ -3343,20 +3167,16 @@ Returns a list of all defined Brokerage authorization Type objects.
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-list_all_brokerage_authorization_type_response = (
-    commercial_api_key_client.reference_data.list_all_brokerage_authorization_type(
-        brokerage="QUESTRADE,ALPACA",
-    )
+list_all_brokerage_authorization_type_response = commercial_api_key_client.reference_data.list_all_brokerage_authorization_type(
+    brokerage="QUESTRADE,ALPACA",
 )
 ```
 
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-list_all_brokerage_authorization_type_response = (
-    personal_api_key_client.reference_data.list_all_brokerage_authorization_type(
-        brokerage="QUESTRADE,ALPACA",
-    )
+list_all_brokerage_authorization_type_response = personal_api_key_client.reference_data.list_all_brokerage_authorization_type(
+    brokerage="QUESTRADE,ALPACA",
 )
 ```
 
@@ -3388,30 +3208,24 @@ Returns a list of all brokerage instruments available for a given brokerage. Not
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-list_all_brokerage_instruments_response = (
-    commercial_api_key_client.reference_data.list_all_brokerage_instruments(
-        slug="QUESTRADE",
-    )
+list_all_brokerage_instruments_response = commercial_api_key_client.reference_data.list_all_brokerage_instruments(
+    slug="QUESTRADE",
 )
 ```
 
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-list_all_brokerage_instruments_response = (
-    personal_api_key_client.reference_data.list_all_brokerage_instruments(
-        slug="QUESTRADE",
-    )
+list_all_brokerage_instruments_response = personal_api_key_client.reference_data.list_all_brokerage_instruments(
+    slug="QUESTRADE",
 )
 ```
 
 ##### OAuth Auth<a id="oauth-auth"></a>
 
 ```python
-list_all_brokerage_instruments_response = (
-    oauth_client.reference_data.list_all_brokerage_instruments(
-        slug="QUESTRADE",
-    )
+list_all_brokerage_instruments_response = oauth_client.reference_data.list_all_brokerage_instruments(
+    slug="QUESTRADE",
 )
 ```
 
@@ -3443,17 +3257,13 @@ Returns a list of all defined Brokerage objects.
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-list_all_brokerages_response = (
-    commercial_api_key_client.reference_data.list_all_brokerages()
-)
+list_all_brokerages_response = commercial_api_key_client.reference_data.list_all_brokerages()
 ```
 
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-list_all_brokerages_response = (
-    personal_api_key_client.reference_data.list_all_brokerages()
-)
+list_all_brokerages_response = personal_api_key_client.reference_data.list_all_brokerages()
 ```
 
 ##### OAuth Auth<a id="oauth-auth"></a>
@@ -3512,13 +3322,11 @@ The search results are further limited to the symbols supported by the brokerage
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-symbol_search_user_account_response = (
-    commercial_api_key_client.reference_data.symbol_search_user_account(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        substring="AAPL",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+symbol_search_user_account_response = commercial_api_key_client.reference_data.symbol_search_user_account(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    substring="AAPL",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -3531,11 +3339,9 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-symbol_search_user_account_response = (
-    personal_api_key_client.reference_data.symbol_search_user_account(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        substring="AAPL",
-    )
+symbol_search_user_account_response = personal_api_key_client.reference_data.symbol_search_user_account(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    substring="AAPL",
 )
 ```
 
@@ -3544,11 +3350,9 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ##### OAuth Auth<a id="oauth-auth"></a>
 
 ```python
-symbol_search_user_account_response = (
-    oauth_client.reference_data.symbol_search_user_account(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        substring="AAPL",
-    )
+symbol_search_user_account_response = oauth_client.reference_data.symbol_search_user_account(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    substring="AAPL",
 )
 ```
 
@@ -3658,13 +3462,11 @@ Gets a quote for the specified account.
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-get_cryptocurrency_pair_quote_response = (
-    commercial_api_key_client.trading.get_cryptocurrency_pair_quote(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        instrument_symbol="BTC-USD",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_cryptocurrency_pair_quote_response = commercial_api_key_client.trading.get_cryptocurrency_pair_quote(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    instrument_symbol="BTC-USD",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -3677,11 +3479,9 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-get_cryptocurrency_pair_quote_response = (
-    personal_api_key_client.trading.get_cryptocurrency_pair_quote(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        instrument_symbol="BTC-USD",
-    )
+get_cryptocurrency_pair_quote_response = personal_api_key_client.trading.get_cryptocurrency_pair_quote(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    instrument_symbol="BTC-USD",
 )
 ```
 
@@ -3690,11 +3490,9 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ##### OAuth Auth<a id="oauth-auth"></a>
 
 ```python
-get_cryptocurrency_pair_quote_response = (
-    oauth_client.trading.get_cryptocurrency_pair_quote(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        instrument_symbol="BTC-USD",
-    )
+get_cryptocurrency_pair_quote_response = oauth_client.trading.get_cryptocurrency_pair_quote(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    instrument_symbol="BTC-USD",
 )
 ```
 
@@ -3975,13 +3773,11 @@ Returns a quote for a single option contract. The option contract is specified u
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-get_user_account_option_quotes_response = (
-    commercial_api_key_client.trading.get_user_account_option_quotes(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        symbol="AAPL  251219C00150000",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_user_account_option_quotes_response = commercial_api_key_client.trading.get_user_account_option_quotes(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    symbol="AAPL  251219C00150000",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -3994,11 +3790,9 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-get_user_account_option_quotes_response = (
-    personal_api_key_client.trading.get_user_account_option_quotes(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        symbol="AAPL  251219C00150000",
-    )
+get_user_account_option_quotes_response = personal_api_key_client.trading.get_user_account_option_quotes(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    symbol="AAPL  251219C00150000",
 )
 ```
 
@@ -4041,14 +3835,12 @@ This endpoint does not work for options quotes.
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-get_user_account_quotes_response = (
-    commercial_api_key_client.trading.get_user_account_quotes(
-        symbols="symbols_example",
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        use_ticker=True,
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+get_user_account_quotes_response = commercial_api_key_client.trading.get_user_account_quotes(
+    symbols="symbols_example",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    use_ticker=True,
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -4061,12 +3853,10 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-get_user_account_quotes_response = (
-    personal_api_key_client.trading.get_user_account_quotes(
-        symbols="symbols_example",
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        use_ticker=True,
-    )
+get_user_account_quotes_response = personal_api_key_client.trading.get_user_account_quotes(
+    symbols="symbols_example",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    use_ticker=True,
 )
 ```
 
@@ -5167,14 +4957,12 @@ Searches cryptocurrency pairs instruments accessible to the specified account. B
 ##### Commercial API Key Auth<a id="commercial-api-key-auth"></a>
 
 ```python
-search_cryptocurrency_pair_instruments_response = (
-    commercial_api_key_client.trading.search_cryptocurrency_pair_instruments(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        base="BTC",
-        quote="USD",
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    )
+search_cryptocurrency_pair_instruments_response = commercial_api_key_client.trading.search_cryptocurrency_pair_instruments(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    base="BTC",
+    quote="USD",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -5187,12 +4975,10 @@ Required credentials for this mode:
 ##### Personal API Key Auth<a id="personal-api-key-auth"></a>
 
 ```python
-search_cryptocurrency_pair_instruments_response = (
-    personal_api_key_client.trading.search_cryptocurrency_pair_instruments(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        base="BTC",
-        quote="USD",
-    )
+search_cryptocurrency_pair_instruments_response = personal_api_key_client.trading.search_cryptocurrency_pair_instruments(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    base="BTC",
+    quote="USD",
 )
 ```
 
@@ -5201,12 +4987,10 @@ The client identifies the user in this mode. Do not pass `user_id` `user_secret`
 ##### OAuth Auth<a id="oauth-auth"></a>
 
 ```python
-search_cryptocurrency_pair_instruments_response = (
-    oauth_client.trading.search_cryptocurrency_pair_instruments(
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        base="BTC",
-        quote="USD",
-    )
+search_cryptocurrency_pair_instruments_response = oauth_client.trading.search_cryptocurrency_pair_instruments(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    base="BTC",
+    quote="USD",
 )
 ```
 

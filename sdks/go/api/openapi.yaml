@@ -910,7 +910,7 @@ paths:
     get:
       deprecated: true
       description: |
-        **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders).
+        **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders).
 
         This endpoint will return HTTP 410 Gone for all customers that sign up after May 11, 2026.
 
@@ -1690,7 +1690,10 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-positions-all
   /accounts/{accountId}/orders:
     get:
+      deprecated: true
       description: |
+        **Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.
+
         Returns a list of recent orders in the specified account.
 
         Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
@@ -1843,8 +1846,6 @@ paths:
         Every order carries a `legs` list with at least one leg. Each leg's `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.
 
         `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage's own label is in `raw_type`.
-
-        **Beta:** this endpoint and its response schema may change.
 
         If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
       operationId: AccountInformation_getAllAccountOrders
@@ -2017,7 +2018,10 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-balanceHistory
   /accounts/{accountId}/recentOrders:
     get:
+      deprecated: true
       description: |
+        **Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.
+
         A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders.
         This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders
         Differs from /orders in that it is always realtime, and only checks the last 24 hours
@@ -2146,8 +2150,6 @@ paths:
         By default only returns executed orders, but that can be changed by setting *only_executed* to false.
 
         Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.
-
-        **Beta:** this endpoint and its response schema may change.
       operationId: AccountInformation_getAllAccountRecentOrders
       parameters:
       - explode: true
@@ -2679,7 +2681,10 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-transactions
   /accounts/{accountId}/orders/details:
     post:
+      deprecated: true
       description: |
+        **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.
+
         Returns the detail of a single order using the external order ID provided in the request body.
 
         This endpoint only works for single-leg orders at this time. Support for multi-leg orders will be added in the future.
@@ -2804,8 +2809,6 @@ paths:
         This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.
 
         This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
-
-        **Beta:** this endpoint and its response schema may change.
       operationId: AccountInformation_getAccountOrder
       parameters:
       - explode: false
@@ -3149,78 +3152,6 @@ paths:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-options-impact
-  /accounts/{accountId}/quotes/options:
-    get:
-      deprecated: true
-      description: |
-        **Deprecated.** This endpoint was sunset on October 1, 2026 and now always returns `410 Gone`.
-
-        Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
-        **Note:** These are derived values and are not suitable for trading purposes.
-      operationId: Trading_getUserAccountOptionQuotes
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      - description: The OCC-formatted option symbol.
-        explode: true
-        in: query
-        name: symbol
-        required: true
-        schema:
-          example: AAPL  251219C00150000
-          type: string
-          x-konfig-original-example: AAPL  251219C00150000
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-quotes-options-get-parameters-3-schema
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OptionQuote'
-          description: OK
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/404FailedRequestResponse'
-          description: Option contract not found
-        "410":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Trading_getUserAccountOptionQuotes_410_response'
-          description: Endpoint is no longer available
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
-          description: Rate limit exceeded
-      summary: Get option quote
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-quotes-options
   /trade/{tradeId}:
     post:
       description: |
@@ -3325,6 +3256,179 @@ paths:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--trade-place
+  /accounts/{accountId}/trading/simple:
+    post:
+      description: |
+        **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. Breaking changes are possible while this endpoint is in beta.
+
+        Equity and equity-option orders use the existing brokerage trading capabilities. Futures are supported on tastytrade, Webull US, and TradeStation (live and SIM); future options are supported on tastytrade and TradeStation (live and SIM). Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).
+
+        An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.
+
+        Webull US supports single-leg futures orders with buy or sell actions and positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day or gtc duration. Futures options, multi-leg futures, trailing stops, and Webull Canada futures trading are not supported. Webull determines contract availability, margin requirements, and valid price increments.
+
+        TradeStation and TradeStation SIM support single-leg futures and futures-option orders in Futures accounts, with positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day, gtc, ioc, or fok duration, subject to the contract and route's supported combinations. Futures use buy/sell; futures options use the open/close option actions. Multi-leg futures-family strategies are not supported. Prices are forwarded without rounding; TradeStation determines contract availability, permissions, margin requirements, and valid price increments.
+
+        All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or brokerage-native futures symbols. For tastytrade, use the exact BrokerageInstrument ticker, including any spaces. For Webull US, use a specific unprefixed futures contract symbol such as ESZ6; slash-prefixed aliases, continuous/root-only symbols, and whitespace are not accepted. For TradeStation, use a specific two-digit-year contract such as ESZ26 or @ESZ26, or a futures-option symbol such as `ESZ26 C6000`, preserving the space and any session alias. The optional @ prefix is supported for dated futures contracts and is forwarded unchanged. Slash-prefixed aliases and root-only continuous symbols such as @ES are not accepted. A futures symbol does not need to be present in SnapTrade's local instrument catalog to submit an order.
+
+        A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details.
+      operationId: Trading_placeSimpleOrder
+      parameters:
+      - description: The ID of the account to execute the trade on.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      requestBody:
+        content:
+          application/json:
+            examples:
+              futureStopLimit:
+                summary: Tastytrade single-leg future stop-limit order
+                value:
+                  order_type: stop_limit
+                  time_in_force: day
+                  client_order_id: 3e8b682d-c901-4b2d-a67f-70f73b04a29e
+                  stop_price: "6000.00"
+                  limit_price: "6000.25"
+                  legs:
+                  - instrument:
+                      kind: future
+                      symbol: /ESZ6
+                    action: buy
+                    units: "1"
+              webullFutureStopLimit:
+                summary: Webull US single-leg future stop-limit order
+                value:
+                  order_type: stop_limit
+                  time_in_force: gtc
+                  client_order_id: 3e8b682d-c901-4b2d-a67f-70f73b04a29e
+                  stop_price: "6000.00"
+                  limit_price: "6000.25"
+                  legs:
+                  - instrument:
+                      kind: future
+                      symbol: ESZ6
+                    action: buy
+                    units: "1"
+              tradestationFutureStopLimit:
+                summary: TradeStation live or SIM single-leg future stop-limit order
+                value:
+                  order_type: stop_limit
+                  time_in_force: gtc
+                  stop_price: "6000.00"
+                  limit_price: "6000.25"
+                  legs:
+                  - instrument:
+                      kind: future
+                      symbol: '@ESZ26'
+                    action: buy
+                    units: "1"
+              tradestationFutureOptionLimit:
+                summary: TradeStation live or SIM single-leg futures-option limit
+                  order
+                value:
+                  order_type: limit
+                  time_in_force: day
+                  limit_price: "10.25"
+                  legs:
+                  - instrument:
+                      kind: future_option
+                      symbol: ESZ26 C6000
+                    action: buy_to_open
+                    units: "1"
+              optionSpread:
+                summary: Equity-option debit spread
+                value:
+                  order_type: limit
+                  time_in_force: day
+                  limit_price: "1.25"
+                  price_effect: debit
+                  legs:
+                  - instrument:
+                      kind: option
+                      symbol: AAPL  261218C00200000
+                    action: buy_to_open
+                    units: "1"
+                  - instrument:
+                      kind: option
+                      symbol: AAPL  261218C00210000
+                    action: sell_to_open
+                    units: "1"
+              notionalEquity:
+                summary: Equity market order by dollar value
+                value:
+                  order_type: market
+                  time_in_force: day
+                  notional_value: "100.00"
+                  legs:
+                  - instrument:
+                      kind: equity
+                      symbol: AAPL
+                    action: buy
+            schema:
+              $ref: '#/components/schemas/SimpleTradeForm'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimpleTradeResponse'
+          description: Order placed
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: "Invalid request, unsupported trading feature, or brokerage\
+            \ rejection"
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FailedRequestResponse'
+          description: User does not have permissions to place trades
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404FailedRequestResponse'
+          description: Account not found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trading_placeSimpleOrder_409_response'
+          description: "For OAuth requests and Wealthsimple multi-leg placement, the\
+            \ client_order_id was already used by this user, or a request with it\
+            \ is in progress. Check the original attempt before submitting another\
+            \ order; this response does not establish whether the brokerage accepted\
+            \ it."
+        "500":
+          description: Unexpected error
+      summary: Place a simple order (beta)
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple
   /accounts/{accountId}/trading/options:
     post:
       description: |
@@ -3384,6 +3488,84 @@ paths:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-options
+  /accounts/{accountId}/trading/complex:
+    post:
+      description: |
+        Places a complex conditional order (OCO, OTO, or OTOCO).
+        Only supported on certain brokerages.
+        Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for details on which brokerages support complex orders and which types they support.
+
+        - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled.
+        - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order.
+        - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders.
+
+        Option OCO peers must trade the same OCC option symbol with the same closing
+        action and positive whole-contract quantity.
+
+        On tastytrade, option OCO supports closing an existing long or short option
+        position with one `Limit` order and one `Stop` or `StopLimit` order. Both
+        `PEER` orders must use `SELL_TO_CLOSE` or both must use `BUY_TO_CLOSE`, with
+        `Day` or `GTC` time in force. Opening option OCOs are not supported.
+
+        On enabled Webull US v3 accounts, option OCO supports closing an existing long
+        option position with one `Limit` take-profit order and one `Stop` stop-loss order.
+        Both `PEER` orders must use `SELL_TO_CLOSE`, `Day`, the same OCC option symbol,
+        and the same positive whole-contract quantity. Webull receives these as
+        `STOP_PROFIT` and `STOP_LOSS` orders sharing a combo ID, without a MASTER order.
+        Opening option OCOs, `BUY_TO_CLOSE`, `StopLimit`, and other option order pairs
+        are not supported on Webull. Equity complex-order behavior is unchanged.
+      operationId: Trading_placeComplexOrder
+      parameters:
+      - description: The ID of the account to execute the trade on.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/ManualTradeFormComplexRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComplexOrderResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Trade could not be placed
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FailedRequestResponse'
+          description: User does not have permissions to place trades
+        "500":
+          description: Unexpected Error
+      summary: Place complex order
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-complex
   /accounts/{accountId}/trading/instruments/cryptocurrencyPairs:
     get:
       description: |
@@ -3705,32 +3887,16 @@ paths:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-replace
-  /accounts/{accountId}/trading/simple:
-    post:
+  /accounts/{accountId}/quotes/options:
+    get:
+      deprecated: true
       description: |
-        **Beta.** Places a single-leg or multi-leg order using a common request format for equities, equity options, futures, and future options. Breaking changes are possible while this endpoint is in beta.
+        **Deprecated.** This endpoint was sunset on October 1, 2026 and now always returns `410 Gone`.
 
-        Equity and equity-option orders use the existing brokerage trading capabilities. Futures are supported on tastytrade, Webull US, and TradeStation (live and SIM); future options are supported on tastytrade and TradeStation (live and SIM). Order types, time in force, optional fields, and strategy combinations remain subject to brokerage support. See the [brokerage trading support page](https://support.snaptrade.com/brokerages).
-
-        An order may contain equity/option legs or future/future_option legs, but cannot mix those two families. Equity/option strategies must share the same underlying symbol. Each strategy is submitted as one brokerage order; unsupported strategies are never split into independent orders. Tastytrade supports single-leg outright futures and up to four future-option legs, and does not support multi-leg market orders.
-
-        Webull US supports single-leg futures orders with buy or sell actions and positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day or gtc duration. Futures options, multi-leg futures, trailing stops, and Webull Canada futures trading are not supported. Webull determines contract availability, margin requirements, and valid price increments.
-
-        TradeStation and TradeStation SIM support single-leg futures and futures-option orders in Futures accounts, with positive whole-contract quantities. Supported order types are market, limit, stop, and stop_limit, with day, gtc, ioc, or fok duration, subject to the contract and route's supported combinations. Futures use buy/sell; futures options use the open/close option actions. Multi-leg futures-family strategies are not supported. Prices are forwarded without rounding; TradeStation determines contract availability, permissions, margin requirements, and valid price increments.
-
-        All string choices use lower snake_case and are case-sensitive. Symbols retain their native format: equity tickers, OCC equity-option symbols, or brokerage-native futures symbols. For tastytrade, use the exact BrokerageInstrument ticker, including any spaces. For Webull US, use a specific unprefixed futures contract symbol such as ESZ6; slash-prefixed aliases, continuous/root-only symbols, and whitespace are not accepted. For TradeStation, use a specific two-digit-year contract such as ESZ26 or @ESZ26, or a futures-option symbol such as `ESZ26 C6000`, preserving the space and any session alias. The optional @ prefix is supported for dated futures contracts and is forwarded unchanged. Slash-prefixed aliases and root-only continuous symbols such as @ES are not accepted. A futures symbol does not need to be present in SnapTrade's local instrument catalog to submit an order.
-
-        A successful response contains only the brokerage order ID. Use the existing order endpoints to retrieve order details.
-      operationId: Trading_placeSimpleOrder
+        Returns a quote for a single option contract. The option contract is specified using in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
+        **Note:** These are derived values and are not suitable for trading purposes.
+      operationId: Trading_getUserAccountOptionQuotes
       parameters:
-      - description: The ID of the account to execute the trade on.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
       - explode: true
         in: query
         name: userId
@@ -3745,217 +3911,54 @@ paths:
         schema:
           $ref: '#/components/schemas/UserSecret'
         style: form
-      requestBody:
-        content:
-          application/json:
-            examples:
-              futureStopLimit:
-                summary: Tastytrade single-leg future stop-limit order
-                value:
-                  order_type: stop_limit
-                  time_in_force: day
-                  client_order_id: 3e8b682d-c901-4b2d-a67f-70f73b04a29e
-                  stop_price: "6000.00"
-                  limit_price: "6000.25"
-                  legs:
-                  - instrument:
-                      kind: future
-                      symbol: /ESZ6
-                    action: buy
-                    units: "1"
-              webullFutureStopLimit:
-                summary: Webull US single-leg future stop-limit order
-                value:
-                  order_type: stop_limit
-                  time_in_force: gtc
-                  client_order_id: 3e8b682d-c901-4b2d-a67f-70f73b04a29e
-                  stop_price: "6000.00"
-                  limit_price: "6000.25"
-                  legs:
-                  - instrument:
-                      kind: future
-                      symbol: ESZ6
-                    action: buy
-                    units: "1"
-              tradestationFutureStopLimit:
-                summary: TradeStation live or SIM single-leg future stop-limit order
-                value:
-                  order_type: stop_limit
-                  time_in_force: gtc
-                  stop_price: "6000.00"
-                  limit_price: "6000.25"
-                  legs:
-                  - instrument:
-                      kind: future
-                      symbol: '@ESZ26'
-                    action: buy
-                    units: "1"
-              tradestationFutureOptionLimit:
-                summary: TradeStation live or SIM single-leg futures-option limit
-                  order
-                value:
-                  order_type: limit
-                  time_in_force: day
-                  limit_price: "10.25"
-                  legs:
-                  - instrument:
-                      kind: future_option
-                      symbol: ESZ26 C6000
-                    action: buy_to_open
-                    units: "1"
-              optionSpread:
-                summary: Equity-option debit spread
-                value:
-                  order_type: limit
-                  time_in_force: day
-                  limit_price: "1.25"
-                  price_effect: debit
-                  legs:
-                  - instrument:
-                      kind: option
-                      symbol: AAPL  261218C00200000
-                    action: buy_to_open
-                    units: "1"
-                  - instrument:
-                      kind: option
-                      symbol: AAPL  261218C00210000
-                    action: sell_to_open
-                    units: "1"
-              notionalEquity:
-                summary: Equity market order by dollar value
-                value:
-                  order_type: market
-                  time_in_force: day
-                  notional_value: "100.00"
-                  legs:
-                  - instrument:
-                      kind: equity
-                      symbol: AAPL
-                    action: buy
-            schema:
-              $ref: '#/components/schemas/SimpleTradeForm'
+      - explode: false
+        in: path
+        name: accountId
         required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      - description: The OCC-formatted option symbol.
+        explode: true
+        in: query
+        name: symbol
+        required: true
+        schema:
+          example: AAPL  251219C00150000
+          type: string
+          x-konfig-original-example: AAPL  251219C00150000
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-quotes-options-get-parameters-3-schema
+        style: form
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SimpleTradeResponse'
-          description: Order placed
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: "Invalid request, unsupported trading feature, or brokerage\
-            \ rejection"
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/403FailedRequestResponse'
-          description: User does not have permissions to place trades
+                $ref: '#/components/schemas/OptionQuote'
+          description: OK
         "404":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/404FailedRequestResponse'
-          description: Account not found
-        "409":
+          description: Option contract not found
+        "410":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Trading_placeSimpleOrder_409_response'
-          description: "For OAuth requests and Wealthsimple multi-leg placement, the\
-            \ client_order_id was already used by this user, or a request with it\
-            \ is in progress. Check the original attempt before submitting another\
-            \ order; this response does not establish whether the brokerage accepted\
-            \ it."
-        "500":
-          description: Unexpected error
-      summary: Place a simple order (beta)
+                $ref: '#/components/schemas/Trading_getUserAccountOptionQuotes_410_response'
+          description: Endpoint is no longer available
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Rate limit exceeded
+      summary: Get option quote
       tags:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple
-  /accounts/{accountId}/trading/complex:
-    post:
-      description: |
-        Places a complex conditional order (OCO, OTO, or OTOCO).
-        Only supported on certain brokerages.
-        Please refer to the [brokerage trading support page](https://support.snaptrade.com/brokerages) for details on which brokerages support complex orders and which types they support.
-
-        - **OCO** (One Cancels the Other): Two peer orders; when one fills the other is cancelled.
-        - **OTO** (One Triggers the Other): A trigger order that, when filled, activates a conditional order.
-        - **OTOCO** (One Triggers a One Cancels the Other): A trigger order that, when filled, activates an OCO pair of two peer orders.
-
-        Option OCO peers must trade the same OCC option symbol with the same closing
-        action and positive whole-contract quantity.
-
-        On tastytrade, option OCO supports closing an existing long or short option
-        position with one `Limit` order and one `Stop` or `StopLimit` order. Both
-        `PEER` orders must use `SELL_TO_CLOSE` or both must use `BUY_TO_CLOSE`, with
-        `Day` or `GTC` time in force. Opening option OCOs are not supported.
-
-        On enabled Webull US v3 accounts, option OCO supports closing an existing long
-        option position with one `Limit` take-profit order and one `Stop` stop-loss order.
-        Both `PEER` orders must use `SELL_TO_CLOSE`, `Day`, the same OCC option symbol,
-        and the same positive whole-contract quantity. Webull receives these as
-        `STOP_PROFIT` and `STOP_LOSS` orders sharing a combo ID, without a MASTER order.
-        Opening option OCOs, `BUY_TO_CLOSE`, `StopLimit`, and other option order pairs
-        are not supported on Webull. Equity complex-order behavior is unchanged.
-      operationId: Trading_placeComplexOrder
-      parameters:
-      - description: The ID of the account to execute the trade on.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      requestBody:
-        $ref: '#/components/requestBodies/ManualTradeFormComplexRequestBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ComplexOrderResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Trade could not be placed
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/403FailedRequestResponse'
-          description: User does not have permissions to place trades
-        "500":
-          description: Unexpected Error
-      summary: Place complex order
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-complex
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-quotes-options
   /snapTrade/partners:
     get:
       description: "Returns configurations for your SnapTrade Client ID, including\
@@ -4283,7 +4286,10 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--snapTrade-stats
   /accounts/{accountId}/orders/v2:
     get:
+      deprecated: true
       description: |
+        **Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.
+
         Returns a list of recent orders in the specified account.
 
         The V2 order response format will include all legs of each order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.
@@ -4412,7 +4418,10 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-v2
   /accounts/{accountId}/recentOrders/v2:
     get:
+      deprecated: true
       description: |
+        **Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.
+
         A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format.
         This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.
         Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days.
@@ -4773,7 +4782,10 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--symbols-query
   /accounts/{accountId}/orders/details/v2/{brokerageOrderId}:
     get:
+      deprecated: true
       description: |
+        **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.
+
         Returns the detail of a single order using the brokerage order ID provided as a path parameter.
 
         The V2 order response format includes all legs of the order in the `legs` list field.
@@ -16148,22 +16160,6 @@ components:
       example: 1000
       type: number
       x-do-not-generate: true
-    konfig-generated-schema-paths--accounts-accountId-quotes-options-get-parameters-3-schema:
-      example: AAPL  251219C00150000
-      type: string
-      x-do-not-generate: true
-    ? konfig-generated-schema-paths--accounts-accountId-quotes-options-get-responses-410-content-application-json-schema-properties-detail
-    : example: This endpoint is no longer available.
-      type: string
-      x-do-not-generate: true
-    ? konfig-generated-schema-paths--accounts-accountId-trading-options-post-responses-409-content-application-json-schema-properties-status_code
-    : example: 409
-      type: number
-      x-do-not-generate: true
-    ? konfig-generated-schema-paths--accounts-accountId-trading-options-post-responses-409-content-application-json-schema-properties-code
-    : example: "1170"
-      type: string
-      x-do-not-generate: true
     ? konfig-generated-schema-paths--accounts-accountId-trading-simple-post-responses-409-content-application-json-schema-properties-detail
     : example: An order with this client_order_id was already submitted. Use a new
         client_order_id for a new order.
@@ -16175,6 +16171,22 @@ components:
       x-do-not-generate: true
     ? konfig-generated-schema-paths--accounts-accountId-trading-simple-post-responses-409-content-application-json-schema-properties-code
     : example: "1170"
+      type: string
+      x-do-not-generate: true
+    ? konfig-generated-schema-paths--accounts-accountId-trading-options-post-responses-409-content-application-json-schema-properties-status_code
+    : example: 409
+      type: number
+      x-do-not-generate: true
+    ? konfig-generated-schema-paths--accounts-accountId-trading-options-post-responses-409-content-application-json-schema-properties-code
+    : example: "1170"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-paths--accounts-accountId-quotes-options-get-parameters-3-schema:
+      example: AAPL  251219C00150000
+      type: string
+      x-do-not-generate: true
+    ? konfig-generated-schema-paths--accounts-accountId-quotes-options-get-responses-410-content-application-json-schema-properties-detail
+    : example: This endpoint is no longer available.
       type: string
       x-do-not-generate: true
     konfig-generated-schema-paths--management-stats-get-parameters-0-schema:
@@ -20063,32 +20075,6 @@ components:
       - userId
       - userSecret
       - accountId
-    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-quotes-options:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        accountId:
-          $ref: '#/components/schemas/AccountID'
-        symbol:
-          example: AAPL  251219C00150000
-          type: string
-          x-konfig-original-example: AAPL  251219C00150000
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-quotes-options-get-parameters-3-schema
-      required:
-      - accountId
-      - symbol
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
-      - accountId
-      - symbol
     konfig-generated-schema-single-parameter-schema-post--trade-tradeId:
       additionalProperties: true
       properties:
@@ -20190,6 +20176,145 @@ components:
       x-konfig-is-parameter:
       - userId
       - userSecret
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple:
+      additionalProperties: true
+      properties:
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        order_type:
+          enum:
+          - limit
+          - market
+          - stop
+          - stop_limit
+          example: stop_limit
+          type: string
+          x-konfig-original-example: stop_limit
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-order_type
+        time_in_force:
+          description: "Order duration, subject to brokerage and execution-path support.\
+            \ gtd requires expiry_date and a non-market single-leg equity/option order.\
+            \ Existing single-leg option routing does not support ioc. Futures and\
+            \ multi-leg orders do not support gtd through this endpoint. Webull US\
+            \ futures only support day and gtc. TradeStation futures and futures options\
+            \ accept day, gtc, ioc, and fok, subject to the contract and route's supported\
+            \ combinations."
+          enum:
+          - day
+          - gtc
+          - gtd
+          - fok
+          - ioc
+          example: day
+          type: string
+          x-konfig-original-example: day
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-time_in_force
+        legs:
+          description: "Legs of one brokerage order. Use equity/option legs or future/future_option\
+            \ legs, without mixing the two families. Brokerage strategy and leg-count\
+            \ limits apply."
+          items:
+            $ref: '#/components/schemas/SimpleTradeLeg'
+          minItems: 1
+          type: array
+        limit_price:
+          allOf:
+          - $ref: '#/components/schemas/SimpleTradeDecimal'
+          description: "Required for limit and stop_limit orders, except that multi-leg\
+            \ price_effect even implies zero. Must be omitted or null for market and\
+            \ stop orders. For multi-leg orders this is the net strategy price. Negative\
+            \ prices are accepted only for futures-family orders, subject to brokerage\
+            \ support."
+        stop_price:
+          allOf:
+          - $ref: '#/components/schemas/SimpleTradeDecimal'
+          description: Required for stop and stop_limit orders. Must be omitted or
+            null for market and limit orders. Must be positive for equity/option orders;
+            futures-family trigger prices are subject to brokerage support.
+        price_effect:
+          description: "Only applicable to multi-leg limit and stop_limit orders.\
+            \ Requirements and supported values depend on the brokerage; tastytrade\
+            \ requires credit or debit. even implies a zero limit_price, which may\
+            \ be omitted and must be zero if supplied. Single-leg price effects are\
+            \ derived from the action."
+          enum:
+          - credit
+          - debit
+          - even
+          example: debit
+          nullable: true
+          type: string
+          x-konfig-original-example: debit
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-price_effect
+        client_order_id:
+          allOf:
+          - $ref: '#/components/schemas/ClientOrderID'
+          description: "Canonical UUID. Required for Wealthsimple multi-leg placement\
+            \ regardless of client-order-ID enablement; reuse it when retrying the\
+            \ same attempt. Wealthsimple multi-leg attempts retain the ID after success\
+            \ or failure, and reuse by the same user across accounts or placement\
+            \ endpoints returns 409 without another submission. A 409 does not establish\
+            \ whether the original attempt was accepted; reconcile it before creating\
+            \ a new order with a new ID. Optional for other orders, forwarded where\
+            \ the existing execution path supports it and for tastytrade, Webull US,\
+            \ and TradeStation futures-family orders. Other orders require the existing\
+            \ client-order-ID enablement; when disabled the value is ignored. Brokerage\
+            \ behavior on duplicates varies. OAuth requests also reject a client_order_id\
+            \ the user has already used with 409. Tastytrade uses this as external-identifier\
+            \ for correlation and does not deduplicate submissions. For Webull US\
+            \ futures, SnapTrade converts the supplied UUID (or its generated order\
+            \ UUID) to lowercase 32-character hexadecimal without hyphens. The original\
+            \ supplied UUID remains in SnapTrade's trade audit; the converted value\
+            \ is returned as brokerage_order_id for subsequent order reads. For TradeStation\
+            \ live and SIM, SnapTrade encodes the supplied UUID (or its generated\
+            \ order UUID) as 22-character URL-safe base64 without padding and sends\
+            \ it as OrderConfirmID for brokerage duplicate prevention; the response\
+            \ contains TradeStation's separate order ID."
+        expiry_date:
+          description: "ISO 8601 expiry timestamp, required for gtd and invalid with\
+            \ other durations. A missing timezone is treated as UTC. Supported only\
+            \ through existing single-leg Public and Sandbox execution paths."
+          example: 2026-12-18T20:00:00Z
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 2026-12-18T20:00:00Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-expiry_date
+        notional_value:
+          allOf:
+          - $ref: '#/components/schemas/SimpleTradeDecimal'
+          description: "Positive order value, supported only for a single-equity market\
+            \ order on eligible brokerages and partners. Mutually exclusive with leg\
+            \ units. Omit or set units to null when supplied."
+        trading_session:
+          default: regular
+          description: extended uses existing single-leg equity/option brokerage support
+            and requires extended-hours enablement. Futures and multi-leg orders only
+            accept regular.
+          enum:
+          - regular
+          - extended
+          example: regular
+          type: string
+          x-konfig-original-example: regular
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-trading_session
+      required:
+      - accountId
+      - legs
+      - order_type
+      - time_in_force
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - accountId
+      - userId
+      - userSecret
     konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-options:
       additionalProperties: true
       properties:
@@ -20255,6 +20380,52 @@ components:
       - userId
       - userSecret
       - accountId
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-complex:
+      additionalProperties: true
+      properties:
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        type:
+          description: |
+            The complex order type.
+            - `OCO`: One Cancels the Other — two peer orders.
+            - `OTO`: One Triggers the Other — a trigger order and a conditional order.
+            - `OTOCO`: One Triggers a One Cancels the Other — a trigger order and two peer orders.
+          enum:
+          - OCO
+          - OTO
+          - OTOCO
+          example: OTO
+          type: string
+          x-konfig-original-example: OTO
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormComplex-properties-type
+        orders:
+          description: |
+            The orders that make up the complex order. Required counts and roles per type:
+            - `OCO`: exactly 2 orders, both `PEER`
+            - `OTO`: exactly 2 orders, one `TRIGGER` and one `CONDITIONAL`
+            - `OTOCO`: exactly 3 orders, one `TRIGGER` and two `PEER`
+          items:
+            $ref: '#/components/schemas/ComplexOrderLeg'
+          type: array
+        client_order_id:
+          $ref: '#/components/schemas/ClientOrderIDNullable'
+      required:
+      - accountId
+      - orders
+      - type
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - accountId
+      - userId
+      - userSecret
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId-trading-instruments-cryptocurrencyPairs:
       additionalProperties: true
       properties:
@@ -20558,191 +20729,32 @@ components:
       - accountId
       - userId
       - userSecret
-    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple:
+    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-quotes-options:
       additionalProperties: true
       properties:
-        accountId:
-          $ref: '#/components/schemas/AccountID'
         userId:
           $ref: '#/components/schemas/UserID'
         userSecret:
           $ref: '#/components/schemas/UserSecret'
-        order_type:
-          enum:
-          - limit
-          - market
-          - stop
-          - stop_limit
-          example: stop_limit
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        symbol:
+          example: AAPL  251219C00150000
           type: string
-          x-konfig-original-example: stop_limit
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-order_type
-        time_in_force:
-          description: "Order duration, subject to brokerage and execution-path support.\
-            \ gtd requires expiry_date and a non-market single-leg equity/option order.\
-            \ Existing single-leg option routing does not support ioc. Futures and\
-            \ multi-leg orders do not support gtd through this endpoint. Webull US\
-            \ futures only support day and gtc. TradeStation futures and futures options\
-            \ accept day, gtc, ioc, and fok, subject to the contract and route's supported\
-            \ combinations."
-          enum:
-          - day
-          - gtc
-          - gtd
-          - fok
-          - ioc
-          example: day
-          type: string
-          x-konfig-original-example: day
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-time_in_force
-        legs:
-          description: "Legs of one brokerage order. Use equity/option legs or future/future_option\
-            \ legs, without mixing the two families. Brokerage strategy and leg-count\
-            \ limits apply."
-          items:
-            $ref: '#/components/schemas/SimpleTradeLeg'
-          minItems: 1
-          type: array
-        limit_price:
-          allOf:
-          - $ref: '#/components/schemas/SimpleTradeDecimal'
-          description: "Required for limit and stop_limit orders, except that multi-leg\
-            \ price_effect even implies zero. Must be omitted or null for market and\
-            \ stop orders. For multi-leg orders this is the net strategy price. Negative\
-            \ prices are accepted only for futures-family orders, subject to brokerage\
-            \ support."
-        stop_price:
-          allOf:
-          - $ref: '#/components/schemas/SimpleTradeDecimal'
-          description: Required for stop and stop_limit orders. Must be omitted or
-            null for market and limit orders. Must be positive for equity/option orders;
-            futures-family trigger prices are subject to brokerage support.
-        price_effect:
-          description: "Only applicable to multi-leg limit and stop_limit orders.\
-            \ Requirements and supported values depend on the brokerage; tastytrade\
-            \ requires credit or debit. even implies a zero limit_price, which may\
-            \ be omitted and must be zero if supplied. Single-leg price effects are\
-            \ derived from the action."
-          enum:
-          - credit
-          - debit
-          - even
-          example: debit
-          nullable: true
-          type: string
-          x-konfig-original-example: debit
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-price_effect
-        client_order_id:
-          allOf:
-          - $ref: '#/components/schemas/ClientOrderID'
-          description: "Canonical UUID. Required for Wealthsimple multi-leg placement\
-            \ regardless of client-order-ID enablement; reuse it when retrying the\
-            \ same attempt. Wealthsimple multi-leg attempts retain the ID after success\
-            \ or failure, and reuse by the same user across accounts or placement\
-            \ endpoints returns 409 without another submission. A 409 does not establish\
-            \ whether the original attempt was accepted; reconcile it before creating\
-            \ a new order with a new ID. Optional for other orders, forwarded where\
-            \ the existing execution path supports it and for tastytrade, Webull US,\
-            \ and TradeStation futures-family orders. Other orders require the existing\
-            \ client-order-ID enablement; when disabled the value is ignored. Brokerage\
-            \ behavior on duplicates varies. OAuth requests also reject a client_order_id\
-            \ the user has already used with 409. Tastytrade uses this as external-identifier\
-            \ for correlation and does not deduplicate submissions. For Webull US\
-            \ futures, SnapTrade converts the supplied UUID (or its generated order\
-            \ UUID) to lowercase 32-character hexadecimal without hyphens. The original\
-            \ supplied UUID remains in SnapTrade's trade audit; the converted value\
-            \ is returned as brokerage_order_id for subsequent order reads. For TradeStation\
-            \ live and SIM, SnapTrade encodes the supplied UUID (or its generated\
-            \ order UUID) as 22-character URL-safe base64 without padding and sends\
-            \ it as OrderConfirmID for brokerage duplicate prevention; the response\
-            \ contains TradeStation's separate order ID."
-        expiry_date:
-          description: "ISO 8601 expiry timestamp, required for gtd and invalid with\
-            \ other durations. A missing timezone is treated as UTC. Supported only\
-            \ through existing single-leg Public and Sandbox execution paths."
-          example: 2026-12-18T20:00:00Z
-          format: date-time
-          nullable: true
-          type: string
-          x-konfig-original-example: 2026-12-18T20:00:00Z
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-expiry_date
-        notional_value:
-          allOf:
-          - $ref: '#/components/schemas/SimpleTradeDecimal'
-          description: "Positive order value, supported only for a single-equity market\
-            \ order on eligible brokerages and partners. Mutually exclusive with leg\
-            \ units. Omit or set units to null when supplied."
-        trading_session:
-          default: regular
-          description: extended uses existing single-leg equity/option brokerage support
-            and requires extended-hours enablement. Futures and multi-leg orders only
-            accept regular.
-          enum:
-          - regular
-          - extended
-          example: regular
-          type: string
-          x-konfig-original-example: regular
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleTradeForm-properties-trading_session
+          x-konfig-original-example: AAPL  251219C00150000
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-quotes-options-get-parameters-3-schema
       required:
       - accountId
-      - legs
-      - order_type
-      - time_in_force
+      - symbol
       - userId
       - userSecret
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter:
-      - accountId
       - userId
       - userSecret
-    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-complex:
-      additionalProperties: true
-      properties:
-        accountId:
-          $ref: '#/components/schemas/AccountID'
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        type:
-          description: |
-            The complex order type.
-            - `OCO`: One Cancels the Other — two peer orders.
-            - `OTO`: One Triggers the Other — a trigger order and a conditional order.
-            - `OTOCO`: One Triggers a One Cancels the Other — a trigger order and two peer orders.
-          enum:
-          - OCO
-          - OTO
-          - OTOCO
-          example: OTO
-          type: string
-          x-konfig-original-example: OTO
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormComplex-properties-type
-        orders:
-          description: |
-            The orders that make up the complex order. Required counts and roles per type:
-            - `OCO`: exactly 2 orders, both `PEER`
-            - `OTO`: exactly 2 orders, one `TRIGGER` and one `CONDITIONAL`
-            - `OTOCO`: exactly 3 orders, one `TRIGGER` and two `PEER`
-          items:
-            $ref: '#/components/schemas/ComplexOrderLeg'
-          type: array
-        client_order_id:
-          $ref: '#/components/schemas/ClientOrderIDNullable'
-      required:
       - accountId
-      - orders
-      - type
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - accountId
-      - userId
-      - userSecret
+      - symbol
     konfig-generated-schema-single-parameter-schema-get--snapTrade-partners:
       additionalProperties: true
       properties: {}
@@ -22164,14 +22176,26 @@ components:
       required:
       - brokerage_order_id
       type: object
-    Trading_getUserAccountOptionQuotes_410_response:
+    Trading_placeSimpleOrder_409_response:
       additionalProperties: true
       properties:
         detail:
-          example: This endpoint is no longer available.
+          example: An order with this client_order_id was already submitted. Use a
+            new client_order_id for a new order.
           type: string
-          x-konfig-original-example: This endpoint is no longer available.
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-quotes-options-get-responses-410-content-application-json-schema-properties-detail
+          x-konfig-original-example: An order with this client_order_id was already
+            submitted. Use a new client_order_id for a new order.
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-trading-simple-post-responses-409-content-application-json-schema-properties-detail
+        status_code:
+          example: 409
+          type: integer
+          x-konfig-original-example: 409
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-trading-simple-post-responses-409-content-application-json-schema-properties-status_code
+        code:
+          example: "1170"
+          type: string
+          x-konfig-original-example: "1170"
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-trading-simple-post-responses-409-content-application-json-schema-properties-code
       type: object
     Trading_placeMlegOrder_409_response:
       additionalProperties: true
@@ -22210,26 +22234,14 @@ components:
       required:
       - items
       type: object
-    Trading_placeSimpleOrder_409_response:
+    Trading_getUserAccountOptionQuotes_410_response:
       additionalProperties: true
       properties:
         detail:
-          example: An order with this client_order_id was already submitted. Use a
-            new client_order_id for a new order.
+          example: This endpoint is no longer available.
           type: string
-          x-konfig-original-example: An order with this client_order_id was already
-            submitted. Use a new client_order_id for a new order.
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-trading-simple-post-responses-409-content-application-json-schema-properties-detail
-        status_code:
-          example: 409
-          type: integer
-          x-konfig-original-example: 409
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-trading-simple-post-responses-409-content-application-json-schema-properties-status_code
-        code:
-          example: "1170"
-          type: string
-          x-konfig-original-example: "1170"
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-trading-simple-post-responses-409-content-application-json-schema-properties-code
+          x-konfig-original-example: This endpoint is no longer available.
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-quotes-options-get-responses-410-content-application-json-schema-properties-detail
       type: object
     TradeDetection_addSubscription_request:
       properties:

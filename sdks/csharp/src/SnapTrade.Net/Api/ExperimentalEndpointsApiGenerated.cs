@@ -81,7 +81,7 @@ namespace SnapTrade.Net.Api
         /// Get account order detail (V2)
         /// </summary>
         /// <remarks>
-        /// Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+        /// **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.  Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
@@ -90,13 +90,14 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecordV2</returns>
+        [Obsolete]
         AccountOrderRecordV2 GetUserAccountOrderDetailV2(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0);
 
         /// <summary>
         /// Get account order detail (V2)
         /// </summary>
         /// <remarks>
-        /// Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+        /// **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.  Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
@@ -105,12 +106,13 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecordV2</returns>
+        [Obsolete]
         ApiResponse<AccountOrderRecordV2> GetUserAccountOrderDetailV2WithHttpInfo(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0);
         /// <summary>
         /// List account orders v2
         /// </summary>
         /// <remarks>
-        /// Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+        /// **Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.  Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -120,13 +122,14 @@ namespace SnapTrade.Net.Api
         /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrdersV2Response</returns>
+        [Obsolete]
         AccountOrdersV2Response GetUserAccountOrdersV2(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0);
 
         /// <summary>
         /// List account orders v2
         /// </summary>
         /// <remarks>
-        /// Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+        /// **Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.  Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -136,12 +139,13 @@ namespace SnapTrade.Net.Api
         /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrdersV2Response</returns>
+        [Obsolete]
         ApiResponse<AccountOrdersV2Response> GetUserAccountOrdersV2WithHttpInfo(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0);
         /// <summary>
         /// List account recent orders (V2, last 24 hours only)
         /// </summary>
         /// <remarks>
-        /// A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false. 
+        /// **Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.  A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -150,13 +154,14 @@ namespace SnapTrade.Net.Api
         /// <param name="onlyExecuted">Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrdersV2Response</returns>
+        [Obsolete]
         AccountOrdersV2Response GetUserAccountRecentOrdersV2(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0);
 
         /// <summary>
         /// List account recent orders (V2, last 24 hours only)
         /// </summary>
         /// <remarks>
-        /// A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false. 
+        /// **Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.  A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -165,6 +170,7 @@ namespace SnapTrade.Net.Api
         /// <param name="onlyExecuted">Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrdersV2Response</returns>
+        [Obsolete]
         ApiResponse<AccountOrdersV2Response> GetUserAccountRecentOrdersV2WithHttpInfo(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0);
         /// <summary>
         /// List active Trade Detection subscriptions
@@ -254,7 +260,7 @@ namespace SnapTrade.Net.Api
         /// Get account order detail (V2)
         /// </summary>
         /// <remarks>
-        /// Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+        /// **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.  Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
@@ -264,13 +270,14 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrderRecordV2</returns>
+        [Obsolete]
         System.Threading.Tasks.Task<AccountOrderRecordV2> GetUserAccountOrderDetailV2Async(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get account order detail (V2)
         /// </summary>
         /// <remarks>
-        /// Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+        /// **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.  Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
@@ -280,12 +287,13 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecordV2)</returns>
+        [Obsolete]
         System.Threading.Tasks.Task<ApiResponse<AccountOrderRecordV2>> GetUserAccountOrderDetailV2WithHttpInfoAsync(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// List account orders v2
         /// </summary>
         /// <remarks>
-        /// Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+        /// **Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.  Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -296,13 +304,14 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrdersV2Response</returns>
+        [Obsolete]
         System.Threading.Tasks.Task<AccountOrdersV2Response> GetUserAccountOrdersV2Async(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// List account orders v2
         /// </summary>
         /// <remarks>
-        /// Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+        /// **Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.  Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -313,12 +322,13 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrdersV2Response)</returns>
+        [Obsolete]
         System.Threading.Tasks.Task<ApiResponse<AccountOrdersV2Response>> GetUserAccountOrdersV2WithHttpInfoAsync(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// List account recent orders (V2, last 24 hours only)
         /// </summary>
         /// <remarks>
-        /// A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false. 
+        /// **Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.  A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -328,13 +338,14 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrdersV2Response</returns>
+        [Obsolete]
         System.Threading.Tasks.Task<AccountOrdersV2Response> GetUserAccountRecentOrdersV2Async(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// List account recent orders (V2, last 24 hours only)
         /// </summary>
         /// <remarks>
-        /// A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false. 
+        /// **Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.  A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -344,6 +355,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrdersV2Response)</returns>
+        [Obsolete]
         System.Threading.Tasks.Task<ApiResponse<AccountOrdersV2Response>> GetUserAccountRecentOrdersV2WithHttpInfoAsync(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// List active Trade Detection subscriptions
@@ -877,7 +889,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get account order detail (V2) Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+        /// Get account order detail (V2) **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.  Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
@@ -886,6 +898,7 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecordV2</returns>
+        [Obsolete]
         public AccountOrderRecordV2 GetUserAccountOrderDetailV2(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0)
         {
             SnapTrade.Net.Client.ApiResponse<AccountOrderRecordV2> localVarResponse = GetUserAccountOrderDetailV2WithHttpInfo(accountId, brokerageOrderId, userId, userSecret);
@@ -893,7 +906,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get account order detail (V2) Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+        /// Get account order detail (V2) **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.  Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
@@ -902,6 +915,7 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecordV2</returns>
+        [Obsolete]
         public SnapTrade.Net.Client.ApiResponse<AccountOrderRecordV2> GetUserAccountOrderDetailV2WithHttpInfo(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0)
         {
             // verify the required parameter 'accountId' is set
@@ -989,7 +1003,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get account order detail (V2) Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+        /// Get account order detail (V2) **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.  Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
@@ -999,6 +1013,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrderRecordV2</returns>
+        [Obsolete]
         public async System.Threading.Tasks.Task<AccountOrderRecordV2> GetUserAccountOrderDetailV2Async(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             SnapTrade.Net.Client.ApiResponse<AccountOrderRecordV2> localVarResponse = await GetUserAccountOrderDetailV2WithHttpInfoAsync(accountId, brokerageOrderId, userId, userSecret, operationIndex, cancellationToken).ConfigureAwait(false);
@@ -1006,7 +1021,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get account order detail (V2) Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+        /// Get account order detail (V2) **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.  Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
@@ -1016,6 +1031,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecordV2)</returns>
+        [Obsolete]
         public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrderRecordV2>> GetUserAccountOrderDetailV2WithHttpInfoAsync(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'accountId' is set
@@ -1105,7 +1121,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account orders v2 Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+        /// List account orders v2 **Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.  Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1115,6 +1131,7 @@ namespace SnapTrade.Net.Api
         /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrdersV2Response</returns>
+        [Obsolete]
         public AccountOrdersV2Response GetUserAccountOrdersV2(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0)
         {
             SnapTrade.Net.Client.ApiResponse<AccountOrdersV2Response> localVarResponse = GetUserAccountOrdersV2WithHttpInfo(userId, userSecret, accountId, state, days);
@@ -1122,7 +1139,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account orders v2 Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+        /// List account orders v2 **Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.  Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1132,6 +1149,7 @@ namespace SnapTrade.Net.Api
         /// <param name="days">Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. Values greater than 90 will be capped at 90. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrdersV2Response</returns>
+        [Obsolete]
         public SnapTrade.Net.Client.ApiResponse<AccountOrdersV2Response> GetUserAccountOrdersV2WithHttpInfo(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
@@ -1220,7 +1238,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account orders v2 Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+        /// List account orders v2 **Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.  Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1231,6 +1249,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrdersV2Response</returns>
+        [Obsolete]
         public async System.Threading.Tasks.Task<AccountOrdersV2Response> GetUserAccountOrdersV2Async(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             SnapTrade.Net.Client.ApiResponse<AccountOrdersV2Response> localVarResponse = await GetUserAccountOrdersV2WithHttpInfoAsync(userId, userSecret, accountId, state, days, operationIndex, cancellationToken).ConfigureAwait(false);
@@ -1238,7 +1257,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account orders v2 Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+        /// List account orders v2 **Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.  Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1249,6 +1268,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrdersV2Response)</returns>
+        [Obsolete]
         public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrdersV2Response>> GetUserAccountOrdersV2WithHttpInfoAsync(string userId, string userSecret, string accountId, string state = default(string), int? days = default(int?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
@@ -1339,7 +1359,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account recent orders (V2, last 24 hours only) A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false. 
+        /// List account recent orders (V2, last 24 hours only) **Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.  A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1348,6 +1368,7 @@ namespace SnapTrade.Net.Api
         /// <param name="onlyExecuted">Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrdersV2Response</returns>
+        [Obsolete]
         public AccountOrdersV2Response GetUserAccountRecentOrdersV2(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0)
         {
             SnapTrade.Net.Client.ApiResponse<AccountOrdersV2Response> localVarResponse = GetUserAccountRecentOrdersV2WithHttpInfo(userId, userSecret, accountId, onlyExecuted);
@@ -1355,7 +1376,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account recent orders (V2, last 24 hours only) A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false. 
+        /// List account recent orders (V2, last 24 hours only) **Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.  A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1364,6 +1385,7 @@ namespace SnapTrade.Net.Api
         /// <param name="onlyExecuted">Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrdersV2Response</returns>
+        [Obsolete]
         public SnapTrade.Net.Client.ApiResponse<AccountOrdersV2Response> GetUserAccountRecentOrdersV2WithHttpInfo(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
@@ -1448,7 +1470,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account recent orders (V2, last 24 hours only) A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false. 
+        /// List account recent orders (V2, last 24 hours only) **Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.  A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1458,6 +1480,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrdersV2Response</returns>
+        [Obsolete]
         public async System.Threading.Tasks.Task<AccountOrdersV2Response> GetUserAccountRecentOrdersV2Async(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             SnapTrade.Net.Client.ApiResponse<AccountOrdersV2Response> localVarResponse = await GetUserAccountRecentOrdersV2WithHttpInfoAsync(userId, userSecret, accountId, onlyExecuted, operationIndex, cancellationToken).ConfigureAwait(false);
@@ -1465,7 +1488,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account recent orders (V2, last 24 hours only) A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false. 
+        /// List account recent orders (V2, last 24 hours only) **Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.  A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1475,6 +1498,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrdersV2Response)</returns>
+        [Obsolete]
         public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrdersV2Response>> GetUserAccountRecentOrdersV2WithHttpInfoAsync(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set

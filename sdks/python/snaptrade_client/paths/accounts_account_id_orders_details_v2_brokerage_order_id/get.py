@@ -593,6 +593,7 @@ class BaseApi(api_client.Api):
 class GetUserAccountOrderDetailV2(BaseApi, typing.Generic[TAuth]):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
+    @api_client.DeprecationWarningOnce(prefix="experimental_endpoints")
     async def aget_user_account_order_detail_v2(
         self,
         account_id: typing.Optional[str] = None,
@@ -622,6 +623,7 @@ class GetUserAccountOrderDetailV2(BaseApi, typing.Generic[TAuth]):
             **kwargs,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="experimental_endpoints")
     def get_user_account_order_detail_v2(
         self,
         account_id: typing.Optional[str] = None,
@@ -636,7 +638,7 @@ class GetUserAccountOrderDetailV2(BaseApi, typing.Generic[TAuth]):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  """
+        """ **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.  Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  """
         args = self._get_user_account_order_detail_v2_mapped_args(
             path_params=path_params,
             account_id=account_id,
@@ -654,6 +656,7 @@ class GetUserAccountOrderDetailV2(BaseApi, typing.Generic[TAuth]):
 class ApiForget(BaseApi, typing.Generic[TAuth]):
     # this class is used by api classes that refer to endpoints by path and http method names
 
+    @api_client.DeprecationWarningOnce(prefix="experimental_endpoints")
     async def aget(
         self,
         account_id: typing.Optional[str] = None,
@@ -683,6 +686,7 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
             **kwargs,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="experimental_endpoints")
     def get(
         self,
         account_id: typing.Optional[str] = None,
@@ -697,7 +701,7 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  """
+        """ **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.  Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  """
         args = self._get_user_account_order_detail_v2_mapped_args(
             path_params=path_params,
             account_id=account_id,

@@ -448,6 +448,8 @@ func (r ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request) Execute() (*
 /*
 GetUserAccountOrderDetailV2 Get account order detail (V2)
 
+**Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.
+
 Returns the detail of a single order using the brokerage order ID provided as a path parameter.
 
 The V2 order response format includes all legs of the order in the `legs` list field.
@@ -464,6 +466,8 @@ This endpoint only returns orders placed through SnapTrade. In other words, orde
  @param userId
  @param userSecret
  @return ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request
+
+Deprecated
 */
 func (a *ExperimentalEndpointsApiService) GetUserAccountOrderDetailV2(accountId string, brokerageOrderId string, userId string, userSecret string) ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request {
 	return ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request{
@@ -478,6 +482,7 @@ func (a *ExperimentalEndpointsApiService) GetUserAccountOrderDetailV2(accountId 
 
 // Execute executes the request
 //  @return AccountOrderRecordV2
+// Deprecated
 func (a *ExperimentalEndpointsApiService) GetUserAccountOrderDetailV2Execute(r ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request) (*AccountOrderRecordV2, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -675,6 +680,8 @@ func (r ExperimentalEndpointsApiGetUserAccountOrdersV2Request) Execute() (*Accou
 /*
 GetUserAccountOrdersV2 List account orders v2
 
+**Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.
+
 Returns a list of recent orders in the specified account.
 
 The V2 order response format will include all legs of each order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.
@@ -687,6 +694,8 @@ If the connection has become disabled, it can no longer access the latest data f
  @param userSecret
  @param accountId
  @return ExperimentalEndpointsApiGetUserAccountOrdersV2Request
+
+Deprecated
 */
 func (a *ExperimentalEndpointsApiService) GetUserAccountOrdersV2(userId string, userSecret string, accountId string) ExperimentalEndpointsApiGetUserAccountOrdersV2Request {
 	return ExperimentalEndpointsApiGetUserAccountOrdersV2Request{
@@ -700,6 +709,7 @@ func (a *ExperimentalEndpointsApiService) GetUserAccountOrdersV2(userId string, 
 
 // Execute executes the request
 //  @return AccountOrdersV2Response
+// Deprecated
 func (a *ExperimentalEndpointsApiService) GetUserAccountOrdersV2Execute(r ExperimentalEndpointsApiGetUserAccountOrdersV2Request) (*AccountOrdersV2Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -890,6 +900,8 @@ func (r ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Request) Execute() (
 /*
 GetUserAccountRecentOrdersV2 List account recent orders (V2, last 24 hours only)
 
+**Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.
+
 A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format.
 This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.
 Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days.
@@ -901,6 +913,8 @@ By default only returns executed orders, but that can be changed by setting *onl
  @param userSecret
  @param accountId
  @return ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Request
+
+Deprecated
 */
 func (a *ExperimentalEndpointsApiService) GetUserAccountRecentOrdersV2(userId string, userSecret string, accountId string) ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Request {
 	return ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Request{
@@ -914,6 +928,7 @@ func (a *ExperimentalEndpointsApiService) GetUserAccountRecentOrdersV2(userId st
 
 // Execute executes the request
 //  @return AccountOrdersV2Response
+// Deprecated
 func (a *ExperimentalEndpointsApiService) GetUserAccountRecentOrdersV2Execute(r ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Request) (*AccountOrdersV2Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet

@@ -881,8 +881,6 @@ This endpoint is always realtime and does not rely on cached data, except that a
 
 This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
 
-**Beta:** this endpoint and its response schema may change.
-
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param accountId
@@ -1361,8 +1359,6 @@ Every order carries a `legs` list with at least one leg. Each leg's `instrument`
 
 `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage's own label is in `raw_type`.
 
-**Beta:** this endpoint and its response schema may change.
-
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
 
@@ -1770,8 +1766,6 @@ Differs from `/accounts/{accountId}/orders/all` in that it is always realtime, a
 By default only returns executed orders, but that can be changed by setting *only_executed* to false.
 
 Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.
-
-**Beta:** this endpoint and its response schema may change.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -2361,6 +2355,8 @@ func (r AccountInformationApiGetUserAccountOrderDetailRequest) Execute() (*Accou
 /*
 GetUserAccountOrderDetail Get account order detail
 
+**Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.
+
 Returns the detail of a single order using the external order ID provided in the request body.
 
 This endpoint only works for single-leg orders at this time. Support for multi-leg orders will be added in the future.
@@ -2376,6 +2372,8 @@ This endpoint only returns orders placed through SnapTrade. In other words, orde
  @param userSecret
  @param accountInformationGetUserAccountOrderDetailRequest
  @return AccountInformationApiGetUserAccountOrderDetailRequest
+
+Deprecated
 */
 func (a *AccountInformationApiService) GetUserAccountOrderDetail(accountId string, userId string, userSecret string, accountInformationGetUserAccountOrderDetailRequest AccountInformationGetUserAccountOrderDetailRequest) AccountInformationApiGetUserAccountOrderDetailRequest {
 	return AccountInformationApiGetUserAccountOrderDetailRequest{
@@ -2390,6 +2388,7 @@ func (a *AccountInformationApiService) GetUserAccountOrderDetail(accountId strin
 
 // Execute executes the request
 //  @return AccountOrderRecord
+// Deprecated
 func (a *AccountInformationApiService) GetUserAccountOrderDetailExecute(r AccountInformationApiGetUserAccountOrderDetailRequest) (*AccountOrderRecord, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
@@ -2601,6 +2600,8 @@ func (r AccountInformationApiGetUserAccountOrdersRequest) Execute() ([]AccountOr
 /*
 GetUserAccountOrders List account orders
 
+**Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.
+
 Returns a list of recent orders in the specified account.
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
@@ -2615,6 +2616,8 @@ If the connection has become disabled, it can no longer access the latest data f
  @param userSecret
  @param accountId
  @return AccountInformationApiGetUserAccountOrdersRequest
+
+Deprecated
 */
 func (a *AccountInformationApiService) GetUserAccountOrders(userId string, userSecret string, accountId string) AccountInformationApiGetUserAccountOrdersRequest {
 	return AccountInformationApiGetUserAccountOrdersRequest{
@@ -2628,6 +2631,7 @@ func (a *AccountInformationApiService) GetUserAccountOrders(userId string, userS
 
 // Execute executes the request
 //  @return []AccountOrderRecord
+// Deprecated
 func (a *AccountInformationApiService) GetUserAccountOrdersExecute(r AccountInformationApiGetUserAccountOrdersRequest) ([]AccountOrderRecord, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -2840,6 +2844,8 @@ func (r AccountInformationApiGetUserAccountRecentOrdersRequest) Execute() (*Rece
 /*
 GetUserAccountRecentOrders List account recent orders (last 24 hours only)
 
+**Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.
+
 A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders.
 This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders
 Differs from /orders in that it is always realtime, and only checks the last 24 hours
@@ -2851,6 +2857,8 @@ By default only returns executed orders, but that can be changed by setting *onl
  @param userSecret
  @param accountId
  @return AccountInformationApiGetUserAccountRecentOrdersRequest
+
+Deprecated
 */
 func (a *AccountInformationApiService) GetUserAccountRecentOrders(userId string, userSecret string, accountId string) AccountInformationApiGetUserAccountRecentOrdersRequest {
 	return AccountInformationApiGetUserAccountRecentOrdersRequest{
@@ -2864,6 +2872,7 @@ func (a *AccountInformationApiService) GetUserAccountRecentOrders(userId string,
 
 // Execute executes the request
 //  @return RecentOrdersResponse
+// Deprecated
 func (a *AccountInformationApiService) GetUserAccountRecentOrdersExecute(r AccountInformationApiGetUserAccountRecentOrdersRequest) (*RecentOrdersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -3273,7 +3282,7 @@ func (r AccountInformationApiGetUserHoldingsRequest) Execute() (*AccountHoldings
 /*
 GetUserHoldings List account holdings
 
-**Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders).
+**Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders).
 
 This endpoint will return HTTP 410 Gone for all customers that sign up after May 11, 2026.
 
