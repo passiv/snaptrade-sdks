@@ -58,6 +58,14 @@ namespace SnapTrade.Net.Test.Model
 
 
         /// <summary>
+        /// Test the property 'Instrument'
+        /// </summary>
+        [Fact]
+        public void InstrumentTest()
+        {
+            // TODO unit test for the property 'Instrument'
+        }
+        /// <summary>
         /// Test the property 'Id'
         /// </summary>
         [Fact]

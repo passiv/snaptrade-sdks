@@ -51,6 +51,7 @@ class AccountUniversalActivity implements ModelInterface, ArrayAccess, \JsonSeri
       * @var string[]
       */
     protected static $openAPITypes = [
+        'instrument' => '\SnapTrade\Model\AccountUniversalActivityInstrument',
         'id' => 'string',
         'symbol' => '\SnapTrade\Model\AccountUniversalActivitySymbol',
         'currency_universal_symbol' => '\SnapTrade\Model\AccountUniversalActivityCurrencyUniversalSymbol',
@@ -78,6 +79,7 @@ class AccountUniversalActivity implements ModelInterface, ArrayAccess, \JsonSeri
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'instrument' => null,
         'id' => null,
         'symbol' => null,
         'currency_universal_symbol' => null,
@@ -103,7 +105,8 @@ class AccountUniversalActivity implements ModelInterface, ArrayAccess, \JsonSeri
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
+        'instrument' => true,
+		'id' => false,
 		'symbol' => true,
 		'currency_universal_symbol' => true,
 		'option_symbol' => true,
@@ -208,6 +211,7 @@ class AccountUniversalActivity implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $attributeMap = [
+        'instrument' => 'instrument',
         'id' => 'id',
         'symbol' => 'symbol',
         'currency_universal_symbol' => 'currency_universal_symbol',
@@ -233,6 +237,7 @@ class AccountUniversalActivity implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $setters = [
+        'instrument' => 'setInstrument',
         'id' => 'setId',
         'symbol' => 'setSymbol',
         'currency_universal_symbol' => 'setCurrencyUniversalSymbol',
@@ -258,6 +263,7 @@ class AccountUniversalActivity implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $getters = [
+        'instrument' => 'getInstrument',
         'id' => 'getId',
         'symbol' => 'getSymbol',
         'currency_universal_symbol' => 'getCurrencyUniversalSymbol',
@@ -334,6 +340,7 @@ class AccountUniversalActivity implements ModelInterface, ArrayAccess, \JsonSeri
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('instrument', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('symbol', $data ?? [], null);
         $this->setIfExists('currency_universal_symbol', $data ?? [], null);
@@ -394,6 +401,42 @@ class AccountUniversalActivity implements ModelInterface, ArrayAccess, \JsonSeri
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets instrument
+     *
+     * @return \SnapTrade\Model\AccountUniversalActivityInstrument|null
+     */
+    public function getInstrument()
+    {
+        return $this->container['instrument'];
+    }
+
+    /**
+     * Sets instrument
+     *
+     * @param \SnapTrade\Model\AccountUniversalActivityInstrument|null $instrument instrument
+     *
+     * @return self
+     */
+    public function setInstrument($instrument)
+    {
+
+        if (is_null($instrument)) {
+            array_push($this->openAPINullablesSetToNull, 'instrument');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('instrument', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        $this->container['instrument'] = $instrument;
+
+        return $this;
+    }
 
     /**
      * Gets id

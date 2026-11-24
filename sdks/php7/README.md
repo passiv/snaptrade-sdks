@@ -731,6 +731,8 @@ $result = $snaptrade->accountInformation->getUserAccountBalance(
 
 **Deprecated.** Use the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint instead, which supports all account types, including investment, deposit, line of credit, annuity, and mortgage accounts.
 
+This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.
+
 Returns account detail known to SnapTrade for the specified account.
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
@@ -1060,9 +1062,11 @@ $result = $snaptrade->accountInformation->listAllUserAccounts(
 
 **Deprecated.** Use the [list all user accounts](/reference/Account%20Information/AccountInformation_listAllUserAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.
 
+This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.
+
 Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
-This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listConnectionAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
 
 
 
@@ -1487,6 +1491,11 @@ $result = $snaptrade->connections->disableBrokerageAuthorization(
 
 
 ### `snaptrade.connections.listBrokerageAuthorizationAccounts`<a id="snaptradeconnectionslistbrokerageauthorizationaccounts"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+**Deprecated.** Use the [list accounts](/reference/Connections/Connections_listConnectionAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.
+
+This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.
 
 Returns all brokerage accounts that belong to the specified connection for the authenticated user.
 

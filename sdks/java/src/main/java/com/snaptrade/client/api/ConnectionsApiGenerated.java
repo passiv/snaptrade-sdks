@@ -716,6 +716,7 @@ public class ConnectionsApiGenerated {
         return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call listBrokerageAuthorizationAccountsValidateBeforeCall(UUID authorizationId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'authorizationId' is set
@@ -773,7 +774,9 @@ public class ConnectionsApiGenerated {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
             return listBrokerageAuthorizationAccountsCall(authorizationId, userId, userSecret, _callback);
         }
@@ -788,7 +791,9 @@ public class ConnectionsApiGenerated {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public List<Account> execute() throws ApiException {
             ApiResponse<List<Account>> localVarResp = listBrokerageAuthorizationAccountsWithHttpInfo(authorizationId, userId, userSecret);
             return localVarResp.getResponseBody();
@@ -803,7 +808,9 @@ public class ConnectionsApiGenerated {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public ApiResponse<List<Account>> executeWithHttpInfo() throws ApiException {
             return listBrokerageAuthorizationAccountsWithHttpInfo(authorizationId, userId, userSecret);
         }
@@ -818,7 +825,9 @@ public class ConnectionsApiGenerated {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call executeAsync(final ApiCallback<List<Account>> _callback) throws ApiException {
             return listBrokerageAuthorizationAccountsAsync(authorizationId, userId, userSecret, _callback);
         }
@@ -826,7 +835,7 @@ public class ConnectionsApiGenerated {
 
     /**
      * List accounts for a connection
-     * Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+     * **Deprecated.** Use the [list accounts](/reference/Connections/Connections_listConnectionAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.  This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.  Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
      * @param authorizationId  (required)
      * @param userId  (required)
      * @param userSecret  (required)
@@ -836,7 +845,9 @@ public class ConnectionsApiGenerated {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public ConnectionsApi.ListBrokerageAuthorizationAccountsRequestBuilder listBrokerageAuthorizationAccounts(UUID authorizationId, String userId, String userSecret) throws IllegalArgumentException {
         if (authorizationId == null) throw new IllegalArgumentException("\"authorizationId\" is required but got null");
             

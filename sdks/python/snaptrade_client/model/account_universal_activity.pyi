@@ -37,6 +37,10 @@ class AccountUniversalActivity(
     class MetaOapg:
         
         class properties:
+        
+            @staticmethod
+            def instrument() -> typing.Type['InstrumentNullable']:
+                return InstrumentNullable
             id = schemas.StrSchema
         
             @staticmethod
@@ -148,6 +152,7 @@ class AccountUniversalActivity(
                         _configuration=_configuration,
                     )
             __annotations__ = {
+                "instrument": instrument,
                 "id": id,
                 "symbol": symbol,
                 "currency_universal_symbol": currency_universal_symbol,
@@ -167,6 +172,9 @@ class AccountUniversalActivity(
                 "external_reference_id": external_reference_id,
             }
         additional_properties = schemas.AnyTypeSchema
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["instrument"]) -> 'InstrumentNullable': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["id"]) -> MetaOapg.properties.id: ...
@@ -222,9 +230,12 @@ class AccountUniversalActivity(
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["symbol"], typing_extensions.Literal["currency_universal_symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["price"], typing_extensions.Literal["units"], typing_extensions.Literal["amount"], typing_extensions.Literal["currency"], typing_extensions.Literal["type"], typing_extensions.Literal["option_type"], typing_extensions.Literal["description"], typing_extensions.Literal["trade_date"], typing_extensions.Literal["settlement_date"], typing_extensions.Literal["fee"], typing_extensions.Literal["fx_rate"], typing_extensions.Literal["institution"], typing_extensions.Literal["external_reference_id"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["instrument"], typing_extensions.Literal["id"], typing_extensions.Literal["symbol"], typing_extensions.Literal["currency_universal_symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["price"], typing_extensions.Literal["units"], typing_extensions.Literal["amount"], typing_extensions.Literal["currency"], typing_extensions.Literal["type"], typing_extensions.Literal["option_type"], typing_extensions.Literal["description"], typing_extensions.Literal["trade_date"], typing_extensions.Literal["settlement_date"], typing_extensions.Literal["fee"], typing_extensions.Literal["fx_rate"], typing_extensions.Literal["institution"], typing_extensions.Literal["external_reference_id"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["instrument"]) -> typing.Union['InstrumentNullable', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["id"]) -> typing.Union[MetaOapg.properties.id, schemas.Unset]: ...
@@ -280,12 +291,13 @@ class AccountUniversalActivity(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["symbol"], typing_extensions.Literal["currency_universal_symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["price"], typing_extensions.Literal["units"], typing_extensions.Literal["amount"], typing_extensions.Literal["currency"], typing_extensions.Literal["type"], typing_extensions.Literal["option_type"], typing_extensions.Literal["description"], typing_extensions.Literal["trade_date"], typing_extensions.Literal["settlement_date"], typing_extensions.Literal["fee"], typing_extensions.Literal["fx_rate"], typing_extensions.Literal["institution"], typing_extensions.Literal["external_reference_id"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["instrument"], typing_extensions.Literal["id"], typing_extensions.Literal["symbol"], typing_extensions.Literal["currency_universal_symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["price"], typing_extensions.Literal["units"], typing_extensions.Literal["amount"], typing_extensions.Literal["currency"], typing_extensions.Literal["type"], typing_extensions.Literal["option_type"], typing_extensions.Literal["description"], typing_extensions.Literal["trade_date"], typing_extensions.Literal["settlement_date"], typing_extensions.Literal["fee"], typing_extensions.Literal["fx_rate"], typing_extensions.Literal["institution"], typing_extensions.Literal["external_reference_id"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
+        instrument: typing.Union['InstrumentNullable', schemas.Unset] = schemas.unset,
         id: typing.Union[MetaOapg.properties.id, str, schemas.Unset] = schemas.unset,
         symbol: typing.Union['SymbolNullable', schemas.Unset] = schemas.unset,
         currency_universal_symbol: typing.Union['SymbolNullable', schemas.Unset] = schemas.unset,
@@ -309,6 +321,7 @@ class AccountUniversalActivity(
         return super().__new__(
             cls,
             *args,
+            instrument=instrument,
             id=id,
             symbol=symbol,
             currency_universal_symbol=currency_universal_symbol,
@@ -331,5 +344,6 @@ class AccountUniversalActivity(
         )
 
 from snaptrade_client.model.currency_nullable import CurrencyNullable
+from snaptrade_client.model.instrument_nullable import InstrumentNullable
 from snaptrade_client.model.options_symbol_nullable import OptionsSymbolNullable
 from snaptrade_client.model.symbol_nullable import SymbolNullable

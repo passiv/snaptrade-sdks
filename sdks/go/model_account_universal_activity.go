@@ -18,6 +18,7 @@ import (
 
 // AccountUniversalActivity A transaction or activity from an institution
 type AccountUniversalActivity struct {
+	Instrument NullableInstrumentNullable `json:"instrument,omitempty"`
 	// Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.  Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one. 
 	Id *string `json:"id,omitempty"`
 	Symbol NullableSymbolNullable `json:"symbol,omitempty"`
@@ -68,6 +69,48 @@ func NewAccountUniversalActivity() *AccountUniversalActivity {
 func NewAccountUniversalActivityWithDefaults() *AccountUniversalActivity {
 	this := AccountUniversalActivity{}
 	return &this
+}
+
+// GetInstrument returns the Instrument field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AccountUniversalActivity) GetInstrument() InstrumentNullable {
+	if o == nil || isNil(o.Instrument.Get()) {
+		var ret InstrumentNullable
+		return ret
+	}
+	return *o.Instrument.Get()
+}
+
+// GetInstrumentOk returns a tuple with the Instrument field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AccountUniversalActivity) GetInstrumentOk() (*InstrumentNullable, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.Instrument.Get(), o.Instrument.IsSet()
+}
+
+// HasInstrument returns a boolean if a field has been set.
+func (o *AccountUniversalActivity) HasInstrument() bool {
+	if o != nil && o.Instrument.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetInstrument gets a reference to the given NullableInstrumentNullable and assigns it to the Instrument field.
+func (o *AccountUniversalActivity) SetInstrument(v InstrumentNullable) {
+	o.Instrument.Set(&v)
+}
+// SetInstrumentNil sets the value for Instrument to be an explicit nil
+func (o *AccountUniversalActivity) SetInstrumentNil() {
+	o.Instrument.Set(nil)
+}
+
+// UnsetInstrument ensures that no value is present for Instrument, not even an explicit nil
+func (o *AccountUniversalActivity) UnsetInstrument() {
+	o.Instrument.Unset()
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -696,6 +739,9 @@ func (o *AccountUniversalActivity) UnsetExternalReferenceId() {
 
 func (o AccountUniversalActivity) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.Instrument.IsSet() {
+		toSerialize["instrument"] = o.Instrument.Get()
+	}
 	if !isNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
@@ -765,6 +811,7 @@ func (o *AccountUniversalActivity) UnmarshalJSON(bytes []byte) error {
 	if err := json.Unmarshal(bytes, &additionalProperties); err != nil {
 		return err
 	}
+	delete(additionalProperties, "instrument")
 	delete(additionalProperties, "id")
 	delete(additionalProperties, "symbol")
 	delete(additionalProperties, "currency_universal_symbol")

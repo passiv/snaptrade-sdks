@@ -16,6 +16,7 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.currency_nullable import CurrencyNullable
+from snaptrade_client.type.instrument_nullable import InstrumentNullable
 from snaptrade_client.type.options_symbol_nullable import OptionsSymbolNullable
 from snaptrade_client.type.symbol_nullable import SymbolNullable
 
@@ -23,6 +24,8 @@ class RequiredAccountUniversalActivity(TypedDict):
     pass
 
 class OptionalAccountUniversalActivity(TypedDict, total=False):
+    instrument: typing.Optional[InstrumentNullable]
+
     # Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.  Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one. 
     id: str
 
