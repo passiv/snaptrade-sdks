@@ -334,6 +334,10 @@ module SnapTrade
 
     # List accounts for a connection
     #
+    # **Deprecated.** Use the [list accounts](/reference/Connections/Connections_listConnectionAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.
+    # 
+    # This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.
+    # 
     # Returns all brokerage accounts that belong to the specified connection for the authenticated user.
     # 
     # On Pay as you Go / Real-time, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call.
@@ -353,6 +357,10 @@ module SnapTrade
 
     # List accounts for a connection
     #
+    # **Deprecated.** Use the [list accounts](/reference/Connections/Connections_listConnectionAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.
+    # 
+    # This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.
+    # 
     # Returns all brokerage accounts that belong to the specified connection for the authenticated user.
     # 
     # On Pay as you Go / Real-time, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call.
@@ -370,7 +378,7 @@ module SnapTrade
     end
 
     # List accounts for a connection
-    # Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+    # **Deprecated.** Use the [list accounts](/reference/Connections/Connections_listConnectionAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.  This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.  Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
     # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -382,7 +390,7 @@ module SnapTrade
     end
 
     # List accounts for a connection
-    # Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+    # **Deprecated.** Use the [list accounts](/reference/Connections/Connections_listConnectionAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.  This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.  Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
     # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 

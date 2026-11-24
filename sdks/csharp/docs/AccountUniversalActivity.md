@@ -5,6 +5,7 @@ A transaction or activity from an institution
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Instrument** | [**InstrumentNullable**](InstrumentNullable.md) | Instrument metadata for a V2 position. Use &#x60;kind&#x60; to determine which schema is present. | [optional] 
 **Id** | **string** | Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.  Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one.  | [optional] 
 **Symbol** | [**SymbolNullable**](SymbolNullable.md) |  | [optional] 
 **CurrencyUniversalSymbol** | [**SymbolNullable**](SymbolNullable.md) |  | [optional] 

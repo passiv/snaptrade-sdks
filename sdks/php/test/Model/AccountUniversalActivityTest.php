@@ -73,6 +73,15 @@ class AccountUniversalActivityTest extends TestCase
     }
 
     /**
+     * Test attribute "instrument"
+     */
+    public function testPropertyInstrument()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "id"
      */
     public function testPropertyId()

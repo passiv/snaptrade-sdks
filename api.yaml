@@ -708,9 +708,11 @@ paths:
       description: |
         **Deprecated.** Use the [list all user accounts](/reference/Account%20Information/AccountInformation_listAllUserAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.
 
+        This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.
+
         Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
-        This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+        This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listConnectionAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
       operationId: AccountInformation_listUserAccounts
       parameters:
         - in: query
@@ -779,6 +781,8 @@ paths:
       deprecated: true
       description: |
         **Deprecated.** Use the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint instead, which supports all account types, including investment, deposit, line of credit, annuity, and mortgage accounts.
+
+        This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.
 
         Returns account detail known to SnapTrade for the specified account.
 
@@ -2282,7 +2286,12 @@ paths:
       tags:
         - Connections
       summary: List accounts for a connection
+      deprecated: true
       description: |
+        **Deprecated.** Use the [list accounts](/reference/Connections/Connections_listConnectionAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.
+
+        This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.
+
         Returns all brokerage accounts that belong to the specified connection for the authenticated user.
 
         On Pay as you Go / Real-time, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call.
@@ -7366,9 +7375,9 @@ components:
         - expiration_code
     FutureOptionInstrument:
       description: |
-        Future option (option on a futures contract) instrument metadata for a V2 position.
+        Contract details for an option on a future, including its underlying futures contract.
 
-        **Beta:** currently returned only for tastytrade and Interactive Brokers connections, and only for partners it has been enabled for. This schema may change.
+        **Beta:** futures-option positions are currently returned only for tastytrade and Interactive Brokers connections, and only for partners enabled for those positions. Tastytrade activities can also identify futures-option contracts. This schema may change.
       type: object
       properties:
         kind:
@@ -9365,6 +9374,11 @@ components:
       description: A transaction or activity from an institution
       type: object
       properties:
+        instrument:
+          description: The resolved futures or futures-option contract, including its underlying future for an option. Null for other activities or when the contract could not be identified.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/Instrument"
         id:
           description: |
             Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.

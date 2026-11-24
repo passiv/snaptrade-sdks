@@ -563,6 +563,10 @@ func (r ConnectionsApiListBrokerageAuthorizationAccountsRequest) Execute() ([]Ac
 /*
 ListBrokerageAuthorizationAccounts List accounts for a connection
 
+**Deprecated.** Use the [list accounts](/reference/Connections/Connections_listConnectionAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.
+
+This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.
+
 Returns all brokerage accounts that belong to the specified connection for the authenticated user.
 
 On Pay as you Go / Real-time, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call.
@@ -577,6 +581,8 @@ Check your API key on the [Customer Dashboard billing page](https://dashboard.sn
  @param userId
  @param userSecret
  @return ConnectionsApiListBrokerageAuthorizationAccountsRequest
+
+Deprecated
 */
 func (a *ConnectionsApiService) ListBrokerageAuthorizationAccounts(authorizationId string, userId string, userSecret string) ConnectionsApiListBrokerageAuthorizationAccountsRequest {
 	return ConnectionsApiListBrokerageAuthorizationAccountsRequest{
@@ -590,6 +596,7 @@ func (a *ConnectionsApiService) ListBrokerageAuthorizationAccounts(authorization
 
 // Execute executes the request
 //  @return []Account
+// Deprecated
 func (a *ConnectionsApiService) ListBrokerageAuthorizationAccountsExecute(r ConnectionsApiListBrokerageAuthorizationAccountsRequest) ([]Account, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet

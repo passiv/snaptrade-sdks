@@ -13,6 +13,8 @@ require 'time'
 module SnapTrade
   # A transaction or activity from an institution
   class AccountUniversalActivity
+    attr_accessor :instrument
+
     # Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.  Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one. 
     attr_accessor :id
 
@@ -63,6 +65,7 @@ module SnapTrade
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'instrument' => :'instrument',
         :'id' => :'id',
         :'symbol' => :'symbol',
         :'currency_universal_symbol' => :'currency_universal_symbol',
@@ -91,6 +94,7 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'instrument' => :'Instrument',
         :'id' => :'String',
         :'symbol' => :'AccountUniversalActivitySymbol',
         :'currency_universal_symbol' => :'AccountUniversalActivityCurrencyUniversalSymbol',
@@ -114,6 +118,7 @@ module SnapTrade
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'instrument',
         :'symbol',
         :'currency_universal_symbol',
         :'option_symbol',
@@ -139,6 +144,10 @@ module SnapTrade
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'instrument')
+        self.instrument = attributes[:'instrument']
+      end
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
@@ -227,6 +236,7 @@ module SnapTrade
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          instrument == o.instrument &&
           id == o.id &&
           symbol == o.symbol &&
           currency_universal_symbol == o.currency_universal_symbol &&
@@ -255,7 +265,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, symbol, currency_universal_symbol, option_symbol, price, units, amount, currency, type, option_type, description, trade_date, settlement_date, fee, fx_rate, institution, external_reference_id].hash
+      [instrument, id, symbol, currency_universal_symbol, option_symbol, price, units, amount, currency, type, option_type, description, trade_date, settlement_date, fee, fx_rate, institution, external_reference_id].hash
     end
 
     # Builds the object from hash

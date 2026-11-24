@@ -44,6 +44,14 @@ public class AccountUniversalActivityTest {
     }
 
     /**
+     * Test the property 'instrument'
+     */
+    @Test
+    public void instrumentTest() {
+        // TODO: test instrument
+    }
+
+    /**
      * Test the property 'id'
      */
     @Test

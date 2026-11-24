@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Instrument** | Pointer to [**NullableInstrumentNullable**](InstrumentNullable.md) |  | [optional] 
 **Id** | Pointer to **string** | Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.  Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one.  | [optional] 
 **Symbol** | Pointer to [**NullableSymbolNullable**](SymbolNullable.md) |  | [optional] 
 **CurrencyUniversalSymbol** | Pointer to [**NullableSymbolNullable**](SymbolNullable.md) |  | [optional] 
@@ -41,6 +42,41 @@ NewAccountUniversalActivityWithDefaults instantiates a new AccountUniversalActiv
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetInstrument
+
+`func (o *AccountUniversalActivity) GetInstrument() InstrumentNullable`
+
+GetInstrument returns the Instrument field if non-nil, zero value otherwise.
+
+### GetInstrumentOk
+
+`func (o *AccountUniversalActivity) GetInstrumentOk() (*InstrumentNullable, bool)`
+
+GetInstrumentOk returns a tuple with the Instrument field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInstrument
+
+`func (o *AccountUniversalActivity) SetInstrument(v InstrumentNullable)`
+
+SetInstrument sets Instrument field to given value.
+
+### HasInstrument
+
+`func (o *AccountUniversalActivity) HasInstrument() bool`
+
+HasInstrument returns a boolean if a field has been set.
+
+### SetInstrumentNil
+
+`func (o *AccountUniversalActivity) SetInstrumentNil(b bool)`
+
+ SetInstrumentNil sets the value for Instrument to be an explicit nil
+
+### UnsetInstrument
+`func (o *AccountUniversalActivity) UnsetInstrument()`
+
+UnsetInstrument ensures that no value is present for Instrument, not even an explicit nil
 ### GetId
 
 `func (o *AccountUniversalActivity) GetId() string`
