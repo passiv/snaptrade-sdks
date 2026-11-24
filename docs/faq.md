@@ -50,7 +50,7 @@ The accounts live under the connection to the brokerage. Each connection is asso
 
 ### If I want to remove an account do I need to delete the connection?
 
-If you want to remove an account, you will need to delete the corresponding connection. You can do this using :api[Connections_removeBrokerageAuthorization].
+If you want to remove an account, you will need to delete the corresponding connection. You can do this using :api[Connections_deleteConnection].
 
 ### If I delete connection, will it delete all accounts from that Connection? Can I delete only one account?
 
