@@ -413,8 +413,6 @@ This endpoint is always realtime and does not rely on cached data, except that a
 
 This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
 
-**Beta:** this endpoint and its response schema may change.
-
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -528,8 +526,6 @@ Every order carries a `legs` list with at least one leg. Each leg's `instrument`
 
 `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage's own label is in `raw_type`.
 
-**Beta:** this endpoint and its response schema may change.
-
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
 
@@ -621,8 +617,6 @@ Differs from `/accounts/{accountId}/orders/all` in that it is always realtime, a
 By default only returns executed orders, but that can be changed by setting *only_executed* to false.
 
 Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.
-
-**Beta:** this endpoint and its response schema may change.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -745,6 +739,9 @@ p result
 
 
 ### `snaptrade.account_information.get_user_account_order_detail`<a id="snaptradeaccount_informationget_user_account_order_detail"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+**Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.
 
 Returns the detail of a single order using the external order ID provided in the request body.
 
@@ -790,6 +787,9 @@ the brokerage system.
 
 
 ### `snaptrade.account_information.get_user_account_orders`<a id="snaptradeaccount_informationget_user_account_orders"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+**Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.
 
 Returns a list of recent orders in the specified account.
 
@@ -839,6 +839,9 @@ Number of days in the past to fetch the most recent orders. Defaults to the last
 
 
 ### `snaptrade.account_information.get_user_account_recent_orders`<a id="snaptradeaccount_informationget_user_account_recent_orders"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+**Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.
 
 A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders.
 This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders
@@ -923,7 +926,7 @@ returns all six supported timeframes.
 ### `snaptrade.account_information.get_user_holdings`<a id="snaptradeaccount_informationget_user_holdings"></a>
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
-**Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders).
+**Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders).
 
 This endpoint will return HTTP 410 Gone for all customers that sign up after May 11, 2026.
 
@@ -1736,6 +1739,9 @@ reference the account in SnapTrade.
 
 
 ### `snaptrade.experimental_endpoints.get_user_account_order_detail_v2`<a id="snaptradeexperimental_endpointsget_user_account_order_detail_v2"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+**Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.
 
 Returns the detail of a single order using the brokerage order ID provided as a path parameter.
 
@@ -1779,6 +1785,9 @@ p result
 
 
 ### `snaptrade.experimental_endpoints.get_user_account_orders_v2`<a id="snaptradeexperimental_endpointsget_user_account_orders_v2"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+**Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.
 
 Returns a list of recent orders in the specified account.
 
@@ -1826,6 +1835,9 @@ Number of days in the past to fetch the most recent orders. Defaults to the last
 
 
 ### `snaptrade.experimental_endpoints.get_user_account_recent_orders_v2`<a id="snaptradeexperimental_endpointsget_user_account_recent_orders_v2"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+**Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.
 
 A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format.
 This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.

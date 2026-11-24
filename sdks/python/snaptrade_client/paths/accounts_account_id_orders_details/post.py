@@ -711,6 +711,7 @@ class BaseApi(api_client.Api):
 class GetUserAccountOrderDetail(BaseApi, typing.Generic[TAuth]):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
+    @api_client.DeprecationWarningOnce(prefix="account_information")
     async def aget_user_account_order_detail(
         self,
         body: typing.Optional[typing.Any] = None,
@@ -743,6 +744,7 @@ class GetUserAccountOrderDetail(BaseApi, typing.Generic[TAuth]):
             **kwargs,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="account_information")
     def get_user_account_order_detail(
         self,
         body: typing.Optional[typing.Any] = None,
@@ -758,7 +760,7 @@ class GetUserAccountOrderDetail(BaseApi, typing.Generic[TAuth]):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns the detail of a single order using the external order ID provided in the request body.  This endpoint only works for single-leg orders at this time. Support for multi-leg orders will be added in the future.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  """
+        """ **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.  Returns the detail of a single order using the external order ID provided in the request body.  This endpoint only works for single-leg orders at this time. Support for multi-leg orders will be added in the future.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  """
         args = self._get_user_account_order_detail_mapped_args(
             body=body,
             path_params=path_params,
@@ -778,6 +780,7 @@ class GetUserAccountOrderDetail(BaseApi, typing.Generic[TAuth]):
 class ApiForpost(BaseApi, typing.Generic[TAuth]):
     # this class is used by api classes that refer to endpoints by path and http method names
 
+    @api_client.DeprecationWarningOnce(prefix="account_information")
     async def apost(
         self,
         body: typing.Optional[typing.Any] = None,
@@ -810,6 +813,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
             **kwargs,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="account_information")
     def post(
         self,
         body: typing.Optional[typing.Any] = None,
@@ -825,7 +829,7 @@ class ApiForpost(BaseApi, typing.Generic[TAuth]):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns the detail of a single order using the external order ID provided in the request body.  This endpoint only works for single-leg orders at this time. Support for multi-leg orders will be added in the future.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  """
+        """ **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.  Returns the detail of a single order using the external order ID provided in the request body.  This endpoint only works for single-leg orders at this time. Support for multi-leg orders will be added in the future.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  """
         args = self._get_user_account_order_detail_mapped_args(
             body=body,
             path_params=path_params,

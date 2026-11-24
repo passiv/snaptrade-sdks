@@ -1130,7 +1130,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * Get account order detail (V2)
      *
-     * Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+     * **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.  Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
      *
      * @param  string $account_id account_id (required)
      * @param  string $brokerage_order_id brokerage_order_id (required)
@@ -1141,6 +1141,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\AccountOrderRecordV2|\SnapTrade\Model\Model404FailedRequestResponse|\SnapTrade\Model\Model429TooManyRequestsResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse|\SnapTrade\Model\Model503BrokerageRequestResponse
+     * @deprecated
      */
     public function getUserAccountOrderDetailV2(
         $account_id,
@@ -1161,7 +1162,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * Get account order detail (V2)
      *
-     * Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+     * **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.  Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
      *
      * @param  string $account_id (required)
      * @param  string $brokerage_order_id (required)
@@ -1172,6 +1173,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\AccountOrderRecordV2|\SnapTrade\Model\Model404FailedRequestResponse|\SnapTrade\Model\Model429TooManyRequestsResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse|\SnapTrade\Model\Model503BrokerageRequestResponse, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function getUserAccountOrderDetailV2WithHttpInfo($account_id, $brokerage_order_id, $user_id, $user_secret, string $contentType = self::contentTypes['getUserAccountOrderDetailV2'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -1376,7 +1378,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * Get account order detail (V2)
      *
-     * Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+     * **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.  Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
      *
      * @param  string $account_id (required)
      * @param  string $brokerage_order_id (required)
@@ -1386,6 +1388,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function getUserAccountOrderDetailV2Async(
         $account_id,
@@ -1410,7 +1413,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * Get account order detail (V2)
      *
-     * Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+     * **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.  Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
      *
      * @param  string $account_id (required)
      * @param  string $brokerage_order_id (required)
@@ -1420,6 +1423,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function getUserAccountOrderDetailV2AsyncWithHttpInfo($account_id, $brokerage_order_id, $user_id, $user_secret, string $contentType = self::contentTypes['getUserAccountOrderDetailV2'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -1476,6 +1480,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function getUserAccountOrderDetailV2Request($account_id, $brokerage_order_id, $user_id, $user_secret, string $contentType = self::contentTypes['getUserAccountOrderDetailV2'][0])
     {
@@ -1650,7 +1655,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * List account orders v2
      *
-     * Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     * **Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.  Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -1662,6 +1667,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\AccountOrdersV2Response|\SnapTrade\Model\Model429TooManyRequestsResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse|\SnapTrade\Model\Model503BrokerageRequestResponse
+     * @deprecated
      */
     public function getUserAccountOrdersV2(
         $user_id,
@@ -1683,7 +1689,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * List account orders v2
      *
-     * Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     * **Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.  Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1695,6 +1701,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\AccountOrdersV2Response|\SnapTrade\Model\Model429TooManyRequestsResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse|\SnapTrade\Model\Model503BrokerageRequestResponse, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function getUserAccountOrdersV2WithHttpInfo($user_id, $user_secret, $account_id, $state = null, $days = null, string $contentType = self::contentTypes['getUserAccountOrdersV2'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -1877,7 +1884,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * List account orders v2
      *
-     * Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     * **Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.  Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1888,6 +1895,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function getUserAccountOrdersV2Async(
         $user_id,
@@ -1913,7 +1921,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * List account orders v2
      *
-     * Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     * **Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.  Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -1924,6 +1932,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function getUserAccountOrdersV2AsyncWithHttpInfo($user_id, $user_secret, $account_id, $state = null, $days = null, string $contentType = self::contentTypes['getUserAccountOrdersV2'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -1981,6 +1990,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function getUserAccountOrdersV2Request($user_id, $user_secret, $account_id, $state = SENTINEL_VALUE, $days = SENTINEL_VALUE, string $contentType = self::contentTypes['getUserAccountOrdersV2'][0])
     {
@@ -2169,7 +2179,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * List account recent orders (V2, last 24 hours only)
      *
-     * A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.
+     * **Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.  A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.
      *
      * @param  string $user_id user_id (required)
      * @param  string $user_secret user_secret (required)
@@ -2180,6 +2190,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\AccountOrdersV2Response|\SnapTrade\Model\Model403FeatureNotEnabledResponse|\SnapTrade\Model\Model429TooManyRequestsResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse|\SnapTrade\Model\Model503BrokerageRequestResponse
+     * @deprecated
      */
     public function getUserAccountRecentOrdersV2(
         $user_id,
@@ -2200,7 +2211,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * List account recent orders (V2, last 24 hours only)
      *
-     * A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.
+     * **Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.  A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -2211,6 +2222,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\AccountOrdersV2Response|\SnapTrade\Model\Model403FeatureNotEnabledResponse|\SnapTrade\Model\Model429TooManyRequestsResponse|\SnapTrade\Model\Model500UnexpectedExceptionResponse|\SnapTrade\Model\Model503BrokerageRequestResponse, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function getUserAccountRecentOrdersV2WithHttpInfo($user_id, $user_secret, $account_id, $only_executed = null, string $contentType = self::contentTypes['getUserAccountRecentOrdersV2'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -2415,7 +2427,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * List account recent orders (V2, last 24 hours only)
      *
-     * A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.
+     * **Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.  A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -2425,6 +2437,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function getUserAccountRecentOrdersV2Async(
         $user_id,
@@ -2449,7 +2462,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * List account recent orders (V2, last 24 hours only)
      *
-     * A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.
+     * **Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.  A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.
      *
      * @param  string $user_id (required)
      * @param  string $user_secret (required)
@@ -2459,6 +2472,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function getUserAccountRecentOrdersV2AsyncWithHttpInfo($user_id, $user_secret, $account_id, $only_executed = null, string $contentType = self::contentTypes['getUserAccountRecentOrdersV2'][0], \SnapTrade\RequestOptions $requestOptions = new \SnapTrade\RequestOptions())
     {
@@ -2515,6 +2529,7 @@ class ExperimentalEndpointsApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function getUserAccountRecentOrdersV2Request($user_id, $user_secret, $account_id, $only_executed = SENTINEL_VALUE, string $contentType = self::contentTypes['getUserAccountRecentOrdersV2'][0])
     {
