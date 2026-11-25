@@ -115,7 +115,7 @@ for account in accounts:
 ```bash
 # Replace <connectionId> with an id returned by /authorizations.
 # Commercial API key example. Personal API key requests omit userId and userSecret.
-curl 'https://api.snaptrade.com/api/v1/connections/<connectionId>/accounts?userId=...&userSecret=...' \
+curl 'https://api.snaptrade.com/connections/<connectionId>/accounts?userId=...&userSecret=...' \
   | jq '[.results[] | select(.kind == "investment")]'
 ```
 

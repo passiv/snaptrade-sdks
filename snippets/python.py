@@ -50,12 +50,12 @@ pprint(connections.body)
 if not isinstance(connections.body, List) or len(connections.body) == 0:
     print("No brokerage connections found for the user.")
 else:
-    accounts = snaptrade.connections.list_brokerage_authorization_accounts(
-        authorization_id=connections.body[0]["id"],
+    accounts = snaptrade.connections.list_connection_accounts(
+        connection_id=connections.body[0]["id"],
         user_id=user_id,
         user_secret=user_secret,
     )
-    pprint(accounts.body)
+    pprint(accounts.body["results"])
 
 # 6) Deleting a user
 deleted_response = snaptrade.authentication.delete_snap_trade_user(
