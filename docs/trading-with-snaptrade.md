@@ -224,10 +224,6 @@ In this example, the order buys `0.01` ETH with EUR.
 
 A successful submission does not mean the order has filled. After placing an order, use the brokerage order ID returned by the submission to follow it.
 
-> 🚧 **Beta**
->
-> The order endpoints in this section are public beta endpoints. Their request and response schemas and behavior may change without advance notice. Use them for new integrations.
-
 | Goal | Endpoint | Notes |
 | --- | --- | --- |
 | Check one order | :api[AccountInformation_getAccountOrder] | Always realtime. Only returns orders placed through SnapTrade. |
