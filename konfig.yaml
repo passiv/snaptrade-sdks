@@ -153,8 +153,6 @@ portal:
       get: true
     /accounts/{accountId}/holdings:
       get: true
-    /accounts/{accountId}/transactions:
-      get: true
     /accounts/{accountId}/orders:
       get: true
     /accounts/{accountId}/recentOrders:
