@@ -11,19 +11,16 @@ order:
     operations:
       - path: /accounts/all
         method: get
-  - tag: Options
-  - tag: Transactions And Reporting
   - tag: Trading
     operations:
       - Trading_getUserAccountQuotes
       - Trading_getOrderImpact
       - Trading_getOptionImpact
-      - Trading_getUserAccountOptionQuotes
       - Trading_placeOrder
       - Trading_placeForceOrder
-      - Trading_cancelUserAccountOrder
-      - Trading_placeBracketOrder
+      - Trading_placeSimpleOrder
       - Trading_placeMlegOrder
+      - Trading_placeComplexOrder
       - Trading_searchCryptocurrencyPairInstruments
       - Trading_getCryptocurrencyPairQuote
       - Trading_previewCryptoOrder
@@ -140,97 +137,51 @@ portal:
   betaOperations:
     /accounts/{accountId}/trading/simple:
       post: true
-    /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace:
-      patch: true
-    /accounts/{accountId}/trading/simple/preview:
-      post: true
-    /brokerages/{brokerageId}/instruments:
-      get: true
-    /accounts/{accountId}/orders/v2:
-      get: true
-    /accounts/{accountId}/orders/all:
-      get: true
-    /accounts/{accountId}/orders/recent:
-      get: true
-    /accounts/{accountId}/orders/{brokerageOrderId}:
-      get: true
-    /accounts/{accountId}/recentOrders/v2:
-      get: true
-    /accounts/{accountId}/orders/details/v2/{brokerageOrderId}:
-      get: true
-    /accounts/{accountId}/trading/options/impact:
-      post: true
-    /authorizations/{authorizationId}/transactions/sync:
-      post: true
-    /accounts/{accountId}/transactions:
+    /accounts/{accountId}/balances/v2:
       get: true
     /accounts/{accountId}/balanceHistory:
-      get: true
-    /accounts/{accountId}/balances/v2:
       get: true
     /management/stats:
       get: true
   hideOperations:
     /snapTrade/stats:
       get: true
-    /accounts/{accountId}/transactions:
-      get: true
-    /accounts/{accountId}/positions:
-      get: true
-    /accounts/{accountId}/options:
-      get: true
-    /activities:
-      get: true
-    /holdings:
+    /accounts:
       get: true
     /accounts/{accountId}:
       put: true
       get: true
-    /sessionEvents:
+    /accounts/{accountId}/holdings:
       get: true
-    /snapTrade/listUserErrors:
+    /accounts/{accountId}/transactions:
       get: true
-    /brokerages:
+    /accounts/{accountId}/orders:
       get: true
-    /performance/custom:
+    /accounts/{accountId}/recentOrders:
       get: true
-    /accounts/{accountId}/optionsChain:
-      get: true
-    /accounts/{accountId}/optionStrategy:
+    /accounts/{accountId}/orders/details:
       post: true
-    /accounts/{accountId}/optionStrategy/{optionStrategyId}:
+    /accounts/{accountId}/orders/v2:
       get: true
-    /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute:
-      post: true
-    /accounts/{accountId}/orders/cancel:
-      post: true
-    /brokerageAuthorizationTypes:
+    /accounts/{accountId}/recentOrders/v2:
       get: true
-    /currencies:
-      get: true
-    /currencies/rates:
-      get: true
-    /currencies/rates/{currencyPair}:
-      get: true
-    /exchanges:
+    /accounts/{accountId}/orders/details/v2/{brokerageOrderId}:
       get: true
     /accounts/{accountId}/returnRates:
       get: true
-    /authorizations/{authorizationId}/returnRates:
-      get: true
-    /authorizations/{authorizationId}:
-      delete: true
-    /accounts/{accountId}/holdings:
-      get: true
-    /accounts/{accountId}/trading/bracket:
-      post: true
     /accounts/{accountId}/quotes/options:
+      get: true
+    /authorizations/{authorizationId}/returnRates:
       get: true
     /authorizations/{authorizationId}/accounts:
       get: true
-    /institutions:
+    /brokerages:
       get: true
-    /accounts:
+    /brokerageAuthorizationTypes:
+      get: true
+    /exchanges:
+      get: true
+    /institutions:
       get: true
   hideTags:
     - Experimental endpoints
@@ -274,7 +225,7 @@ readmeHeader:
 useSecurityKeyName: true
 additionalGenerators:
   php7:
-    version: 3.0.66
+    version: 3.0.68
     outputDirectory: sdks/php7
     packageName: snaptrade-php-7-sdk
     invokerPackage: SnapTrade
@@ -288,7 +239,7 @@ additionalGenerators:
       repoId: snaptrade-php-7-sdk
 generators:
   go:
-    version: 2.0.67
+    version: 2.0.69
     packageName: snaptrade
     outputDirectory: sdks/go
     readmeSnippet: snippets/go.go
@@ -300,7 +251,7 @@ generators:
       - ConsumerKey
   ruby:
     moduleName: SnapTrade
-    version: 3.0.66
+    version: 3.0.68
     outputDirectory: sdks/ruby
     apiDocumentationAuthenticationPartial: snippets/ruby_doc_auth_partial.rb
     gemName: snaptrade
@@ -311,7 +262,7 @@ generators:
       - name: consumer_key
         required: true
   php:
-    version: 3.0.66
+    version: 3.0.68
     outputDirectory: sdks/php
     packageName: snaptrade-php-sdk
     invokerPackage: SnapTrade
@@ -323,7 +274,7 @@ generators:
       repoId: snaptrade-php-sdk
   csharp:
     clientName: Snaptrade
-    version: 6.0.66
+    version: 6.0.68
     packageName: SnapTrade.Net
     logoPath: logo.png
     outputDirectory: sdks/csharp
@@ -334,7 +285,7 @@ generators:
       userId: passiv
       repoId: snaptrade-sdks/tree/master/sdks/csharp
   java:
-    version: 6.0.66
+    version: 6.0.68
     outputDirectory: sdks/java
     readmeSnippet: snippets/java.java
     clientName: Snaptrade
@@ -348,7 +299,7 @@ generators:
     groupId: com.snaptrade
     artifactId: snaptrade-java-sdk
   python:
-    version: 13.4.8
+    version: 13.4.10
     responseTypeVersion: '1'
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
@@ -372,7 +323,7 @@ generators:
         - pnpm typecheck
         - pnpm test
         - pnpm build
-    version: 13.4.8
+    version: 13.4.11
     outputDirectory: sdks/typescript
     clientState:
       - consumerKey

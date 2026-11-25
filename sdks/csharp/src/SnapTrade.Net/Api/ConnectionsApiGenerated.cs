@@ -112,7 +112,7 @@ namespace SnapTrade.Net.Api
         /// List accounts for a connection
         /// </summary>
         /// <remarks>
-        /// Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+        /// **Deprecated.** Use the [list accounts](/reference/Connections/Connections_listConnectionAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.  This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.  Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId"></param>
@@ -120,13 +120,14 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;Account&gt;</returns>
+        [Obsolete]
         List<Account> ListBrokerageAuthorizationAccounts(string authorizationId, string userId, string userSecret, int operationIndex = 0);
 
         /// <summary>
         /// List accounts for a connection
         /// </summary>
         /// <remarks>
-        /// Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+        /// **Deprecated.** Use the [list accounts](/reference/Connections/Connections_listConnectionAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.  This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.  Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId"></param>
@@ -134,6 +135,7 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;Account&gt;</returns>
+        [Obsolete]
         ApiResponse<List<Account>> ListBrokerageAuthorizationAccountsWithHttpInfo(string authorizationId, string userId, string userSecret, int operationIndex = 0);
         /// <summary>
         /// List all connections
@@ -370,7 +372,7 @@ namespace SnapTrade.Net.Api
         /// List accounts for a connection
         /// </summary>
         /// <remarks>
-        /// Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+        /// **Deprecated.** Use the [list accounts](/reference/Connections/Connections_listConnectionAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.  This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.  Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId"></param>
@@ -379,13 +381,14 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;Account&gt;</returns>
+        [Obsolete]
         System.Threading.Tasks.Task<List<Account>> ListBrokerageAuthorizationAccountsAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// List accounts for a connection
         /// </summary>
         /// <remarks>
-        /// Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+        /// **Deprecated.** Use the [list accounts](/reference/Connections/Connections_listConnectionAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.  This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.  Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId"></param>
@@ -394,6 +397,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;Account&gt;)</returns>
+        [Obsolete]
         System.Threading.Tasks.Task<ApiResponse<List<Account>>> ListBrokerageAuthorizationAccountsWithHttpInfoAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// List all connections
@@ -1291,7 +1295,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List accounts for a connection Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+        /// List accounts for a connection **Deprecated.** Use the [list accounts](/reference/Connections/Connections_listConnectionAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.  This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.  Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId"></param>
@@ -1299,6 +1303,7 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;Account&gt;</returns>
+        [Obsolete]
         public List<Account> ListBrokerageAuthorizationAccounts(string authorizationId, string userId, string userSecret, int operationIndex = 0)
         {
             SnapTrade.Net.Client.ApiResponse<List<Account>> localVarResponse = ListBrokerageAuthorizationAccountsWithHttpInfo(authorizationId, userId, userSecret);
@@ -1306,7 +1311,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List accounts for a connection Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+        /// List accounts for a connection **Deprecated.** Use the [list accounts](/reference/Connections/Connections_listConnectionAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.  This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.  Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId"></param>
@@ -1314,6 +1319,7 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;Account&gt;</returns>
+        [Obsolete]
         public SnapTrade.Net.Client.ApiResponse<List<Account>> ListBrokerageAuthorizationAccountsWithHttpInfo(string authorizationId, string userId, string userSecret, int operationIndex = 0)
         {
             // verify the required parameter 'authorizationId' is set
@@ -1394,7 +1400,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List accounts for a connection Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+        /// List accounts for a connection **Deprecated.** Use the [list accounts](/reference/Connections/Connections_listConnectionAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.  This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.  Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId"></param>
@@ -1403,6 +1409,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;Account&gt;</returns>
+        [Obsolete]
         public async System.Threading.Tasks.Task<List<Account>> ListBrokerageAuthorizationAccountsAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             SnapTrade.Net.Client.ApiResponse<List<Account>> localVarResponse = await ListBrokerageAuthorizationAccountsWithHttpInfoAsync(authorizationId, userId, userSecret, operationIndex, cancellationToken).ConfigureAwait(false);
@@ -1410,7 +1417,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List accounts for a connection Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
+        /// List accounts for a connection **Deprecated.** Use the [list accounts](/reference/Connections/Connections_listConnectionAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.  This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.  Returns all brokerage accounts that belong to the specified connection for the authenticated user.  On Pay as you Go / Real-time, this endpoint refreshes each account&#39;s opening date, funding date, and total value live from the brokerage on each call.  On Pay as you Go / Daily, this endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. To force a refresh, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see whether your plan includes real-time data. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId"></param>
@@ -1419,6 +1426,7 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;Account&gt;)</returns>
+        [Obsolete]
         public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<List<Account>>> ListBrokerageAuthorizationAccountsWithHttpInfoAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'authorizationId' is set

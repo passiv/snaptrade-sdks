@@ -166,6 +166,7 @@ func main() {
 
 
 ## ListBrokerageAuthorizationAccounts
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 List accounts for a connection
 

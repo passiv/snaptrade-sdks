@@ -541,8 +541,6 @@ module SnapTrade
     # This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.
     # 
     # This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
-    # 
-    # **Beta:** this endpoint and its response schema may change.
     #
     # @param account_id [String] 
     # @param brokerage_order_id [String] 
@@ -563,8 +561,6 @@ module SnapTrade
     # This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.
     # 
     # This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
-    # 
-    # **Beta:** this endpoint and its response schema may change.
     #
     # @param account_id [String] 
     # @param brokerage_order_id [String] 
@@ -576,7 +572,7 @@ module SnapTrade
     end
 
     # Get account order detail
-    # Returns the detail of a single order, identified by the brokerage order ID in the path, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`.  The order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Beta:** this endpoint and its response schema may change. 
+    # Returns the detail of a single order, identified by the brokerage order ID in the path, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`.  The order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
     # @param account_id [String] 
     # @param brokerage_order_id [String] 
     # @param user_id [String] 
@@ -589,7 +585,7 @@ module SnapTrade
     end
 
     # Get account order detail
-    # Returns the detail of a single order, identified by the brokerage order ID in the path, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;.  The order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  **Beta:** this endpoint and its response schema may change. 
+    # Returns the detail of a single order, identified by the brokerage order ID in the path, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;.  The order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. Multi-leg orders are a single order with multiple legs.  This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
     # @param account_id [String] 
     # @param brokerage_order_id [String] 
     # @param user_id [String] 
@@ -821,8 +817,6 @@ module SnapTrade
     # 
     # `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage's own label is in `raw_type`.
     # 
-    # **Beta:** this endpoint and its response schema may change.
-    # 
     # If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
     #
     # @param user_id [String] 
@@ -846,8 +840,6 @@ module SnapTrade
     # 
     # `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage's own label is in `raw_type`.
     # 
-    # **Beta:** this endpoint and its response schema may change.
-    # 
     # If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
     #
     # @param user_id [String] 
@@ -863,7 +855,7 @@ module SnapTrade
     end
 
     # List all account orders
-    # Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.  Every order carries a `legs` list with at least one leg. Each leg's `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.  `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage's own label is in `raw_type`.  **Beta:** this endpoint and its response schema may change.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+    # Returns a list of recent orders in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/positions/all`.  Every order carries a `legs` list with at least one leg. Each leg's `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.  `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage's own label is in `raw_type`.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -877,7 +869,7 @@ module SnapTrade
     end
 
     # List all account orders
-    # Returns a list of recent orders in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/positions/all&#x60;.  Every order carries a &#x60;legs&#x60; list with at least one leg. Each leg&#39;s &#x60;instrument&#x60; uses the same &#x60;Instrument&#x60; union as positions; switch on &#x60;instrument.kind&#x60; to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a &#x60;group.id&#x60;.  &#x60;order_type&#x60; is an object discriminated by &#x60;kind&#x60;. Each kind declares the price fields it requires (&#x60;limit_price&#x60; on &#x60;limit&#x60;, &#x60;stop_price&#x60; on &#x60;stop&#x60;, both on &#x60;stop_limit&#x60;, &#x60;trail&#x60; on &#x60;trailing_stop&#x60;), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, &#x60;kind&#x60; is &#x60;other&#x60; and the brokerage&#39;s own label is in &#x60;raw_type&#x60;.  **Beta:** this endpoint and its response schema may change.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+    # Returns a list of recent orders in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/positions/all&#x60;.  Every order carries a &#x60;legs&#x60; list with at least one leg. Each leg&#39;s &#x60;instrument&#x60; uses the same &#x60;Instrument&#x60; union as positions; switch on &#x60;instrument.kind&#x60; to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a &#x60;group.id&#x60;.  &#x60;order_type&#x60; is an object discriminated by &#x60;kind&#x60;. Each kind declares the price fields it requires (&#x60;limit_price&#x60; on &#x60;limit&#x60;, &#x60;stop_price&#x60; on &#x60;stop&#x60;, both on &#x60;stop_limit&#x60;, &#x60;trail&#x60; on &#x60;trailing_stop&#x60;), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, &#x60;kind&#x60; is &#x60;other&#x60; and the brokerage&#39;s own label is in &#x60;raw_type&#x60;.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -1085,8 +1077,6 @@ module SnapTrade
     # By default only returns executed orders, but that can be changed by setting *only_executed* to false.
     # 
     # Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.
-    # 
-    # **Beta:** this endpoint and its response schema may change.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -1107,8 +1097,6 @@ module SnapTrade
     # By default only returns executed orders, but that can be changed by setting *only_executed* to false.
     # 
     # Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.
-    # 
-    # **Beta:** this endpoint and its response schema may change.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -1121,7 +1109,7 @@ module SnapTrade
     end
 
     # List all account recent orders (last 24 hours only)
-    # A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from `/accounts/{accountId}/orders/all` in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.  **Beta:** this endpoint and its response schema may change. 
+    # A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same `kind`-discriminated format as `/accounts/{accountId}/orders/all`. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from `/accounts/{accountId}/orders/all` in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -1134,7 +1122,7 @@ module SnapTrade
     end
 
     # List all account recent orders (last 24 hours only)
-    # A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from &#x60;/accounts/{accountId}/orders/all&#x60; in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  Every order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. &#x60;data_freshness.as_of&#x60; is the time of this live request.  **Beta:** this endpoint and its response schema may change. 
+    # A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account, in the same &#x60;kind&#x60;-discriminated format as &#x60;/accounts/{accountId}/orders/all&#x60;. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from &#x60;/accounts/{accountId}/orders/all&#x60; in that it is always realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  Every order carries a &#x60;legs&#x60; list with at least one leg; switch on &#x60;legs[].instrument.kind&#x60; and &#x60;order_type.kind&#x60; to know which fields are present. &#x60;data_freshness.as_of&#x60; is the time of this live request. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -1320,6 +1308,8 @@ module SnapTrade
     #
     # **Deprecated.** Use the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint instead, which supports all account types, including investment, deposit, line of credit, annuity, and mortgage accounts.
     # 
+    # This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.
+    # 
     # Returns account detail known to SnapTrade for the specified account.
     # 
     # Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
@@ -1341,6 +1331,8 @@ module SnapTrade
     #
     # **Deprecated.** Use the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint instead, which supports all account types, including investment, deposit, line of credit, annuity, and mortgage accounts.
     # 
+    # This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.
+    # 
     # Returns account detail known to SnapTrade for the specified account.
     # 
     # Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
@@ -1358,7 +1350,7 @@ module SnapTrade
     end
 
     # Get account detail
-    # **Deprecated.** Use the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint instead, which supports all account types, including investment, deposit, line of credit, annuity, and mortgage accounts.  Returns account detail known to SnapTrade for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+    # **Deprecated.** Use the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint instead, which supports all account types, including investment, deposit, line of credit, annuity, and mortgage accounts.  This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.  Returns account detail known to SnapTrade for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -1370,7 +1362,7 @@ module SnapTrade
     end
 
     # Get account detail
-    # **Deprecated.** Use the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint instead, which supports all account types, including investment, deposit, line of credit, annuity, and mortgage accounts.  Returns account detail known to SnapTrade for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+    # **Deprecated.** Use the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint instead, which supports all account types, including investment, deposit, line of credit, annuity, and mortgage accounts.  This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.  Returns account detail known to SnapTrade for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -1437,6 +1429,8 @@ module SnapTrade
 
     # Get account order detail
     #
+    # **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.
+    # 
     # Returns the detail of a single order using the external order ID provided in the request body.
     # 
     # This endpoint only works for single-leg orders at this time. Support for multi-leg orders will be added in the future.
@@ -1461,6 +1455,8 @@ module SnapTrade
 
     # Get account order detail
     #
+    # **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.
+    # 
     # Returns the detail of a single order using the external order ID provided in the request body.
     # 
     # This endpoint only works for single-leg orders at this time. Support for multi-leg orders will be added in the future.
@@ -1483,7 +1479,7 @@ module SnapTrade
     end
 
     # Get account order detail
-    # Returns the detail of a single order using the external order ID provided in the request body.  This endpoint only works for single-leg orders at this time. Support for multi-leg orders will be added in the future.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+    # **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.  Returns the detail of a single order using the external order ID provided in the request body.  This endpoint only works for single-leg orders at this time. Support for multi-leg orders will be added in the future.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
     # @param account_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -1496,7 +1492,7 @@ module SnapTrade
     end
 
     # Get account order detail
-    # Returns the detail of a single order using the external order ID provided in the request body.  This endpoint only works for single-leg orders at this time. Support for multi-leg orders will be added in the future.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+    # **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.  Returns the detail of a single order using the external order ID provided in the request body.  This endpoint only works for single-leg orders at this time. Support for multi-leg orders will be added in the future.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
     # @param account_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -1573,6 +1569,8 @@ module SnapTrade
 
     # List account orders
     #
+    # **Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.
+    # 
     # Returns a list of recent orders in the specified account.
     # 
     # Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
@@ -1596,6 +1594,8 @@ module SnapTrade
 
     # List account orders
     #
+    # **Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.
+    # 
     # Returns a list of recent orders in the specified account.
     # 
     # Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
@@ -1617,7 +1617,7 @@ module SnapTrade
     end
 
     # List account orders
-    # Returns a list of recent orders in the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+    # **Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.  Returns a list of recent orders in the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -1631,7 +1631,7 @@ module SnapTrade
     end
 
     # List account orders
-    # Returns a list of recent orders in the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+    # **Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.  Returns a list of recent orders in the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -1714,6 +1714,8 @@ module SnapTrade
 
     # List account recent orders (last 24 hours only)
     #
+    # **Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.
+    # 
     # A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders.
     # This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders
     # Differs from /orders in that it is always realtime, and only checks the last 24 hours
@@ -1732,6 +1734,8 @@ module SnapTrade
 
     # List account recent orders (last 24 hours only)
     #
+    # **Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.
+    # 
     # A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders.
     # This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders
     # Differs from /orders in that it is always realtime, and only checks the last 24 hours
@@ -1748,7 +1752,7 @@ module SnapTrade
     end
 
     # List account recent orders (last 24 hours only)
-    # A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is always realtime, and only checks the last 24 hours By default only returns executed orders, but that can be changed by setting *only_executed* to false 
+    # **Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.  A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is always realtime, and only checks the last 24 hours By default only returns executed orders, but that can be changed by setting *only_executed* to false 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -1761,7 +1765,7 @@ module SnapTrade
     end
 
     # List account recent orders (last 24 hours only)
-    # A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is always realtime, and only checks the last 24 hours By default only returns executed orders, but that can be changed by setting *only_executed* to false 
+    # **Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.  A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is always realtime, and only checks the last 24 hours By default only returns executed orders, but that can be changed by setting *only_executed* to false 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -1940,7 +1944,7 @@ module SnapTrade
 
     # List account holdings
     #
-    # **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders).
+    # **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders).
     # 
     # This endpoint will return HTTP 410 Gone for all customers that sign up after May 11, 2026.
     # 
@@ -1965,7 +1969,7 @@ module SnapTrade
 
     # List account holdings
     #
-    # **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders).
+    # **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders).
     # 
     # This endpoint will return HTTP 410 Gone for all customers that sign up after May 11, 2026.
     # 
@@ -1988,7 +1992,7 @@ module SnapTrade
     end
 
     # List account holdings
-    # **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders).  This endpoint will return HTTP 410 Gone for all customers that sign up after May 11, 2026.  Returns a list of balances, positions, and recent orders for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.  Concurrent live holdings requests for the same account fail immediately with HTTP 409 and error code `1166`. Wait for the in-flight request to complete before retrying. 
+    # **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders).  This endpoint will return HTTP 410 Gone for all customers that sign up after May 11, 2026.  Returns a list of balances, positions, and recent orders for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don't, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.  Concurrent live holdings requests for the same account fail immediately with HTTP 409 and error code `1166`. Wait for the in-flight request to complete before retrying. 
     # @param account_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -2000,7 +2004,7 @@ module SnapTrade
     end
 
     # List account holdings
-    # **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders).  This endpoint will return HTTP 410 Gone for all customers that sign up after May 11, 2026.  Returns a list of balances, positions, and recent orders for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.  Concurrent live holdings requests for the same account fail immediately with HTTP 409 and error code &#x60;1166&#x60;. Wait for the in-flight request to complete before retrying. 
+    # **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders).  This endpoint will return HTTP 410 Gone for all customers that sign up after May 11, 2026.  Returns a list of balances, positions, and recent orders for the specified account.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.  Concurrent live holdings requests for the same account fail immediately with HTTP 409 and error code &#x60;1166&#x60;. Wait for the in-flight request to complete before retrying. 
     # @param account_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -2172,9 +2176,11 @@ module SnapTrade
     #
     # **Deprecated.** Use the [list all user accounts](/reference/Account%20Information/AccountInformation_listAllUserAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.
     # 
+    # This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.
+    # 
     # Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
     # 
-    # This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+    # This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listConnectionAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -2188,9 +2194,11 @@ module SnapTrade
     #
     # **Deprecated.** Use the [list all user accounts](/reference/Account%20Information/AccountInformation_listAllUserAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.
     # 
+    # This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.
+    # 
     # Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
     # 
-    # This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+    # This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listConnectionAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -2200,7 +2208,7 @@ module SnapTrade
     end
 
     # List user accounts
-    # **Deprecated.** Use the [list all user accounts](/reference/Account%20Information/AccountInformation_listAllUserAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.  Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
+    # **Deprecated.** Use the [list all user accounts](/reference/Account%20Information/AccountInformation_listAllUserAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.  This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.  Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listConnectionAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -2211,7 +2219,7 @@ module SnapTrade
     end
 
     # List user accounts
-    # **Deprecated.** Use the [list all user accounts](/reference/Account%20Information/AccountInformation_listAllUserAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.  Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  This endpoint returns Daily data regardless of the customer&#39;s plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user&#39;s connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
+    # **Deprecated.** Use the [list all user accounts](/reference/Account%20Information/AccountInformation_listAllUserAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.  This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.  Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  This endpoint returns Daily data regardless of the customer&#39;s plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user&#39;s connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listConnectionAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters

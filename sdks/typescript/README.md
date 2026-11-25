@@ -63,7 +63,7 @@ backoff with jitter rather than from the headers.
 See https://docs.snaptrade.com/docs/ratelimiting.
 
 
-[![npm](https://img.shields.io/badge/npm-v13.4.8-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/13.4.8)
+[![npm](https://img.shields.io/badge/npm-v13.4.11-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/13.4.11)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -186,6 +186,14 @@ yarn add snaptrade-typescript-sdk
 ## Authentication<a id="authentication"></a>
 
 Choose the authentication mode that matches your credentials, then use its client in the reference examples.
+
+The `auth` option is required. Pass `auth: null` explicitly to call public endpoints without credentials. TypeScript rejects protected endpoint calls from a client initialized with `auth: null`. The API server enforces authentication at runtime.
+
+```typescript
+import { Snaptrade } from "snaptrade-typescript-sdk";
+
+const unauthenticatedClient = new Snaptrade({ auth: null });
+```
 ### Commercial API Key Auth authentication<a id="commercial-api-key-auth-authentication"></a>
 Use a Commercial API Key when your app manages users and their connection experience.
 
@@ -678,8 +686,6 @@ This endpoint is always realtime and does not rely on cached data, except that a
 
 This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
 
-**Beta:** this endpoint and its response schema may change.
-
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -826,8 +832,6 @@ Every order carries a `legs` list with at least one leg. Each leg's `instrument`
 
 `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage's own label is in `raw_type`.
 
-**Beta:** this endpoint and its response schema may change.
-
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
 
@@ -972,8 +976,6 @@ By default only returns executed orders, but that can be changed by setting *onl
 
 Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.
 
-**Beta:** this endpoint and its response schema may change.
-
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1104,6 +1106,8 @@ The client identifies the user in this mode. Do not pass `userId` `userSecret` t
 
 **Deprecated.** Use the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint instead, which supports all account types, including investment, deposit, line of credit, annuity, and mortgage accounts.
 
+This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.
+
 Returns account detail known to SnapTrade for the specified account.
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
@@ -1173,6 +1177,9 @@ The client identifies the user in this mode. Do not pass `userId` `userSecret` t
 
 
 ### `snaptrade.accountInformation.getUserAccountOrderDetail`<a id="snaptradeaccountinformationgetuseraccountorderdetail"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+**Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.
 
 Returns the detail of a single order using the external order ID provided in the request body.
 
@@ -1250,6 +1257,9 @@ Order ID returned by brokerage. This is the unique identifier for the order in t
 
 
 ### `snaptrade.accountInformation.getUserAccountOrders`<a id="snaptradeaccountinformationgetuseraccountorders"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+**Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.
 
 Returns a list of recent orders in the specified account.
 
@@ -1334,6 +1344,9 @@ Number of days in the past to fetch the most recent orders. Defaults to the last
 
 
 ### `snaptrade.accountInformation.getUserAccountRecentOrders`<a id="snaptradeaccountinformationgetuseraccountrecentorders"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+**Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.
 
 A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders.
 This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders
@@ -1469,7 +1482,7 @@ Optional comma separated list of rate-of-return timeframes to return. Supported 
 ### `snaptrade.accountInformation.getUserHoldings`<a id="snaptradeaccountinformationgetuserholdings"></a>
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
-**Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders).
+**Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders).
 
 This endpoint will return HTTP 410 Gone for all customers that sign up after May 11, 2026.
 
@@ -1607,9 +1620,11 @@ The client identifies the user in this mode. Do not pass `userId` `userSecret` t
 
 **Deprecated.** Use the [list all user accounts](/reference/Account%20Information/AccountInformation_listAllUserAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.
 
+This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.
+
 Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
-This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listConnectionAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -2195,6 +2210,11 @@ The client identifies the user in this mode. Do not pass `userId` `userSecret` t
 
 
 ### `snaptrade.connections.listBrokerageAuthorizationAccounts`<a id="snaptradeconnectionslistbrokerageauthorizationaccounts"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+**Deprecated.** Use the [list accounts](/reference/Connections/Connections_listConnectionAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.
+
+This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.
 
 Returns all brokerage accounts that belong to the specified connection for the authenticated user.
 
@@ -2698,6 +2718,9 @@ Unique identifier for the connected brokerage account. This is the UUID used to 
 
 
 ### `snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2`<a id="snaptradeexperimentalendpointsgetuseraccountorderdetailv2"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+**Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.
 
 Returns the detail of a single order using the brokerage order ID provided as a path parameter.
 
@@ -2776,6 +2799,9 @@ The client identifies the user in this mode. Do not pass `userId` `userSecret` t
 
 
 ### `snaptrade.experimentalEndpoints.getUserAccountOrdersV2`<a id="snaptradeexperimentalendpointsgetuseraccountordersv2"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+**Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.
 
 Returns a list of recent orders in the specified account.
 
@@ -2858,6 +2884,9 @@ Number of days in the past to fetch the most recent orders. Defaults to the last
 
 
 ### `snaptrade.experimentalEndpoints.getUserAccountRecentOrdersV2`<a id="snaptradeexperimentalendpointsgetuseraccountrecentordersv2"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+**Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.
 
 A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format.
 This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.

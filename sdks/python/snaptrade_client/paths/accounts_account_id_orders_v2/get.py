@@ -661,6 +661,7 @@ class BaseApi(api_client.Api):
 class GetUserAccountOrdersV2(BaseApi, typing.Generic[TAuth]):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
+    @api_client.DeprecationWarningOnce(prefix="experimental_endpoints")
     async def aget_user_account_orders_v2(
         self,
         account_id: typing.Optional[str] = None,
@@ -693,6 +694,7 @@ class GetUserAccountOrdersV2(BaseApi, typing.Generic[TAuth]):
             **kwargs,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="experimental_endpoints")
     def get_user_account_orders_v2(
         self,
         account_id: typing.Optional[str] = None,
@@ -708,7 +710,7 @@ class GetUserAccountOrdersV2(BaseApi, typing.Generic[TAuth]):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.  """
+        """ **Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.  Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.  """
         args = self._get_user_account_orders_v2_mapped_args(
             query_params=query_params,
             path_params=path_params,
@@ -728,6 +730,7 @@ class GetUserAccountOrdersV2(BaseApi, typing.Generic[TAuth]):
 class ApiForget(BaseApi, typing.Generic[TAuth]):
     # this class is used by api classes that refer to endpoints by path and http method names
 
+    @api_client.DeprecationWarningOnce(prefix="experimental_endpoints")
     async def aget(
         self,
         account_id: typing.Optional[str] = None,
@@ -760,6 +763,7 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
             **kwargs,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="experimental_endpoints")
     def get(
         self,
         account_id: typing.Optional[str] = None,
@@ -775,7 +779,7 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.  """
+        """ **Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.  Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.  """
         args = self._get_user_account_orders_v2_mapped_args(
             query_params=query_params,
             path_params=path_params,

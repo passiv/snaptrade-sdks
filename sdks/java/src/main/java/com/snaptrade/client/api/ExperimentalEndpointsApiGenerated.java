@@ -511,6 +511,7 @@ public class ExperimentalEndpointsApiGenerated {
         return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call getUserAccountOrderDetailV2ValidateBeforeCall(UUID accountId, String brokerageOrderId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'accountId' is set
@@ -575,7 +576,9 @@ public class ExperimentalEndpointsApiGenerated {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
             return getUserAccountOrderDetailV2Call(accountId, brokerageOrderId, userId, userSecret, _callback);
         }
@@ -590,7 +593,9 @@ public class ExperimentalEndpointsApiGenerated {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public AccountOrderRecordV2 execute() throws ApiException {
             ApiResponse<AccountOrderRecordV2> localVarResp = getUserAccountOrderDetailV2WithHttpInfo(accountId, brokerageOrderId, userId, userSecret);
             return localVarResp.getResponseBody();
@@ -605,7 +610,9 @@ public class ExperimentalEndpointsApiGenerated {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public ApiResponse<AccountOrderRecordV2> executeWithHttpInfo() throws ApiException {
             return getUserAccountOrderDetailV2WithHttpInfo(accountId, brokerageOrderId, userId, userSecret);
         }
@@ -620,7 +627,9 @@ public class ExperimentalEndpointsApiGenerated {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call executeAsync(final ApiCallback<AccountOrderRecordV2> _callback) throws ApiException {
             return getUserAccountOrderDetailV2Async(accountId, brokerageOrderId, userId, userSecret, _callback);
         }
@@ -628,7 +637,7 @@ public class ExperimentalEndpointsApiGenerated {
 
     /**
      * Get account order detail (V2)
-     * Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+     * **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.  Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
      * @param accountId  (required)
      * @param brokerageOrderId  (required)
      * @param userId  (required)
@@ -639,7 +648,9 @@ public class ExperimentalEndpointsApiGenerated {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public ExperimentalEndpointsApi.GetUserAccountOrderDetailV2RequestBuilder getUserAccountOrderDetailV2(UUID accountId, String brokerageOrderId, String userId, String userSecret) throws IllegalArgumentException {
         if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
             
@@ -716,6 +727,7 @@ public class ExperimentalEndpointsApiGenerated {
         return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call getUserAccountOrdersV2ValidateBeforeCall(String userId, String userSecret, UUID accountId, String state, Integer days, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
@@ -795,7 +807,9 @@ public class ExperimentalEndpointsApiGenerated {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
             return getUserAccountOrdersV2Call(userId, userSecret, accountId, state, days, _callback);
         }
@@ -810,7 +824,9 @@ public class ExperimentalEndpointsApiGenerated {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public AccountOrdersV2Response execute() throws ApiException {
             ApiResponse<AccountOrdersV2Response> localVarResp = getUserAccountOrdersV2WithHttpInfo(userId, userSecret, accountId, state, days);
             return localVarResp.getResponseBody();
@@ -825,7 +841,9 @@ public class ExperimentalEndpointsApiGenerated {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public ApiResponse<AccountOrdersV2Response> executeWithHttpInfo() throws ApiException {
             return getUserAccountOrdersV2WithHttpInfo(userId, userSecret, accountId, state, days);
         }
@@ -840,7 +858,9 @@ public class ExperimentalEndpointsApiGenerated {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call executeAsync(final ApiCallback<AccountOrdersV2Response> _callback) throws ApiException {
             return getUserAccountOrdersV2Async(userId, userSecret, accountId, state, days, _callback);
         }
@@ -848,7 +868,7 @@ public class ExperimentalEndpointsApiGenerated {
 
     /**
      * List account orders v2
-     * Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+     * **Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.  Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId  (required)
@@ -858,7 +878,9 @@ public class ExperimentalEndpointsApiGenerated {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public ExperimentalEndpointsApi.GetUserAccountOrdersV2RequestBuilder getUserAccountOrdersV2(String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
             
@@ -928,6 +950,7 @@ public class ExperimentalEndpointsApiGenerated {
         return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call getUserAccountRecentOrdersV2ValidateBeforeCall(String userId, String userSecret, UUID accountId, Boolean onlyExecuted, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
@@ -996,7 +1019,9 @@ public class ExperimentalEndpointsApiGenerated {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
             return getUserAccountRecentOrdersV2Call(userId, userSecret, accountId, onlyExecuted, _callback);
         }
@@ -1011,7 +1036,9 @@ public class ExperimentalEndpointsApiGenerated {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public AccountOrdersV2Response execute() throws ApiException {
             ApiResponse<AccountOrdersV2Response> localVarResp = getUserAccountRecentOrdersV2WithHttpInfo(userId, userSecret, accountId, onlyExecuted);
             return localVarResp.getResponseBody();
@@ -1026,7 +1053,9 @@ public class ExperimentalEndpointsApiGenerated {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public ApiResponse<AccountOrdersV2Response> executeWithHttpInfo() throws ApiException {
             return getUserAccountRecentOrdersV2WithHttpInfo(userId, userSecret, accountId, onlyExecuted);
         }
@@ -1041,7 +1070,9 @@ public class ExperimentalEndpointsApiGenerated {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call executeAsync(final ApiCallback<AccountOrdersV2Response> _callback) throws ApiException {
             return getUserAccountRecentOrdersV2Async(userId, userSecret, accountId, onlyExecuted, _callback);
         }
@@ -1049,7 +1080,7 @@ public class ExperimentalEndpointsApiGenerated {
 
     /**
      * List account recent orders (V2, last 24 hours only)
-     * A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false. 
+     * **Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.  A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId  (required)
@@ -1059,7 +1090,9 @@ public class ExperimentalEndpointsApiGenerated {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public ExperimentalEndpointsApi.GetUserAccountRecentOrdersV2RequestBuilder getUserAccountRecentOrdersV2(String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
             

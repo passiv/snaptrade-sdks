@@ -35,6 +35,7 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountUniversalActivity" /> class.
         /// </summary>
+        /// <param name="instrument">Instrument metadata for a V2 position. Use &#x60;kind&#x60; to determine which schema is present..</param>
         /// <param name="id">Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.  Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one. .</param>
         /// <param name="symbol">symbol.</param>
         /// <param name="currencyUniversalSymbol">currencyUniversalSymbol.</param>
@@ -52,8 +53,9 @@ namespace SnapTrade.Net.Model
         /// <param name="fxRate">The forex conversion rate involved in the transaction if provided by the brokerage. Used in cases where securities of one currency are purchased in a different currency, and the forex conversion is automatic. In those cases, price, amount and fee will be in the top level currency (activity -&gt; currency).</param>
         /// <param name="institution">The institution that the transaction is associated with. This is usually the brokerage name..</param>
         /// <param name="externalReferenceId">A stable and unique transaction id when available.</param>
-        public AccountUniversalActivity(string id = default(string), SymbolNullable symbol = default(SymbolNullable), SymbolNullable currencyUniversalSymbol = default(SymbolNullable), OptionsSymbolNullable optionSymbol = default(OptionsSymbolNullable), double price = default(double), double units = default(double), double? amount = default(double?), CurrencyNullable currency = default(CurrencyNullable), string type = default(string), string optionType = default(string), string description = default(string), DateTime? tradeDate = default(DateTime?), DateTime settlementDate = default(DateTime), double fee = default(double), double? fxRate = default(double?), string institution = default(string), string externalReferenceId = default(string)) : base()
+        public AccountUniversalActivity(InstrumentNullable instrument = default(InstrumentNullable), string id = default(string), SymbolNullable symbol = default(SymbolNullable), SymbolNullable currencyUniversalSymbol = default(SymbolNullable), OptionsSymbolNullable optionSymbol = default(OptionsSymbolNullable), double price = default(double), double units = default(double), double? amount = default(double?), CurrencyNullable currency = default(CurrencyNullable), string type = default(string), string optionType = default(string), string description = default(string), DateTime? tradeDate = default(DateTime?), DateTime settlementDate = default(DateTime), double fee = default(double), double? fxRate = default(double?), string institution = default(string), string externalReferenceId = default(string)) : base()
         {
+            this.Instrument = instrument;
             this.Id = id;
             this.Symbol = symbol;
             this.CurrencyUniversalSymbol = currencyUniversalSymbol;
@@ -73,6 +75,13 @@ namespace SnapTrade.Net.Model
             this.ExternalReferenceId = externalReferenceId;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
+
+        /// <summary>
+        /// Instrument metadata for a V2 position. Use &#x60;kind&#x60; to determine which schema is present.
+        /// </summary>
+        /// <value>Instrument metadata for a V2 position. Use &#x60;kind&#x60; to determine which schema is present.</value>
+        [DataMember(Name = "instrument", EmitDefaultValue = true)]
+        public InstrumentNullable Instrument { get; set; }
 
         /// <summary>
         /// Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.  Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one. 
@@ -204,6 +213,7 @@ namespace SnapTrade.Net.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class AccountUniversalActivity {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  Instrument: ").Append(Instrument).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
             sb.Append("  CurrencyUniversalSymbol: ").Append(CurrencyUniversalSymbol).Append("\n");
@@ -257,6 +267,11 @@ namespace SnapTrade.Net.Model
                 return false;
             }
             return base.Equals(input) && 
+                (
+                    this.Instrument == input.Instrument ||
+                    (this.Instrument != null &&
+                    this.Instrument.Equals(input.Instrument))
+                ) && base.Equals(input) && 
                 (
                     this.Id == input.Id ||
                     (this.Id != null &&
@@ -351,6 +366,10 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
+                if (this.Instrument != null)
+                {
+                    hashCode = (hashCode * 59) + this.Instrument.GetHashCode();
+                }
                 if (this.Id != null)
                 {
                     hashCode = (hashCode * 59) + this.Id.GetHashCode();

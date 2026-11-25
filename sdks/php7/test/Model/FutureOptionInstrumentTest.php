@@ -29,7 +29,7 @@ use PHPUnit\Framework\TestCase;
  * FutureOptionInstrumentTest Class Doc Comment
  *
  * @category    Class
- * @description Future option (option on a futures contract) instrument metadata for a V2 position.  **Beta:** currently returned only for tastytrade and Interactive Brokers connections, and only for partners it has been enabled for. This schema may change.
+ * @description Contract details for an option on a future, including its underlying futures contract.  **Beta:** futures-option positions are currently returned only for tastytrade and Interactive Brokers connections, and only for partners enabled for those positions. Tastytrade activities can also identify futures-option contracts. This schema may change.
  * @package     SnapTrade
  */
 class FutureOptionInstrumentTest extends TestCase

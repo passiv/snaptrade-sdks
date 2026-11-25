@@ -617,7 +617,7 @@ paths:
       summary: List account holdings
       deprecated: true
       description: |
-        **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders).
+        **Deprecated.** Use the finer-grained account data endpoints instead: [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getAllAccountPositions), and [orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders).
 
         This endpoint will return HTTP 410 Gone for all customers that sign up after May 11, 2026.
 
@@ -708,9 +708,11 @@ paths:
       description: |
         **Deprecated.** Use the [list all user accounts](/reference/Account%20Information/AccountInformation_listAllUserAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.
 
+        This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.
+
         Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
-        This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listBrokerageAuthorizationAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
+        This endpoint returns Daily data regardless of the customer's plan. Daily data is cached and refreshed once a day, which makes this endpoint fast and well-suited to listing accounts across all of a user's connections in a single call. Exact refresh timing may vary by brokerage. To get real-time data on Pay as you Go / Real-time, use the [list accounts for a connection endpoint](/reference/Connections/Connections_listConnectionAccounts). Customers on Pay as you Go / Daily can force a refresh with the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
       operationId: AccountInformation_listUserAccounts
       parameters:
         - in: query
@@ -779,6 +781,8 @@ paths:
       deprecated: true
       description: |
         **Deprecated.** Use the [get account details](/reference/Account%20Information/AccountInformation_getAccountDetails) endpoint instead, which supports all account types, including investment, deposit, line of credit, annuity, and mortgage accounts.
+
+        This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.
 
         Returns account detail known to SnapTrade for the specified account.
 
@@ -1078,7 +1082,10 @@ paths:
         - Account Information
       summary: List account orders
       operationId: AccountInformation_getUserAccountOrders
+      deprecated: true
       description: |
+        **Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.
+
         Returns a list of recent orders in the specified account.
 
         Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
@@ -1161,7 +1168,10 @@ paths:
         - Experimental endpoints
       summary: List account orders v2
       operationId: AccountInformation_getUserAccountOrdersV2
+      deprecated: true
       description: |
+        **Deprecated.** Use the [list all account orders](/reference/Account%20Information/AccountInformation_getAllAccountOrders) endpoint instead.
+
         Returns a list of recent orders in the specified account.
 
         The V2 order response format will include all legs of each order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.
@@ -1234,8 +1244,6 @@ paths:
         Every order carries a `legs` list with at least one leg. Each leg's `instrument` uses the same `Instrument` union as positions; switch on `instrument.kind` to know which fields are present. Multi-leg orders (spreads, strangles, covered calls) are a single order with multiple legs. Orders that belong to a complex order group (OCO, OTO, OTOCO) share a `group.id`.
 
         `order_type` is an object discriminated by `kind`. Each kind declares the price fields it requires (`limit_price` on `limit`, `stop_price` on `stop`, both on `stop_limit`, `trail` on `trailing_stop`), so a consumer never has to null-check a price that cannot exist for that kind. When the brokerage reports an order type we cannot normalize, `kind` is `other` and the brokerage's own label is in `raw_type`.
-
-        **Beta:** this endpoint and its response schema may change.
 
         If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
       parameters:
@@ -1338,7 +1346,10 @@ paths:
         - Account Information
       summary: List account recent orders (last 24 hours only)
       operationId: AccountInformation_getUserAccountRecentOrders
+      deprecated: true
       description: |
+        **Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.
+
         A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders.
         This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders
         Differs from /orders in that it is always realtime, and only checks the last 24 hours
@@ -1403,7 +1414,10 @@ paths:
         - Experimental endpoints
       summary: List account recent orders (V2, last 24 hours only)
       operationId: AccountInformation_getUserAccountRecentOrdersV2
+      deprecated: true
       description: |
+        **Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.
+
         A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format.
         This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.
         Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days.
@@ -1469,8 +1483,6 @@ paths:
         By default only returns executed orders, but that can be changed by setting *only_executed* to false.
 
         Every order carries a `legs` list with at least one leg; switch on `legs[].instrument.kind` and `order_type.kind` to know which fields are present. `data_freshness.as_of` is the time of this live request.
-
-        **Beta:** this endpoint and its response schema may change.
       parameters:
         - in: query
           required: true
@@ -2282,7 +2294,12 @@ paths:
       tags:
         - Connections
       summary: List accounts for a connection
+      deprecated: true
       description: |
+        **Deprecated.** Use the [list accounts](/reference/Connections/Connections_listConnectionAccounts) endpoint instead, which returns all account types in a single response, including investment, deposit, line of credit, annuity, and mortgage accounts.
+
+        This endpoint will return HTTP 410 Gone for all customers that sign up after December 1, 2026.
+
         Returns all brokerage accounts that belong to the specified connection for the authenticated user.
 
         On Pay as you Go / Real-time, this endpoint refreshes each account's opening date, funding date, and total value live from the brokerage on each call.
@@ -2971,7 +2988,10 @@ paths:
         - Account Information
       summary: Get account order detail
       operationId: AccountInformation_getUserAccountOrderDetail
+      deprecated: true
       description: |
+        **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.
+
         Returns the detail of a single order using the external order ID provided in the request body.
 
         This endpoint only works for single-leg orders at this time. Support for multi-leg orders will be added in the future.
@@ -3036,7 +3056,10 @@ paths:
         - Experimental endpoints
       summary: Get account order detail (V2)
       operationId: AccountInformation_getUserAccountOrderDetailV2
+      deprecated: true
       description: |
+        **Deprecated.** Use the [get account order detail](/reference/Account%20Information/AccountInformation_getAccountOrder) endpoint instead.
+
         Returns the detail of a single order using the brokerage order ID provided as a path parameter.
 
         The V2 order response format includes all legs of the order in the `legs` list field.
@@ -3108,8 +3131,6 @@ paths:
         This endpoint is always realtime and does not rely on cached data, except that an order in a terminal state (executed, canceled, rejected, failed, expired, replaced) may be served from a short-lived cache since it can no longer change.
 
         This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
-
-        **Beta:** this endpoint and its response schema may change.
       parameters:
         - in: path
           name: accountId
@@ -7366,9 +7387,9 @@ components:
         - expiration_code
     FutureOptionInstrument:
       description: |
-        Future option (option on a futures contract) instrument metadata for a V2 position.
+        Contract details for an option on a future, including its underlying futures contract.
 
-        **Beta:** currently returned only for tastytrade and Interactive Brokers connections, and only for partners it has been enabled for. This schema may change.
+        **Beta:** futures-option positions are currently returned only for tastytrade and Interactive Brokers connections, and only for partners enabled for those positions. Tastytrade activities can also identify futures-option contracts. This schema may change.
       type: object
       properties:
         kind:
@@ -9365,6 +9386,11 @@ components:
       description: A transaction or activity from an institution
       type: object
       properties:
+        instrument:
+          description: The resolved futures or futures-option contract, including its underlying future for an option. Null for other activities or when the contract could not be identified.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/Instrument"
         id:
           description: |
             Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.

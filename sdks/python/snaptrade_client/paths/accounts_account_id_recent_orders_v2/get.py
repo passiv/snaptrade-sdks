@@ -637,6 +637,7 @@ class BaseApi(api_client.Api):
 class GetUserAccountRecentOrdersV2(BaseApi, typing.Generic[TAuth]):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
+    @api_client.DeprecationWarningOnce(prefix="experimental_endpoints")
     async def aget_user_account_recent_orders_v2(
         self,
         account_id: typing.Optional[str] = None,
@@ -667,6 +668,7 @@ class GetUserAccountRecentOrdersV2(BaseApi, typing.Generic[TAuth]):
             **kwargs,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="experimental_endpoints")
     def get_user_account_recent_orders_v2(
         self,
         account_id: typing.Optional[str] = None,
@@ -681,7 +683,7 @@ class GetUserAccountRecentOrdersV2(BaseApi, typing.Generic[TAuth]):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  """
+        """ **Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.  A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  """
         args = self._get_user_account_recent_orders_v2_mapped_args(
             query_params=query_params,
             path_params=path_params,
@@ -700,6 +702,7 @@ class GetUserAccountRecentOrdersV2(BaseApi, typing.Generic[TAuth]):
 class ApiForget(BaseApi, typing.Generic[TAuth]):
     # this class is used by api classes that refer to endpoints by path and http method names
 
+    @api_client.DeprecationWarningOnce(prefix="experimental_endpoints")
     async def aget(
         self,
         account_id: typing.Optional[str] = None,
@@ -730,6 +733,7 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
             **kwargs,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="experimental_endpoints")
     def get(
         self,
         account_id: typing.Optional[str] = None,
@@ -744,7 +748,7 @@ class ApiForget(BaseApi, typing.Generic[TAuth]):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  """
+        """ **Deprecated.** Use the [list all account recent orders](/reference/Account%20Information/AccountInformation_getAllAccountRecentOrders) endpoint instead.  A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders. Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days. By default only returns executed orders, but that can be changed by setting *only_executed* to false.  """
         args = self._get_user_account_recent_orders_v2_mapped_args(
             query_params=query_params,
             path_params=path_params,
