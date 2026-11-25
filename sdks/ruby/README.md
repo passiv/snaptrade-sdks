@@ -200,8 +200,11 @@ p.result[3] # [Faraday::Response] Raw HTTP response
 
 
 ### `snaptrade.account_information.get_account_activities`<a id="snaptradeaccount_informationget_account_activities"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
-This endpoint is not deprecated and has no planned sunset. Responses to requests using the legacy `/api/v1` path prefix include `Deprecation: @1781222400` (June 12, 2026); that header applies only to the path prefix. Use the canonical root path `/accounts/{accountId}/activities`.
+**Deprecated.** Use the [list account transactions](/reference/Account%20Information/AccountInformation_getAccountTransactions) endpoint instead. This endpoint currently has no planned sunset.
+
+The `Deprecation: @1781222400` header (June 12, 2026) applies only to the legacy `/api/v1` path prefix. The canonical path for account activities is `/accounts/{accountId}/activities`.
 
 Returns all historical transactions for the specified account.
 
@@ -446,6 +449,8 @@ p result
 
 
 ### `snaptrade.account_information.get_account_transactions`<a id="snaptradeaccount_informationget_account_transactions"></a>
+
+This endpoint replaces the deprecated [list account activities](/reference/Account%20Information/AccountInformation_getAccountActivities) endpoint.
 
 Returns the account's cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.
 
