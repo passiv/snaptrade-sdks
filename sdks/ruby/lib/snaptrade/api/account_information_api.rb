@@ -19,7 +19,9 @@ module SnapTrade
 
     # List account activities
     #
-    # This endpoint is not deprecated and has no planned sunset. Responses to requests using the legacy `/api/v1` path prefix include `Deprecation: @1781222400` (June 12, 2026); that header applies only to the path prefix. Use the canonical root path `/accounts/{accountId}/activities`.
+    # **Deprecated.** Use the [list account transactions](/reference/Account%20Information/AccountInformation_getAccountTransactions) endpoint instead. This endpoint currently has no planned sunset.
+    # 
+    # The `Deprecation: @1781222400` header (June 12, 2026) applies only to the legacy `/api/v1` path prefix. The canonical path for account activities is `/accounts/{accountId}/activities`.
     # 
     # Returns all historical transactions for the specified account.
     # 
@@ -52,7 +54,9 @@ module SnapTrade
 
     # List account activities
     #
-    # This endpoint is not deprecated and has no planned sunset. Responses to requests using the legacy `/api/v1` path prefix include `Deprecation: @1781222400` (June 12, 2026); that header applies only to the path prefix. Use the canonical root path `/accounts/{accountId}/activities`.
+    # **Deprecated.** Use the [list account transactions](/reference/Account%20Information/AccountInformation_getAccountTransactions) endpoint instead. This endpoint currently has no planned sunset.
+    # 
+    # The `Deprecation: @1781222400` header (June 12, 2026) applies only to the legacy `/api/v1` path prefix. The canonical path for account activities is `/accounts/{accountId}/activities`.
     # 
     # Returns all historical transactions for the specified account.
     # 
@@ -83,7 +87,7 @@ module SnapTrade
     end
 
     # List account activities
-    # This endpoint is not deprecated and has no planned sunset. Responses to requests using the legacy `/api/v1` path prefix include `Deprecation: @1781222400` (June 12, 2026); that header applies only to the path prefix. Use the canonical root path `/accounts/{accountId}/activities`.  Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the `trade_date` field.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+    # **Deprecated.** Use the [list account transactions](/reference/Account%20Information/AccountInformation_getAccountTransactions) endpoint instead. This endpoint currently has no planned sunset.  The `Deprecation: @1781222400` header (June 12, 2026) applies only to the legacy `/api/v1` path prefix. The canonical path for account activities is `/accounts/{accountId}/activities`.  Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the `trade_date` field.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
     # @param account_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -100,7 +104,7 @@ module SnapTrade
     end
 
     # List account activities
-    # This endpoint is not deprecated and has no planned sunset. Responses to requests using the legacy &#x60;/api/v1&#x60; path prefix include &#x60;Deprecation: @1781222400&#x60; (June 12, 2026); that header applies only to the path prefix. Use the canonical root path &#x60;/accounts/{accountId}/activities&#x60;.  Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
+    # **Deprecated.** Use the [list account transactions](/reference/Account%20Information/AccountInformation_getAccountTransactions) endpoint instead. This endpoint currently has no planned sunset.  The &#x60;Deprecation: @1781222400&#x60; header (June 12, 2026) applies only to the legacy &#x60;/api/v1&#x60; path prefix. The canonical path for account activities is &#x60;/accounts/{accountId}/activities&#x60;.  Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 
     # @param account_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -657,6 +661,8 @@ module SnapTrade
 
     # List account transactions
     #
+    # This endpoint replaces the deprecated [list account activities](/reference/Account%20Information/AccountInformation_getAccountActivities) endpoint.
+    # 
     # Returns the account's cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.
     # 
     # History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
@@ -682,6 +688,8 @@ module SnapTrade
 
     # List account transactions
     #
+    # This endpoint replaces the deprecated [list account activities](/reference/Account%20Information/AccountInformation_getAccountActivities) endpoint.
+    # 
     # Returns the account's cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.
     # 
     # History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
@@ -705,7 +713,7 @@ module SnapTrade
     end
 
     # List account transactions
-    # Returns the account's cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+    # This endpoint replaces the deprecated [list account activities](/reference/Account%20Information/AccountInformation_getAccountActivities) endpoint.  Returns the account's cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
     # @param account_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -722,7 +730,7 @@ module SnapTrade
     end
 
     # List account transactions
-    # Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
+    # This endpoint replaces the deprecated [list account activities](/reference/Account%20Information/AccountInformation_getAccountActivities) endpoint.  Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history. 
     # @param account_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 

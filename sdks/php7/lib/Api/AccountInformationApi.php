@@ -194,7 +194,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account activities
      *
-     * This endpoint is not deprecated and has no planned sunset. Responses to requests using the legacy &#x60;/api/v1&#x60; path prefix include &#x60;Deprecation: @1781222400&#x60; (June 12, 2026); that header applies only to the path prefix. Use the canonical root path &#x60;/accounts/{accountId}/activities&#x60;.  Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     * **Deprecated.** Use the [list account transactions](/reference/Account%20Information/AccountInformation_getAccountTransactions) endpoint instead. This endpoint currently has no planned sunset.  The &#x60;Deprecation: @1781222400&#x60; header (June 12, 2026) applies only to the legacy &#x60;/api/v1&#x60; path prefix. The canonical path for account activities is &#x60;/accounts/{accountId}/activities&#x60;.  Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
      *
      * @param  string $account_id account_id (required)
      * @param  string $user_id user_id (required)
@@ -209,6 +209,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \SnapTrade\Model\PaginatedUniversalActivity|\SnapTrade\Model\Model429TooManyRequestsResponse
+     * @deprecated
      */
     public function getAccountActivities(
         $account_id,
@@ -233,7 +234,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account activities
      *
-     * This endpoint is not deprecated and has no planned sunset. Responses to requests using the legacy &#x60;/api/v1&#x60; path prefix include &#x60;Deprecation: @1781222400&#x60; (June 12, 2026); that header applies only to the path prefix. Use the canonical root path &#x60;/accounts/{accountId}/activities&#x60;.  Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     * **Deprecated.** Use the [list account transactions](/reference/Account%20Information/AccountInformation_getAccountTransactions) endpoint instead. This endpoint currently has no planned sunset.  The &#x60;Deprecation: @1781222400&#x60; header (June 12, 2026) applies only to the legacy &#x60;/api/v1&#x60; path prefix. The canonical path for account activities is &#x60;/accounts/{accountId}/activities&#x60;.  Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
      *
      * @param  string $account_id (required)
      * @param  string $user_id (required)
@@ -249,6 +250,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      * @throws \SnapTrade\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \SnapTrade\Model\PaginatedUniversalActivity|\SnapTrade\Model\Model429TooManyRequestsResponse, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function getAccountActivitiesWithHttpInfo($account_id, $user_id, $user_secret, $start_date = null, $end_date = null, $offset = null, $limit = null, $type = null, string $contentType = self::contentTypes['getAccountActivities'][0], \SnapTrade\RequestOptions $requestOptions = null)
     {
@@ -389,7 +391,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account activities
      *
-     * This endpoint is not deprecated and has no planned sunset. Responses to requests using the legacy &#x60;/api/v1&#x60; path prefix include &#x60;Deprecation: @1781222400&#x60; (June 12, 2026); that header applies only to the path prefix. Use the canonical root path &#x60;/accounts/{accountId}/activities&#x60;.  Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     * **Deprecated.** Use the [list account transactions](/reference/Account%20Information/AccountInformation_getAccountTransactions) endpoint instead. This endpoint currently has no planned sunset.  The &#x60;Deprecation: @1781222400&#x60; header (June 12, 2026) applies only to the legacy &#x60;/api/v1&#x60; path prefix. The canonical path for account activities is &#x60;/accounts/{accountId}/activities&#x60;.  Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
      *
      * @param  string $account_id (required)
      * @param  string $user_id (required)
@@ -404,6 +406,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function getAccountActivitiesAsync(
         $account_id,
@@ -432,7 +435,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account activities
      *
-     * This endpoint is not deprecated and has no planned sunset. Responses to requests using the legacy &#x60;/api/v1&#x60; path prefix include &#x60;Deprecation: @1781222400&#x60; (June 12, 2026); that header applies only to the path prefix. Use the canonical root path &#x60;/accounts/{accountId}/activities&#x60;.  Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+     * **Deprecated.** Use the [list account transactions](/reference/Account%20Information/AccountInformation_getAccountTransactions) endpoint instead. This endpoint currently has no planned sunset.  The &#x60;Deprecation: @1781222400&#x60; header (June 12, 2026) applies only to the legacy &#x60;/api/v1&#x60; path prefix. The canonical path for account activities is &#x60;/accounts/{accountId}/activities&#x60;.  Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  This endpoint returns Daily data. Daily data is cached and refreshed once a day. Exact refresh timing may vary by brokerage.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
      *
      * @param  string $account_id (required)
      * @param  string $user_id (required)
@@ -446,6 +449,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function getAccountActivitiesAsyncWithHttpInfo($account_id, $user_id, $user_secret, $start_date = null, $end_date = null, $offset = null, $limit = null, $type = null, string $contentType = self::contentTypes['getAccountActivities'][0], $requestOptions = null)
     {
@@ -507,6 +511,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function getAccountActivitiesRequest($account_id, $user_id, $user_secret, $start_date = SENTINEL_VALUE, $end_date = SENTINEL_VALUE, $offset = SENTINEL_VALUE, $limit = SENTINEL_VALUE, $type = SENTINEL_VALUE, string $contentType = self::contentTypes['getAccountActivities'][0])
     {
@@ -2723,7 +2728,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account transactions
      *
-     * Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
+     * This endpoint replaces the deprecated [list account activities](/reference/Account%20Information/AccountInformation_getAccountActivities) endpoint.  Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
      *
      * @param  string $account_id account_id (required)
      * @param  string $user_id user_id (required)
@@ -2762,7 +2767,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account transactions
      *
-     * Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
+     * This endpoint replaces the deprecated [list account activities](/reference/Account%20Information/AccountInformation_getAccountActivities) endpoint.  Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
      *
      * @param  string $account_id (required)
      * @param  string $user_id (required)
@@ -2918,7 +2923,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account transactions
      *
-     * Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
+     * This endpoint replaces the deprecated [list account activities](/reference/Account%20Information/AccountInformation_getAccountActivities) endpoint.  Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
      *
      * @param  string $account_id (required)
      * @param  string $user_id (required)
@@ -2961,7 +2966,7 @@ class AccountInformationApi extends \SnapTrade\CustomApi
      *
      * List account transactions
      *
-     * Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
+     * This endpoint replaces the deprecated [list account activities](/reference/Account%20Information/AccountInformation_getAccountActivities) endpoint.  Returns the account&#39;s cached transaction history, most recent date first. Transactions with the same timestamp are ordered by descending internal activity ID.  History refreshes daily. Timing and available history depend on the brokerage. A disabled connection continues to return its last cached history.
      *
      * @param  string $account_id (required)
      * @param  string $user_id (required)
