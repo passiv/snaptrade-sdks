@@ -62,7 +62,7 @@ The self-serve OAuth app created in the SnapTrade Dashboard is a **confidential 
 
 In the [SnapTrade Dashboard](https://dashboard.snaptrade.com), select **OAuth Apps** in the left sidebar, create your app, and add your callback URLs. Each developer account can register one **Test** OAuth app and one **Production** OAuth app. Test OAuth apps are limited to **5 users**. The app name shown during consent comes from the name of your SnapTrade customer account.
 
-Creating a Production OAuth app requires the same KYC approval process as Commercial production API access. Complete the [Production Access Application](https://dashboard.snaptrade.com/production-access) before registering your Production app. This is SnapTrade's production approval process; no separate broker approvals are required for your OAuth app.
+Creating a Production OAuth app requires the same approval process as Commercial production API access. Complete the [Production Access Application](https://dashboard.snaptrade.com/production-access) before registering your Production app. This is SnapTrade's production approval process; no separate broker approvals are required for your OAuth app.
 
 To receive webhooks, also configure a listener URL in the **Webhooks** section of the Dashboard. OAuth apps registered under the same SnapTrade customer use that customer's existing webhook URL, signing key, and custom headers. The `oauthClientId` in each OAuth webhook identifies the receiving app.
 
