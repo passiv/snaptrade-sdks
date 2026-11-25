@@ -56,14 +56,11 @@ First, let's get a list of the user's connected accounts to select one for fetch
 :::form
 
 ```python
-accounts = snaptrade.account_information.list_all_user_accounts(
+accounts = snaptrade.account_information.list_user_accounts(
   user_id=user_id,
   user_secret=user_secret
 )
 print(json.dumps(accounts.body, indent=2))
-
-for account in accounts.body["results"]:
-    print("::SAVE[ACCOUNTS]/{}".format(account["id"]))
 ```
 
 ::button[Get Accounts]
@@ -80,7 +77,7 @@ Please note for accounts with a large number of transactions, it could take a si
 
 :::form{skippable}
 
-::enum{name=ACCOUNT_ID label="Account ID" placeholder="ACCOUNT_ID" savedData=ACCOUNTS description="The ID of the account to fetch transactions for"}
+::input{name=ACCOUNT_ID label="Account ID" placeholder="YOUR_ACCOUNT_ID" description="The ID of the account to fetch transactions for"}
 
 ::date{name=START_DATE label="Start Date" placeholder="START_DATE" description="The start date (inclusive) of the transaction history to retrieve" valueFormat="YYYY-MM-DD" optional}
 ::date{name=END_DATE label="End Date" placeholder="END_DATE" description="The end date (inclusive) of the transaction history to retrieve" valueFormat="YYYY-MM-DD" optional}
