@@ -51,13 +51,13 @@ public class Example {
                 if (connections.isEmpty()) {
                         System.out.println("No brokerage connections found for the user.");
                 } else {
-                        List<Account> accounts = snaptrade.connections
-                                        .listBrokerageAuthorizationAccounts(
+                        ConnectionAccountsResponse accounts = snaptrade.connections
+                                        .listConnectionAccounts(
                                                         connections.get(0).getId(),
                                                         userId,
                                                         userSecret)
                                         .execute();
-                        System.out.println(accounts);
+                        System.out.println(accounts.getResults());
                 }
 
                 // 6) Deleting a user

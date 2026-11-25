@@ -54,12 +54,12 @@ async function main() {
     console.log("No brokerage connections found for the user.");
   } else {
     const accounts = (
-      await snaptrade.connections.listBrokerageAuthorizationAccounts({
-        authorizationId: connections[0].id,
+      await snaptrade.connections.listConnectionAccounts({
+        connectionId: connections[0].id,
         userId,
         userSecret,
       })
-    ).data;
+    ).data.results;
     console.log("accounts:", accounts);
   }
 

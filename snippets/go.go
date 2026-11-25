@@ -52,12 +52,12 @@ func main() {
 	if len(connections) == 0 {
 		fmt.Println("No brokerage connections found for the user.")
 	} else {
-		accounts, _, _ := client.ConnectionsApi.ListBrokerageAuthorizationAccounts(
+		accounts, _, _ := client.ConnectionsApi.ListConnectionAccounts(
 			connections[0].GetId(),
 			userId,
 			userSecret,
 		).Execute()
-		fmt.Println(accounts)
+		fmt.Println(accounts.GetResults())
 	}
 
 	// 6) Deleting a user
