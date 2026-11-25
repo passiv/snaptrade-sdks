@@ -100,9 +100,11 @@ Technical requirements:
 Build a dashboard that:
 - Lists my accounts with institution, account name, account number suffix,
   account type, and total value where available.
-- Retrieves balances and unified positions for every account.
+- Retrieves balances for every account and unified positions for investment
+  accounts.
 - Shows portfolio value, cash, positions, and allocation by account.
-- Shows recent orders and recent account activity in separate sections.
+- Shows recent orders for investment accounts and recent account activity in
+  separate sections.
 - Shows loading, empty, partial-data, stale-data, and error states.
 - Displays when the data was retrieved.
 - Formats currencies using the currency reported by the API instead of assuming
@@ -112,9 +114,12 @@ Build a dashboard that:
 Implementation requirements:
 - First inspect the installed SDK's TypeScript types and method signatures. Do
   not guess response shapes.
-- Use listUserAccounts, getUserAccountBalance, getAllAccountPositions, and
+- Use listAllUserAccounts and read accounts from data.results. Use
+  getUserAccountBalance, getAllAccountPositions, and
   getAccountActivities where appropriate. Use getAllAccountRecentOrders for
   recent orders and listBrokerageAuthorizations for connection status.
+- Only call position and recent-order endpoints for accounts whose kind is
+  "investment".
 - Keep data fetching on the server.
 - Ensure the portfolio page is rendered dynamically instead of being included
   in a static build.
@@ -164,26 +169,28 @@ export const snaptrade = new Snaptrade({
 });
 ```
 
-For Personal authentication, account calls do not include `userId` or `userSecret`:
+For Personal authentication, account calls do not include `userId` or `userSecret`. Fetch balances and positions for investment accounts like this:
 
 ```typescript
-const accounts = await snaptrade.accountInformation.listUserAccounts();
+const accounts = await snaptrade.accountInformation.listAllUserAccounts();
 
 const accountData = await Promise.allSettled(
-  accounts.data.map(async (account) => {
-    const accountId = account.id!;
+  accounts.data.results
+    .filter((account) => account.kind === "investment")
+    .map(async (account) => {
+      const accountId = account.id;
 
-    const [balances, positions] = await Promise.all([
-      snaptrade.accountInformation.getUserAccountBalance({ accountId }),
-      snaptrade.accountInformation.getAllAccountPositions({ accountId }),
-    ]);
+      const [balances, positions] = await Promise.all([
+        snaptrade.accountInformation.getUserAccountBalance({ accountId }),
+        snaptrade.accountInformation.getAllAccountPositions({ accountId }),
+      ]);
 
-    return {
-      account,
-      balances: balances.data,
-      positions: positions.data,
-    };
-  }),
+      return {
+        account,
+        balances: balances.data,
+        positions: positions.data,
+      };
+    }),
 );
 ```
 
