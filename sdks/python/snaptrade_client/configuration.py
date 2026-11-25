@@ -29,7 +29,7 @@ from snaptrade_client.exceptions import ClientConfigurationError
 from snaptrade_client.exceptions import InvalidHostConfigurationError
 from snaptrade_client.auth import AuthMode
 
-TAuth = typing.TypeVar("TAuth", bound=AuthMode)
+TAuth = typing.TypeVar("TAuth", bound=typing.Optional[AuthMode])
 
 
 JSON_SCHEMA_VALIDATION_KEYWORDS = {
@@ -517,11 +517,37 @@ conf = snaptrade_client.Configuration(
             }
         return auth
 
-    def auth_settings_for_auth_modes(self, auth_modes, fallback_auth_settings=None):
+    def _has_legacy_auth_settings(self, fallback_auth_settings):
+        fallback_names = set(fallback_auth_settings or [])
+        if 'OAuthBearer' in fallback_names and self.access_token is not None:
+            return True
+        if 'PartnerClientId' in fallback_names and ('PartnerClientId' in self.api_key):
+            return True
+        if 'PartnerSignature' in fallback_names and ('PartnerSignature' in self.api_key):
+            return True
+        if 'PartnerTimestamp' in fallback_names and ('PartnerTimestamp' in self.api_key):
+            return True
+        if 'PersonalClientId' in fallback_names and ('PersonalClientId' in self.api_key or 'PartnerClientId' in self.api_key):
+            return True
+        if 'PersonalSignature' in fallback_names and ('PersonalSignature' in self.api_key or 'PartnerSignature' in self.api_key):
+            return True
+        if 'PersonalTimestamp' in fallback_names and ('PersonalTimestamp' in self.api_key or 'PartnerTimestamp' in self.api_key):
+            return True
+        if 'userId' in fallback_names and ('userId' in self.api_key):
+            return True
+        if 'userSecret' in fallback_names and ('userSecret' in self.api_key):
+            return True
+        return False
+
+    def auth_settings_for_auth_modes(self, auth_modes, fallback_auth_settings=None, allows_anonymous=False):
         if not auth_modes:
             return fallback_auth_settings
         if self.auth_mode is None:
-            return fallback_auth_settings
+            if self._has_legacy_auth_settings(fallback_auth_settings):
+                return fallback_auth_settings
+            if allows_anonymous:
+                return []
+            raise ClientConfigurationError("This operation requires authentication; auth=None only supports public operations")
         if self.auth_mode not in auth_modes:
             raise ClientConfigurationError(
                 "This operation does not support the selected auth mode: %s" % self.auth_mode

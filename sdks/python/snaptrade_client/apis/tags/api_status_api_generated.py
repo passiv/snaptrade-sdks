@@ -13,7 +13,7 @@ from snaptrade_client.paths.root.get import Check
 import typing
 from snaptrade_client.auth import AuthMode
 
-TAuth = typing.TypeVar("TAuth", bound=AuthMode)
+TAuth = typing.TypeVar("TAuth", bound=typing.Optional[AuthMode])
 
 
 class APIStatusApiGenerated(

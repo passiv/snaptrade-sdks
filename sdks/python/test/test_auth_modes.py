@@ -210,3 +210,86 @@ def test_public_operation_does_not_use_selected_auth_mode(monkeypatch):
     assert len(calls) == 1
     assert calls[0]["url"] == "https://api.snaptrade.com/api/v1/"
     assert "Signature" not in calls[0]["headers"]
+
+
+def test_none_auth_public_operation_does_not_sign(monkeypatch):
+    calls = _install_request_spy(monkeypatch)
+    client = SnapTrade(auth=None, host="https://api.snaptrade.com/api/v1")
+    client.api_status.check()
+    assert len(calls) == 1
+    assert calls[0]["url"] == "https://api.snaptrade.com/api/v1/"
+    assert "Signature" not in calls[0]["headers"]
+    assert "Authorization" not in calls[0]["headers"]
+
+
+def test_omitted_auth_is_rejected():
+    with pytest.raises(TypeError, match="auth"):
+        SnapTrade()
+
+
+@pytest.mark.parametrize("operation", ["accounts", "users"])
+def test_none_auth_protected_operation_fails_before_http(monkeypatch, operation):
+    from snaptrade_client.exceptions import ClientConfigurationError
+
+    calls = _install_request_spy(monkeypatch)
+    client = SnapTrade(auth=None)
+    with pytest.raises(ClientConfigurationError, match="requires authentication"):
+        if operation == "accounts":
+            client.account_information.list_user_accounts()
+        else:
+            client.authentication.list_snap_trade_users()
+    assert calls == []
+
+
+@pytest.mark.parametrize("credentials", [
+        {"api_key": {"PartnerClientId": "legacy-client"}},
+        {"client_id": "legacy-client", "consumer_key": "legacy-secret"},
+        {"access_token": "legacy-token"},
+])
+def test_prebuilt_credentialed_configuration_preserves_legacy_auth(monkeypatch, credentials):
+    from snaptrade_client.configuration import Configuration
+
+    calls = _install_request_spy(monkeypatch, response_payload=b"[]")
+    configuration = Configuration(host="https://api.snaptrade.com/api/v1", **credentials)
+    SnapTrade(configuration, auth=None).reference_data.list_all_brokerages()
+
+    assert len(calls) == 1
+    if "access_token" in credentials:
+        assert calls[0]["headers"]["Authorization"] == "Bearer legacy-token"
+    else:
+        assert "clientId=legacy-client" in calls[0]["url"]
+
+
+def test_legacy_guard_does_not_refresh_credentials(monkeypatch):
+    from snaptrade_client.configuration import Configuration
+
+    calls = _install_request_spy(monkeypatch, response_payload=b"[]")
+    configuration = Configuration(
+        host="https://api.snaptrade.com/api/v1",
+        api_key={"PersonalClientId": "legacy-client"},
+    )
+    refreshes = []
+    configuration.refresh_api_key_hook = lambda config: refreshes.append(config)
+    assert configuration.auth_settings_for_auth_modes(
+        {"personalApiKey": ["PersonalClientId"]}, ["PersonalClientId"],
+    ) == ["PersonalClientId"]
+    assert refreshes == []
+    SnapTrade(configuration, auth=None).reference_data.list_all_brokerages()
+
+    from snaptrade_client.paths.brokerages.get import _legacy_auth
+    assert len(calls) == 1
+    assert len(refreshes) == len(_legacy_auth)
+
+
+def test_unseeded_refresh_hook_does_not_authenticate_protected_request(monkeypatch):
+    from snaptrade_client.configuration import Configuration
+    from snaptrade_client.exceptions import ClientConfigurationError
+
+    calls = _install_request_spy(monkeypatch, response_payload=b"[]")
+    configuration = Configuration()
+    refreshes = []
+    configuration.refresh_api_key_hook = lambda config: refreshes.append(config)
+    with pytest.raises(ClientConfigurationError, match="requires authentication"):
+        SnapTrade(configuration, auth=None).reference_data.list_all_brokerages()
+    assert calls == []
+    assert refreshes == []

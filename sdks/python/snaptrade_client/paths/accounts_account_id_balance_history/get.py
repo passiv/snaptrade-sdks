@@ -22,7 +22,7 @@ from snaptrade_client.api_response import AsyncGeneratorResponse
 from snaptrade_client import api_client, exceptions
 from snaptrade_client.auth import AuthMode
 
-TAuth = typing.TypeVar("TAuth", bound=AuthMode)
+TAuth = typing.TypeVar("TAuth", bound=typing.Optional[AuthMode])
 from datetime import date, datetime  # noqa: F401
 import decimal  # noqa: F401
 import functools  # noqa: F401

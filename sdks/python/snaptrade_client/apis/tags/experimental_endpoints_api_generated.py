@@ -18,7 +18,7 @@ from snaptrade_client.paths.snap_trade_trade_detection_subscriptions.get import 
 import typing
 from snaptrade_client.auth import AuthMode
 
-TAuth = typing.TypeVar("TAuth", bound=AuthMode)
+TAuth = typing.TypeVar("TAuth", bound=typing.Optional[AuthMode])
 
 
 class ExperimentalEndpointsApiGenerated(

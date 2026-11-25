@@ -27,7 +27,7 @@ from snaptrade_client.apis.tags.reference_data_api import ReferenceDataApi
 from snaptrade_client.apis.tags.trading_api import TradingApi
 
 
-TAuth = typing.TypeVar("TAuth", bound=AuthMode)
+TAuth = typing.TypeVar("TAuth", bound=typing.Optional[AuthMode])
 
 class SnapTrade(ClientCustom, typing.Generic[TAuth]):
 
@@ -44,6 +44,7 @@ class SnapTrade(ClientCustom, typing.Generic[TAuth]):
         """Create a client.
 
         Authentication credentials must be provided through ``auth``.
+        Pass ``auth=None`` explicitly to call public operations without credentials.
         :param consumer_key: Unsupported. Pass this credential through ``auth``.
         :param client_id: Unsupported. Pass this credential through ``auth``.
         :param access_token: Unsupported. Pass this credential through ``auth``.
