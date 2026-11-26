@@ -167,6 +167,8 @@ portal:
       get: true
     /accounts/{accountId}/returnRates:
       get: true
+    /accounts/{accountId}/activities:
+      get: true
     /accounts/{accountId}/quotes/options:
       get: true
     /authorizations/{authorizationId}/returnRates:
