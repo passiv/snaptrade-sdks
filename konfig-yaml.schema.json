@@ -4,16 +4,9 @@
     "konfigYaml": {
       "type": "object",
       "properties": {
-        "primaryColor": {
-          "type": "string",
-          "description": "Primary color to be used in Konfig's API Portal"
-        },
         "portal": {
           "type": "object",
           "properties": {
-            "primaryColor": {
-              "$ref": "#/definitions/konfigYaml/properties/primaryColor"
-            },
             "favicon": {
               "type": "string",
               "description": "Relative path to favicon image used for Konfig's API Portal"

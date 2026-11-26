@@ -31,7 +31,6 @@ overrideTopLevelReadme: ./snippets/topLevelReadmeOverride.md
 portal:
   title: SnapTrade
   hideNonSdkSnippets: true
-  primaryColor: '#ebb964'
   favicon: favicon.png
   cta:
     url: https://snaptrade.com/contact-sales
