@@ -227,7 +227,7 @@ A successful submission does not mean the order has filled. After placing an ord
 | Goal | Endpoint | Notes |
 | --- | --- | --- |
 | Check one order | :api[AccountInformation_getAccountOrder] | Always realtime. Only returns orders placed through SnapTrade. |
-| List the last 24 hours of orders | :api[AccountInformation_getAllAccountRecentOrders] | Lightweight and always realtime. Returns executed orders only unless you set `only_executed=false`. Each call incurs an additional charge. |
+| List the last 24 hours of orders | :api[AccountInformation_getAllAccountRecentOrders] | Lightweight and always realtime. Returns executed orders only unless you set `only_executed=false`. |
 | List up to 90 days of orders | :api[AccountInformation_getAllAccountOrders] | Defaults to the last 30 days. Filter with `state` and `days`. |
 | Cancel a pending order | :api[Trading_cancelOrder] | Accepts order IDs for all asset types. |
 
