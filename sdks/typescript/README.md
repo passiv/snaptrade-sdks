@@ -589,6 +589,17 @@ const getAccountBalancesV2Response =
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getAccountBalancesV2Response =
+  await oauthClient.accountInformation.getAccountBalancesV2({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -722,6 +733,18 @@ const getAccountOrderResponse =
 
 The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
 
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getAccountOrderResponse =
+  await oauthClient.accountInformation.getAccountOrder({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    brokerageOrderId: "66a033fa-da74-4fcf-b527-feefdec9257e",
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
@@ -780,6 +803,22 @@ Required credentials for this mode:
 ```typescript
 const getAccountTransactionsResponse =
   await personalApiKeyClient.accountInformation.getAccountTransactions({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    startDate: "2022-01-24",
+    endDate: "2022-01-24",
+    type: "BUY,DIVIDEND",
+    offset: 0,
+    limit: 1000,
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getAccountTransactionsResponse =
+  await oauthClient.accountInformation.getAccountTransactions({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     startDate: "2022-01-24",
     endDate: "2022-01-24",
@@ -866,6 +905,19 @@ Required credentials for this mode:
 ```typescript
 const getAllAccountOrdersResponse =
   await personalApiKeyClient.accountInformation.getAllAccountOrders({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    state: "all",
+    days: 30,
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getAllAccountOrdersResponse =
+  await oauthClient.accountInformation.getAllAccountOrders({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     state: "all",
     days: 30,
@@ -1007,6 +1059,18 @@ Required credentials for this mode:
 ```typescript
 const getAllAccountRecentOrdersResponse =
   await personalApiKeyClient.accountInformation.getAllAccountRecentOrders({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    onlyExecuted: true,
+  });
+```
+
+The client identifies the user in this mode. Do not pass `userId` `userSecret` to this method.
+
+##### OAuth Auth<a id="oauth-auth"></a>
+
+```typescript
+const getAllAccountRecentOrdersResponse =
+  await oauthClient.accountInformation.getAllAccountRecentOrders({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     onlyExecuted: true,
   });
