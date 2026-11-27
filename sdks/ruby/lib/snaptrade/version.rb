@@ -8,5 +8,5 @@ Contact: api@snaptrade.com
 =end
 
 module SnapTrade
-  VERSION = '3.0.69'
+  VERSION = '3.0.70'
 end
