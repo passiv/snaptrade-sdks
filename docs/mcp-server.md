@@ -118,14 +118,14 @@ The portfolio server is read-only and exposes 19 tools. All read data except `re
 
 **Account information**
 
-- `AccountInformation_listUserAccounts` — list all of the user's accounts
+- `AccountInformation_listAllUserAccounts` — list all of the user's accounts in an `accounts` array. Each account has a `kind`; select `investment` for holdings and trading. Other kinds include deposit, line of credit, annuity, and mortgage.
 - `AccountInformation_getUserAccountDetails` — account details, including institution name and total value
 - `AccountInformation_getUserAccountBalance` — cash balances and buying power
 - `AccountInformation_getAllAccountPositions` — positions and holdings for an account
 - `AccountInformation_getAccountBalanceHistory` — historical account balances
-- `AccountInformation_getUserAccountOrdersV2` — orders for an account
-- `AccountInformation_getUserAccountRecentOrdersV2` — recent orders for an account
-- `AccountInformation_getUserAccountOrderDetailV2` — details for a single order
+- `AccountInformation_getAllAccountOrders` — orders for an account in the v3 format, returned in an `orders` array
+- `AccountInformation_getAllAccountRecentOrders` — realtime orders from the last 24 hours, returned in an `orders` array; set `only_executed=false` to include unfilled orders
+- `AccountInformation_getAccountOrder` — v3 details for a single order placed through SnapTrade, identified by its brokerage order ID
 - `AccountInformation_getAccountActivities` — historical account activity such as deposits, dividends, and fees
 
 **Portfolio summaries**
@@ -145,11 +145,12 @@ The portfolio server is read-only and exposes 19 tools. All read data except `re
 - `list_supported_brokerages` — list the brokerages the user can connect
 - `request_connection_link` — generate a one-time URL the user opens to connect a new brokerage. The link is single-use and expires after 5 minutes. The assistant cannot complete the connection itself; only the user's browser session can.
 
+Account-list and order-list responses use `accounts` and `orders` instead of the REST API's `results` key. Account numbers (including masked numbers) and institution account identifiers are removed from MCP responses. The v3 order endpoints remain in beta.
+
 ### Trading server
 
-The trading server exposes 21 tools: the same connection, account, reference-data, portfolio-summary, and app and connection tools, except that `AccountInformation_getUserAccountOrdersV2` and `AccountInformation_getUserAccountRecentOrdersV2` are replaced by `AccountInformation_getAllAccountOrders`. It adds:
+The trading server exposes 22 tools: all 19 portfolio tools, including the same v3 order list, realtime recent-order, and order-detail tools, plus:
 
-- `AccountInformation_getAllAccountOrders` — orders for an account, in the same format used to place orders
 - `Trading_previewSimpleOrder` — validate an order and estimate its cost against the account's quote and cash balance, without placing it. Returns a `preview_token` valid for 5 minutes.
 - `Trading_placeSimpleOrder` — submit an order. Requires the `preview_token` from a preview of the same order, so an order cannot be placed without a matching preview. The token does not prove the user saw or confirmed the preview; the tool instructions tell the assistant to show it and wait for confirmation, and that depends on the client following them.
 - `Trading_cancelOrder` — cancel an open order
