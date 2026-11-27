@@ -5,6 +5,8 @@ Start with [Choose Your Integration](https://docs.snaptrade.com/docs/authenticat
 <a id="getting-started-api-keys"></a>
 <a id="choose-a-customer-model"></a>
 
+The [interactive Getting Started Demo](https://docs.snaptrade.com/demo/getting-started) offers Commercial API key, Personal API key, and OAuth walkthroughs. Select an authentication method for its setup and request behavior, then retrieve account data. Personal API keys identify your own user; OAuth apps use the user’s existing Personal connections. User registration and deletion apply only to Commercial API keys.
+
 ## Choose a Guide
 
 <a id="commercial-quickstart"></a>
@@ -46,7 +48,7 @@ To share accounts with an OAuth-enabled app, connect your brokerage in the Dashb
 
 Production access requires the approval steps described in the selected guide.
 
-For definitions, see [Terminology](https://docs.snaptrade.com/docs/terminology). For customer-account context, see [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial). The [interactive demo](https://docs.snaptrade.com/demo/getting-started) demonstrates the Commercial API-key flow.
+For definitions, see [Terminology](https://docs.snaptrade.com/docs/terminology). For customer-account context, see [SnapTrade Personal vs Commercial](https://docs.snaptrade.com/docs/personal-vs-commercial). The [interactive demo](https://docs.snaptrade.com/demo/getting-started) supports all three authentication methods.
 
 ## SnapTrade SDKs
 
